@@ -1,5 +1,5 @@
 require 'rails'
-#require 'gollum/rails/config'
+require 'gollum/rails/config'
   
 module Gollum
   module Rails
