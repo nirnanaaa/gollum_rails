@@ -18,6 +18,7 @@ module Gollum
       attr_reader :wiki
 
       attr_reader :persisted
+      
       # attributes needs to be a hash
       # example:
       #   Gollum::Rails::Page.new({name: '', content: '', format: '', commit: {}})
@@ -54,17 +55,49 @@ module Gollum
 
       # Some "ActiveRecord" like things e.g. .save .valid? .find .find_by_* .where and so on
       def save
-      end
-      
-      def update
+        if valid?
+          begin
+            @wiki.wiki.write_page(@name, @format, @content, @commit)
+          end
+        end
       end
 
+      def update
+      end
+      
+      ## if a page is loaded
+      def get_raw_data
+        
+      end
+      def version
+        
+      end
+      def get_formatted_data
+        
+      end
+
+      # default:
+      #  - name must be set
+      #  - content can be NIL || " "
+      #  - committer must be set
+      # format must be set
       def valid?
+        if !@name || @name.nil?
+          return false
+        end
+        if !@commit || !@commit.is_a?(Hash)
+          return false
+        end
+        if !@format
+          return false
+        end
+        return true
+        
       end
 
       def find(by_string = nil)
         if !by_string.nil?
-          
+
         end
       end
 
