@@ -52,9 +52,25 @@ context "Page Test" do
     assert_instance_of Gollum::DuplicatePageError, @page.get_error_message
   end
   test "#find page" do
+    
     found = @page.find("static")
     assert_instance_of Gollum::Page, found
     assert_equal 'content', found.raw_data
+    assert_equal :markdown, found.format
+    assert_equal '<p>content</p>', found.formatted_data
+    assert_equal nil, @page.get_error_message
+    
+  end
+  test "#nil provided" do
+    found_not = @page.find(nil) #same as @page.find
+    assert_equal nil, found_not
+  end
+  test "#page not found" do
+    found_not = @page.find("i am not existant or am i")
+    assert_equal nil, found_not
+    assert_equal "The given page was not found" ,@page.get_error_message
+  end
+  test "#versions" do
     
   end
   test "#save as differ formats" do

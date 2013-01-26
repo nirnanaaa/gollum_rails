@@ -1,6 +1,5 @@
 require 'rubygems'
 require 'gollum'
-require 'yaml'
 
 module Gollum
   module Rails

@@ -108,10 +108,14 @@ module Gollum
       
       def find(name = nil)
         if !name.nil?
-          return @wiki.wiki.page(name)
+            page = @wiki.wiki.page(name)
+            if page.nil?
+              @error = "The given page was not found"
+              return nil
+            end
+            return page
         else
-          #@error = 
-          return false
+          return nil
         end
       end
 
@@ -120,7 +124,7 @@ module Gollum
       end
 
       def method_missing(name, *args)
-
+          true
       end
 
     end
