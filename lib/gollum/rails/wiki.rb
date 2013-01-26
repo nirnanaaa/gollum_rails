@@ -1,3 +1,7 @@
+require 'gollum/rails/page'
+require 'gollum/rails/validations'
+require 'gollum/rails/config'
+
 module Gollum
   module Rails
     class Wiki

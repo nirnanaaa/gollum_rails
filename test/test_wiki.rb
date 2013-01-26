@@ -6,6 +6,12 @@ context "Backend" do
     @wiki = Gollum::Rails::Wiki.new(@path)
   end
   test "#gets the path of the wiki" do
+    assert_not_nil @wiki.getPath
+    assert_instance_of String, @wiki.getPath
     assert_equal @path, @wiki.getPath
+    
+  end
+  test "#gets the git repository" do
+   # assert
   end
 end
