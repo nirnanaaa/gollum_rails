@@ -3,7 +3,9 @@ module Gollum
     class Wiki
       attr_accessor :wiki
       def initialize(path)
-        send("wiki=", getMainGollum(path))
+        main = getMainGollum(path)
+        send("wiki=", main)
+        DependencyInjector.set('wiki', main)
       end
 
       def getMainGollum(path)
