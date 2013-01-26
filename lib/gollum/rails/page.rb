@@ -1,7 +1,7 @@
 # ~*~ encoding: utf-8 ~*~
 module Gollum
   module Rails
-    class Page
+    class Page 
       include ActiveModel::Conversion
       extend ActiveModel::Naming
 
@@ -186,8 +186,10 @@ module Gollum
         if !@format
           return false
         end
+        
+        #super
+        
         return true
-
       end
 
       #gets an Instance of Gollum::Wiki fetched by find() method
