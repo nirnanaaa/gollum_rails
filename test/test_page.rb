@@ -35,4 +35,25 @@ context "Page Test" do
     assert_instance_of Gollum::Wiki, @page.wiki.wiki
     assert_instance_of Gollum::Rails::Wiki, @page.wiki
   end
+  test "#save" do
+    name =  Time.now.to_s
+    @page.name = name
+    
+    #frist run should pass
+    assert_equal true, @page.save
+    
+    #page already exist
+    assert_equal false, @page.save
+  end
+  
+  test "#get error message" do
+    @page.name = "static"
+    @page.save
+    assert_instance_of Gollum::DuplicatePageError, @page.get_error_message
+    
+    
+  end
+  test "#save as differ formats" do
+    
+  end
 end

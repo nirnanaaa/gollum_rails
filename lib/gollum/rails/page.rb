@@ -19,6 +19,7 @@ module Gollum
 
       attr_reader :persisted
       
+      attr_reader :error
       # attributes needs to be a hash
       # example:
       #   Gollum::Rails::Page.new({name: '', content: '', format: '', commit: {}})
@@ -42,24 +43,34 @@ module Gollum
         if !Validations.is_boolean?(@persisted)
           @persisted = false
         end
+        if !@error
+          @error = nil
+        end
         attributes.each do |name, value|
           send("#{name}=", value)
         end
 
       end
-
+      
       ## checks if @wiki.wiki is an instance of Gollum::Wiki
       def wikiLoaded?
         @wiki.wiki.is_a?(Gollum::Wiki)
       end
-
+      
+      def get_error_message
+        @error
+      end
       # Some "ActiveRecord" like things e.g. .save .valid? .find .find_by_* .where and so on
       def save
         if valid?
           begin
             @wiki.wiki.write_page(@name, @format, @content, @commit)
+          rescue Gollum::DuplicatePageError => e
+            @error = e
+            return false
           end
         end
+        return true
       end
 
       def update
@@ -94,7 +105,7 @@ module Gollum
         return true
         
       end
-
+      
       def find(by_string = nil)
         if !by_string.nil?
 
