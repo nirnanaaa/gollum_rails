@@ -70,9 +70,14 @@ context "Page Test" do
     assert_equal nil, found_not
     assert_equal "The given page was not found" ,@page.get_error_message
   end
-  test "#method_missing" do
-    puts @page.find_by_id
+  test "#page update" do
+    origin = @page.find("static")
+    assert_instance_of String, @page.update("content", @commit)
   end
+  #test "#method_missing" do
+  #  found = @page.find_by_id
+  #  assert_instance_of Gollum::Page, found
+  #end
   test "#save as differ formats" do
     
   end
