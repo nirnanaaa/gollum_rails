@@ -26,10 +26,15 @@ module Gollum
       #      email: 'nirnanaaa@khnetworks.com'
       #   }
       def initialize(attributes, options = {})
+        wiki = DependencyInjector.get('wiki')
+        if wiki && wiki.is_a?(Wiki)
+          @wiki = wiki
+        end
+        
         attributes.each do |name, value|
           send("#{name}=", value)
         end
-        @wiki = DependencyInjector.get('wiki')
+        
       end
       ## checks if @wiki.wiki is an instance of Gollum::Wiki
       def wikiLoaded?
