@@ -124,7 +124,13 @@ module Gollum
       end
 
       def method_missing(name, *args)
-          true
+          meth = name.to_s.index("find_by_")
+          if meth.nil?
+            @error = "method not found"
+            raise RuntimeError
+          end
+          finder = name[8 .. name.length]
+          return finder
       end
 
     end

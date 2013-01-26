@@ -15,6 +15,7 @@ module Gollum
       end
 
       def self.settings_from_rails
+        Rails.settings
       end
 
       def self.rails_root

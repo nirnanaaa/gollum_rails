@@ -70,8 +70,8 @@ context "Page Test" do
     assert_equal nil, found_not
     assert_equal "The given page was not found" ,@page.get_error_message
   end
-  test "#versions" do
-    
+  test "#method_missing" do
+    puts @page.find_by_id
   end
   test "#save as differ formats" do
     

@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
      LICENSE.md
      README.md
      lib/gollum_rails.rb
+     lib/gollum/rails/dependency_injector.rb
      lib/gollum/rails/page.rb
      lib/gollum/rails/validations.rb
      lib/gollum/rails/wiki.rb
