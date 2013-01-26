@@ -41,6 +41,9 @@ module Gollum
       # holds an instance of Gollum::Wiki
       attr_reader :wiki
       
+      # class names
+      attr_reader :class
+      
       # attributes needs to be a hash
       # example:
       #   Gollum::Rails::Page.new({name: '', content: '', format: '', commit: {}})

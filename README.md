@@ -51,7 +51,7 @@ Works like `ActiveRecord` / `ActiveModel` validation
 some examples:
 
 
-## Api
+## API
 
 
 ## TODO
@@ -59,11 +59,11 @@ some examples:
 * Search pages
 * embed gollum :markdown editor
 
-## Developer
+## DEVELOPER
 
 Very cool. Just fork this repository and send  pull requests ;)
 
-### Quick start
+### QUICK START
 
 Clone the repository:
 
@@ -74,7 +74,7 @@ Run the [Bundler](http://gembundler.com/):
 	$ bundle install
 	
 
-### Testing
+### TESTING
 
 First use the Quick Start to install all dependencys.
 All tests are stored under the `test/` directory.
@@ -89,7 +89,9 @@ To run tests just use the `rake` command:
 
 BE CAREFUL! THE FIRST TEST WILL FAIL BECAUSE THE NECESSARY STATIC FILES ARE NOT EXISTING
 
-##License
+
+## EXAMPLE
+## LICENSE
 Copyright © 2013 Florian Kasper
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
