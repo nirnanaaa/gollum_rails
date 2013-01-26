@@ -4,11 +4,21 @@ module Gollum
       include ActiveModel::Validations
       include ActiveModel::Conversion
       extend ActiveModel::Naming
-      attr_accessor :name, :content, :format, :commit
+      
+      attr_accessor :name
+      
+      attr_accessor :content
+      
+      attr_accessor :format
+      
+      attr_accessor :commit
       
       attr_accessor :options
       
       attr_reader :wiki
+      
+      attr_reader :persisted
+      
       
       # attributes needs to be a hash
       # example:
