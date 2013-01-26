@@ -78,7 +78,30 @@ context "Page Test" do
   #  found = @page.find_by_id
   #  assert_instance_of Gollum::Page, found
   #end
-  test "#save as differ formats" do
+  test "#production test runs (create|update|delete)" do
+    wiki = Gollum::Rails::Wiki.new(PATH)
+    page = Gollum::Rails::Page.new
+    cnt = page.find("static")
+    commit = {
+      :message => "production test update",
+      :name => 'Florian Kasper',
+      :email => 'nirnanaaa@khnetworks.com'
+    }
+    update = page.update("content", commit)
+    assert_instance_of String, update
     
+    commit[:message] = "test delete"
+    delete = page.delete(commit)
+    assert_instance_of String, delete
+    
+    commit[:message] = "test create"
+    page = Gollum::Rails::Page.new({
+      name: 'static',
+      content: 'content',
+      format: :markdown,
+      commit: commit
+    })
+    assert_equal true, page.save
   end
+  
 end

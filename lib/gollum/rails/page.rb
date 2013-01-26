@@ -32,13 +32,12 @@ module Gollum
 
       # a boolean variable that holds the status of save() and update()
       attr_reader :persisted
-      
+
       # holds the error messages
       attr_reader :error
-      
+
       # holds an instance of Gollum::Wiki
       attr_reader :wiki
-         
       # attributes needs to be a hash
       # example:
       #   Gollum::Rails::Page.new({name: '', content: '', format: '', commit: {}})
@@ -54,7 +53,7 @@ module Gollum
       #      name: 'Florian Kasper',
       #      email: 'nirnanaaa@khnetworks.com'
       #   }
-      def initialize(attributes, options = {})
+      def initialize(attributes = {}, options = {})
         wiki = DependencyInjector.get('wiki')
         if wiki && wiki.is_a?(Wiki)
           @wiki = wiki
@@ -70,15 +69,17 @@ module Gollum
         end
 
       end
-      
+
       ## checks if @wiki.wiki is an instance of Gollum::Wiki
       def wikiLoaded?
         @wiki.wiki.is_a?(Gollum::Wiki)
       end
-      
+
+      ## Error String content brought by the functions in this class
       def get_error_message
         @error
       end
+
       # Some "ActiveRecord" like things e.g. .save .valid? .find .find_by_* .where and so on
       def save
         if valid?
@@ -93,6 +94,22 @@ module Gollum
         return true
       end
 
+      # Updates an existing page
+      # usage:
+      #
+      #
+      # wiki = Gollum::Rails::Wiki.new(PATH)
+      #
+      # page = Gollum::Rails::Page.new
+      # cnt = page.find(PAGENAME)
+      #
+      # commit = {
+      #   :message => "production test update",
+      #   :name => 'Florian Kasper',
+      #   :email => 'nirnanaaa@khnetworks.com'
+      # }
+      # update = page.update("content", commit)
+
       def update(content, commit, name=nil, format=nil)
         if !name.nil?
           @name = name
@@ -101,22 +118,57 @@ module Gollum
           @format = format
         end
         if commit.nil? || content.nil?
+          @error = "commit must be given"
           return false
         end
-        @wiki.wiki.update_page(@page, @name, @format, content, commit)
+        return @wiki.wiki.update_page(@page, @name, @format, content, commit)
       end
       
-      ## if a page is loaded
-      def get_raw_data
-        
+      # Deletes page fetched by find()
+      def delete(commit)
+        if commit.nil?
+          @error = "commit must be given"
+          return false
+        end
+        return @wiki.wiki.delete_page(@page, commit)
       end
+      # if a page is loaded wraps Gollum::Page.raw_data
+      def raw_data
+        if @page
+          @page.raw_data
+        else
+          @error = "no page fetched"
+          return false  
+        end
+      end
+      
+      # if a page is loaded wraps Gollum::Page.formatted_data
+      def formatted_data
+        if @page
+          @page.formatted_data
+        else
+          @error = "no page fetched"
+          return false  
+        end
+      end
+      
+      # Active Record like
+      # Page.version.first.id
+      # Page.version.first.authored_data
+      #
+      #
+      # see Active Model documentation
       def version
-        
+        if @page
+          @page.versions
+        else
+          @error = "no page fetched"
+          return false  
+        end
       end
-      def get_formatted_data
-        
-      end
-      
+
+
+
       #
       # Validates the Class variables
       # default:
@@ -135,27 +187,27 @@ module Gollum
           return false
         end
         return true
-        
+
       end
-      
+
       #gets an Instance of Gollum::Wiki fetched by find() method
       attr_reader :page
-      
+
       #finds a wiki page
       def find(name = nil)
         if !name.nil?
-            page = @wiki.wiki.page(name)
-            if page.nil?
-              @error = "The given page was not found"
-              return nil
-            end
-            
-            #need a better solution thats fu***** bull*****
-            @page = page
-            @name = page.name
-            @format = page.format
+          page = @wiki.wiki.page(name)
+          if page.nil?
+            @error = "The given page was not found"
+            return nil
+          end
 
-            return page
+          #need a better solution thats fu***** bull*****
+          @page = page
+          @name = page.name
+          @format = page.format
+
+          return page
         else
           return nil
         end
@@ -165,17 +217,23 @@ module Gollum
         @persisted
       end
 
-    #  def method_missing(name, *args)
-    #      meth = name.to_s.index("find_by_")
-    #      if meth.nil?
-    #        @error = "method not found"
-    #        raise RuntimeError
-    #      end
-    #      finder = name[8 .. name.length]
-    #      if finder == "name"
-           # find(args)
-    #      end
-    #  end
+      # Static into non static converter
+      def self.method_missing(name, *args)
+        klass = self.new
+        return klass.send(name, args)
+      end
+
+      #  def method_missing(name, *args)
+      #      meth = name.to_s.index("find_by_")
+      #      if meth.nil?
+      #        @error = "method not found"
+      #        raise RuntimeError
+      #      end
+      #      finder = name[8 .. name.length]
+      #      if finder == "name"
+      # find(args)
+      #      end
+      #  end
 
     end
   end
