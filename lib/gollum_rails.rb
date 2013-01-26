@@ -8,4 +8,4 @@ module Gollum
   end
 end
 
-require 'gollum/rails/wiki' if defined?(Rails)
+require 'gollum/rails/gollum_rails' if defined?(Rails)

@@ -6,6 +6,10 @@ module Gollum
       extend ActiveModel::Naming
       attr_accessor :name, :content, :format, :commit
       
+      attr_accessor :options
+      
+      attr_reader :wiki
+      
       # attributes needs to be a hash
       # example:
       #   Gollum::Rails::Page.new({name: '', content: '', format: '', commit: {}})
@@ -21,10 +25,19 @@ module Gollum
       #      name: 'Florian Kasper',
       #      email: 'nirnanaaa@khnetworks.com'
       #   }
-      def initialize(attributes)
+      def initialize(attributes, options = {})
+        #options = self.class.options.merge
         attributes.each do |name, value|
           send("#{name}=", value)
         end
+        
+        #@wiki = Gollum::Rails::Wiki.getWiki
+        #puts @wiki
+        puts DependencyInjector.set("a","b")
+        #@wiki = options.fetch :wiki, nil
+      end
+      def wikiLoaded?
+        
       end
       # Some "ActiveRecord" like things e.g. .save .valid? .find .find_by_* .where and so on
       def save

@@ -2,8 +2,6 @@ require File.expand_path(File.join(File.dirname(__FILE__), "helper"))
 context "Backend" do
   include Rack::Test::Methods
   setup do
-    @path = testpath(".") + '/wiki'
-    @wiki = Gollum::Rails::Wiki.new(@path)
     commit = {
       :message => "test creation of page",
       :name => 'Florian Kasper',

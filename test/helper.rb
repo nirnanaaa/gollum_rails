@@ -11,6 +11,10 @@ TEST_DIR = File.join(File.dirname(__FILE__), *%w[.])
 def testpath(path)
   File.join(TEST_DIR, path)
 end
+
+PATH = testpath(".") + '/wiki'
+WIKI = Gollum::Rails::Wiki.new(PATH)
+
 # test/spec/mini 3
 # http://gist.github.com/25455
 # chris@ozmm.org
