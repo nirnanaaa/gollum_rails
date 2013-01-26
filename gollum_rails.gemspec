@@ -35,8 +35,7 @@ Gem::Specification.new do |s|
      lib/gollum/rails/gollum_rails.rb
      lib/gollum/rails/engine.rb
      lib/gollum/rails/config.rb
-     lib/gollum/rails/exceptions/page_not_found.rb
-     lib/gollum/rails/exceptions/not_a_git_repository.rb
+     lib/gollum/rails/messages.yml
    ]
    s.require_paths = %w[lib]
    s.has_rdoc = false
