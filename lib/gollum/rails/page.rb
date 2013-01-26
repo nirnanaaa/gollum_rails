@@ -106,9 +106,12 @@ module Gollum
         
       end
       
-      def find(by_string = nil)
-        if !by_string.nil?
-
+      def find(name = nil)
+        if !name.nil?
+          return @wiki.wiki.page(name)
+        else
+          #@error = 
+          return false
         end
       end
 

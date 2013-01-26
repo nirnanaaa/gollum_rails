@@ -39,7 +39,7 @@ context "Page Test" do
     name =  Time.now.to_s
     @page.name = name
     
-    #frist run should pass
+    #first run should pass
     assert_equal true, @page.save
     
     #page already exist
@@ -50,7 +50,11 @@ context "Page Test" do
     @page.name = "static"
     @page.save
     assert_instance_of Gollum::DuplicatePageError, @page.get_error_message
-    
+  end
+  test "#find page" do
+    found = @page.find("static")
+    assert_instance_of Gollum::Page, found
+    assert_equal 'content', found.raw_data
     
   end
   test "#save as differ formats" do
