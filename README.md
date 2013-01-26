@@ -46,20 +46,10 @@ If you want you can add a model the same way as normal `ActiveRecord` / `ActiveM
 	
 ## Validating
 
+Works like `ActiveRecord` / `ActiveModel` validation
 
-Explanation:
+some examples:
 
-`Gollum::Rails::Wiki` spawns a new instance of the gollum wiki and sets it in the Dependency Injection container
-
-`<location>` is the location to your GIT repository, containing the pages
-
-Now you can extend a model with the Page class and treat it as a normal ActiveModel
-
-```
-class Page < Gollum::Rails::Page
-
-end
-```
 
 ## Api
 
