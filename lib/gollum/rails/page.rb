@@ -26,18 +26,14 @@ module Gollum
       #      email: 'nirnanaaa@khnetworks.com'
       #   }
       def initialize(attributes, options = {})
-        #options = self.class.options.merge
         attributes.each do |name, value|
           send("#{name}=", value)
         end
-        
-        #@wiki = Gollum::Rails::Wiki.getWiki
-        #puts @wiki
-        puts DependencyInjector.set("a","b")
-        #@wiki = options.fetch :wiki, nil
+        @wiki = DependencyInjector.get('wiki')
       end
+      ## checks if @wiki.wiki is an instance of Gollum::Wiki
       def wikiLoaded?
-        
+        @wiki.wiki.is_a?(Gollum::Wiki)
       end
       # Some "ActiveRecord" like things e.g. .save .valid? .find .find_by_* .where and so on
       def save

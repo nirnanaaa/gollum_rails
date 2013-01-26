@@ -5,7 +5,7 @@ module Gollum
       def initialize(path)
         main = getMainGollum(path)
         send("wiki=", main)
-        DependencyInjector.set('wiki', main)
+        DependencyInjector.set('wiki', self)
       end
 
       def getMainGollum(path)

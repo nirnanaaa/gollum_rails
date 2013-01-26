@@ -21,4 +21,9 @@ context "Backend" do
   test "#gets the git repositorys" do
    # assert
   end
+  test "#is the wiki an instance of gollum?" do
+    assert_equal true, @page.wikiLoaded?
+    assert_instance_of Gollum::Wiki, @page.wiki.wiki
+    assert_instance_of Gollum::Rails::Wiki, @page.wiki
+  end
 end
