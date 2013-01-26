@@ -5,8 +5,8 @@ module Gollum
     class Config
       attr_reader :config
       def self.read_config
-        @config = self.open_config
-        @config
+        config = self.open_config
+        DependencyInjector.set('config', config)
       end
       def self.config_location
       end

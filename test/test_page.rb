@@ -68,7 +68,7 @@ context "Page Test" do
   test "#page not found" do
     found_not = @page.find("i am not existant or am i")
     assert_equal nil, found_not
-    assert_equal "The given page was not found" ,@page.get_error_message
+    assert_equal "The page was not found" ,@page.get_error_message
   end
   test "#page update" do
     origin = @page.find("static")

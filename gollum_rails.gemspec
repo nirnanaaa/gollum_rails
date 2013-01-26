@@ -37,6 +37,7 @@ Gem::Specification.new do |s|
      lib/gollum/rails/engine.rb
      lib/gollum/rails/config.rb
      lib/gollum/rails/messages.yml
+     lib/gollum/rails/hash.rb
    ]
    s.require_paths = %w[lib]
    s.has_rdoc = false

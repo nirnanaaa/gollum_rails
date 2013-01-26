@@ -1,8 +1,10 @@
 # ~*~ encoding: utf-8 ~*~
+require "gollum/rails/hash"
 module Gollum
   module Rails
     class Page 
       include ActiveModel::Conversion
+      include ActiveModel::Validations
       extend ActiveModel::Naming
 
       #the filename
@@ -27,7 +29,7 @@ module Gollum
       # the commit Hash
       attr_accessor :commit
 
-      # WHAT?!
+      # Holds a ::Hash of config options
       attr_accessor :options
 
       # a boolean variable that holds the status of save() and update()
@@ -38,6 +40,7 @@ module Gollum
 
       # holds an instance of Gollum::Wiki
       attr_reader :wiki
+      
       # attributes needs to be a hash
       # example:
       #   Gollum::Rails::Page.new({name: '', content: '', format: '', commit: {}})
@@ -55,8 +58,16 @@ module Gollum
       #   }
       def initialize(attributes = {}, options = {})
         wiki = DependencyInjector.get('wiki')
+        config = DependencyInjector.get('config')
         if wiki && wiki.is_a?(Wiki)
           @wiki = wiki
+        else
+          raise RuntimeError
+        end
+        if config && config.is_a?(Hash)
+          @options = config
+        else
+          raise RuntimeError  
         end
         if !Validations.is_boolean?(@persisted)
           @persisted = false
@@ -118,7 +129,7 @@ module Gollum
           @format = format
         end
         if commit.nil? || content.nil?
-          @error = "commit must be given"
+          @error = @options.messages.commit_not_empty_and_content_not_empty
           return false
         end
         return @wiki.wiki.update_page(@page, @name, @format, content, commit)
@@ -127,7 +138,7 @@ module Gollum
       # Deletes page fetched by find()
       def delete(commit)
         if commit.nil?
-          @error = "commit must be given"
+          @error = @options.messages.commit_must_be_given
           return false
         end
         return @wiki.wiki.delete_page(@page, commit)
@@ -137,7 +148,7 @@ module Gollum
         if @page
           @page.raw_data
         else
-          @error = "no page fetched"
+          @error = @options.messages.no_page_fetched
           return false  
         end
       end
@@ -147,7 +158,7 @@ module Gollum
         if @page
           @page.formatted_data
         else
-          @error = "no page fetched"
+          @error = @options.messages.no_page_fetched
           return false  
         end
       end
@@ -162,7 +173,7 @@ module Gollum
         if @page
           @page.versions
         else
-          @error = "no page fetched"
+          @error = @options.messages.no_page_fetched
           return false  
         end
       end
@@ -178,16 +189,19 @@ module Gollum
       # format must be set
       def valid?
         if !@name || @name.nil?
+          @error = @options.messages.name_not_set_or_nil
           return false
         end
         if !@commit || !@commit.is_a?(Hash)
+          @error = @options.messages.commit_must_be_given
           return false
         end
         if !@format
+          @error = @options.messages.format_not_set
           return false
         end
         
-        #super
+        super
         
         return true
       end
@@ -200,7 +214,7 @@ module Gollum
         if !name.nil?
           page = @wiki.wiki.page(name)
           if page.nil?
-            @error = "The given page was not found"
+            @error = @options.messages.no_page_found
             return nil
           end
 
