@@ -36,7 +36,7 @@ If you want you can add an initializer into e.g. `config/initializers/gollum_rai
 
 	Gollum::Rails::Wiki.new(<location>)
 
-Now your gollum is ready for use
+Now your gollum wiki is ready for use
 
 If you want you can add a model the same way as normal `ActiveRecord` / `ActiveModel`
 
@@ -50,9 +50,34 @@ Works like `ActiveRecord` / `ActiveModel` validation
 
 some examples:
 
-
+	# validates the presence of the Name (already embedded into to gem)
+	validates_presence_of :name
+	
+	# forces the name to have a given format e.g. only 0-9 a-z and A-Z
+	validates_format_of :name, :with => /^[a-zA-Z0-9_]+$/i
+	
+	# checks if the lenght of the content fit
+	validates_length_of :content, :maximum => 500
+	
 ## API
 
+Accessible variables / methods are:
+
+`Gollum::Rails::Page`
+
+Create a new Page:
+
+Example for existing model `Page`
+
+	page = Page.new {:name => 'Example page',
+					 :content => 'some very very very very long content',
+					 :format => :markdown,
+					 :commit => commit_data
+					 }
+	page.save
+	
+Thats it. Very easy. You can use also `page.save!` method.
+	
 
 ## TODO
 * List all pages

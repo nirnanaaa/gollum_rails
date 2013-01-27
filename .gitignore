@@ -2,6 +2,7 @@
 ## Eclipse
 #################
 
+*.gem
 *.pydevproject
 .project
 .metadata
