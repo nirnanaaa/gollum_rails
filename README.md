@@ -34,13 +34,13 @@ Then just run the [Bundler](http://gembundler.com/)
 	
 If you want you can add an initializer into e.g. `config/initializers/gollum_rails.rb`
 
-	Gollum::Rails::Wiki.new(<location>)
+	GollumRails::Wiki.new(<location>)
 
 Now your gollum wiki is ready for use
 
 If you want you can add a model the same way as normal `ActiveRecord` / `ActiveModel`
 
-	class Page < Gollum::Rails::Page
+	class Page < GollumRails::Page
 
 	end
 	
@@ -48,7 +48,7 @@ If you want you can add a model the same way as normal `ActiveRecord` / `ActiveM
 
 Accessible variables / methods are:
 
-For: `Gollum::Rails::Page`
+For: `GollumRails::Page`
 
 Every action returns a `String`, containing the commit id of the current action
 

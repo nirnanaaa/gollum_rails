@@ -8,6 +8,7 @@
 .metadata
 bin/
 tmp/
+pkg/
 *.tmp
 *.bak
 *.swp

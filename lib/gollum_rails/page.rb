@@ -1,7 +1,6 @@
 # ~*~ encoding: utf-8 ~*~
-require "gollum/rails/hash"
-module Gollum
-  module Rails
+require "gollum_rails/hash"
+module GollumRails
     class Page 
       include ActiveModel::Conversion
       include ActiveModel::Validations
@@ -50,7 +49,7 @@ module Gollum
       
       # attributes needs to be a hash
       # example:
-      #   Gollum::Rails::Page.new({name: '', content: '', format: '', commit: {}})
+      #   GollumRails::Page.new({name: '', content: '', format: '', commit: {}})
       #
       #
       # explanation:
@@ -126,9 +125,9 @@ module Gollum
       # usage:
       #
       #
-      # wiki = Gollum::Rails::Wiki.new(PATH)
+      # wiki = GollumRails::Wiki.new(PATH)
       #
-      # page = Gollum::Rails::Page.new
+      # page = GollumRails::Page.new
       # cnt = page.find(PAGENAME)
       #
       # commit = {
@@ -280,4 +279,3 @@ module Gollum
 
     end
   end
-end

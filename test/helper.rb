@@ -13,7 +13,7 @@ def testpath(path)
 end
 
 PATH = testpath(".") + '/wiki'
-WIKI = Gollum::Rails::Wiki.new(PATH)
+WIKI = GollumRails::Wiki.new(PATH)
 
 # test/spec/mini 3
 # http://gist.github.com/25455

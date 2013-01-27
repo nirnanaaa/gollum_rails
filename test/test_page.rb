@@ -13,7 +13,7 @@ context "Page Test" do
       format: :markdown,
       commit: @commit
     }
-    @page = Gollum::Rails::Page.new(attributes)
+    @page = GollumRails::Page.new(attributes)
   end
   test "#tests the creation of the page" do
     assert_equal false, @page.persisted?
@@ -33,7 +33,7 @@ context "Page Test" do
   test "#is the wiki an instance of gollum?" do
     assert_equal true, @page.wikiLoaded?
     assert_instance_of Gollum::Wiki, @page.wiki.wiki
-    assert_instance_of Gollum::Rails::Wiki, @page.wiki
+    assert_instance_of GollumRails::Wiki, @page.wiki
   end
   test "#save" do
     name =  Time.now.to_s
@@ -79,8 +79,8 @@ context "Page Test" do
   #end
 
   test "#production test runs (create|update|delete)" do
-    wiki = Gollum::Rails::Wiki.new(PATH)
-    page = Gollum::Rails::Page.new
+    wiki = GollumRails::Wiki.new(PATH)
+    page = GollumRails::Page.new
     cnt = page.find("static")
     commit = {
       :message => "production test update",
@@ -95,7 +95,7 @@ context "Page Test" do
     assert_instance_of String, delete
     
     commit[:message] = "test create"
-    page = Gollum::Rails::Page.new({
+    page = GollumRails::Page.new({
       name: 'static',
       content: 'content',
       format: :markdown,
@@ -107,7 +107,7 @@ context "Page Test" do
   
   
   ### RAILS MODEL
-  class Page < Gollum::Rails::Page
+  class Page < GollumRails::Page
   end
   
   ###/RAILS MODEL

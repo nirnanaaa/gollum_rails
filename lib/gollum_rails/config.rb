@@ -1,7 +1,6 @@
 require 'yaml'
 
-module Gollum
-  module Rails
+module GollumRails
     class Config
       attr_reader :config
       def self.read_config
@@ -34,5 +33,4 @@ module Gollum
       end
 
     end
-  end
 end
