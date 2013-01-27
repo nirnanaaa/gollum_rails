@@ -85,7 +85,7 @@ module Gollum
         attributes.each do |name, value|
           send("#{name}=", value)
         end
-
+        
       end
 
       ## checks if @wiki.wiki is an instance of Gollum::Wiki
@@ -207,8 +207,6 @@ module Gollum
         end
       end
 
-
-
       #
       # Validates the Class variables
       # default:
@@ -228,13 +226,14 @@ module Gollum
         if !@format
           @error = @options.messages.format_not_set
           return false
-        end
+        end    
         
         #super #doesn't work atm
         
         return true
       end
 
+      
       #gets an Instance of Gollum::Wiki fetched by find() method
       attr_reader :page
 
@@ -267,7 +266,6 @@ module Gollum
         klass = self.new
         return klass.send(name, args)
       end
-
       #  def method_missing(name, *args)
       #      meth = name.to_s.index("find_by_")
       #      if meth.nil?
