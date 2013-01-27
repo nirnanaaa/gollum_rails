@@ -17,9 +17,9 @@ module GollumRails
     # Public: Gets/Sets the format of the document
     #
     # Examples
-    # Page.format = :creole
-    # #or
-    # Page.format = :markdown
+    #   Page.format = :creole
+    #   #or
+    #   Page.format = :markdown
     #
     # Possible formats are
     #  - :asciidoc
@@ -46,12 +46,12 @@ module GollumRails
     #                assume that this operation is part of batch of
     #                updates and the commit happens later.
     #
-    # Examples:
+    # Examples
     #     commit = {
-    #       message: 'page created',
-    #       name: 'Florian Kasper',
-    #       email: 'nirnanaaa@khnetworks.com'
-    #     }
+    #         message: 'page created',
+    #         name: 'Florian Kasper',
+    #         email: 'nirnanaaa@khnetworks.com'
+    #       }
     #
     attr_accessor :commit
 
@@ -73,16 +73,19 @@ module GollumRails
 
     # Public: Gets ?!
     attr_reader :class
+    
     # Public: Initializes a new Page instance
     #
     # attributes - A hash of attributes. See example
     # options - Will be merged with the configuration
     #
     # Examples
+    #
     #   GollumRails::Page.new({name: '', content: '', format: '', commit: {}})
     #
     #
-    # Explanation:
+    # Explanation
+    #
     #   name must be a string.
     #   content should be a text/String
     #   format must be eighter :markdown, :latex, :rdoc, ...
@@ -144,7 +147,6 @@ module GollumRails
     end
 
     # Public: saves this instance
-
     def save
       if valid?
         begin
@@ -158,7 +160,7 @@ module GollumRails
       return true
     end
 
-    #rewrite for save() method with raising exceptions as well
+    # Public: rewrite for save() method with raising exceptions as well
     def save!
       saves = save
       if @error
@@ -169,7 +171,7 @@ module GollumRails
 
     end
 
-    # Updates an existing page
+    # Public: Updates an existing page
     # usage:
     #
     #

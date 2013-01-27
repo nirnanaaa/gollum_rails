@@ -1,149 +1,123 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: GollumRails::Engine
+  
+    &mdash; Documentation by YARD 0.8.3
+  
+</title>
 
-<html>
-<head>
-<meta content="text/html; charset=US-ASCII" http-equiv="Content-Type">
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
 
-<title>class GollumRails::Engine - RDoc Documentation</title>
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
 
-<link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
-
-<script type="text/javascript">
-  var rdoc_rel_prefix = "../";
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../';
+  framesUrl = "../frames.html#!" + escape(window.location.href);
 </script>
 
-<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
-<script type="text/javascript" charset="utf-8" src="../js/navigation.js"></script>
-<script type="text/javascript" charset="utf-8" src="../js/search_index.js"></script>
-<script type="text/javascript" charset="utf-8" src="../js/search.js"></script>
-<script type="text/javascript" charset="utf-8" src="../js/searcher.js"></script>
-<script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
 
 
-<body id="top" class="class">
-<nav id="metadata">
-  <nav id="home-section" class="section">
-  <h3 class="section-header">
-    <a href="../index.html">Home</a>
-    <a href="../table_of_contents.html#classes">Classes</a>
-    <a href="../table_of_contents.html#methods">Methods</a>
-  </h3>
-</nav>
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (E)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../GollumRails.html" title="GollumRails (module)">GollumRails</a></span></span>
+     &raquo; 
+    <span class="title">Engine</span>
+  
 
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
 
-  <nav id="search-section" class="section project-section" class="initially-hidden">
-  <form action="#" method="get" accept-charset="utf-8">
-    <h3 class="section-header">
-      <input type="text" name="search" placeholder="Search" id="search-field"
-             title="Type to search, Up and Down to navigate, Enter to load">
-    </h3>
-  </form>
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
 
-  <ul id="search-results" class="initially-hidden"></ul>
-</nav>
+    <iframe id="search_frame"></iframe>
 
+    <div id="content"><h1>Class: GollumRails::Engine
+  
+  
+  
+</h1>
 
-  <div id="file-metadata">
-    <nav id="file-list-section" class="section">
-  <h3 class="section-header">Defined In</h3>
-  <ul>
-    <li>lib/gollum_rails/engine.rb
-  </ul>
-</nav>
-
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Rails::Engine</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Rails::Engine</li>
+          
+            <li class="next">GollumRails::Engine</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
     
-  </div>
-
-  <div id="class-metadata">
+  
+  
     
-    <nav id="parent-class-section" class="section">
-  <h3 class="section-header">Parent</h3>
   
-  <p class="link">Rails::Engine
-  
-</nav>
-
     
-    
-  </div>
-
-  <div id="project-metadata">
-    <nav id="fileindex-section" class="section project-section">
-  <h3 class="section-header">Pages</h3>
-
-  <ul>
-  
-    <li class="file"><a href="../Gemfile.html">Gemfile</a>
-  
-    <li class="file"><a href="../Rakefile.html">Rakefile</a>
-  
-  </ul>
-</nav>
-
-    <nav id="classindex-section" class="section project-section">
-  <h3 class="section-header">Class and Module Index</h3>
-
-  <ul class="link-list">
-  
-    <li><a href="../GollumRails.html">GollumRails</a>
-  
-    <li><a href="../GollumRails/Config.html">GollumRails::Config</a>
-  
-    <li><a href="../GollumRails/DependencyInjector.html">GollumRails::DependencyInjector</a>
-  
-    <li><a href="../GollumRails/Engine.html">GollumRails::Engine</a>
-  
-    <li><a href="../GollumRails/Page.html">GollumRails::Page</a>
-  
-    <li><a href="../GollumRails/Validations.html">GollumRails::Validations</a>
-  
-    <li><a href="../GollumRails/Wiki.html">GollumRails::Wiki</a>
-  
-    <li><a href="../Gollum.html">Gollum</a>
-  
-    <li><a href="../Gollum/Rails.html">Gollum::Rails</a>
-  
-    <li><a href="../Hash.html">Hash</a>
-  
-    <li><a href="../Object.html">Object</a>
-  
-    <li><a href="../Page.html">Page</a>
-  
-  </ul>
-</nav>
-
-  </div>
-</nav>
-
-<div id="documentation">
-  <h1 class="class">class GollumRails::Engine</h1>
-
-  <div id="description" class="description">
-    
-  </div><!-- description -->
-
   
   
   
-  <section id="5Buntitled-5D" class="documentation-section">
-    
-
-    
-
-    
-
-    
-
-    <!-- Methods -->
-    
-  </section><!-- 5Buntitled-5D -->
-
-</div><!-- documentation -->
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/gollum_rails/engine.rb</dd>
+  
+</dl>
+<div class="clear"></div>
 
 
-<footer id="validator-badges">
-  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
-  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
-</footer>
 
+
+
+
+
+
+
+  
+
+</div>
+
+    <div id="footer">
+  Generated on Sun Jan 27 17:01:54 2013 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.3 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>
