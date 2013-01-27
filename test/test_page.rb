@@ -57,12 +57,14 @@ context "Page Test" do
     assert_instance_of Gollum::DuplicatePageError, @page.get_error_message
   end
   test "#find page" do
+    @page.name = "static"
+    @page.save
+    
     found = @page.find("static")
     assert_instance_of Gollum::Page, found
     assert_equal 'content', found.raw_data
     assert_equal :markdown, found.format
     assert_equal '<p>content</p>', found.formatted_data
-    assert_equal nil, @page.get_error_message
 
   end
   test "#nil provided" do
@@ -75,6 +77,8 @@ context "Page Test" do
     assert_equal "The page was not found" ,@page.get_error_message
   end
   test "#page update" do
+    @page.name = "static"
+    @page.save
     origin = @page.find("static")
     assert_instance_of String, @page.update("content", @commit)
   end
@@ -86,12 +90,15 @@ context "Page Test" do
   test "#production test runs (create|update|delete)" do
     wiki = GollumRails::Wiki.new(PATH)
     page = GollumRails::Page.new
-    cnt = page.find("static")
     commit = {
       :message => "production test update",
       :name => 'Florian Kasper',
       :email => 'nirnanaaa@khnetworks.com'
     }
+    
+    cnt = page.find("static")
+    
+
     update = page.update("content", commit)
     assert_instance_of String, update
 
@@ -145,6 +152,8 @@ context "Page Test" do
     end
 
   end
+  
+  
   test "#attr setter" do
     page = Page.new
 
@@ -164,10 +173,6 @@ context "Page Test" do
     assert_equal "content", page.content
     assert_equal :markdown, page.format
     assert_instance_of Hash, page.commit
-  end
-  test "#static calls" do
-    puts GollumRails::Page.find('static').nil?
-    puts GollumRails::Page.get_error_message
   end
 
   test "#formats" do
