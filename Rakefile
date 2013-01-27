@@ -126,7 +126,6 @@ task :gemspec => :validate do
   # read spec file and split out manifest section
   spec = File.read(gemspec_file)
   head, manifest, tail = spec.split("  # = MANIFEST =\n")
-
   # replace name version and date
   replace_header(head, :name)
   replace_header(head, :version)
@@ -146,7 +145,7 @@ task :gemspec => :validate do
   # piece file back together and write
   manifest = "  s.files = %w[\n#{files}\n  ]\n"
   spec = [head, manifest, tail].join("  # = MANIFEST =\n")
-  File.open(gemspec_file, 'w') { |io| io.write(spec) }
+  #File.open(gemspec_file, 'w') { |io| io.write(spec) }
   puts "Updated #{gemspec_file}"
 end
 
