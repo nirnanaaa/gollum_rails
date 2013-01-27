@@ -4,9 +4,9 @@ context "Configuration" do
   setup do
     
   end
-  test "#basic block assert" do
+  test "#file uploads" do
     GollumRails::DependencyInjector.register do |r|
-      assert_instance_of Hash, r.set({:b => true})
+      
     end
   end
 end
