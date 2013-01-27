@@ -52,7 +52,6 @@ context "Page Test" do
     assert_instance_of Gollum::DuplicatePageError, @page.get_error_message
   end
   test "#find page" do
-    
     found = @page.find("static")
     assert_instance_of Gollum::Page, found
     assert_equal 'content', found.raw_data
@@ -78,6 +77,7 @@ context "Page Test" do
   #  found = @page.find_by_id
   #  assert_instance_of Gollum::Page, found
   #end
+
   test "#production test runs (create|update|delete)" do
     wiki = Gollum::Rails::Wiki.new(PATH)
     page = Gollum::Rails::Page.new
@@ -104,4 +104,65 @@ context "Page Test" do
     assert_equal true, page.save
   end
   
+  
+  
+  ### RAILS MODEL
+  class Page < Gollum::Rails::Page
+  end
+  
+  ###/RAILS MODEL
+  
+  test "#rails model test" do
+    ## Controller
+    commit = {
+      :message => "rails test",
+      :name => 'Florian Kasper',
+      :email => 'nirnanaaa@khnetworks.com'
+    }
+    
+  time = Time.now.to_s
+  page = Page.new({
+    name: "static-#{time}",
+    content: 'content',
+    format: :markdown,
+    commit: commit
+  })
+  save = page.save!
+  assert_equal true, save
+  if save
+    puts "\npage static-#{time} saved"
+  end
+  
+  found = page.find "static-#{time}"
+  
+  assert_instance_of Gollum::Page, found
+  
+  if page.delete! commit 
+    puts "page static-#{time} deleted"
+  end
+  
+  end
+  test "#attr setter" do
+    page = Page.new
+
+    page.name = "testpage"
+    page.content = "content"
+    page.format = :markdown
+    
+    page.commit = {
+      :message => "rails test",
+      :name => 'Florian Kasper',
+      :email => 'nirnanaaa@khnetworks.com'
+    }
+    assert_equal "testpage", page.name
+    
+    #must differ in message
+    assert_not_equal @commit, page.commit
+    
+    assert_equal "content", page.content
+    
+    assert_equal :markdown, page.format
+    
+    assert_instance_of Hash, page.commit
+  end
 end

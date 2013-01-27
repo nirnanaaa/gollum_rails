@@ -44,21 +44,6 @@ If you want you can add a model the same way as normal `ActiveRecord` / `ActiveM
 
 	end
 	
-## Validating
-
-Works like `ActiveRecord` / `ActiveModel` validation
-
-some examples:
-
-	# validates the presence of the Name (already embedded into to gem)
-	validates_presence_of :name
-	
-	# forces the name to have a given format e.g. only 0-9 a-z and A-Z
-	validates_format_of :name, :with => /^[a-zA-Z0-9_]+$/i
-	
-	# checks if the lenght of the content fit
-	validates_length_of :content, :maximum => 500
-	
 ## API
 
 Accessible variables / methods are:
@@ -115,7 +100,21 @@ Thats it. Very easy. You can use also `page.save!` method.
 	page.delete!
 	
 	# for getting errors instead of `NIL`
-	
+
+**Set data manually**
+
+	page = Page.new
+
+    page.name = "testpage"
+    page.content = "content"
+    page.format = :markdown
+    page.commit = {
+      				:message => "test action on page",
+      				:name => 'Florian Kasper',
+      				:email => 'nirnanaaa@khnetworks.com'
+    		      }
+    
+		
 ## TODO
 * List all pages
 * Search pages
