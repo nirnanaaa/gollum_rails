@@ -4,4 +4,5 @@ notifications:
   disabled: true
   
 before_install:
- - sudo apt-get update -qq
+ - git init test/wiki
+ 

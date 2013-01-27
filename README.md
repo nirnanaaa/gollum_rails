@@ -1,5 +1,6 @@
 Gollum for Rails
 ================
+[![Build Status](https://travis-ci.org/nirnanaaa/gollum_rails.png?branch=master)](https://travis-ci.org/nirnanaaa/gollum_rails)
 
 Gollum for Rails combines the benefits from gollum with the flexibility of Rails.
 
