@@ -1,4 +1,5 @@
 Gem::Specification.new do |s|
+   s.rubygems_version = '1.3.5'
    s.name = 'gollum_rails'
    s.version = '0.0.2.4'
    
@@ -17,7 +18,7 @@ Gem::Specification.new do |s|
    s.add_development_dependency('rake', '~> 10.0.2')
    s.add_development_dependency('rails', '~> 3.2.11')
    
-   s.author = 'nirnanaaa'
+   s.author = 'Florian Kasper'
    s.email = 'nirnanaaa@khnetworks.com'
    s.homepage = 'https://github.com/nirnanaaa/gollum_rails'
    s.platform = Gem::Platform::RUBY
@@ -44,6 +45,7 @@ Gem::Specification.new do |s|
   ]
   # = MANIFEST =
    s.require_paths = %w[lib]
-   s.has_rdoc = false
+   s.has_rdoc = true
+   s.rdoc_options = ["--charset=UTF-8"]
    s.test_files = s.files.select { |path| path =~ /^test\/test_.*\.rb/ }
 end
