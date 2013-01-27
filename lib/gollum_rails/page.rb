@@ -1,19 +1,26 @@
 # ~*~ encoding: utf-8 ~*~
 require "gollum_rails/hash"
+
 module GollumRails
     class Page 
       include ActiveModel::Conversion
       include ActiveModel::Validations
       extend ActiveModel::Naming
 
-      #the filename
+      # Public: Gets/Sets the name of the document
       attr_accessor :name
 
-      # text content
+      # Public: Gets/Sets the content of the document
       attr_accessor :content
 
-      # file formatting type
-      # possible:
+      # Public: Gets/Sets the format of the document
+      # 
+      # Examples
+      # Page.format = :creole
+      # #or
+      # Page.format = :markdown
+      # 
+      # Possible formats are
       #  - :asciidoc
       #  - :creole
       #  - :markdown
@@ -25,55 +32,82 @@ module GollumRails
       #  - :wiki
       attr_accessor :format
 
-      # the commit Hash
+      # Public: Gets/Sets the commiters credentials
+      #
+      # commit - The commit Hash details:
+      #   :message - The String commit message.
+      #   :name - The String author full name.
+      #   :email - The String email address.
+      #   :parent - Optional Grit::Commit parent to this update.
+      #   :tree - Optional String SHA of the tree to create the
+      #           index from.
+      #   :committer - Optional Gollum::Committer instance. If provided,
+      #                assume that this operation is part of batch of
+      #                updates and the commit happens later.
+      # 
+      # Examples:
+      #     commit = {
+      #       message: 'page created',
+      #       name: 'Florian Kasper',
+      #       email: 'nirnanaaa@khnetworks.com'
+      #     }
+      #  
       attr_accessor :commit
 
-      # Holds a ::Hash of config options
-      attr_accessor :options
 
-      # a boolean variable that holds the status of save() and update()
-      attr_reader :persisted
 
       #########
       # READERs
       #########
       
-      # holds the error messages
+      # Public: Gets the options
+      attr_reader :options
+
+      # Public: Gets the persistance of objects by save(), update(), delete() methods
+      attr_reader :persisted
+      
+      # Public: Gets the error messages
       attr_reader :error
 
-      # holds an instance of Gollum::Wiki
+      # Public: Gets the instance of Gollum::Wiki
       attr_reader :wiki
       
-      # class names
+      # Public: Gets ?!
       attr_reader :class
       
-      # attributes needs to be a hash
-      # example:
+      # Public: Initializes a new Page instance
+      #
+      # attributes - A hash of attributes. See example
+      # options - Will be merged with the configuration 
+      #
+      # Examples
       #   GollumRails::Page.new({name: '', content: '', format: '', commit: {}})
       #
       #
-      # explanation:
-      # name must be a string.
-      # content should be a text/String
-      # format must be eighter :markdown, :latex, :rdoc, ...
-      # commit must be a hash for example:
-      #   commit = {
-      #      message: 'page created',
-      #      name: 'Florian Kasper',
-      #      email: 'nirnanaaa@khnetworks.com'
-      #   }
+      # Explanation:
+      #   name must be a string.
+      #   content should be a text/String
+      #   format must be eighter :markdown, :latex, :rdoc, ...
+      #   commit must be a hash for example:
+      #
+      # Raises RuntimeError if the wiki was not initialized
+      # Raises RuntimeError if no configuration was provided
+      #
+      # Returns an instance of this class
       def initialize(attributes = {}, options = {})
         wiki = DependencyInjector.wiki
         config = DependencyInjector.config
         if wiki && wiki.is_a?(Wiki) && wiki_loaded?(wiki.wiki)
           @wiki = wiki
         else
-          raise RuntimeError
+          #must be hardcoded, cause no options are loaded
+          raise RuntimeError, "No wiki loaded"
         end
         if config && config.is_a?(Hash)
           @options = config
+          options.each{|k,v| @options[k] = v}
         else
-          raise RuntimeError  
+          raise RuntimeError, "No configuration provided"
         end
         if !Validations.is_boolean?(@persisted)
           @persisted = false
@@ -87,17 +121,32 @@ module GollumRails
         
       end
 
-      ## checks if @wiki.wiki is an instance of Gollum::Wiki
+      # Public: Checks if the given Instance is an Instance of the Gollum Wiki
+      # 
+      # wiki - An instance of a class
+      # 
+      # Examples
+      #   wiki_loaded?(Gollum::Wiki)
+      #   # => true
+      #
+      # Returns if the given instance is an instance of Gollum::Wiki
       def wiki_loaded?(wiki)
         wiki.is_a?(Gollum::Wiki)
       end
 
-      ## Error String content brought by the functions in this class
+      # Public: Gets the @error message 
+      #
+      # Examples:
+      #   puts get_error_message
+      #   # => 'An Error Occured'
+      #
+      # Returns an Error message
       def get_error_message
         @error
       end
 
-      # Some "ActiveRecord" like things e.g. .save .valid? .find .find_by_* .where and so on
+      # Public: saves this instance
+      
       def save
         if valid?
           begin
