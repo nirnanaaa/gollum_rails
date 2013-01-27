@@ -22,8 +22,28 @@ Gem::Specification.new do |s|
    s.homepage = 'https://github.com/nirnanaaa/gollum_rails'
    s.platform = Gem::Platform::RUBY
    s.required_ruby_version = '>=1.9'
-
+  # = MANIFEST =
+  s.files = %w[
+    Gemfile
+    Gemfile.lock
+    HISTORY.md
+    LICENSE.md
+    README.md
+    Rakefile
+    gollum_rails.gemspec
+    lib/gollum_rails.rb
+    lib/gollum_rails/config.rb
+    lib/gollum_rails/dependency_injector.rb
+    lib/gollum_rails/engine.rb
+    lib/gollum_rails/gollum_rails.rb
+    lib/gollum_rails/hash.rb
+    lib/gollum_rails/messages.yml
+    lib/gollum_rails/page.rb
+    lib/gollum_rails/validations.rb
+    lib/gollum_rails/wiki.rb
+  ]
+  # = MANIFEST =
    s.require_paths = %w[lib]
    s.has_rdoc = false
    s.test_files = s.files.select { |path| path =~ /^test\/test_.*\.rb/ }
-end  
+end
