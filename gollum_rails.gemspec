@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.email = 'nirnanaaa@khnetworks.com'
   s.homepage = 'https://github.com/nirnanaaa/gollum_rails'
   s.platform = Gem::Platform::RUBY
-  s.required_ruby_version = '>=1.9'
+  s.required_ruby_version = '>=1.8.7'
   
   # = MANIFEST =
   s.files = %w[
