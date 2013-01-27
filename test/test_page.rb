@@ -1,4 +1,5 @@
 require File.expand_path(File.join(File.dirname(__FILE__), "helper"))
+
 context "Page Test" do
   include Rack::Test::Methods
   setup do
@@ -8,10 +9,10 @@ context "Page Test" do
       :email => 'nirnanaaa@khnetworks.com'
     }
     attributes = {
-      name: 'TestPage',
-      content: 'content',
-      format: :markdown,
-      commit: @commit
+      :name => 'TestPage',
+      :content => 'content',
+      :format => :markdown,
+      :commit => @commit
     }
     @page = GollumRails::Page.new(attributes)
   end
@@ -38,14 +39,18 @@ context "Page Test" do
   test "#save" do
     name =  Time.now.to_s
     @page.name = name
-    
+
     #first run should pass
     assert_equal true, @page.save
-    
+
     #page already exist
     assert_equal false, @page.save
+    
+    f = @page.find(name)
+    assert_instance_of String, @page.delete(@commit)
+    
   end
-  
+
   test "#get error message" do
     @page.name = "static"
     @page.save
@@ -58,7 +63,7 @@ context "Page Test" do
     assert_equal :markdown, found.format
     assert_equal '<p>content</p>', found.formatted_data
     assert_equal nil, @page.get_error_message
-    
+
   end
   test "#nil provided" do
     found_not = @page.find(nil) #same as @page.find
@@ -89,29 +94,27 @@ context "Page Test" do
     }
     update = page.update("content", commit)
     assert_instance_of String, update
-    
+
     commit[:message] = "test delete"
     delete = page.delete(commit)
     assert_instance_of String, delete
-    
+
     commit[:message] = "test create"
     page = GollumRails::Page.new({
-      name: 'static',
-      content: 'content',
-      format: :markdown,
-      commit: commit
+      :name => 'static',
+      :content => 'content',
+      :format => :markdown,
+      :commit => commit
     })
     assert_equal true, page.save
   end
-  
-  
-  
+
   ### RAILS MODEL
   class Page < GollumRails::Page
   end
-  
+
   ###/RAILS MODEL
-  
+
   test "#rails model test" do
     ## Controller
     commit = {
@@ -119,28 +122,28 @@ context "Page Test" do
       :name => 'Florian Kasper',
       :email => 'nirnanaaa@khnetworks.com'
     }
-    
-  time = Time.now.to_s
-  page = Page.new({
-    name: "static-#{time}",
-    content: 'content',
-    format: :markdown,
-    commit: commit
-  })
-  save = page.save!
-  assert_equal true, save
-  if save
-    puts "\nstatic-#{time} saved"
-  end
-  
-  found = page.find "static-#{time}"
-  
-  assert_instance_of Gollum::Page, found
-  
-  if page.delete! commit 
-    puts "static-#{time} deleted"
-  end
-  
+
+    time = Time.now.to_s
+    page = Page.new({
+      :name => "static-#{time}",
+      :content => 'content',
+      :format => :markdown,
+      :commit => commit
+    })
+    save = page.save!
+    assert_equal true, save
+    if save
+      puts "\nstatic-#{time} saved"
+    end
+
+    found = page.find "static-#{time}"
+
+    assert_instance_of Gollum::Page, found
+
+    if page.delete! commit
+      puts "static-#{time} deleted"
+    end
+
   end
   test "#attr setter" do
     page = Page.new
@@ -148,25 +151,46 @@ context "Page Test" do
     page.name = "testpage"
     page.content = "content"
     page.format = :markdown
-    
+
     page.commit = {
       :message => "rails test",
       :name => 'Florian Kasper',
       :email => 'nirnanaaa@khnetworks.com'
     }
     assert_equal "testpage", page.name
-    
+
     #must differ in message
     assert_not_equal @commit, page.commit
-    
     assert_equal "content", page.content
-    
     assert_equal :markdown, page.format
-    
     assert_instance_of Hash, page.commit
   end
   test "#static calls" do
     puts GollumRails::Page.find('static').nil?
     puts GollumRails::Page.get_error_message
+  end
+
+  test "#formats" do
+    page = Page.new
+
+    testformats = [:markdown, :creole, :asciidoc, :org, :pod, :rdoc, :rst, :textile, :wiki]
+    testformats.each do |k,f|
+      if !f.nil?
+
+        page.commit = {
+          :message => "test",
+          :name => 'FlorianKasper',
+          :email => 'nirnanaaa@khnetworks.com'
+        }
+        page.content = "accccccc"
+        page.name = "asciidoc" + k
+        page.format = f.parameterize.underscore.to_sym
+        page.save!
+        page.find(page.name)
+        page.delete(commit)
+      end
+
+    end
+
   end
 end
