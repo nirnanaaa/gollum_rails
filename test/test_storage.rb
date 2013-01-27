@@ -2,7 +2,7 @@ require File.expand_path(File.join(File.dirname(__FILE__), "helper"))
 context "Backend" do
   include Rack::Test::Methods
   setup do
-    @di_compo = Gollum::Rails::DependencyInjector
+    @di_compo = GollumRails::DependencyInjector
   end
   test "#simple holding test" do
     
@@ -17,10 +17,10 @@ context "Backend" do
     assert_instance_of Hash, @di_compo.get("test2")
     
     ##Wiki Class
-    test_three = @di_compo.set("test3", Gollum::Rails::Wiki.new(PATH))
+    test_three = @di_compo.set("test3", GollumRails::Wiki.new(PATH))
     assert_equal test_three, @di_compo.get("test3")
-    assert_instance_of Gollum::Rails::Wiki, test_three
-    assert_instance_of Gollum::Rails::Wiki, @di_compo.get("test3")
+    assert_instance_of GollumRails::Wiki, test_three
+    assert_instance_of GollumRails::Wiki, @di_compo.get("test3")
     
     ##integer
     r = Random.new

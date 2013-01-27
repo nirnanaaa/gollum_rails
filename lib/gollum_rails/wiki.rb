@@ -1,5 +1,4 @@
-module Gollum
-  module Rails
+module GollumRails
     class Wiki
       attr_accessor :wiki
       def initialize(path)
@@ -31,4 +30,3 @@ module Gollum
       end
     end
   end
-end

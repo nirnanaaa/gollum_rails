@@ -1,7 +1,6 @@
 ## Overrides
 
-module Gollum
-  module Rails
+module GollumRails
     class Validations 
       def self.is_boolean?(variable)
         variable.is_a?(TrueClass) || variable.is_a?(FalseClass)
@@ -9,5 +8,3 @@ module Gollum
 
     end
   end
-end
-

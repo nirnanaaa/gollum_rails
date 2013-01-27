@@ -1,5 +1,4 @@
-module Gollum
-  module Rails
+module GollumRails
     ## simple DI component
     class DependencyInjector
 
@@ -26,5 +25,4 @@ module Gollum
         @storage[name]
       end
     end
-  end
 end

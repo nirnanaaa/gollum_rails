@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
    s.name = 'gollum_rails'
-   s.version = '0.0.2.3'
+   s.version = '0.0.2.4'
    
    s.summary = 'Combines the benefits from Gollum with Rails'
    s.description= 'use templating, authentication and so on'
@@ -22,25 +22,8 @@ Gem::Specification.new do |s|
    s.homepage = 'https://github.com/nirnanaaa/gollum_rails'
    s.platform = Gem::Platform::RUBY
    s.required_ruby_version = '>=1.9'
-   s.files = %w[
-     Gemfile
-     HISTORY.md
-     gollum_rails.gemspec
-     LICENSE.md
-     README.md
-     lib/gollum_rails.rb
-     lib/gollum/rails/dependency_injector.rb
-     lib/gollum/rails/page.rb
-     lib/gollum/rails/validations.rb
-     lib/gollum/rails/wiki.rb
-     lib/gollum/rails/version.rb
-     lib/gollum/rails/gollum_rails.rb
-     lib/gollum/rails/engine.rb
-     lib/gollum/rails/config.rb
-     lib/gollum/rails/messages.yml
-     lib/gollum/rails/hash.rb
-   ]
+
    s.require_paths = %w[lib]
    s.has_rdoc = false
    s.test_files = s.files.select { |path| path =~ /^test\/test_.*\.rb/ }
-end
+end  
