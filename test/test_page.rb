@@ -130,7 +130,7 @@ context "Page Test" do
   save = page.save!
   assert_equal true, save
   if save
-    puts "\npage static-#{time} saved"
+    puts "\nstatic-#{time} saved"
   end
   
   found = page.find "static-#{time}"
@@ -138,7 +138,7 @@ context "Page Test" do
   assert_instance_of Gollum::Page, found
   
   if page.delete! commit 
-    puts "page static-#{time} deleted"
+    puts "static-#{time} deleted"
   end
   
   end
@@ -164,5 +164,9 @@ context "Page Test" do
     assert_equal :markdown, page.format
     
     assert_instance_of Hash, page.commit
+  end
+  test "#static calls" do
+    puts GollumRails::Page.find('static').nil?
+    puts GollumRails::Page.get_error_message
   end
 end
