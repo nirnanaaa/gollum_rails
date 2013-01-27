@@ -31,7 +31,7 @@ context "Page Test" do
     @page.commit = @commit
   end
   test "#is the wiki an instance of gollum?" do
-    assert_equal true, @page.wikiLoaded?
+    assert_equal true, @page.wiki_loaded?(@page.wiki.wiki)
     assert_instance_of Gollum::Wiki, @page.wiki.wiki
     assert_instance_of GollumRails::Wiki, @page.wiki
   end

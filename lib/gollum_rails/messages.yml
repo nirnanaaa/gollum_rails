@@ -5,3 +5,4 @@ messages:
   no_page_fetched: No page was fetched
   no_page_found: The page was not found
   format_not_set: The format was not set
+  wiki_could_not_be_loaded: The wiki instance in ::Page is not an Instance of GollumRails::Wiki or is empty

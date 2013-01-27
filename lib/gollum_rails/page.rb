@@ -63,9 +63,9 @@ module GollumRails
       #      email: 'nirnanaaa@khnetworks.com'
       #   }
       def initialize(attributes = {}, options = {})
-        wiki = DependencyInjector.get('wiki')
-        config = DependencyInjector.get('config')
-        if wiki && wiki.is_a?(Wiki)
+        wiki = DependencyInjector.wiki
+        config = DependencyInjector.config
+        if wiki && wiki.is_a?(Wiki) && wiki_loaded?(wiki.wiki)
           @wiki = wiki
         else
           raise RuntimeError
@@ -88,8 +88,8 @@ module GollumRails
       end
 
       ## checks if @wiki.wiki is an instance of Gollum::Wiki
-      def wikiLoaded?
-        @wiki.wiki.is_a?(Gollum::Wiki)
+      def wiki_loaded?(wiki)
+        wiki.is_a?(Gollum::Wiki)
       end
 
       ## Error String content brought by the functions in this class
@@ -121,6 +121,7 @@ module GollumRails
         end
         
       end
+      
       # Updates an existing page
       # usage:
       #
@@ -151,6 +152,16 @@ module GollumRails
         return @wiki.wiki.update_page(@page, @name, @format, content, commit)
       end
       
+      # alias for update with exceptions
+      def update!(content, commit, name=nil, format=nil)
+        updates = update(content, commit, name=nil, format=nil)
+        if @error
+          raise RuntimeError, @error
+        else
+          return updates
+        end
+      end
+      
       # Deletes page fetched by find()
       def delete(commit)
         if commit.nil?
@@ -171,6 +182,19 @@ module GollumRails
         end
       end
       
+      def all
+        
+      end
+      
+      def preview(name = nil, content = nil, format = :markdown)
+        if !name or name == nil
+          name = @name
+        end
+        if !content or content == nil
+          content = @content
+        end
+        return @wiki.wiki.preview_page(name, content, format)
+      end
       # if a page is loaded wraps Gollum::Page.raw_data
       def raw_data
         if @page

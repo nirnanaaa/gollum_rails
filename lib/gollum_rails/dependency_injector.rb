@@ -1,28 +1,24 @@
 module GollumRails
-    ## simple DI component
-    class DependencyInjector
+  ## simple DI component
+  class DependencyInjector
 
-      attr_accessor :storage
-      
-      #initializes the :storage with a new Hash
-      def self.initialize
-        @storage = Hash.new
-      end
-      
-      #sets a storage Hash
-      def self.set(name, value)
-        if !@storage.is_a?(Hash)
-          self.initialize
-        end  
-        @storage[name] = value
-      end
+    @storage = {}
 
-      # gets a storage
-      def self.get(name)
-        if !@storage.is_a?(Hash)
-          self.initialize
-        end
-        @storage[name]
+    #sets a storage Hash
+    def self.register(&block)
+      block.call(self)
+    end
+
+    def self.set(arguments = {})
+      arguments.each{ |key, value| @storage[key] = value}
+    end
+
+    def self.method_missing(method, *arguments, &block)
+      if @storage[method]
+        return @storage[method]
+      else
+        return false
       end
     end
+  end
 end

@@ -1,3 +1,12 @@
+# 0.0.2.5 27th January 2013
+
+* added versioning
+* added searching
+* added static file support
+* added GRIT support for static files
+* added page preview
+* improved dependency injection
+
 # 0.0.2 27th January 2013
 
 * Refactored modules prefix
