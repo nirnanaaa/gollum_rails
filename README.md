@@ -65,7 +65,7 @@ Accessible variables / methods are:
 
 `Gollum::Rails::Page`
 
-Create a new Page:
+**Create a new Page:**
 
 Example for existing model `Page`
 
