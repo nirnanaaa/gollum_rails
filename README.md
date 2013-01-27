@@ -63,8 +63,18 @@ some examples:
 
 Accessible variables / methods are:
 
-`Gollum::Rails::Page`
+For: `Gollum::Rails::Page`
 
+Every action returns a `String`, containing the commit id of the current action
+
+First: For each action you write on a wiki page, a commit must be given. So lets do this. The commit MUST be a `Hash`
+
+	commit_data = {
+      				:message => "test action on page",
+      				:name => 'Florian Kasper',
+      				:email => 'nirnanaaa@khnetworks.com'
+    		      }
+    		      
 **Create a new Page:**
 
 Example for existing model `Page`
@@ -78,7 +88,34 @@ Example for existing model `Page`
 	
 Thats it. Very easy. You can use also `page.save!` method.
 	
+	
+**Update an existing page**
 
+	page = Page.new
+	page.find('Example page')
+	page.update('some very long content', commit_data)
+	
+	# you can also change the name
+	
+	page.update('some very long content', commit_data, 'new-name')
+	
+	# and the format (page will be recreated)
+	
+	page.update('some very long content', commit_data, nil, :wiki)
+	
+	
+**Delete a page**
+	
+	page = Page.new
+	page.find('Example page')
+	page.delete
+	
+	# or
+	
+	page.delete!
+	
+	# for getting errors instead of `NIL`
+	
 ## TODO
 * List all pages
 * Search pages

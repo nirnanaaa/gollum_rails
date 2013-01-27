@@ -35,6 +35,10 @@ module Gollum
       # a boolean variable that holds the status of save() and update()
       attr_reader :persisted
 
+      #########
+      # READERs
+      #########
+      
       # holds the error messages
       attr_reader :error
 
@@ -110,10 +114,11 @@ module Gollum
 
       #rewrite for save() method with raising exceptions as well
       def save!
+        saves = save
         if @error
           raise RuntimeError, @error
         else
-          return save
+          return saves
         end
         
       end
@@ -155,6 +160,18 @@ module Gollum
         end
         return @wiki.wiki.delete_page(@page, commit)
       end
+      
+      # alias for delete with exceptions
+      
+      def delete!(commit)
+        deletes = delete(commit)
+        if @error
+          raise RuntimeError, @error
+        else
+          return deletes
+        end
+      end
+      
       # if a page is loaded wraps Gollum::Page.raw_data
       def raw_data
         if @page
@@ -213,7 +230,7 @@ module Gollum
           return false
         end
         
-        super
+        #super #doesn't work atm
         
         return true
       end
