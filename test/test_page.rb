@@ -15,6 +15,7 @@ context "Page Test" do
       :commit => @commit
     }
     @page = GollumRails::Page.new(attributes)
+    
   end
   test "#tests the creation of the page" do
     assert_equal false, @page.persisted?
@@ -45,10 +46,10 @@ context "Page Test" do
 
     #page already exist
     assert_equal false, @page.save
-    
+
     f = @page.find(name)
     assert_instance_of String, @page.delete(@commit)
-    
+
   end
 
   test "#get error message" do
@@ -59,7 +60,7 @@ context "Page Test" do
   test "#find page" do
     @page.name = "static"
     @page.save
-    
+
     found = @page.find("static")
     assert_instance_of Gollum::Page, found
     assert_equal 'content', found.raw_data
@@ -95,9 +96,8 @@ context "Page Test" do
       :name => 'Florian Kasper',
       :email => 'nirnanaaa@khnetworks.com'
     }
-    
+
     cnt = page.find("static")
-    
 
     update = page.update("content", commit)
     assert_instance_of String, update
@@ -139,21 +139,15 @@ context "Page Test" do
     })
     save = page.save!
     assert_equal true, save
-    if save
-      puts "\nstatic-#{time} saved"
-    end
 
     found = page.find "static-#{time}"
 
     assert_instance_of Gollum::Page, found
 
-    if page.delete! commit
-      puts "static-#{time} deleted"
-    end
+    assert_instance_of String, page.delete!(commit)
 
   end
-  
-  
+
   test "#attr setter" do
     page = Page.new
 
@@ -178,24 +172,28 @@ context "Page Test" do
   test "#formats" do
     page = Page.new
 
-    testformats = [:markdown, :creole, :asciidoc, :org, :pod, :rdoc, :rst, :textile, :wiki]
-    testformats.each do |k,f|
-      if !f.nil?
-
-        page.commit = {
+    TESTFORMATS.each do |k,f|
+        commit = {
           :message => "test",
           :name => 'FlorianKasper',
           :email => 'nirnanaaa@khnetworks.com'
         }
-        page.content = "accccccc"
-        page.name = "asciidoc" + k
-        page.format = f.parameterize.underscore.to_sym
-        page.save!
-        page.find(page.name)
-        page.delete(commit)
-      end
-
+        page.content = "foo bar" * 10000000
+        page.name = "doc" + k.to_s
+        page.format = k
+        page.save
     end
-
   end
+  test "#preview" do
+    page = Page.new
+    assert_it = File.read(File.join(File.dirname(__FILE__) + "/rendering/html", "result.html"))
+    TESTFORMATS.each do |k,f|
+      if !k.nil?
+        preview = page.preview("testpage", File.read(File.join(File.dirname(__FILE__) + "/rendering/#{k}", "test.#{k}")), k)
+        assert_equal assert_it, preview.split("\n").join("")
+      end
+    end
+    
+  end
+
 end

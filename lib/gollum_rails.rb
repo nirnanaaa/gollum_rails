@@ -5,7 +5,7 @@ require 'gollum'
 
 module Gollum
   module Rails
-  VERSION = '0.0.2.5'
+  VERSION = '0.0.2.6'
     require 'gollum_rails/engine' if defined?(Rails)
   end
 end

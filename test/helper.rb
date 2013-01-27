@@ -14,7 +14,8 @@ end
 
 PATH = testpath(".") + '/wiki'
 WIKI = GollumRails::Wiki.new(PATH)
-
+TESTFORMATS = [:markdown, :asciidoc, :rdoc, :mediawiki]
+  
 # test/spec/mini 3
 # http://gist.github.com/25455
 # chris@ozmm.org

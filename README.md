@@ -115,7 +115,13 @@ Thats it. Very easy. You can use also `page.save!` method.
       				:email => 'nirnanaaa@khnetworks.com'
     		      }
     
-		
+**Preview a page (AJAX/or not)**
+
+	page = Page.new
+	preview = page.preview("testpage", "content") # or page.preview("testpage", "content", :format)
+	
+	# preview contains the HTML rendered data!
+			
 ## TODO
 * List all pages
 * Search pages
