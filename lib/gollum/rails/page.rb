@@ -108,6 +108,15 @@ module Gollum
         return true
       end
 
+      #rewrite for save() method with raising exceptions as well
+      def save!
+        if @error
+          raise RuntimeError, @error
+        else
+          return save
+        end
+        
+      end
       # Updates an existing page
       # usage:
       #
