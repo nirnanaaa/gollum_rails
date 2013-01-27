@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=US-ASCII" http-equiv="Content-Type">
+
+<title>Rakefile - RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body class="file">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./Gemfile.html">Gemfile</a>
+  
+    <li class="file"><a href="./Rakefile.html">Rakefile</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./GollumRails.html">GollumRails</a>
+  
+    <li><a href="./GollumRails/Config.html">GollumRails::Config</a>
+  
+    <li><a href="./GollumRails/DependencyInjector.html">GollumRails::DependencyInjector</a>
+  
+    <li><a href="./GollumRails/Engine.html">GollumRails::Engine</a>
+  
+    <li><a href="./GollumRails/Page.html">GollumRails::Page</a>
+  
+    <li><a href="./GollumRails/Validations.html">GollumRails::Validations</a>
+  
+    <li><a href="./GollumRails/Wiki.html">GollumRails::Wiki</a>
+  
+    <li><a href="./Gollum.html">Gollum</a>
+  
+    <li><a href="./Gollum/Rails.html">Gollum::Rails</a>
+  
+    <li><a href="./Hash.html">Hash</a>
+  
+    <li><a href="./Object.html">Object</a>
+  
+    <li><a href="./Page.html">Page</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation" class="description">
+  
+<p>require 'rubygems' require 'rake' require 'date'</p>
+
+<p>#############################################################################
+# # Helper functions #
+#############################################################################</p>
+
+<p>def name</p>
+
+<pre>@name ||= Dir['*.gemspec'].first.split('.').first</pre>
+
+<p>end</p>
+
+<p>def version</p>
+
+<pre>line = File.read(&quot;lib/#{name}.rb&quot;)[/^\s*VERSION\s*=\s*.  ]
+line.match(/.*VERSION\s*=\s*['&quot;](.*)['&quot;]/)[1]</pre>
+
+<p>end</p>
+
+<p># assumes x.y.z all digit version def next_version</p>
+
+<pre># x.y.z
+v = version.split '.'
+# bump z
+v[-1] = v[-1].to_i + 1
+v.join '.'</pre>
+
+<p>end</p>
+
+<p>def bump_version</p>
+
+<pre>old_file = File.read(&quot;lib/#{name}.rb&quot;)
+old_version_line = old_file[/^\s*VERSION\s*=\s*.*/]
+new_version = next_version
+# replace first match of old vesion with new version
+old_file.sub!(old_version_line, &quot;  VERSION = '#{new_version}'&quot;)
+
+File.write(&quot;lib/#{name}.rb&quot;, old_file)
+
+new_version</pre>
+
+<p>end</p>
+
+<p>def date</p>
+
+<pre>Date.today.to_s</pre>
+
+<p>end</p>
+
+<p>def rubyforge_project</p>
+
+<pre>name</pre>
+
+<p>end</p>
+
+<p>def gemspec_file</p>
+
+<pre>&quot;#{name}.gemspec&quot;</pre>
+
+<p>end</p>
+
+<p>def gem_file</p>
+
+<pre>&quot;#{name}-#{version}.gem&quot;</pre>
+
+<p>end</p>
+
+<p>def replace_header(head, header_name)</p>
+
+<pre>head.sub!(/(\.#{header_name}\s*= ').*'/) { &quot;#{$1}#{send(header_name)}'&quot;}</pre>
+
+<p>end</p>
+
+<p>#############################################################################
+# # Standard tasks #
+#############################################################################</p>
+
+<p>task :default =&gt; :test</p>
+
+<p>require 'rake/testtask' Rake::TestTask.new(:test) do |test|</p>
+
+<pre>test.libs &lt;&lt; 'lib' &lt;&lt; 'test' &lt;&lt; '.'
+test.pattern = 'test   /test_*.rb'
+test.verbose = true</pre>
+
+<p>end</p>
+
+<p>desc "Open an irb session preloaded with this library" task :console do</p>
+
+<pre>sh &quot;irb -rubygems -r ./lib/#{name}.rb&quot;</pre>
+
+<p>end</p>
+
+<p>#############################################################################
+# # Custom tasks (add your own tasks here) #
+#############################################################################</p>
+
+<p>desc "Update version number and gemspec" task :bump do</p>
+
+<pre>puts &quot;Updated version to #{bump_version}&quot;
+# Execute does not invoke dependencies.
+# Manually invoke gemspec then validate.
+Rake::Task[:gemspec].execute
+Rake::Task[:validate].execute</pre>
+
+<p>end</p>
+
+<p>#############################################################################
+# # Packaging tasks #
+#############################################################################</p>
+
+<p>desc 'Create a release build' task :release =&gt; :build do</p>
+
+<pre>unless `git branch` =~ /^\* master$/
+  puts &quot;You must be on the master branch to release!&quot;
+  exit!
+end
+sh &quot;git commit --allow-empty -a -m 'Release #{version}'&quot;
+sh &quot;git pull&quot;
+sh &quot;git tag v#{version}&quot;
+sh &quot;git push origin master&quot;
+sh &quot;git push origin v#{version}&quot;
+sh &quot;gem push pkg/#{name}-#{version}.gem&quot;</pre>
+
+<p>end</p>
+
+<p>desc 'Build gem' task :build =&gt; :gemspec do</p>
+
+<pre>sh &quot;mkdir -p pkg&quot;
+sh &quot;gem build #{gemspec_file}&quot;
+sh &quot;mv #{gem_file} pkg&quot;</pre>
+
+<p>end</p>
+
+<p>desc 'Update gemspec' task :gemspec =&gt; :validate do</p>
+
+<pre class="ruby"><span class="ruby-comment"># read spec file and split out manifest section</span>
+<span class="ruby-identifier">spec</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">gemspec_file</span>)
+<span class="ruby-identifier">head</span>, <span class="ruby-identifier">manifest</span>, <span class="ruby-identifier">tail</span> = <span class="ruby-identifier">spec</span>.<span class="ruby-identifier">split</span>(<span class="ruby-node">&quot;  # = MANIFEST =\n&quot;</span>)
+<span class="ruby-comment"># replace name version and date</span>
+<span class="ruby-identifier">replace_header</span>(<span class="ruby-identifier">head</span>, :<span class="ruby-identifier">name</span>)
+<span class="ruby-identifier">replace_header</span>(<span class="ruby-identifier">head</span>, :<span class="ruby-identifier">version</span>)
+<span class="ruby-identifier">replace_header</span>(<span class="ruby-identifier">head</span>, :<span class="ruby-identifier">date</span>)
+<span class="ruby-comment">#comment this out if your rubyforge_project has a different name</span>
+<span class="ruby-identifier">replace_header</span>(<span class="ruby-identifier">head</span>, :<span class="ruby-identifier">rubyforge_project</span>)
+
+<span class="ruby-comment"># determine file list from git ls-files</span>
+<span class="ruby-identifier">files</span> = <span class="ruby-value">%xgit ls-files`</span>.
+  <span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\n&quot;</span>).
+  <span class="ruby-identifier">sort</span>.
+  <span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span> <span class="ruby-identifier">file</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r^\./</span> }.
+  <span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span> <span class="ruby-identifier">file</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r^(rdoc|pkg|test|Home\.md|\.gitattributes)/</span> }.
+  <span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;    #{file}&quot;</span> }.
+  <span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
+
+<span class="ruby-comment"># piece file back together and write</span>
+<span class="ruby-identifier">manifest</span> = <span class="ruby-node">&quot;  s.files = %w[\n#{files}\n  ]\n&quot;</span>
+<span class="ruby-identifier">spec</span> = [<span class="ruby-identifier">head</span>, <span class="ruby-identifier">manifest</span>, <span class="ruby-identifier">tail</span>].<span class="ruby-identifier">join</span>(<span class="ruby-node">&quot;  # = MANIFEST =\n&quot;</span>)
+<span class="ruby-comment">#File.open(gemspec_file, 'w') { |io| io.write(spec) }</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Updated #{gemspec_file}&quot;</span>
+</pre>
+
+<p>end</p>
+
+<p>desc 'Validate lib files and version file' task :validate do</p>
+
+<pre>libfiles = Dir['lib/*'] - [&quot;lib/#{name}.rb&quot;, &quot;lib/#{name}&quot;]
+unless libfiles.empty?
+  puts &quot;Directory `lib` should only contain a `#{name}.rb` file and `#{name}` dir.&quot;
+  exit!
+end
+unless Dir['VERSION*'].empty?
+  puts &quot;A `VERSION` file at root level violates Gem best practices.&quot;
+  exit!
+end</pre>
+
+<p>end</p>
+
+</div>
+
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

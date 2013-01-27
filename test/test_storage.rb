@@ -18,7 +18,6 @@ context "Backend" do
     ##Wiki Class
     test_three = @di_compo.set({:test3 => GollumRails::Wiki.new(PATH)})
     assert_instance_of GollumRails::Wiki, @di_compo.test3
-
     ##integer
     r = Random.new
     rand = r.rand(10000..420000)
