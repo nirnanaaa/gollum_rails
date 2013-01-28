@@ -2,7 +2,9 @@
 module GollumRails
   class Versions
 
+    # Public: Gets the versions
     attr_reader :versions
+    
     def initialize(page)
       @versions = page.versions
     end

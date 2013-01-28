@@ -1,11 +1,13 @@
 require 'rails'
-require 'gollum_rails/config'
-  
+
 module GollumRails
-    class Engine < ::Rails::Engine
-      #initialize "gollum_rails.load_app" do |app|
+  class Engine < ::Rails::Engine
+    initializer "gollum_rails.load_app" do |app|
+      puts "abl"
+      #super
       ##   GollumRails::Config::rails = app
-     # end
     end
   end
+
+end
 
