@@ -122,7 +122,30 @@ Thats it. Very easy. You can use also `page.save!` method.
 	preview = page.preview("testpage", "content") # or page.preview("testpage", "content", :format)
 	
 	# preview contains the HTML rendered data!
-			
+
+**Show pages versions**
+
+	page = Page.new
+	page.find("testpage")
+	versions = page.versions
+	
+	versions.all
+	# => #<Grit::Commit "83a5e82a58eb4afda2662b7ca665b64554baf431">,
+ 		 #<Grit::Commit "3a12080810acaf5cff3c2fb9bf67821943033548">,
+ 		 #<Grit::Commit "3b9ee74806b5cd59ec7d01fe4d974aa9974c816e">,
+ 		 #<Grit::Commit "c1507f5c47ae5bee16dea3ebed2f177dbcf48a68">,
+
+	
+	versions.latest
+	# => #<Grit::Commit "3a12080810acaf5cff3c2fb9bf67821943033548"> 
+	
+	versions.oldest
+	# => #<Grit::Commit "6d71571d379cfe863933123ea93dea4aac1d6eb64"> 
+	
+	versions.find("6d71571d379cfe86393135ea93dea4aac1d6eb64")	
+	# => #<Grit::Commit "6d71571d379cfe863933123ea93dea4aac1d6eb64"> 
+	
+		
 ## TODO
 * List all pages
 * Search pages
