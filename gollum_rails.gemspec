@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.rubygems_version = '1.3.5'
   s.name = 'gollum_rails'
-  s.version = '0.0.2.7'
+  s.version = '0.0.2.8'
 
   s.summary = 'Combines the benefits from Gollum with Rails'
   s.description= 'use templating, authentication and so on'
