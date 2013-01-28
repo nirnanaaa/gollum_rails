@@ -8,7 +8,13 @@ module GollumRails
       argument :model_name, :type => :string
       
       def write_class
-        template "model.rb.erb", Rails.root.join("app", "models", "#{file_name}")
+        if ::File.exist? Rails.root.join("app", "models", "#{file_name}")
+          puts <<-EOM
+          Warning: The file already exists
+          EOM
+        else
+          template "model.rb.erb", Rails.root.join("app", "models", "#{file_name}")
+        end
       end
       
       protected
