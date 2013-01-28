@@ -1,0 +1,17 @@
+# Automatically load the wiki's Class components on Startup
+#
+autoinitialize_wiki: true
+
+# relative / absolute
+#
+# relative will result in 'relative to Rails root'
+# absolute will result in '/'
+# 
+location_type: relative
+
+# the location
+location: db/wiki
+
+# enable i18n?
+
+i18n_messages: true

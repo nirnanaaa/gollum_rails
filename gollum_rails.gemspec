@@ -55,3 +55,4 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.test_files = s.files.select { |path| path =~ /^test\/test_.*\.rb/ }
 end  
+
