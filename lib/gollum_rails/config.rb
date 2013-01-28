@@ -7,6 +7,9 @@ module GollumRails
         config = self.open_config
         DependencyInjector.set({:config => config})
       end
+      def self.read_rails_conf(app)
+        DependencyInjector.set({:rails_conf => self.open_gollum_rails_conf(app)})
+      end
       def self.config_location
       end
 
@@ -30,6 +33,9 @@ module GollumRails
       #gives a hardcoded configuration file
       def self.open_config
         YAML.load_file(::File.join(::File.dirname(__FILE__), 'messages.yml'))
+      end
+      def self.open_gollum_rails_conf(app)
+        YAML.load_file(::File.read(app.root.join("config", "gollum.yml")))
       end
 
     end
