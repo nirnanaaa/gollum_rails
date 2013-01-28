@@ -63,6 +63,9 @@
 
     <div id="content"><div id='filecontents'><h1>Gollum for Rails</h1>
 
+<p><a href="https://travis-ci.org/nirnanaaa/gollum_rails"><img src="https://travis-ci.org/nirnanaaa/gollum_rails.png?branch=master" alt="Build Status"></a>
+<a href="https://gemnasium.com/nirnanaaa/gollum_rails"><img src="https://gemnasium.com/nirnanaaa/gollum_rails.png" alt="Dependency Status"></a></p>
+
 <p>Gollum for Rails combines the benefits from gollum with the flexibility of Rails.</p>
 
 <p>It improves the lightweight &quot;gollum&quot; experience which is quite awesome.</p>
@@ -187,6 +190,37 @@ page.save
               <span class='rbrace'>}</span>
 </code></pre>
 
+<p><strong>Preview a page (AJAX/or not)</strong></p>
+
+<pre class="code ruby"><code><span class='id identifier rubyid_page'>page</span> <span class='op'>=</span> <span class='const'>Page</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_preview'>preview</span> <span class='op'>=</span> <span class='id identifier rubyid_page'>page</span><span class='period'>.</span><span class='id identifier rubyid_preview'>preview</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>testpage</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>content</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='comment'># or page.preview(&quot;testpage&quot;, &quot;content&quot;, :format)
+</span>
+<span class='comment'># preview contains the HTML rendered data!
+</span></code></pre>
+
+<p><strong>Show pages versions</strong></p>
+
+<pre class="code ruby"><code><span class='id identifier rubyid_page'>page</span> <span class='op'>=</span> <span class='const'>Page</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_page'>page</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>testpage</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id identifier rubyid_versions'>versions</span> <span class='op'>=</span> <span class='id identifier rubyid_page'>page</span><span class='period'>.</span><span class='id identifier rubyid_versions'>versions</span>
+
+<span class='id identifier rubyid_versions'>versions</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+<span class='comment'># =&gt; #&lt;Grit::Commit &quot;83a5e82a58eb4afda2662b7ca665b64554baf431&quot;&gt;,
+</span>     <span class='comment'>#&lt;Grit::Commit &quot;3a12080810acaf5cff3c2fb9bf67821943033548&quot;&gt;,
+</span>     <span class='comment'>#&lt;Grit::Commit &quot;3b9ee74806b5cd59ec7d01fe4d974aa9974c816e&quot;&gt;,
+</span>     <span class='comment'>#&lt;Grit::Commit &quot;c1507f5c47ae5bee16dea3ebed2f177dbcf48a68&quot;&gt;,
+</span>
+
+<span class='id identifier rubyid_versions'>versions</span><span class='period'>.</span><span class='id identifier rubyid_latest'>latest</span>
+<span class='comment'># =&gt; #&lt;Grit::Commit &quot;3a12080810acaf5cff3c2fb9bf67821943033548&quot;&gt; 
+</span>
+<span class='id identifier rubyid_versions'>versions</span><span class='period'>.</span><span class='id identifier rubyid_oldest'>oldest</span>
+<span class='comment'># =&gt; #&lt;Grit::Commit &quot;6d71571d379cfe863933123ea93dea4aac1d6eb64&quot;&gt; 
+</span>
+<span class='id identifier rubyid_versions'>versions</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>6d71571d379cfe86393135ea93dea4aac1d6eb64</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>   
+<span class='comment'># =&gt; #&lt;Grit::Commit &quot;6d71571d379cfe863933123ea93dea4aac1d6eb64&quot;&gt; 
+</span></code></pre>
+
 <h2>TODO</h2>
 
 <ul>
@@ -232,7 +266,7 @@ All tests are stored under the <code>test/</code> directory.</p>
 </div></div>
 
     <div id="footer">
-  Generated on Sun Jan 27 17:01:53 2013 by
+  Generated on Mon Jan 28 19:34:37 2013 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.3 (ruby-1.9.3).
 </div>
