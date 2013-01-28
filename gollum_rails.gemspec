@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
   s.add_dependency('grit', '~> 2.5.0')
   s.add_dependency('builder', '~> 3.0.0')
   s.add_dependency('rack', '~> 1.4.0')
+  
   s.add_development_dependency('org-ruby', '~> 0.7.2')
   s.add_development_dependency('shoulda', '~> 3.3.2')
   s.add_development_dependency('rack-test', '~> 0.6.2')
@@ -33,6 +34,7 @@ Gem::Specification.new do |s|
     README.md
     Rakefile
     gollum_rails.gemspec
+    lib/generators/gollum_rails/model/model_generator.rb
     lib/gollum_rails.rb
     lib/gollum_rails/config.rb
     lib/gollum_rails/dependency_injector.rb
