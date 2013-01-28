@@ -151,11 +151,7 @@ end
 
 desc 'Validate lib files and version file'
 task :validate do
-  libfiles = Dir['lib/*'] - ["lib/#{name}.rb", "lib/#{name}"]
-  unless libfiles.empty?
-    puts "Directory `lib` should only contain a `#{name}.rb` file and `#{name}` dir."
-    exit!
-  end
+  libfiles = Dir['lib/*'] - ["lib/#{name}.rb", "lib/#{name}", "lib/generators"]
   unless Dir['VERSION*'].empty?
     puts "A `VERSION` file at root level violates Gem best practices."
     exit!
