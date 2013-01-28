@@ -13,7 +13,6 @@ require File.expand_path('../gollum_rails/wiki', __FILE__)
 $KCODE = 'U' if RUBY_VERSION[0,3] == '1.8'
 
 module GollumRails
-
-  VERSION = '0.0.2.7'
+  VERSION = '0.0.2.8'
 
 end
