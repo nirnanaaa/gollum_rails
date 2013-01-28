@@ -35,7 +35,7 @@ module GollumRails
         YAML.load_file(::File.join(::File.dirname(__FILE__), 'messages.yml'))
       end
       def self.open_gollum_rails_conf(app)
-        YAML.load_file(::File.read(app.root.join("config", "gollum.yml")))
+        YAML.load_file(app.root.join("config", "gollum.yml"))
       end
 
     end
