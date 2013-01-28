@@ -5,8 +5,6 @@ context "Configuration" do
     
   end
   test "#file uploads" do
-    GollumRails::DependencyInjector.register do |r|
-      
-    end
+    
   end
 end

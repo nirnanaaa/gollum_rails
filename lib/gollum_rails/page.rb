@@ -6,7 +6,6 @@ module GollumRails
     include ActiveModel::Conversion
     include ActiveModel::Validations
     extend ActiveModel::Naming
-    
 
     # Public: Gets/Sets the name of the document
     attr_accessor :name
@@ -73,7 +72,6 @@ module GollumRails
 
     # Public: Gets ?!
     attr_reader :class
-    
     # Public: Initializes a new Page instance
     #
     # attributes - A hash of attributes. See example
@@ -150,14 +148,17 @@ module GollumRails
     def save
       if valid?
         begin
-          @wiki.wiki.write_page(@name, @format, @content, @commit)
-          @persisted = true
+          commit = wiki.wiki.write_page(@name, @format, @content, @commit)
         rescue Gollum::DuplicatePageError => e
           @error = e
           return false
         end
       end
-      return true
+      if commit and commit.is_a? String
+        return commit
+      else
+        return false
+      end
     end
 
     # Public: rewrite for save() method with raising exceptions as well
@@ -198,7 +199,14 @@ module GollumRails
         @error = @options.messages.commit_not_empty_and_content_not_empty
         return false
       end
-      return @wiki.wiki.update_page(@page, @name, @format, content, commit)
+      commit = @wiki.wiki.update_page(@page, @name, @format, content, commit)
+      if commit.is_a?(String)
+        @persisted = true
+        return commit
+      else
+        @persisted = false
+        return nil
+      end
     end
 
     #Public: alias for update with exceptions
@@ -220,7 +228,6 @@ module GollumRails
       return @wiki.wiki.delete_page(@page, commit)
     end
 
-    
     #Public: alias for delete with exceptions
     def delete!(commit)
       deletes = delete(commit)
@@ -237,8 +244,8 @@ module GollumRails
     end
 
     # Public: Renders a preview (usable e.g. with ajax)
-    # 
-    # 
+    #
+    #
     # Returns rendered HTML
     def preview(name = nil, content = nil, format = :markdown)
       if !name or name == nil
@@ -279,7 +286,7 @@ module GollumRails
     attr_reader :page
 
     # Public: Finds a page based on given search string
-    # 
+    #
     # Be careful: At the moment you must initialize the class by .new
     #
     # Examples
@@ -355,7 +362,7 @@ module GollumRails
     # Public: A simple wrapper for Gollum::Page.raw_data
     #
     # Page needs to be loaded!
-    # 
+    #
     # Returns raw data
     def raw_data
       if @page
@@ -381,15 +388,13 @@ module GollumRails
     end
 
     # Public: Active Record like
-    # 
-    # Page.version.first.id
-    # Page.version.first.authored_data
+    #
     #
     #
     # see Active Model documentation
-    def version
-      if @page
-        @page.versions
+    def versions
+      if @page && @page.is_a?(Gollum::Page) #&& (persisted? || found?)
+        return GollumRails::Versions.new(@page)
       else
         @error = @options.messages.no_page_fetched
         return false

@@ -2,6 +2,7 @@
 ## Eclipse
 #################
 
+.yardoc/
 *.gem
 *.pydevproject
 .project
