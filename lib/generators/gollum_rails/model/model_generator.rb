@@ -4,7 +4,7 @@ module GollumRails
   module Generators
     class ModelGenerator < ::Rails::Generators::Base
       desc "Install a new model into app/models"
-      source_root File.expand_path('../templates/model', __FILE__)
+      source_root File.expand_path('../../templates/model', __FILE__)
       argument :model_name, :type => :string
       
       def write_class
