@@ -1,5 +1,6 @@
 module GollumRails
   class File
+    # Public: initializer
     def initialize
       
     end

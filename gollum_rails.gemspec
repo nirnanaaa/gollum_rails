@@ -67,5 +67,3 @@ Gem::Specification.new do |s|
   "\t\rails g gollum_rails:model MODEL_NAME"\
   "**********************************************"
 end  
-
-

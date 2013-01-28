@@ -6,7 +6,7 @@ module GollumRails
       desc "Installs the RailsGollum files"
       source_root ::File.expand_path("../templates", __FILE__)
       
-      class_option :messages, :type => :boolean, :default => false, :description => "Include error message templates"
+      class_option :messages, :type => :boolean, :default => true, :description => "Include error message templates"
       
       def copy_config
         copy_file "gollum.yml", Rails.root.join("config", "gollum.yml")
