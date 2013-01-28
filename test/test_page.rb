@@ -42,7 +42,7 @@ context "Page Test" do
     @page.name = name
 
     #first run should pass
-    assert_equal true, @page.save
+    assert_instance_of String, @page.save
 
     #page already exist
     assert_equal false, @page.save
@@ -113,7 +113,7 @@ context "Page Test" do
       :format => :markdown,
       :commit => commit
     })
-    assert_equal true, page.save
+    assert_instance_of String, page.save
   end
 
   ### RAILS MODEL
@@ -138,7 +138,7 @@ context "Page Test" do
       :commit => commit
     })
     save = page.save!
-    assert_equal true, save
+    assert_instance_of String, save
 
     found = page.find "static-#{time}"
 
@@ -195,5 +195,6 @@ context "Page Test" do
     end
     
   end
+
 
 end
