@@ -58,6 +58,13 @@ Gem::Specification.new do |s|
   s.has_rdoc = true
   s.rdoc_options = ["--charset=UTF-8"]
   s.test_files = s.files.select { |path| path =~ /^test\/test_.*\.rb/ }
+  s.post_install_message = "Important: \n\n" \
+  "**********************************************\n\n" \
+  "To use the 'autoinitializer' just run the following command:\n\n"\
+  "\t\trails g gollum_rails:install\n\n"\
+  "To generate a new Page model just run:\n\n"\
+  "\t\rails g gollum_rails:model MODEL_NAME"\
+  "**********************************************"
 end  
 
 
