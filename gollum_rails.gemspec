@@ -34,7 +34,11 @@ Gem::Specification.new do |s|
     README.md
     Rakefile
     gollum_rails.gemspec
+    lib/generators/gollum_rails/install/install_generator.rb
     lib/generators/gollum_rails/model/model_generator.rb
+    lib/generators/gollum_rails/templates/install/gollum.yml
+    lib/generators/gollum_rails/templates/install/messages.yml
+    lib/generators/gollum_rails/templates/model/class.rb.erb
     lib/gollum_rails.rb
     lib/gollum_rails/config.rb
     lib/gollum_rails/dependency_injector.rb
@@ -55,4 +59,5 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.test_files = s.files.select { |path| path =~ /^test\/test_.*\.rb/ }
 end  
+
 
