@@ -36,9 +36,9 @@ Gem::Specification.new do |s|
     gollum_rails.gemspec
     lib/generators/gollum_rails/install/install_generator.rb
     lib/generators/gollum_rails/model/model_generator.rb
-    lib/generators/gollum_rails/templates/install/gollum.yml
-    lib/generators/gollum_rails/templates/install/messages.yml
-    lib/generators/gollum_rails/templates/model/class.rb.erb
+    lib/generators/gollum_rails/templates/class.rb.erb
+    lib/generators/gollum_rails/templates/gollum.yml
+    lib/generators/gollum_rails/templates/messages.yml
     lib/gollum_rails.rb
     lib/gollum_rails/config.rb
     lib/gollum_rails/dependency_injector.rb
@@ -52,6 +52,7 @@ Gem::Specification.new do |s|
     lib/gollum_rails/wiki.rb
   ]
   # = MANIFEST =
+
 
 
   s.require_paths = %w[lib]
