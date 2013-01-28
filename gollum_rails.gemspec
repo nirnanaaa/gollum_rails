@@ -38,7 +38,7 @@ Gem::Specification.new do |s|
     lib/generators/gollum_rails/install/templates/gollum.yml
     lib/generators/gollum_rails/install/templates/messages.yml
     lib/generators/gollum_rails/model/model_generator.rb
-    lib/generators/gollum_rails/model/templates/class.rb.erb
+    lib/generators/gollum_rails/model/templates/model.rb.erb
     lib/gollum_rails.rb
     lib/gollum_rails/config.rb
     lib/gollum_rails/dependency_injector.rb
@@ -67,3 +67,4 @@ Gem::Specification.new do |s|
   "\t\rails g gollum_rails:model MODEL_NAME"\
   "**********************************************"
 end  
+
