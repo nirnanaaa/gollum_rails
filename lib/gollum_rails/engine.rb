@@ -1,5 +1,5 @@
 require 'rails'
-
+require File.expand_path('../hash', __FILE__)
 module GollumRails
   class Engine < ::Rails::Engine
     initializer "gollum_rails.load_app",
@@ -10,10 +10,11 @@ module GollumRails
         Config.read_rails_conf(app)
         Config.read_config
         config = DependencyInjector.rails_conf
-        if config[:location_type] == "relative"
-          path = app.root.join(config[:location])
-        elsif config[:location_type] == "absolute"
-          path = config[:location]
+        path = config.location
+        if config.location_type == "relative"
+          path = app.root.join(config.location)
+        elsif config.location_type == "absolute"
+          path = config.location
         end
         Wiki.new(path)
       end
