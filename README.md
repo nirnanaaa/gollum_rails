@@ -40,6 +40,7 @@ If you want you can add an initializer into e.g. `config/initializers/gollum_rai
 
 Now your gollum wiki is ready for use
 
+
 To create a new ActiveModel / GollumRails::Page just run
 
 	rails g <page>
