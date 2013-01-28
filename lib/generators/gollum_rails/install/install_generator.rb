@@ -4,7 +4,7 @@ module GollumRails
   module Generators
     class InstallGenerator < ::Rails::Generators::Base
       desc "Installs the RailsGollum files"
-      source_root File.expand_path('../../templates/install', __FILE__)
+      source_root File.expand_path("../templates", __FILE__)
       
       class_option :messages, :type => :boolean, :default => false, :description => "Include error message templates"
       
