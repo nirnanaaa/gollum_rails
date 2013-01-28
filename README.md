@@ -40,11 +40,10 @@ If you want you can add an initializer into e.g. `config/initializers/gollum_rai
 
 Now your gollum wiki is ready for use
 
-If you want you can add a model the same way as normal `ActiveRecord` / `ActiveModel`
+To create a new ActiveModel / GollumRails::Page just run
 
-	class Page < GollumRails::Page
-
-	end
+	rails g <page>
+	# make sure that the file does not exist
 	
 ## API
 
@@ -145,7 +144,7 @@ Thats it. Very easy. You can use also `page.save!` method.
 	versions.find("6d71571d379cfe86393135ea93dea4aac1d6eb64")	
 	# => #<Grit::Commit "6d71571d379cfe863933123ea93dea4aac1d6eb64"> 
 	
-		
+
 ## TODO
 * List all pages
 * Search pages
