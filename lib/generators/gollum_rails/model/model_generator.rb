@@ -4,14 +4,11 @@ module GollumRails
   module Generators
     class ModelGenerator < ::Rails::Generators::Base
       desc "Install a new model into app/models"
+      source_root File.expand_path('../templates/model', __FILE__)
       argument :model_name, :type => :string
       
-      def self.source_root
-        @source_root ||= File.join(File.dirname(__FILE__), 'templates')
-      end
-      
       def write_class
-        puts class_name
+        template "model.rb.erb", Rails.root.join("app", "models", "#{file_name}")
       end
       
       protected
@@ -19,6 +16,10 @@ module GollumRails
       def class_name
         model_name.camelize
       end
+      def file_name
+        "#{model_name.downcase.underscore}.rb"
+      end
+      
     end
   end
 end

@@ -1,3 +1,7 @@
+# 0.0.2.8 28th January 2013
+
+* quick generator fail fix
+
 # 0.0.2.7 28th January 2013
 
 * added versioning support
