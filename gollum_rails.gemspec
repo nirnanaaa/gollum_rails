@@ -38,7 +38,6 @@ Gem::Specification.new do |s|
     lib/gollum_rails/dependency_injector.rb
     lib/gollum_rails/engine.rb
     lib/gollum_rails/file.rb
-    lib/gollum_rails/gollum_rails.rb
     lib/gollum_rails/hash.rb
     lib/gollum_rails/messages.yml
     lib/gollum_rails/page.rb

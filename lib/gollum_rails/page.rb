@@ -1,5 +1,6 @@
 # ~*~ encoding: utf-8 ~*~
-require "gollum_rails/hash"
+require File.expand_path('../hash', __FILE__)
+require File.expand_path('../versions', __FILE__)
 
 module GollumRails
   class Page
