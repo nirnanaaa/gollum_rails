@@ -8,6 +8,15 @@ module GollumRails
       if is_installed? app
         DependencyInjector.set({:installed => true})
         Config.read_rails_conf(app)
+        config = DependencyInjector.rails_conf
+        if config[:autoinitialize_wiki]
+          if config[:location_type] == "relative"
+            path = app.root.join(config[:location])
+          elsif config[:location_type] == "absolute"
+            path = config[:location]
+          end
+          Wiki.new(path)
+        end
       end
     end
     def is_installed?(app)
