@@ -6,7 +6,7 @@ require 'fileutils'
 require 'gollum'
 require 'gollum_rails'
 require 'coveralls'
-Coveralls.wear!
+
 
 TEST_DIR = File.join(File.dirname(__FILE__), *%w[.])
 
@@ -42,3 +42,4 @@ def context(*args, &block)
   klass.class_eval &block
 end
 $contexts = []
+Coveralls.wear!
