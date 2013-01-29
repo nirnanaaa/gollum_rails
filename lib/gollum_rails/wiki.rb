@@ -1,26 +1,35 @@
 require File.expand_path('../validations', __FILE__)
 require File.expand_path('../file', __FILE__)
 require File.expand_path('../page', __FILE__)
+require File.expand_path('../hash', __FILE__)
 
 module GollumRails
   class Wiki
-    attr_accessor :wiki
-    def initialize(path)
-      main = getMainGollum(path)
-      send("wiki=", main)
-      DependencyInjector.set({:wiki => self})
+    class << self
+
+    def new(path)
+      initConfig
+      if path != :rails
+        gollum = getMainGollum path
+      else
+        conf = DependencyInjector.rails_conf
+        gollum = getMainGollum conf.location
+      end
+      DependencyInjector.set({ :wiki => gollum, :wiki_path => gollum.path })
+      return gollum
     end
 
+    def initConfig
+      return Config.read_rails_conf if DependencyInjector.in_rails?
+      return Config.read_config
+    end
     def getMainGollum(path)
-      wiki = Gollum::Wiki.new(path)
-    end
-
-    def getPath
-      @wiki.path
-    end
-
-    def getRepo
-      @wiki.repo
+      begin
+        return ::Gollum::Wiki.new(path)  if path.is_a? ::String
+      rescue ::Grit::NoSuchPathError
+        DependencyInjector.set(:error => "No such git repository #{path.to_s}")
+        return nil
+      end
     end
 
     def search(string = '')
@@ -29,8 +38,6 @@ module GollumRails
 
     ## static setters / getters
 
-    def self.getWiki
-      @wiki
-    end
   end
+end
 end
