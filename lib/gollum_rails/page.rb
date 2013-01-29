@@ -1,6 +1,7 @@
 # ~*~ encoding: utf-8 ~*~
 require File.expand_path('../hash', __FILE__)
 require File.expand_path('../page/actions.rb', __FILE__)
+
 #require File.expand_path('../versions', __FILE__)
 
 module GollumRails
@@ -8,7 +9,21 @@ module GollumRails
     include ActiveModel::Conversion
     include ActiveModel::Validations
     extend ActiveModel::Naming
-
+    
+    # Public: Singleton
+    #
+    # loads the necessary external classes
+    #
+    class << self
+      DependencyInjector.page_calls.each do |hash|
+        self.class.instance_eval do
+          define_method(hash[0]) do |*args|
+            return hash[1].single_run(*args)
+          end
+        end
+      end
+    end
+    
     # Public: Gets/Sets the name of the document
     attr_accessor :name
 
@@ -100,8 +115,8 @@ module GollumRails
       config = DependencyInjector.config
 
       if DependencyInjector.wiki &&
-         DependencyInjector.wiki.is_a?(::Gollum::Wiki) &&
-         wiki_loaded?(DependencyInjector.wiki)
+      DependencyInjector.wiki.is_a?(::Gollum::Wiki) &&
+      wiki_loaded?(DependencyInjector.wiki)
       else
         #must be hardcoded, cause no options are loaded
         raise RuntimeError, "No wiki loaded"
@@ -124,7 +139,7 @@ module GollumRails
 
     end
 
-#    DependencyINjector.page_attributes.
+    #    DependencyINjector.page_attributes.
 
     # Public: Checks if the given Instance is an Instance of the Gollum Wiki
     #
@@ -356,11 +371,11 @@ module GollumRails
     # args - Pointer of arguments
     #
     # Static into non static converter
- #   def self.method_missing(name, *args)
-      #klass = self.new
-      #return klass.find(args) if name.to_s == 'find'
-#      klass = Actions.perform(name, *args)
-  #  end
+    #   def self.method_missing(name, *args)
+    #klass = self.new
+    #return klass.find(args) if name.to_s == 'find'
+    #      klass = Actions.perform(name, *args)
+    #  end
 
     ################################################
     ######### P A G E # L O A D E D ################
