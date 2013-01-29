@@ -15,7 +15,7 @@ context "Page Test" do
       :commit => @commit
     }
     @page = GollumRails::Page.new(attributes)
-    
+
   end
   test "#tests the creation of the page" do
     assert_equal false, @page.persisted?
@@ -33,9 +33,9 @@ context "Page Test" do
     @page.commit = @commit
   end
   test "#is the wiki an instance of gollum?" do
-    assert_equal true, @page.wiki_loaded?(@page.wiki.wiki)
-    assert_instance_of Gollum::Wiki, @page.wiki.wiki
-    assert_instance_of GollumRails::Wiki, @page.wiki
+    wiki = GollumRails::DependencyInjector.wiki
+    assert_equal true, @page.wiki_loaded?(wiki)
+    assert_instance_of Gollum::Wiki, wiki
   end
   test "#save" do
     name =  Time.now.to_s
@@ -193,7 +193,7 @@ context "Page Test" do
         assert_equal assert_it, preview.split("\n").join("")
       end
     end
-    
+
   end
 
 

@@ -4,10 +4,10 @@ context "Backend" do
   setup do
   end
   test "#gets the path of the wiki" do
-    assert_not_nil WIKI.getPath
-    assert_instance_of String, WIKI.getPath
-    assert_equal PATH, WIKI.getPath
-    
+    assert_not_nil GollumRails::DependencyInjector.wiki_path
+    assert_instance_of String, GollumRails::DependencyInjector.wiki_path
+    assert_equal PATH, GollumRails::DependencyInjector.wiki_path
+
   end
   test "#gets the git repository" do
    # assert
