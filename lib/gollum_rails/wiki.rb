@@ -21,8 +21,11 @@ module GollumRails
       if path != :rails
         gollum = getMainGollum path
       else
-        conf = DependencyInjector.rails_conf
-        gollum = getMainGollum conf.location
+        if DependencyInjector.in_rails?
+          conf = DependencyInjector.rails_conf
+          puts conf
+          gollum = getMainGollum conf.location
+        end
       end
       DependencyInjector.set({ :wiki => gollum, :wiki_path => gollum.path })
       return gollum
