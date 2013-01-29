@@ -3,6 +3,8 @@
 #################
 
 .yardoc/
+.coveralls.yml
+coverage/
 *.gem
 *.pydevproject
 .project
