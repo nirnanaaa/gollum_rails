@@ -94,7 +94,7 @@
   
   
     <dt class="r2 last">Defined in:</dt>
-    <dd class="r2 last">lib/gollum_rails/versions.rb</dd>
+    <dd class="r2 last">lib/gollum_rails/page/versions.rb</dd>
   
 </dl>
 <div class="clear"></div>
@@ -129,7 +129,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute versions.</p>
+<p>Public: Gets the versions.</p>
 </div></span>
   
 </li>
@@ -302,12 +302,12 @@
       <pre class="lines">
 
 
-6
-7
-8</pre>
+8
+9
+10</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/versions.rb', line 6</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page/versions.rb', line 8</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_page'>page</span><span class='rparen'>)</span>
   <span class='ivar'>@versions</span> <span class='op'>=</span> <span class='id identifier rubyid_page'>page</span><span class='period'>.</span><span class='id identifier rubyid_versions'>versions</span>
@@ -336,7 +336,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns the value of attribute versions</p>
+<p>Public: Gets the versions</p>
 
 
   </div>
@@ -350,12 +350,12 @@
       <pre class="lines">
 
 
-5
 6
-7</pre>
+7
+8</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/versions.rb', line 5</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page/versions.rb', line 6</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_versions'>versions</span>
   <span class='ivar'>@versions</span>
@@ -415,12 +415,12 @@
       <pre class="lines">
 
 
-52
-53
-54</pre>
+54
+55
+56</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/versions.rb', line 52</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page/versions.rb', line 54</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_all'>all</span>
   <span class='kw'>return</span> <span class='ivar'>@versions</span>
@@ -465,18 +465,18 @@
       <pre class="lines">
 
 
-66
-67
 68
 69
 70
 71
 72
 73
-74</pre>
+74
+75
+76</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/versions.rb', line 66</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page/versions.rb', line 68</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_version'>version</span> <span class='op'>=</span> <span class='const'>String</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='kw'>nil</span>
@@ -525,12 +525,12 @@
       <pre class="lines">
 
 
-18
-19
-20</pre>
+20
+21
+22</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/versions.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page/versions.rb', line 20</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_latest'>latest</span>
   <span class='kw'>return</span> <span class='ivar'>@versions</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span>
@@ -573,12 +573,12 @@
       <pre class="lines">
 
 
-30
-31
-32</pre>
+32
+33
+34</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/versions.rb', line 30</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page/versions.rb', line 32</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_oldest'>oldest</span>
   <span class='kw'>return</span> <span class='ivar'>@versions</span><span class='period'>.</span><span class='id identifier rubyid_last'>last</span>
@@ -593,7 +593,7 @@
 </div>
 
     <div id="footer">
-  Generated on Mon Jan 28 19:34:38 2013 by
+  Generated on Tue Jan 29 17:10:39 2013 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.3 (ruby-1.9.3).
 </div>
