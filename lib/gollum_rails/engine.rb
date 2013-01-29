@@ -5,7 +5,7 @@ module GollumRails
     :group => :all do |app|
 
       if is_installed? app
-        DependencyInjector.set({:in_rails => true})
+        DependencyInjector.set({:in_rails => true, :app => app})
         Wiki.new(:rails)
       end
     end

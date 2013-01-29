@@ -7,8 +7,10 @@ module GollumRails
         config = self.open_config
         DependencyInjector.set({:config => config})
       end
-      def self.read_rails_conf(app)
-        DependencyInjector.set({:rails_conf => self.open_gollum_rails_conf(app)})
+      def self.read_rails_conf
+        DependencyInjector.set({:rails_conf => self.open_gollum_rails_conf(
+        DependencyInjector.app
+        )})
       end
       def self.config_location
       end
@@ -26,7 +28,7 @@ module GollumRails
 
       def self.rails_config_dir
       end
-      
+
       #######
       private
       #######
