@@ -73,6 +73,7 @@ module GollumRails
 
     # Public: Gets ?!
     attr_reader :class
+
     # Public: Initializes a new Page instance
     #
     # attributes - A hash of attributes. See example
@@ -95,10 +96,11 @@ module GollumRails
     #
     # Returns an instance of this class
     def initialize(attributes = {}, options = {})
-      wiki = DependencyInjector.wiki
       config = DependencyInjector.config
-      if wiki && wiki.is_a?(Wiki) && wiki_loaded?(wiki.wiki)
-        @wiki = wiki
+
+      if DependencyInjector.wiki &&
+         DependencyInjector.wiki.is_a?(::Gollum::Wiki) &&
+         wiki_loaded?(DependencyInjector.wiki)
       else
         #must be hardcoded, cause no options are loaded
         raise RuntimeError, "No wiki loaded"
@@ -149,7 +151,7 @@ module GollumRails
     def save
       if valid?
         begin
-          commit = wiki.wiki.write_page(@name, @format, @content, @commit)
+          commit = DependencyInjector.wiki.write_page(@name, @format, @content, @commit)
         rescue Gollum::DuplicatePageError => e
           @error = e
           return false
@@ -200,7 +202,7 @@ module GollumRails
         @error = @options.messages.commit_not_empty_and_content_not_empty
         return false
       end
-      commit = @wiki.wiki.update_page(@page, @name, @format, content, commit)
+      commit = DependencyInjector.wiki.update_page(@page, @name, @format, content, commit)
       if commit.is_a?(String)
         @persisted = true
         return commit
@@ -226,7 +228,7 @@ module GollumRails
         @error = @options.messages.commit_must_be_given
         return false
       end
-      return @wiki.wiki.delete_page(@page, commit)
+      return DependencyInjector.wiki.delete_page(@page, commit)
     end
 
     #Public: alias for delete with exceptions
@@ -255,7 +257,7 @@ module GollumRails
       if !content or content == nil
         content = @content
       end
-      return @wiki.wiki.preview_page(name, content, format).formatted_data
+      return DependencyInjector.wiki.preview_page(name, content, format).formatted_data
     end
 
     # Public: Validates class variables
@@ -297,7 +299,7 @@ module GollumRails
     # Returns either nil or an instance of Gollum::Page
     def find(name = nil)
       if !name.nil?
-        page = @wiki.wiki.page(name)
+        page = DependencyInjector.wiki.page(name)
         if page.nil?
           @error = @options.messages.no_page_found
           return nil

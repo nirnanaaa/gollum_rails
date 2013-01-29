@@ -4,23 +4,21 @@ require File.expand_path('../page', __FILE__)
 
 module GollumRails
   class Wiki
-    attr_accessor :wiki
-    def initialize(path)
-      main = getMainGollum(path)
-      send("wiki=", main)
-      DependencyInjector.set({:wiki => self})
+    class << self
+
+    def new(path)
+      gollum = getMainGollum path
+      DependencyInjector.set({ :wiki => gollum, :wiki_path => gollum.path })
+      return gollum
     end
 
     def getMainGollum(path)
-      wiki = Gollum::Wiki.new(path)
-    end
+      begin
+        return ::Gollum::Wiki.new(path)  if path.is_a? ::String
 
-    def getPath
-      @wiki.path
-    end
+      rescue ::Grit::NoSuchPathError
 
-    def getRepo
-      @wiki.repo
+      end
     end
 
     def search(string = '')
@@ -29,8 +27,6 @@ module GollumRails
 
     ## static setters / getters
 
-    def self.getWiki
-      @wiki
-    end
   end
+end
 end
