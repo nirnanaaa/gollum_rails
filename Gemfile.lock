@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    gollum_rails (0.0.2.8)
+    gollum_rails (0.0.2.9)
       activemodel (~> 3.2.11)
       builder (~> 3.0.0)
       gollum (~> 2.4.11)
