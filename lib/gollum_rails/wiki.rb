@@ -1,6 +1,7 @@
 require File.expand_path('../validations', __FILE__)
 require File.expand_path('../file', __FILE__)
 require File.expand_path('../page', __FILE__)
+require File.expand_path('../hash', __FILE__)
 
 module GollumRails
   class Wiki
@@ -8,7 +9,12 @@ module GollumRails
 
     def new(path)
       initConfig
-      gollum = getMainGollum path
+      if path != :rails
+        gollum = getMainGollum path
+      else
+        conf = DependencyInjector.rails_conf
+        gollum = getMainGollum conf.location
+      end
       DependencyInjector.set({ :wiki => gollum, :wiki_path => gollum.path })
       return gollum
     end
