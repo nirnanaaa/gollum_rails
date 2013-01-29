@@ -24,6 +24,7 @@ module GollumRails
             gollum = getMainGollum DependencyInjector.app.root.join(DependencyInjector.rails_conf.location)
            else
             gollum = getMainGollum DependencyInjector.rails_conf.location
+           end
         end
       else
         #STANDALONE
