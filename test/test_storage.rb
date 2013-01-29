@@ -25,6 +25,5 @@ context "Backend" do
     test_four = @di_compo.set({:describe => rand})
     assert_equal rand, @di_compo.describe
     assert_instance_of Fixnum, @di_compo.describe
-
   end
 end
