@@ -9,7 +9,6 @@ module GollumRails
       end
       def self.read_rails_conf
         app = DependencyInjector.app
-        puts app
         puts self.open_gollum_rails_conf(app)
         DependencyInjector.set({:rails_conf => self.open_gollum_rails_conf(
         DependencyInjector.app

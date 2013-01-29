@@ -1,7 +1,3 @@
-require File.expand_path('../validations', __FILE__)
-require File.expand_path('../file', __FILE__)
-require File.expand_path('../page', __FILE__)
-require File.expand_path('../hash', __FILE__)
 
 module GollumRails
   class Wiki
@@ -16,28 +12,22 @@ module GollumRails
     #
     #
     # Returns a new Gollum::Wiki instance
-    def new(path)
-      initConfig
-      if path != :rails
-        gollum = getMainGollum path
-      else
-        if DependencyInjector.in_rails?
-          conf = DependencyInjector.rails_conf
-          puts conf
-          gollum = getMainGollum conf.location
+    def new(path = String.new, settings = {})
+      Config.read_config
+
+      #path is nil
+      if path == nil and settings
+        Config.read_rails_conf
+        if settings.env == :rails &&
+           DependencyInjector.in_rails
+           gollum = getMainGollum DependencyInjector.rails_conf.location
         end
+      else
+        #STANDALONE
+          gollum = getMainGollum DependencyInjector.app.path.join(path)
       end
       DependencyInjector.set({ :wiki => gollum, :wiki_path => gollum.path })
       return gollum
-    end
-
-    # Public: initiates the configuration
-    #
-    #
-    # Returns either the Rails configuration or the internal if Rails is not loaded
-    def initConfig
-      return Config.read_rails_conf if DependencyInjector.in_rails?
-      return Config.read_config
     end
 
     # Public: fetches the Gollum WIKI
@@ -51,7 +41,7 @@ module GollumRails
     # Returns either nil or Gollum::Wiki
     def getMainGollum(path)
       begin
-        return ::Gollum::Wiki.new(path)  if path.is_a? ::String
+        return ::Gollum::Wiki.new(path)
       rescue ::Grit::NoSuchPathError
         DependencyInjector.set(:error => "No such git repository #{path.to_s}")
         return nil

@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.rubygems_version = '1.3.5'
   s.name = 'gollum_rails'
-  s.version = '0.0.2.8'
+  s.version = '0.0.2.9'
 
   s.summary = 'Combines the benefits from Gollum with Rails'
   s.description= 'use templating, authentication and so on'
@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.add_dependency('grit', '~> 2.5.0')
   s.add_dependency('builder', '~> 3.0.0')
   s.add_dependency('rack', '~> 1.4.0')
-  
+
   s.add_development_dependency('org-ruby', '~> 0.7.2')
   s.add_development_dependency('shoulda', '~> 3.3.2')
   s.add_development_dependency('rack-test', '~> 0.6.2')
@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.homepage = 'https://github.com/nirnanaaa/gollum_rails'
   s.platform = Gem::Platform::RUBY
   s.required_ruby_version = '>=1.8.7'
-  
+
   # = MANIFEST =
   s.files = %w[
     Gemfile
@@ -66,5 +66,5 @@ Gem::Specification.new do |s|
   "To generate a new Page model just run:\n\n"\
   "\t\rails g gollum_rails:model MODEL_NAME"\
   "**********************************************"
-end  
+end
 
