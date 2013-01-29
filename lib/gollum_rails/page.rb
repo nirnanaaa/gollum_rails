@@ -124,6 +124,8 @@ module GollumRails
 
     end
 
+#    DependencyINjector.page_attributes.
+
     # Public: Checks if the given Instance is an Instance of the Gollum Wiki
     #
     # wiki - An instance of a class
@@ -354,10 +356,11 @@ module GollumRails
     # args - Pointer of arguments
     #
     # Static into non static converter
-    def self.method_missing(name, *args)
-      klass = self.new
-      return klass.find(args) if name.to_s == 'find'
-    end
+ #   def self.method_missing(name, *args)
+      #klass = self.new
+      #return klass.find(args) if name.to_s == 'find'
+#      klass = Actions.perform(name, *args)
+  #  end
 
     ################################################
     ######### P A G E # L O A D E D ################
