@@ -193,7 +193,7 @@ context "Page Test" do
         assert_equal assert_it, preview.split("\n").join("")
       end
     end
-
+    puts GollumRails::Page.find("test")
   end
 
 

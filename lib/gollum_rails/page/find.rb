@@ -1,21 +1,20 @@
 module GollumRails
-    class Find < PageHelper
-        call_by 'find'
-        attribute :by, :default => nil, :description =>
-
-        def module_run
-
-        end
-        #def module_vars
-        #
-        # =>end
-
-        def module_call
-
+  module PageActions
+    class Find < GollumRails::PageHelper
+      call_by 'find'
+      class << self
+        def initialized_first
 
         end
+
+        def single_run(*args)
+          return "hello"
+        end
+
         def mass_assignment(&block)
 
         end
+      end
     end
+  end
 end

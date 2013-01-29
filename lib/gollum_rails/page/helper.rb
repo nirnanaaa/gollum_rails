@@ -1,39 +1,23 @@
 module GollumRails
   class PageHelper
     class << self
-
-     def method_missing(name, *arguments)
-
+      def method_missing(name, *arguments)
+        #puts name
+        puts arguments
       end
-      if !DependencyInjector.page_attributes
-        eval "DependencyInjector.set({ :page_attributes =>{} })"
-      end
+      DependencyInjector.set({ :page_calls => {} }) if !DependencyInjector.page_calls
 
       protected
-
-      def call_by(name, *arguments)
-        DependencyInjector.set(DependencyInjector.page_attributes.merge!({
-           self.name => {:call => {:by =>name, :arguments => arguments}}}))
+      
+      def call_by(method_name, *arguments)
+        save_calls(self, method_name)
       end
 
-      def attribute(name, *arguments)
-        if !DependencyInjector.send("page_attributes")
-          DependencyInjector.set({ :page_attributes =>{} })
-        end
-        depi = DependencyInjector.page_attributes # {}
-        nary = { self.name.merge!({ :arguments => {  name =>{ :arguments => arguments}}})}
-        depi.merge!(nary)
-        DependencyInjector.set({:page_attributes => depi})
-        puts DependencyInjector.page_attributes
-        #puts GollumRails::DependencyInjector.send("page_attrib.#{name}")
+      private
 
-        if DependencyInjector.send("page_attrib_#{name}")
-          #puts DependencyInjecor.instance_variable_get("page_attrib_#{name}")
-          #puts DependencyInjector.send("page_attrib_#{name}")
-          #puts "bla"
-        end
+      def save_calls(klass, method)
+        DependencyInjector.page_calls.merge!({method => klass})
       end
-
     end
   end
 end
