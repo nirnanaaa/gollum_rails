@@ -20,11 +20,14 @@ module GollumRails
         Config.read_rails_conf
         if settings.env == :rails &&
            DependencyInjector.in_rails
-           gollum = getMainGollum DependencyInjector.rails_conf.location
+           if DependencyInjector.rails_conf.location_type.to_s == "relative"
+            gollum = getMainGollum DependencyInjector.app.root.join(DependencyInjector.rails_conf.location)
+           else
+            gollum = getMainGollum DependencyInjector.rails_conf.location
         end
       else
         #STANDALONE
-          gollum = getMainGollum DependencyInjector.app.path.join(path)
+          gollum = getMainGollum path
       end
       DependencyInjector.set({ :wiki => gollum, :wiki_path => gollum.path })
       return gollum
@@ -42,9 +45,8 @@ module GollumRails
     def getMainGollum(path)
       begin
         return ::Gollum::Wiki.new(path)
-      rescue ::Grit::NoSuchPathError
-        DependencyInjector.set(:error => "No such git repository #{path.to_s}")
-        return nil
+      rescue ::Grit::NoSuchPathError => e
+        raise RuntimeError, e
       end
     end
 
