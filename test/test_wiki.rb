@@ -7,7 +7,7 @@ context "Backend" do
     assert_not_nil WIKI.getPath
     assert_instance_of String, WIKI.getPath
     assert_equal PATH, WIKI.getPath
-    
+
   end
   test "#gets the git repository" do
    # assert
