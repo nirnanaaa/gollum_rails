@@ -7,6 +7,15 @@ module GollumRails
   class Wiki
     class << self
 
+    # Public: Spawns a new Gollum::Wiki
+    #
+    #
+    # Examples
+    #   Wiki.new("/home/nirnanaaa/wiki")
+    #   # => Gollum::Wiki
+    #
+    #
+    # Returns a new Gollum::Wiki instance
     def new(path)
       initConfig
       if path != :rails
@@ -19,10 +28,24 @@ module GollumRails
       return gollum
     end
 
+    # Public: initiates the configuration
+    #
+    #
+    # Returns either the Rails configuration or the internal if Rails is not loaded
     def initConfig
       return Config.read_rails_conf if DependencyInjector.in_rails?
       return Config.read_config
     end
+
+    # Public: fetches the Gollum WIKI
+    #
+    # path - String, containing the GIT repositorys location
+    #
+    # Examples
+    #   getMainGollum /home/nirnanaaa/wiki
+    #   # => Gollum::Wiki
+    #
+    # Returns either nil or Gollum::Wiki
     def getMainGollum(path)
       begin
         return ::Gollum::Wiki.new(path)  if path.is_a? ::String
