@@ -32,9 +32,5 @@ context "Page_Singleton" do
   test "#basic block assert" do
     assert_instance_of Gollum::Page, GollumRails::Page.find(@name)
     assert_equal "The page was not found", Gollum::Page.find(['static'])
-    found = Gollum::Page.find do
-      
-    end
-    puts found
   end
 end

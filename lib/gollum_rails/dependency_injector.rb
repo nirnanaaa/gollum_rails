@@ -3,7 +3,9 @@ module GollumRails
   class DependencyInjector
 
     @storage = {}
-
+    def self.get_error_buffer
+      error ||= error_old 
+    end
     #sets a storage Hash
     def self.register(&block)
       block.call(self)

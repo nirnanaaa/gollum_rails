@@ -10,12 +10,20 @@ module GollumRails
     include ActiveModel::Validations
     extend ActiveModel::Naming
     
+    def method_missing(name, *args)
+      return Page.send(name, *args)
+     # false
+      #puts name
+     #puts self.const_get(self.class.name)
+    end
+    
     # Public: Singleton
     #
     # loads the necessary external classes
     #
     class << self
       DependencyInjector.page_calls.each do |hash|
+        #puts DependencyInjector.page_calls
         self.class.instance_eval do
           define_method(hash[0]) do |*argv|
             hash[1].initialized_first
@@ -239,24 +247,7 @@ module GollumRails
       end
     end
 
-    #Public: Deletes page fetched by find()
-    def delete(commit)
-      if commit.nil?
-        @error = @options.messages.commit_must_be_given
-        return false
-      end
-      return DependencyInjector.wiki.delete_page(@page, commit)
-    end
 
-    #Public: alias for delete with exceptions
-    def delete!(commit)
-      deletes = delete(commit)
-      if @error
-        raise RuntimeError, @error
-      else
-        return deletes
-      end
-    end
 
     #Public: For outputting all pages
     def all
@@ -364,6 +355,8 @@ module GollumRails
       @persisted
     end
 
+
+    
     # Public: Magic method ( static )
     #
     # name - The functions name
