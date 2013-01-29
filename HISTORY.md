@@ -1,3 +1,8 @@
+# 0.0.2.9 30th January 2013
+
+* Singleton classes for dynamic modules
+* Page.find is now static useable, as well as delete, update, safe
+
 # 0.0.2.8 28th January 2013
 
 * quick generator fail fix

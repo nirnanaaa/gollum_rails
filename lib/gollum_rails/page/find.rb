@@ -4,6 +4,9 @@ module GollumRails
       call_by 'find'
       
       class << self
+        # Public: runs the initializer from superclass ( super clears the error buffer )
+        #
+        # Returns nothing
         def initialized_first
           #self.instance_variable_set("@wiki")
           
@@ -12,15 +15,20 @@ module GollumRails
 
         # Public: Finds a page based on given search string
         #
-        # Be careful: At the moment you must initialize the class by .new
         #
         # Examples
-        #   page = Page.new attributes
-        #   page.find('static')
+        #   found = page.find('static')
+        #   # => Gollum::Page
+        #
+        #   found.raw_data
+        #   # => some string data. Unformatted
+        #
+        #   found.formatted_data
+        #   # => some <html> formated string
+        #
         #
         # Returns either nil or an instance of Gollum::Page
         def single_run(*argv)
-          puts argv
           page = DependencyInjector.wiki.page(argv.first.to_s) 
           
           DependencyInjector.set({ 
@@ -28,7 +36,7 @@ module GollumRails
           }) if page.nil? or not page.is_a?(Gollum::Page)
           
           return DependencyInjector.error if DependencyInjector.error.is_a? String and 
-                                             DependencyInjector.error.length >= 2
+                                             DependencyInjector.error.length >= 2# 2digit hexcodes 00-FF
           
           DependencyInjector.set({ :page => page })
           return page

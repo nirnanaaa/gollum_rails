@@ -20,7 +20,7 @@ context "Versions" do
     finder.find("static")
     
     100.times do  |rounds|
-      finder.update "lazy shit#{rounds}", COMMIT
+      finder.update "content", COMMIT
     end
     
     @versions = finder.versions

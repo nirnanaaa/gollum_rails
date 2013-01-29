@@ -1,15 +1,21 @@
 module GollumRails
+  class CommitMustBeGivenError < StandardError; end
+  class NoPageLoadedError < StandardError; end
   class PageHelper
     class << self
+      def initialized_first
+        DependencyInjector.set({ :error_old => DependencyInjector.error, :error => nil })
+      end
       def method_missing(name, *arguments)
         #puts name
-        puts arguments
+        #puts DependencyInjector.page_calls
       end
       DependencyInjector.set({ :page_calls => {} }) if !DependencyInjector.page_calls
 
       protected
       
       def call_by(method_name, *arguments)
+        
         save_calls(self, method_name)
       end
 
