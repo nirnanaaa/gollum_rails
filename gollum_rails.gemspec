@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rack-test', '~> 0.6.2')
   s.add_development_dependency('rake', '~> 10.0.2')
   s.add_development_dependency('rails', '~> 3.2.11')
-
+  
   s.author = 'Florian Kasper'
   s.email = 'nirnanaaa@khnetworks.com'
   s.homepage = 'https://github.com/nirnanaaa/gollum_rails'
@@ -47,8 +47,14 @@ Gem::Specification.new do |s|
     lib/gollum_rails/hash.rb
     lib/gollum_rails/messages.yml
     lib/gollum_rails/page.rb
+    lib/gollum_rails/page/actions.rb
+    lib/gollum_rails/page/delete.rb
+    lib/gollum_rails/page/find.rb
+    lib/gollum_rails/page/helper.rb
+    lib/gollum_rails/page/save.rb
+    lib/gollum_rails/page/update.rb
+    lib/gollum_rails/page/versions.rb
     lib/gollum_rails/validations.rb
-    lib/gollum_rails/versions.rb
     lib/gollum_rails/wiki.rb
   ]
   # = MANIFEST =

@@ -5,6 +5,8 @@ require 'shoulda'
 require 'fileutils'
 require 'gollum'
 require 'gollum_rails'
+require 'coveralls'
+Coveralls.wear!
 
 TEST_DIR = File.join(File.dirname(__FILE__), *%w[.])
 

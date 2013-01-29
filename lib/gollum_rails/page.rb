@@ -17,8 +17,9 @@ module GollumRails
     class << self
       DependencyInjector.page_calls.each do |hash|
         self.class.instance_eval do
-          define_method(hash[0]) do |*args|
-            return hash[1].single_run(*args)
+          define_method(hash[0]) do |*argv|
+            hash[1].initialized_first
+            return hash[1].single_run(*argv)
           end
         end
       end
@@ -138,8 +139,6 @@ module GollumRails
       end
 
     end
-
-    #    DependencyINjector.page_attributes.
 
     # Public: Checks if the given Instance is an Instance of the Gollum Wiki
     #
