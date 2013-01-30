@@ -29,11 +29,26 @@ context "Page_Singleton" do
     #GollumRails::Page.find('static') #newest version
 
   end
-  test "#basic block assert" do
+  test "#basic deletion" do
     found = GollumRails::Page.find(@name)
     assert_instance_of Gollum::Page, found
+    fs = false
+    ::Dir.glob(::File.expand_path(::File.dirname(__FILE__)) + '/wiki/static.md') do |file|
+      fs = File.exists? file
+    end
+    assert_equal true, fs
+    fs = false
     assert_instance_of String, GollumRails::Page.delete(found, @commit)
     assert_instance_of String, GollumRails::Page.delete(@commit)
+    
+    ::Dir.glob(::File.expand_path(::File.dirname(__FILE__)) + '/wiki/static.md') do |file|
+      fs = File.exists? file
+    end
+    assert_equal false, fs
     #assert_equal "The page was not found", Gollum::Page.find(['static'])
   end
+  test "#" do
+    
+  end
+  
 end
