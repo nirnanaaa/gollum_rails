@@ -99,7 +99,18 @@
 </dl>
 <div class="clear"></div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Public: GollumRails::Config</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
 
 
 
@@ -129,7 +140,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute config.</p>
+<p>Public: Gets/Sets the configuration (DEPRECATED will be removed in 0.0.4).</p>
 </div></span>
   
 </li>
@@ -165,7 +176,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Public: Gets the internals config location.</p>
+</div></span>
   
 </li>
 
@@ -187,7 +200,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Public: Gets the current language from RailsENV.</p>
+</div></span>
   
 </li>
 
@@ -231,7 +246,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Public: Gets  the rails root path.</p>
+</div></span>
   
 </li>
 
@@ -253,7 +270,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Public: Gets/Pushes the internal configuration.</p>
+</div></span>
   
 </li>
 
@@ -275,7 +294,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Public: Gets/Pushes the RAILS internal configuration.</p>
+</div></span>
   
 </li>
 
@@ -297,7 +318,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Public: Gets the app configuration.</p>
+</div></span>
   
 </li>
 
@@ -323,7 +346,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns the value of attribute config</p>
+<p>Public: Gets/Sets the configuration (DEPRECATED will be removed in 0.0.4)</p>
 
 
   </div>
@@ -337,12 +360,12 @@
       <pre class="lines">
 
 
-5
-6
-7</pre>
+9
+10
+11</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/config.rb', line 5</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/config.rb', line 9</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_config'>config</span>
   <span class='ivar'>@config</span>
@@ -368,17 +391,30 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Public: Gets the internals config location</p>
+
+<p>Returns a String =&gt; path</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-16
-17</pre>
+32
+33</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/config.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/config.rb', line 32</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_config_location'>config_location</span>
 <span class='kw'>end</span></pre>
@@ -396,17 +432,28 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Public: Gets the current language from RailsENV</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-19
-20</pre>
+37
+38</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/config.rb', line 19</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/config.rb', line 37</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_lang_from_rails'>lang_from_rails</span>
 <span class='kw'>end</span></pre>
@@ -430,11 +477,11 @@
       <pre class="lines">
 
 
-30
-31</pre>
+53
+54</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/config.rb', line 30</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/config.rb', line 53</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_rails_config_dir'>rails_config_dir</span>
 <span class='kw'>end</span></pre>
@@ -452,21 +499,34 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Public: Gets  the rails root path</p>
+
+<p>Returns a string</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-26
-27
-28</pre>
+49
+50
+51</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/config.rb', line 26</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/config.rb', line 49</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_rails_root'>rails_root</span>
-  <span class='const'>Rails</span><span class='period'>.</span><span class='id identifier rubyid_root'>root</span>
+  <span class='const'>DependencyInjector</span><span class='period'>.</span><span class='id identifier rubyid_app'>app</span><span class='period'>.</span><span class='id identifier rubyid_root'>root</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -482,19 +542,32 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Public: Gets/Pushes the internal configuration</p>
+
+<p>Returns the hashed configuration</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-6
-7
-8
-9</pre>
+14
+15
+16
+17</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/config.rb', line 6</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/config.rb', line 14</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_read_config'>read_config</span>
   <span class='id identifier rubyid_config'>config</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_open_config'>open_config</span>
@@ -514,21 +587,34 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Public: Gets/Pushes the RAILS internal configuration</p>
+
+<p>Returns the hashed configuration</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-10
-11
-12
-13
-14
-15</pre>
+22
+23
+24
+25
+26
+27</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/config.rb', line 10</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/config.rb', line 22</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_read_rails_conf'>read_rails_conf</span>
   <span class='id identifier rubyid_app'>app</span> <span class='op'>=</span> <span class='const'>DependencyInjector</span><span class='period'>.</span><span class='id identifier rubyid_app'>app</span>
@@ -550,21 +636,32 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Public: Gets the app configuration</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-22
-23
-24</pre>
+42
+43
+44</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/config.rb', line 22</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/config.rb', line 42</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_settings_from_rails'>settings_from_rails</span>
-  <span class='const'>Rails</span><span class='period'>.</span><span class='id identifier rubyid_settings'>settings</span>
+  <span class='const'>DependencyInjector</span><span class='period'>.</span><span class='id identifier rubyid_app'>app</span><span class='period'>.</span><span class='id identifier rubyid_settings'>settings</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -576,7 +673,7 @@
 </div>
 
     <div id="footer">
-  Generated on Wed Jan 30 14:59:34 2013 by
+  Generated on Wed Jan 30 15:11:44 2013 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.3 (ruby-1.9.3).
 </div>
