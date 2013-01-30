@@ -22,17 +22,29 @@ context "Backbone module extender" do
         end
       end
     end
-    #assert_instance_of(Array, Gollum::Page.finder)
     gollum_rails = GollumRails::Page.new
     assert_instance_of Array, GollumRails::Page.finder(1,2,3,4)
     assert_instance_of Array, gollum_rails.finder(1,2,3,4)
     
     assert_equal [1,2,3,4], gollum_rails.finder(1,2,3,4)
+    
     assert_equal false, GollumRails::DependencyInjector.error
     
+    
   end
-  test "#" do
+  test "#generators color code" do
 
   end
-
+  test "#errors" do
+    assert_raise GollumRails::CommitMustBeGivenError do
+      raise GollumRails::CommitMustBeGivenError
+    end
+    assert_raise GollumRails::NoPageLoadedError do
+      raise GollumRails::NoPageLoadedError
+    end
+    assert_raise GollumRails::ModuleInternalError do
+      raise GollumRails::ModuleInternalError
+    end
+  end
+  
 end
