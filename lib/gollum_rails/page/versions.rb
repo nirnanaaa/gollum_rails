@@ -1,5 +1,7 @@
 # ~*~ encoding: utf-8 ~*~
 module GollumRails
+  
+  # Public: page version output
   class Versions
 
     # Public: Gets the versions

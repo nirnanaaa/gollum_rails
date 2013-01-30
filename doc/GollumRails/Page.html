@@ -107,7 +107,18 @@
 </dl>
 <div class="clear"></div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Public: Page actions (mainly used for ActiveModel actions)</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
 
 
 
@@ -549,7 +560,9 @@ methods.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Public: redirects calls on Class to self object.</p>
+</div></span>
   
 </li>
 
@@ -848,6 +861,17 @@ no configuration was provided</p>
       <pre class="lines">
 
 
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
 123
 124
 125
@@ -863,21 +887,10 @@ no configuration was provided</p>
 135
 136
 137
-138
-139
-140
-141
-142
-143
-144
-145
-146
-147
-148
-149</pre>
+138</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 123</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 112</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_attributes'>attributes</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_config'>config</span> <span class='op'>=</span> <span class='const'>DependencyInjector</span><span class='period'>.</span><span class='id identifier rubyid_config'>config</span>
@@ -928,28 +941,37 @@ no configuration was provided</p>
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Public: redirects calls on Class to self object</p>
+
+<p>name - Functions name args - Array of arguments</p>
+
+<p>Returns the function call of -name-</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-13
-14
-15
-16
-17
-18</pre>
+21
+22
+23</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 21</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method_missing'>method_missing</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='const'>Page</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
- <span class='comment'># false
-</span>  <span class='comment'>#puts name
-</span> <span class='comment'>#puts self.const_get(self.class.name)
-</span><span class='kw'>end</span></pre>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -988,12 +1010,12 @@ no configuration was provided</p>
       <pre class="lines">
 
 
-100
-101
-102</pre>
+89
+90
+91</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 100</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 89</span>
 
 <span class='kw'>def</span> <span class='kw'>class</span>
   <span class='ivar'>@class</span>
@@ -1051,12 +1073,12 @@ no configuration was provided</p>
       <pre class="lines">
 
 
-81
-82
-83</pre>
+70
+71
+72</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 81</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 70</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_commit'>commit</span>
   <span class='ivar'>@commit</span>
@@ -1094,12 +1116,12 @@ no configuration was provided</p>
       <pre class="lines">
 
 
-40
-41
-42</pre>
+29
+30
+31</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 40</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 29</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_content'>content</span>
   <span class='ivar'>@content</span>
@@ -1137,12 +1159,12 @@ no configuration was provided</p>
       <pre class="lines">
 
 
-94
-95
-96</pre>
+83
+84
+85</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 94</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 83</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_error'>error</span>
   <span class='ivar'>@error</span>
@@ -1198,12 +1220,12 @@ no configuration was provided</p>
       <pre class="lines">
 
 
-59
-60
-61</pre>
+48
+49
+50</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 59</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 48</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_format'>format</span>
   <span class='ivar'>@format</span>
@@ -1241,12 +1263,12 @@ no configuration was provided</p>
       <pre class="lines">
 
 
-37
-38
-39</pre>
+26
+27
+28</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 26</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_name'>name</span>
   <span class='ivar'>@name</span>
@@ -1284,12 +1306,12 @@ no configuration was provided</p>
       <pre class="lines">
 
 
-88
-89
-90</pre>
+77
+78
+79</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 88</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 77</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_options'>options</span>
   <span class='ivar'>@options</span>
@@ -1331,12 +1353,12 @@ no configuration was provided</p>
       <pre class="lines">
 
 
-297
-298
-299</pre>
+284
+285
+286</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 297</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 284</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_page'>page</span>
   <span class='ivar'>@page</span>
@@ -1375,12 +1397,12 @@ methods</p>
       <pre class="lines">
 
 
-91
-92
-93</pre>
+80
+81
+82</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 91</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 80</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_persisted'>persisted</span>
   <span class='ivar'>@persisted</span>
@@ -1418,12 +1440,12 @@ methods</p>
       <pre class="lines">
 
 
-97
-98
-99</pre>
+86
+87
+88</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 97</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 86</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_wiki'>wiki</span>
   <span class='ivar'>@wiki</span>
@@ -1466,12 +1488,12 @@ methods</p>
       <pre class="lines">
 
 
-253
-254
-255</pre>
+240
+241
+242</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 253</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 240</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_all'>all</span>
 
@@ -1516,28 +1538,28 @@ methods</p>
       <pre class="lines">
 
 
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
 308
 309
 310
 311
 312
-313
-314
-315
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
-326</pre>
+313</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 308</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 295</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -1593,17 +1615,17 @@ methods</p>
       <pre class="lines">
 
 
-395
-396
-397
-398
-399
-400
-401
-402</pre>
+380
+381
+382
+383
+384
+385
+386
+387</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 395</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 380</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_formatted_data'>formatted_data</span>
   <span class='kw'>if</span> <span class='ivar'>@page</span>
@@ -1651,12 +1673,12 @@ methods</p>
       <pre class="lines">
 
 
-171
-172
-173</pre>
+160
+161
+162</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 171</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 160</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_error_message'>get_error_message</span>
   <span class='ivar'>@error</span>
@@ -1731,12 +1753,12 @@ methods</p>
       <pre class="lines">
 
 
-354
-355
-356</pre>
+341
+342
+343</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 354</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 341</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_persisted?'>persisted?</span>
   <span class='ivar'>@persisted</span>
@@ -1774,18 +1796,18 @@ methods</p>
       <pre class="lines">
 
 
-261
-262
-263
-264
-265
-266
-267
-268
-269</pre>
+248
+249
+250
+251
+252
+253
+254
+255
+256</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 261</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 248</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_preview'>preview</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_content'>content</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_format'>format</span> <span class='op'>=</span> <span class='symbol'>:markdown</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_name'>name</span> <span class='kw'>or</span> <span class='id identifier rubyid_name'>name</span> <span class='op'>==</span> <span class='kw'>nil</span>
@@ -1831,17 +1853,17 @@ methods</p>
       <pre class="lines">
 
 
-381
-382
-383
-384
-385
-386
-387
-388</pre>
+366
+367
+368
+369
+370
+371
+372
+373</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 381</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 366</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_raw_data'>raw_data</span>
   <span class='kw'>if</span> <span class='ivar'>@page</span>
@@ -1882,24 +1904,24 @@ methods</p>
       <pre class="lines">
 
 
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
 176
 177
 178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-189
-190</pre>
+179</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 176</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 165</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_save'>save</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_valid?'>valid?</span>
@@ -1947,18 +1969,18 @@ methods</p>
       <pre class="lines">
 
 
-193
-194
-195
-196
-197
-198
-199
-200
-201</pre>
+182
+183
+184
+185
+186
+187
+188
+189
+190</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 193</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 182</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_save!'>save!</span>
   <span class='id identifier rubyid_saves'>saves</span> <span class='op'>=</span> <span class='id identifier rubyid_save'>save</span>
@@ -2011,6 +2033,17 @@ methods</p>
       <pre class="lines">
 
 
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
 219
 220
 221
@@ -2019,21 +2052,10 @@ methods</p>
 224
 225
 226
-227
-228
-229
-230
-231
-232
-233
-234
-235
-236
-237
-238</pre>
+227</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 219</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 208</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='id identifier rubyid_content'>content</span><span class='comma'>,</span> <span class='id identifier rubyid_commit'>commit</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='op'>=</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_format'>format</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -2086,17 +2108,17 @@ methods</p>
       <pre class="lines">
 
 
-241
-242
-243
-244
-245
-246
-247
-248</pre>
+230
+231
+232
+233
+234
+235
+236
+237</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 241</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 230</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update!'>update!</span><span class='lparen'>(</span><span class='id identifier rubyid_content'>content</span><span class='comma'>,</span> <span class='id identifier rubyid_commit'>commit</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='op'>=</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_format'>format</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_updates'>updates</span> <span class='op'>=</span> <span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='id identifier rubyid_content'>content</span><span class='comma'>,</span> <span class='id identifier rubyid_commit'>commit</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='op'>=</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_format'>format</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
@@ -2152,25 +2174,25 @@ methods</p>
       <pre class="lines">
 
 
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
 275
 276
-277
-278
-279
-280
-281
-282
-283
-284
-285
-286
-287
-288
-289
-290</pre>
+277</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 275</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 262</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_valid?'>valid?</span>
   <span class='kw'>if</span> <span class='op'>!</span><span class='ivar'>@name</span> <span class='op'>||</span> <span class='ivar'>@name</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -2221,17 +2243,17 @@ methods</p>
       <pre class="lines">
 
 
-409
-410
-411
-412
-413
-414
-415
-416</pre>
+394
+395
+396
+397
+398
+399
+400
+401</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 409</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 394</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_versions'>versions</span>
   <span class='kw'>if</span> <span class='ivar'>@page</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@page</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Gollum</span><span class='op'>::</span><span class='const'>Page</span><span class='rparen'>)</span> <span class='comment'>#&amp;&amp; (persisted? || found?)
@@ -2294,12 +2316,12 @@ methods</p>
       <pre class="lines">
 
 
-160
-161
-162</pre>
+149
+150
+151</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 160</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page.rb', line 149</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_wiki_loaded?'>wiki_loaded?</span><span class='lparen'>(</span><span class='id identifier rubyid_wiki'>wiki</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_wiki'>wiki</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Gollum</span><span class='op'>::</span><span class='const'>Wiki</span><span class='rparen'>)</span>
@@ -2314,7 +2336,7 @@ methods</p>
 </div>
 
     <div id="footer">
-  Generated on Wed Jan 30 15:11:43 2013 by
+  Generated on Wed Jan 30 23:22:41 2013 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.3 (ruby-1.9.3).
 </div>

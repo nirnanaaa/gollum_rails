@@ -101,7 +101,18 @@
 </dl>
 <div class="clear"></div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Public: rails g gollum_rails:install</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
 
 
 
@@ -133,7 +144,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Public: copyies the configuration fiile.</p>
+</div></span>
   
 </li>
 
@@ -155,7 +168,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Public: gets rails default locale.</p>
+</div></span>
   
 </li>
 
@@ -179,19 +194,30 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Public: copyies the configuration fiile</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-11
-12
-13
-14</pre>
+14
+15
+16
+17</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/generators/gollum_rails/install/install_generator.rb', line 11</span>
+      <pre class="code"><span class="info file"># File 'lib/generators/gollum_rails/install/install_generator.rb', line 14</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_copy_config'>copy_config</span>
   <span class='id identifier rubyid_copy_file'>copy_file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gollum.yml</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='const'>Rails</span><span class='period'>.</span><span class='id identifier rubyid_root'>root</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>config</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gollum.yml</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
@@ -211,21 +237,38 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Public: gets rails default locale</p>
+
+<p>Returns a String</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-15
-16
-17</pre>
+22
+23
+24
+25
+26</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/generators/gollum_rails/install/install_generator.rb', line 15</span>
+      <pre class="code"><span class="info file"># File 'lib/generators/gollum_rails/install/install_generator.rb', line 22</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_default_locale'>default_locale</span>
-  <span class='const'>Rails</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_i18n'>i18n</span><span class='period'>.</span><span class='id identifier rubyid_default_locale'>default_locale</span>
+  <span class='id identifier rubyid_locale'>locale</span> <span class='op'>=</span> <span class='const'>Rails</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_i18n'>i18n</span><span class='period'>.</span><span class='id identifier rubyid_default_locale'>default_locale</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_locale'>locale</span> <span class='kw'>if</span> <span class='id identifier rubyid_locale'>locale</span>
+  <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>en</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -237,7 +280,7 @@
 </div>
 
     <div id="footer">
-  Generated on Wed Jan 30 15:11:44 2013 by
+  Generated on Wed Jan 30 23:22:41 2013 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.3 (ruby-1.9.3).
 </div>
