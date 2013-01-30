@@ -1,6 +1,12 @@
 require 'rails'
+require File.expand_path('../hash', __FILE__)
 module GollumRails
+
+  # Public: Rails Engine class with initializers
   class Engine < ::Rails::Engine
+
+    # Public: initializesthe classes load
+    # Returns nothing. Just executes
     initializer "gollum_rails.load_app",
     :group => :all do |app|
 
@@ -18,6 +24,7 @@ module GollumRails
         #Config.read_rails_conf
         #::File.write("./wiki", DependencyInjector.rails_conf.location)
         wiki
+        #true
 
       end
     end
