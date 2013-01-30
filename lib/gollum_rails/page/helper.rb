@@ -7,6 +7,7 @@ module GollumRails
         DependencyInjector.set({ :error_old => DependencyInjector.error, :error => nil })
       end
       def method_missing(name, *arguments)
+        puts name
         #puts name
         #puts DependencyInjector.page_calls
       end
@@ -14,6 +15,11 @@ module GollumRails
 
       protected
       
+      def inject_on_startup(object, &block)
+        object.instance_eval(&block)
+        puts Gollum::Page.delete("bla")
+        #puts object.delete
+      end
       def call_by(method_name, *arguments)
         
         save_calls(self, method_name)
