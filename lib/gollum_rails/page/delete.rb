@@ -1,5 +1,6 @@
 module GollumRails
   module PageActions
+    # Public: .delete or .delete! builtin extension for GollumRails::Page
     class Delete < GollumRails::PageHelper
       # Public: Page.<call_by> . The method call will be generated with this information
       call_by 'delete'

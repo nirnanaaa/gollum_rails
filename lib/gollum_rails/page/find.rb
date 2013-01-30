@@ -1,5 +1,6 @@
 module GollumRails
   module PageActions
+    # Public: .find extension for GollumRails::Page
     class Find < GollumRails::PageHelper
       call_by 'find'
       

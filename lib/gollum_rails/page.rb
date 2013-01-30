@@ -1,38 +1,27 @@
 # ~*~ encoding: utf-8 ~*~
 require File.expand_path('../hash', __FILE__)
-require File.expand_path('../page/actions.rb', __FILE__)
-
-#require File.expand_path('../versions', __FILE__)
 
 module GollumRails
+  
+  # Public: Page actions (mainly used for ActiveModel actions)
   class Page
     include ActiveModel::Conversion
     include ActiveModel::Validations
     extend ActiveModel::Naming
-    
+
+    require ::File.expand_path('../page/actions.rb', __FILE__) #loaders
+
+    # Public: redirects calls on Class to self object
+    #
+    # name - Functions name
+    # args - Array of arguments
+    #
+    #
+    # Returns the function call of -name-
     def method_missing(name, *args)
       return Page.send(name, *args)
-     # false
-      #puts name
-     #puts self.const_get(self.class.name)
     end
-    
-    # Public: Singleton
-    #
-    # loads the necessary external classes
-    #
-    class << self
-      DependencyInjector.page_calls.each do |hash|
-        #puts DependencyInjector.page_calls
-        self.class.instance_eval do
-          define_method(hash[0]) do |*argv|
-            hash[1].initialized_first
-            return hash[1].single_run(*argv)
-          end
-        end
-      end
-    end
-    
+
     # Public: Gets/Sets the name of the document
     attr_accessor :name
 
@@ -247,8 +236,6 @@ module GollumRails
       end
     end
 
-
-
     #Public: For outputting all pages
     def all
 
@@ -355,8 +342,6 @@ module GollumRails
       @persisted
     end
 
-
-    
     # Public: Magic method ( static )
     #
     # name - The functions name

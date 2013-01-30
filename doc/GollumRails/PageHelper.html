@@ -99,7 +99,18 @@
 </dl>
 <div class="clear"></div>
 
-<div id="subclasses">
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Public: Page helpers, to include if writing an extension for the Page class</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><div id="subclasses">
   <h2>Direct Known Subclasses</h2>
   <p class="children"><span class='object_link'><a href="PageActions/Delete.html" title="GollumRails::PageActions::Delete (class)">GollumRails::PageActions::Delete</a></span>, <span class='object_link'><a href="PageActions/Find.html" title="GollumRails::PageActions::Find (class)">GollumRails::PageActions::Find</a></span>, <span class='object_link'><a href="PageActions/Update.html" title="GollumRails::PageActions::Update (class)">GollumRails::PageActions::Update</a></span></p>
 </div>
@@ -135,7 +146,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Public: will be called from child functions if called Half transparent.</p>
+</div></span>
   
 </li>
 
@@ -157,7 +170,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Public: catches method missings / will soft fail.</p>
+</div></span>
   
 </li>
 
@@ -180,18 +195,37 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Public: will be called from child functions if called Half transparent</p>
+
+<p>Examples</p>
+
+<pre class="code ruby"><code><span class='const'>Page</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>some string</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='comment'># method will be called in background
+</span><span class='comment'># =&gt; nil || Gollum::Page</span></code></pre>
+
+<p>Returns a Hash</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-6
-7
-8</pre>
+26
+27
+28</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page/helper.rb', line 6</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page/helper.rb', line 26</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialized_first'>initialized_first</span>
   <span class='const'>DependencyInjector</span><span class='period'>.</span><span class='id identifier rubyid_set'>set</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='symbol'>:error_old</span> <span class='op'>=&gt;</span> <span class='const'>DependencyInjector</span><span class='period'>.</span><span class='id identifier rubyid_error'>error</span><span class='comma'>,</span> <span class='symbol'>:error</span> <span class='op'>=&gt;</span> <span class='kw'>nil</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
@@ -210,24 +244,41 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Public: catches method missings / will soft fail</p>
+
+<p>name - methods Name arguments - Array containing all arguments, the
+function was called with</p>
+
+<p>Examples</p>
+
+<pre class="code ruby"><code><span class='const'>Find</span><span class='period'>.</span><span class='id identifier rubyid_do_something_strange'>do_something_strange</span>
+<span class='comment'># =&gt; MethodMissing</span></code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-9
-10
-11
-12</pre>
+38
+39
+40</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page/helper.rb', line 9</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/page/helper.rb', line 38</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method_missing'>method_missing</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_arguments'>arguments</span><span class='rparen'>)</span>
-  <span class='comment'>#puts name
-</span>  <span class='comment'>#puts DependencyInjector.page_calls
-</span><span class='kw'>end</span></pre>
+  <span class='const'>DependencyInjector</span><span class='period'>.</span><span class='id identifier rubyid_set'>set</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='symbol'>:error</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>No such method \n\ncall:\n\t</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'>\n\t</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_arguments'>arguments</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -238,7 +289,7 @@
 </div>
 
     <div id="footer">
-  Generated on Wed Jan 30 15:11:44 2013 by
+  Generated on Wed Jan 30 23:22:41 2013 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.3 (ruby-1.9.3).
 </div>
