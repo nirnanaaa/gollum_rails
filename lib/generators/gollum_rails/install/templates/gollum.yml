@@ -1,13 +1,39 @@
-# relative / absolute
+# Welcome to the GollumWiki configuration
 #
-# relative will result in 'relative to Rails root'
+##################################################
+# ->PATH TYPE<-
+# value: relative / absolute / auto
+#
+# relative will result in 'relative to Rails root/'
 # absolute will result in '/'
-# 
+# auto will result in either /(prefixed) or <railsroot/>path
+#
+#
 location_type: relative
 
-# the location
+###################################################
+# ->PATH<-
+# value: String, the location of the Wiki
+#
+# Examples
+#   location: db/wiki
+#
+#   # or
+#   location: /var/www/wiki
+#
+#
 location: db/wiki
 
-# enable i18n?
-
+####################################################
+# ->TRANSLATED MESSAGES<-
+# value: Boolean, use Lanuage specific messages
+#
+# Examples
+#   # use
+#   i18n_messages: true
+#   # don't use
+#   i18n_messages: false
+#
 i18n_messages: true
+
+
