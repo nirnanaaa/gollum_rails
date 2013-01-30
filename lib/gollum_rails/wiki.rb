@@ -1,10 +1,17 @@
 
 module GollumRails
+
+  # Public: GollumRails::Wiki
+  #
   class Wiki
+
+    # Public: Singleton class
     class << self
 
     # Public: Spawns a new Gollum::Wiki
     #
+    # path - A string, maybe empty if in Rails env
+    # settings - A hash, Framework environment
     #
     # Examples
     #   Wiki.new("/home/nirnanaaa/wiki")
@@ -51,6 +58,10 @@ module GollumRails
       end
     end
 
+    # Public: searches the whole wiki (DEPRECATED)
+    #
+    # use Page.search instead, which is a Page plugin
+    #
     def search(string = '')
 
     end
