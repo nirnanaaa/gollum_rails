@@ -142,7 +142,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Public: Reads either error or error_old.</p>
+</div></span>
   
 </li>
 
@@ -164,7 +166,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Public: expects arguments or a block.</p>
+</div></span>
   
 </li>
 
@@ -187,7 +191,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>sets a storage Hash.</p>
+<p>Public: block assignment.</p>
 </div></span>
   
 </li>
@@ -210,7 +214,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Public: setter.</p>
+</div></span>
   
 </li>
 
@@ -233,21 +239,32 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Public: Reads either error or error_old</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-6
-7
-8</pre>
+9
+10
+11</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/dependency_injector.rb', line 6</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/dependency_injector.rb', line 9</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_error_buffer'>get_error_buffer</span>
-  <span class='id identifier rubyid_error'>error</span> <span class='op'>||=</span> <span class='id identifier rubyid_error_old'>error_old</span> 
+  <span class='id identifier rubyid_error'>error</span> <span class='op'>||=</span> <span class='id identifier rubyid_error_old'>error_old</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -263,22 +280,36 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Public: expects arguments or a block</p>
+
+<p>method - .call arguments - Array of additional arguments (unused,
+DEPRECATED) block - Get  block variables</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-18
-19
-20
-21
-22
-23
-24</pre>
+38
+39
+40
+41
+42
+43
+44</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/dependency_injector.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/dependency_injector.rb', line 38</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_method_missing'>method_missing</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_arguments'>arguments</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='ivar'>@storage</span><span class='lbracket'>[</span><span class='id identifier rubyid_method'>method</span><span class='rbracket'>]</span>
@@ -304,7 +335,9 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>sets a storage Hash</p>
+<p>Public: block assignment</p>
+
+<p>block - Block of Enumerables</p>
 
 
   </div>
@@ -318,12 +351,12 @@
       <pre class="lines">
 
 
-10
-11
-12</pre>
+19
+20
+21</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/dependency_injector.rb', line 10</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/dependency_injector.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_register'>register</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_block'>block</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span>
@@ -342,18 +375,33 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Public: setter</p>
+
+<p>arguments - Hash of arguments</p>
+
+<p>Returns arguments</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-14
-15
-16</pre>
+28
+29
+30</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/dependency_injector.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/dependency_injector.rb', line 28</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_set'>set</span><span class='lparen'>(</span><span class='id identifier rubyid_arguments'>arguments</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_arguments'>arguments</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='op'>|</span> <span class='ivar'>@storage</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span><span class='rbrace'>}</span>
@@ -368,7 +416,7 @@
 </div>
 
     <div id="footer">
-  Generated on Wed Jan 30 23:22:41 2013 by
+  Generated on Thu Jan 31 07:36:20 2013 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.3 (ruby-1.9.3).
 </div>
