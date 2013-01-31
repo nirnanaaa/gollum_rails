@@ -50,6 +50,7 @@ module GollumRails
         DependencyInjector.app.root
       end
 
+      # Public: Gets the path of the rails config dir
       def self.rails_config_dir
       end
 
