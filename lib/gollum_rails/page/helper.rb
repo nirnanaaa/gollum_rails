@@ -1,5 +1,5 @@
 module GollumRails
-  
+
   # Public: No commit is given in action
   class CommitMustBeGivenError < StandardError; end
 
@@ -8,23 +8,27 @@ module GollumRails
 
   # Public: Module internal error / not loaded
   class ModuleInternalError < StandardError; end
-    
+
   # Public: Page helpers, to include if writing an extension for the Page class
   #
   class PageHelper
     class << self
-      
+
       # Public: will be called from child functions if called
       # Half transparent
       #
       # Examples
       #   Page.find("some string")
       #   # method will be called in background
-      #   # => nil || Gollum::Page 
+      #   # => nil || Gollum::Page
       #
-      # Returns a Hash 
+      # Returns a Hash
       def initialized_first
-        DependencyInjector.set({ :error_old => DependencyInjector.error, :error => nil })
+        DependencyInjector.set({:error_old => []}) if not DependencyInjector.error_old.is_a?(Array)
+        DependencyInjector.error_old <<  DependencyInjector.error if DependencyInjector.error_old.is_a?(Array)
+        DependencyInjector.set({
+          :error => nil
+        })
       end
 
       # Public: catches method missings / will soft fail
@@ -38,11 +42,11 @@ module GollumRails
       def method_missing(name, *arguments)
         DependencyInjector.set({ :error => "No such method \n\ncall:\n\t#{name}\n\t#{arguments}"})
       end
-      
+
       # Public: sets the DI page_calls to a new Hash ( FIXME )
       DependencyInjector.set({ :page_calls => {} }) if !DependencyInjector.page_calls
 
-        
+
       protected
 
       # Public: Injector block
@@ -80,7 +84,7 @@ module GollumRails
       end
 
       private
-      
+
       # Public: Saves the current call_by call
       def save_calls(klass, method)
         Page.class.instance_eval do

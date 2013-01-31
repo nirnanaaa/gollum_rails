@@ -36,18 +36,36 @@ context "Backbone module extender" do
 
   test "#error cleaning / getting " do
     text = "something happened"
+
     GollumRails::DependencyInjector.set({:error => text})
 
     assert_equal text, GollumRails::DependencyInjector.error
     assert_instance_of String, GollumRails::DependencyInjector.error
-    assert_equal false, GollumRails::DependencyInjector.error_old
+    #assert_equal false, GollumRails::DependencyInjector.error_old
 
     # clear errors
+    100.times do |cnt|
+      GollumRails::DependencyInjector.set({:error => text})
+
+      assert_equal text, GollumRails::DependencyInjector.error
+      GollumRails::PageHelper.initialized_first
+      assert_instance_of FalseClass, GollumRails::DependencyInjector.error
+
+    end
+
     GollumRails::PageHelper.initialized_first
-    assert_instance_of FalseClass, GollumRails::DependencyInjector.error
-    assert_equal false, GollumRails::DependencyInjector.error
-    assert_instance_of String, GollumRails::DependencyInjector.error_old
-    assert_equal text, GollumRails::DependencyInjector.error_old
+
+    assert_instance_of Array, GollumRails::DependencyInjector.error_old
+
+    GollumRails::DependencyInjector.error_old.each do |ele|
+      assert_instance_of String, ele.to_s
+    end
+
+    # false => no error happened
+    #assert_instance_of FalseClass, GollumRails::DependencyInjector.error
+    #assert_equal false, GollumRails::DependencyInjector.error
+    #assert_instance_of String, GollumRails::DependencyInjector.error_old
+    #assert_equal text, GollumRails::DependencyInjector.error_old
 
   end
 
