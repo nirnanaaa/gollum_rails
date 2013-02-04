@@ -21,36 +21,14 @@ module GollumRails
         #
         # Returns the commit string
         def single_run(*args)
-          name = self.class.f_name(args[0])
-          commit = args[1] if args[1].is_a? ::Hash
-          content = args[2] if not args[2].empty?
-          format = args[3] if not args[3].is_nil?
-          page = args[4] if args[4].is_a? Gollum::Page
+          page, name, format, content, commit = args
 
-          if commit.nil? || content.nil?
-            @error = @options.messages.commit_not_empty_and_content_not_empty
-            return false
-          end
-          commit = DependencyInjector.wiki.update_page(@page, @name, @format, content, commit)
-          if commit.is_a?(String)
-            @persisted = true
-            return commit
-          else
-            @persisted = false
-            return nil
-          end
+          commit = DependencyInjector.wiki.update_page(page, name, format, content, commit)
+
+          DependencyInjector.set({:persisted => true}) if commit.is_a?(String)
+          DependencyInjector.set({:persisted => false}) if not commit.is_a?(String)
         end
 
-      end
-      private
-      def f_name(name)
-        name || GollumRails::DependencyInjector.page.name
-      end
-      def f_content(content)
-      end
-      def f_format(format)
-      end
-      def f_page(page)
       end
     end
   end
