@@ -5,7 +5,7 @@ module GollumRails
     class Update < GollumRails::PageHelper
       call_by 'update'
       class << self
-        # function initializer
+        # Public: validates if page exists
         def initialized_first
           raise GollumRails::PageActions::NoPageLoadedError, "no page loaded! Please verify that you call find() before update()" if
           not DependencyInjector.page
@@ -31,5 +31,6 @@ module GollumRails
 
       end
     end
+    
   end
 end
