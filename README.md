@@ -61,29 +61,29 @@ The "main" configuration file is located under  `config/gollum.yml` in your Rail
 
 Content:
 
-  # value: relative / absolute / auto
-  #
-  # relative will result in 'relative to Rails root/'
-  # absolute will result in '/'
-  # auto will result in either /(prefixed) or <railsroot/>path
-  #
-  location_type: relative
-
-  #   location: db/wiki
-  #   # or
-  #   location: /var/www/wiki
-  #
-  location: db/wiki
-
-  #   # use
-  #   i18n_messages: true
-  #   # don't use
-  #   i18n_messages: false
-  #
-  i18n_messages: true
-
-  # Throw exceptions or only set `error` method
-  throw_exceptions: false
+	  # value: relative / absolute / auto
+	  #
+	  # relative will result in 'relative to Rails root/'
+	  # absolute will result in '/'
+	  # auto will result in either /(prefixed) or <railsroot/>path
+	  #
+	  location_type: relative
+	
+	  #   location: db/wiki
+	  #   # or
+	  #   location: /var/www/wiki
+	  #
+	  location: db/wiki
+	
+	  #   # use
+	  #   i18n_messages: true
+	  #   # don't use
+	  #   i18n_messages: false
+	  #
+	  i18n_messages: true
+	
+	  # Throw exceptions or only set `error` method
+	  throw_exceptions: false
 
 If  you have `i18n` support enabled you should have a look at
 `RAILSROOT/config/locales/gollum.<LANG>.yml`
@@ -91,8 +91,8 @@ which is already filled.
 
 Format:
 
-  gollum_messages:
-    <identifier>: <translated>
+	  gollum_messages:
+	    <identifier>: <translated>
 
 
 ## USAGE
