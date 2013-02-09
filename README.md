@@ -37,10 +37,10 @@ Then just run the [Bundler](http://gembundler.com/)
 
 To install GollumRails just run the `generator`
 
-  $ rails g gollum_rails:install
+  	$ rails g gollum_rails:install
 
-  # for help
-  $ rails g gollum_rails:install --help
+  	# for help
+  	$ rails g gollum_rails:install --help
 
 If you want you can add an initializer into e.g. `config/initializers/gollum_rails.rb`
 instead of installing the application.
