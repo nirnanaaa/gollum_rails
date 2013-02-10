@@ -1,5 +1,4 @@
 module GollumRails
-
   # Public: No commit is given in action
   class CommitMustBeGivenError < StandardError; end
 
@@ -13,7 +12,6 @@ module GollumRails
   #
   class PageHelper
     class << self
-
       # Public: will be called from child functions if called
       # Half transparent
       #
@@ -41,11 +39,11 @@ module GollumRails
       #   # => MethodMissing
       def method_missing(name, *arguments)
         DependencyInjector.set({ :error => "No such method \n\ncall:\n\t#{name}\n\t#{arguments}"})
+        raise ModuleInternalError, "no such method"
       end
 
       # Public: sets the DI page_calls to a new Hash ( FIXME )
       DependencyInjector.set({ :page_calls => {} }) if !DependencyInjector.page_calls
-
 
       protected
 
@@ -83,6 +81,12 @@ module GollumRails
         return save_calls(self, method_name)
       end
 
+      # Public: DRY (create / new)
+      #
+      #
+      def new_entry()
+
+      end
       private
 
       # Public: Saves the current call_by call

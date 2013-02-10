@@ -5,8 +5,6 @@ module GollumRails
       # Public: Page.<call_by> . The method call will be generated with this information
       call_by 'create'
       call_by 'create!'
-
-
       class << self
         # Public: runs the initializer from superclass ( super clears the error buffer )
         #
@@ -22,11 +20,7 @@ module GollumRails
         #
         # Returns String
         def single_run(*argv)
-
-        end
-
-        def mass_assignment(&block)
-
+          
         end
       end
     end
