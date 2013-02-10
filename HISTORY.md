@@ -1,3 +1,11 @@
+# 0.0.3 10th February 2013
+
+* create added
+* 100% documentation
+* modular functions
+* installation generator
+* module generator
+
 # 0.0.2.9 30th January 2013
 
 * Singleton classes for dynamic modules
