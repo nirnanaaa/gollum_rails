@@ -13,12 +13,12 @@ Gem::Specification.new do |s|
   s.add_dependency('builder', '~> 3.0.0')
   s.add_dependency('rack', '~> 1.4.0')
 
-  s.add_development_dependency('org-ruby', '~> 0.7.2')
+  s.add_development_dependency('org-ruby', '~> 0.8.0')
   s.add_development_dependency('shoulda', '~> 3.3.2')
   s.add_development_dependency('rack-test', '~> 0.6.2')
   s.add_development_dependency('rake', '~> 10.0.2')
-  s.add_development_dependency('rails', '~> 3.2.11')
-  
+  s.add_development_dependency('rails', '~> 3.2.12')
+
   s.author = 'Florian Kasper'
   s.email = 'nirnanaaa@khnetworks.com'
   s.homepage = 'https://github.com/nirnanaaa/gollum_rails'
