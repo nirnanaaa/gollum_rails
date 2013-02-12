@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.description= 'use templating, authentication and so on'
   #File.read(File.join(File.dirname(__FILE__), 'README.md'))
 
-  s.add_dependency('activemodel', '~> 3.2.11')
+  s.add_dependency('activemodel', '~> 3.2.12')
   s.add_dependency('gollum', '~> 2.4.11')
   s.add_dependency('grit', '~> 2.5.0')
   s.add_dependency('builder', '~> 3.0.0')
