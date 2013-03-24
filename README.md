@@ -4,6 +4,9 @@ Gollum for Rails
 [![Dependency Status](https://gemnasium.com/nirnanaaa/gollum_rails.png)](https://gemnasium.com/nirnanaaa/gollum_rails)
 [![Gem Version](https://badge.fury.io/rb/gollum_rails.png)](http://badge.fury.io/rb/gollum_rails)
 
+Gem won't be updated until may 2013
+--------------------------------
+
 Gollum for Rails combines the benefits from gollum with the flexibility of Rails.
 
 It improves the lightweight "gollum" experience which is quite awesome.
