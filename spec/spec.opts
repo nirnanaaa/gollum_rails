@@ -1,0 +1,6 @@
+--color
+--backtrace
+--format progress
+--loadby mtime
+--reverse
+

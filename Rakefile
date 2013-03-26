@@ -74,6 +74,7 @@ RSpec::Core::RakeTask.new do |t|
 end
 
 desc "Run specs"
+
 task :spec do
   puts "testing with active model"
   system "rake spec"
