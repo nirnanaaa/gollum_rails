@@ -1,11 +1,6 @@
 require 'rubygems'
 require 'bundler/setup'
 
-Bundler.require(:default)
-
-require 'supermodel'
-require 'activemodel'
-require 'matchers'
 
 RSpec.configure do |config|
  config.treat_symbols_as_metadata_keys_with_true_values = true

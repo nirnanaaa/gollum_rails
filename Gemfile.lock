@@ -139,6 +139,7 @@ PLATFORMS
 
 DEPENDENCIES
   gollum_rails!
+  i18n
   rails (~> 3.2.13)
   rr (~> 1.0.4)
   rspec (~> 2.13.0)
