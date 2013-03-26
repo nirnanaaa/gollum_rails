@@ -75,10 +75,8 @@ end
 
 desc "Run specs"
 task :spec do
-  %w[active_record data_mapper mongoid].each do |model_adapter|
-   puts "MODEL_ADAPTER = #{model_adapter}"
-   system "rake spec MODEL_ADAPTER=#{model_adapter}"
-  end
+  puts "testing with active model"
+  system "rake spec"
 end
 
 
