@@ -13,13 +13,12 @@ Gem::Specification.new do |s|
   s.add_dependency 'activemodel', '~> 3.2.13'
   s.add_dependency 'gollum', '~> 2.4.11'
   s.add_dependency 'grit', '~> 2.5.0'
-  s.add_dependency 'builder', '~> 3.2.0'
-  s.add_dependency 'rack', '~> 1.5.2'
+  s.add_dependency 'builder', '~> 3.0.0'
+  s.add_dependency 'rack', '~> 1.4.5'
 
   s.add_development_dependency 'rspec', '~> 2.13.0'
   s.add_development_dependency 'rails', '~> 3.2.13'
   s.add_development_dependency 'rr', '~> 1.0.4' 
-  s.add_development_dependency 'supermodel', '~> 0.1.6'
   s.add_development_dependency 'rails', '~> 3.2.13'
 
   s.author = 'Florian Kasper'
