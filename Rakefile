@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'rake'
 require 'date'
+require 'rspec/core/rake_task'
+
 
 #############################################################################
 #
@@ -64,13 +66,19 @@ end
 #
 #############################################################################
 
-task :default => :test
+task :default => :spec
 
-require 'rake/testtask'
-Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'test' << '.'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
+desc "Run RSpec"
+RSpec::Core::RakeTask.new do |t|
+    t.verbose = false
+end
+
+desc "Run specs"
+task :spec do
+  %w[active_record data_mapper mongoid].each do |model_adapter|
+   puts "MODEL_ADAPTER = #{model_adapter}"
+   system "rake spec MODEL_ADAPTER=#{model_adapter}"
+  end
 end
 
 
