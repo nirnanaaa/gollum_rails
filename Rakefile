@@ -66,7 +66,7 @@ end
 #
 #############################################################################
 
-task :default => :spec
+task :default => :spec_run
 
 desc "Run RSpec"
 RSpec::Core::RakeTask.new do |t|
@@ -74,10 +74,8 @@ RSpec::Core::RakeTask.new do |t|
 end
 
 desc "Run specs"
-
-task :spec do
-  puts "testing with active model"
-  system "rake spec"
+task :spec_run do
+  sh "rake spec"
 end
 
 
