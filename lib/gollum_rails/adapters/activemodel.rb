@@ -1,10 +1,5 @@
-require 'activemodel'
-
-module GollumRails
-  module Adapters
-    include ::ActiveModel::Validations
-    include ::ActiveModel::Conversion
-    extend ::ActiveModel::Naming
-    
-  end
-end
+require 'active_model'
+require File.expand_path '../activemodel/callback', __FILE__
+require File.expand_path '../activemodel/naming', __FILE__
+require File.expand_path '../activemodel/error', __FILE__
+require File.expand_path '../activemodel/validation', __FILE__
