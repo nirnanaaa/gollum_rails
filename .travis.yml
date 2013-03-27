@@ -1,9 +1,11 @@
 rvm:
   - 1.9.3
+  - 2.0.0
+  - head
   
 notifications:
   disabled: true
   
 before_install:
- - git init test/wiki
+ - git init spec/utils/wiki
  
