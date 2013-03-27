@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   #File.read(File.join(File.dirname(__FILE__), 'README.md'))
 
   s.add_dependency 'activemodel', '~> 3.2.13'
-  s.add_dependency 'gollum', '~> 2.4.11'
+  s.add_dependency 'gollum-lib', '~> 0.0.1'
   s.add_dependency 'grit', '~> 2.5.0'
   s.add_dependency 'builder', '~> 3.0.0'
   s.add_dependency 'rack', '~> 1.4.5'
@@ -36,7 +36,17 @@ Gem::Specification.new do |s|
     README.md
     Rakefile
     gollum_rails.gemspec
+    lib/generators/gollum_rails/install/editor_generator.rb
     lib/generators/gollum_rails/install/install_generator.rb
+    lib/generators/gollum_rails/install/templates/editor/gollum.editor.js
+    lib/generators/gollum_rails/install/templates/editor/gollum.editor.min.js
+    lib/generators/gollum_rails/install/templates/editor/langs/asciidoc.js
+    lib/generators/gollum_rails/install/templates/editor/langs/creole.js
+    lib/generators/gollum_rails/install/templates/editor/langs/markdown.js
+    lib/generators/gollum_rails/install/templates/editor/langs/org.js
+    lib/generators/gollum_rails/install/templates/editor/langs/pod.js
+    lib/generators/gollum_rails/install/templates/editor/langs/rdoc.js
+    lib/generators/gollum_rails/install/templates/editor/langs/textile.js
     lib/generators/gollum_rails/install/templates/gollum.yml
     lib/generators/gollum_rails/install/templates/messages.yml
     lib/generators/gollum_rails/model/model_generator.rb
@@ -47,17 +57,24 @@ Gem::Specification.new do |s|
     lib/gollum_rails/engine.rb
     lib/gollum_rails/file.rb
     lib/gollum_rails/hash.rb
-    lib/gollum_rails/messages.yml
     lib/gollum_rails/page.rb
     lib/gollum_rails/page/actions.rb
+    lib/gollum_rails/page/create.rb
     lib/gollum_rails/page/delete.rb
     lib/gollum_rails/page/find.rb
     lib/gollum_rails/page/helper.rb
+    lib/gollum_rails/page/new.rb
     lib/gollum_rails/page/save.rb
+    lib/gollum_rails/page/search.rb
     lib/gollum_rails/page/update.rb
     lib/gollum_rails/page/versions.rb
     lib/gollum_rails/validations.rb
     lib/gollum_rails/wiki.rb
+    spec/gollum_rails/page_spec.rb
+    spec/gollum_rails/respository_spec.rb
+    spec/gollum_rails/wiki_spec.rb
+    spec/spec.opts
+    spec/spec_helper.rb
   ]
   # = MANIFEST =
 

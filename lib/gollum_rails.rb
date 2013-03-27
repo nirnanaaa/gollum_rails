@@ -1,27 +1,25 @@
-# ~*~ encoding: utf-8 ~*~
-
-# externals
 require 'rubygems'
-require 'gollum'
+require 'gollum-lib'
 
-# internals
-#require File.expand_path('../gollum_rails/engine', __FILE__)
-#require File.expand_path('../gollum_rails/dependency_injector', __FILE__)
-#require File.expand_path('../gollum_rails/config', __FILE__)
-#require File.expand_path('../gollum_rails/wiki', __FILE__)
-#require File.expand_path('../gollum_rails/validations', __FILE__)
-#require File.expand_path('../gollum_rails/file', __FILE__)
-#require File.expand_path('../gollum_rails/page', __FILE__)
 
-# gollum still supports ruby 1.8.7 so gollum_rails must also do
-#
-$KCODE = 'U' if RUBY_VERSION[0,3] == '1.8'
+require File.expand_path '../gollum_rails/adapters/activemodel', __FILE__
+require File.expand_path '../gollum_rails/adapters/gollum', __FILE__
+require File.expand_path '../gollum_rails/repository', __FILE__
+require File.expand_path '../gollum_rails/page', __FILE__
 
-# Public: Main application class
-#
+# load extensions
+require File.expand_path '../gollum_rails/modules/loader', __FILE__
+
+
 module GollumRails
-
-  # Public: Gets the applications version
-  VERSION = '0.0.3'
-
+  
+  VERSION="0.0.3"
+  
+  class Error < StandardError; end
+  class GollumInternalError < Error
+  
+  end
 end
+
+
+
