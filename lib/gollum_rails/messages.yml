@@ -1,8 +1,0 @@
-messages:
-  name_not_set_or_nil: The name is not set or is NIL
-  commit_not_empty_and_content_not_empty: The commit must be set and also the content
-  commit_must_be_given: Commit must not be empty or nil
-  no_page_fetched: No page was fetched
-  no_page_found: The page was not found
-  format_not_set: The format was not set
-  wiki_could_not_be_loaded: The wiki instance in ::Page is not an Instance of GollumRails::Wiki or is empty
