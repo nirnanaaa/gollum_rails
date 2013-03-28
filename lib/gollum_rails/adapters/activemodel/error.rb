@@ -14,14 +14,12 @@ module GollumRails
 
         # Initializes a new Instance of ActiveModel
         # 
-        def initialize(name, message = "", stack = nil, priority = :low)
-          @errors = ActiveModel::Errors.new(self)
+        def initialize(name, message = nil, stack = nil, priority = :crit)
           if priority == :high or priority == :crit
-            raise self, "Error thrown: #{name},\n #{(stack || message)}"
+            super("Error thrown: #{name},\n\n #{(message||stack)}")
           else
-            errors.add priority.to_sym
+            puts "Info: #{name}, \n\n #{(message||stack)}"
           end
-
         end
 
 
