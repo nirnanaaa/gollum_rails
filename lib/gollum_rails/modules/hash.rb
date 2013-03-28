@@ -1,3 +1,16 @@
+# See http://ruby-doc.org/core-2.0/Hash.html for further information
+#
+# Extended methods:
+#   * object support
+#   * setter
+#   * hash setter
+#   * isset
+#
+#
+# TODO
+#   * implement is? method
+#   * improve testing
+#
 class ::Hash
 
 
@@ -40,6 +53,9 @@ class ::Hash
 
   alias_method :hash=, :set_new
 
+  # Checks if Hash is set
+  #
+  # Returns a boolean
   def is?(name, *args)
     new = name.to_s.gsub(/\?/, '')
   end
