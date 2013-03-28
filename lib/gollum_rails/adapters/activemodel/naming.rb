@@ -6,7 +6,6 @@ module GollumRails
       # Naming class for all Classes, extending the AdtiveModel::Naming module
       #
       # provides base functionality like filenames, classnames, variable-, instancenames
-      # Also handles the conversion between static and non-static methods
       module Naming
         
         # Outputs the currents class name
