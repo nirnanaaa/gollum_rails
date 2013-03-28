@@ -42,8 +42,6 @@ GEM
     builder (3.0.4)
     diff-lcs (1.2.1)
     erubis (2.7.0)
-    factory_girl (4.2.0)
-      activesupport (>= 3.0.0)
     github-markdown (0.5.3)
     github-markup (0.7.5)
     gollum-lib (0.0.1)
@@ -128,7 +126,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  factory_girl (~> 4.2.0)
   gollum-lib
   gollum_rails!
   rails (~> 3.2.13)
