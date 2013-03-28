@@ -1,5 +1,14 @@
 # ~*~ encoding: utf-8 ~*~
 module GollumRails
+
+  # Gollum Wiki connector classes
+  #
+  # TODO:
+  #   * implement
+  #
+  # FIXME:
+  #   currently nothing implemented
+  #
   module Gollum
 
     # Sets the page class used by all instances
