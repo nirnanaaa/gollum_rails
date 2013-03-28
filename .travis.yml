@@ -1,11 +1,25 @@
+language: ruby
+
+branches:
+  only:
+    - master
+    - trunk
+
 rvm:
   - 1.9.3
   - 2.0.0
   - ruby-head
   
+matrix:
+  allow-failures:
+  - rvm: ruby-head
+
 notifications:
   disabled: true
   
+
 before_install:
+ - sudo apt-get update -qq
+ - sudo apt-get install -yqq git-core
  - git init spec/utils/wiki
  
