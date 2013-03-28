@@ -11,6 +11,9 @@ module GollumRails
   #
   module Gollum
 
+    # connector version
+    VERSION="0.0.0"
+
     # Sets the page class used by all instances
     attr_writer :page_class
 

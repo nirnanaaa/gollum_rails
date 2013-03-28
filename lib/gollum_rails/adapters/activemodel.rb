@@ -30,6 +30,8 @@ module GollumRails
     #   none a.t.m.
     #
     module ActiveModel
+
+      # connector version
       VERSION="0.0.4"
     end
   end
