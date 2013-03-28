@@ -70,7 +70,8 @@ describe GollumRails::Adapters::ActiveModel::Validation do
     @model.error[:type][0].should == "not a kind of given class Integer"
 
     @model.test preset, "max=2"
-    puts @model.error
+    #is too long (maximum is 2 characters)
+    @model.error[:variable][0].should == "is too long (maximum is 2 characters)"
 
     
   end
