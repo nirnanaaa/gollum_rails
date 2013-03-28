@@ -3,6 +3,9 @@ require 'bundler/setup'
 
 require 'gollum_rails'
 
+require 'coveralls'
+Coveralls.wear!
+
 require 'benchmark'
 RSpec::Matchers.define :take_less_than do |n|
   chain :seconds do; end
