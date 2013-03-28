@@ -21,14 +21,14 @@ module GollumRails
     attr_writer :wiki_class
 
     # Sets the committer
-    attr_writer :committer
+    attr_writer :committer_class
 
     # Gets the Globally used Page class or use a new one if not defined
     #
     #
     # Returns the internal page class or a fresh ::Gollum::Page
     def page_class
-      @page_class || ::Gollum::Page
+      @page_class || Page
     end
 
     # Gets the Globally used Page class or use a new one if not defined
@@ -36,14 +36,14 @@ module GollumRails
     #
     # Returns the internal page class or a fresh ::Gollum::Page
     def wiki_class
-      @wiki_class || ::Gollum::Wiki
+      @wiki_class || Wiki
     end
 
     # Gets the current committer or using anon
     #
     #
     def committer
-      @committer ||=
+      @committer_class ||
         if Committer.kind_of? ::Gollum::Committer
           Committer
         else
@@ -54,3 +54,6 @@ module GollumRails
   end
 end
 
+require File.expand_path '../gollum/wiki', __FILE__
+require File.expand_path '../gollum/committer', __FILE__
+require File.expand_path '../gollum/page', __FILE__
