@@ -3,7 +3,10 @@ module GollumRails
     module Gollum
 
       # TODO: doc
-      class  Wiki
+      class  Wiki < ::Gollum::Wiki
+        def initialize(location)
+
+        end
       end
     end
   end
