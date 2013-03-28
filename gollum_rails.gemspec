@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rails', '~> 3.2.13'
   s.add_development_dependency 'rr', '~> 1.0.4' 
   s.add_development_dependency 'rails', '~> 3.2.13'
+  s.add_development_dependency 'factory_girl', '~> 4.2.0'
 
   s.author = 'Florian Kasper'
   s.email = 'mosny@zyg.li'
@@ -35,46 +36,20 @@ Gem::Specification.new do |s|
     LICENSE.md
     README.md
     Rakefile
+    examples/rails/initializer.rb
     gollum_rails.gemspec
-    lib/generators/gollum_rails/install/editor_generator.rb
-    lib/generators/gollum_rails/install/install_generator.rb
-    lib/generators/gollum_rails/install/templates/editor/gollum.editor.js
-    lib/generators/gollum_rails/install/templates/editor/gollum.editor.min.js
-    lib/generators/gollum_rails/install/templates/editor/langs/asciidoc.js
-    lib/generators/gollum_rails/install/templates/editor/langs/creole.js
-    lib/generators/gollum_rails/install/templates/editor/langs/markdown.js
-    lib/generators/gollum_rails/install/templates/editor/langs/org.js
-    lib/generators/gollum_rails/install/templates/editor/langs/pod.js
-    lib/generators/gollum_rails/install/templates/editor/langs/rdoc.js
-    lib/generators/gollum_rails/install/templates/editor/langs/textile.js
-    lib/generators/gollum_rails/install/templates/gollum.yml
-    lib/generators/gollum_rails/install/templates/messages.yml
-    lib/generators/gollum_rails/model/model_generator.rb
-    lib/generators/gollum_rails/model/templates/model.rb.erb
     lib/gollum_rails.rb
-    lib/gollum_rails/config.rb
-    lib/gollum_rails/dependency_injector.rb
-    lib/gollum_rails/engine.rb
-    lib/gollum_rails/file.rb
-    lib/gollum_rails/hash.rb
+    lib/gollum_rails/adapters/activemodel.rb
+    lib/gollum_rails/adapters/activemodel/boolean.rb
+    lib/gollum_rails/adapters/activemodel/callback.rb
+    lib/gollum_rails/adapters/activemodel/error.rb
+    lib/gollum_rails/adapters/activemodel/naming.rb
+    lib/gollum_rails/adapters/activemodel/validation.rb
+    lib/gollum_rails/adapters/gollum.rb
+    lib/gollum_rails/modules/hash.rb
+    lib/gollum_rails/modules/loader.rb
     lib/gollum_rails/page.rb
-    lib/gollum_rails/page/actions.rb
-    lib/gollum_rails/page/create.rb
-    lib/gollum_rails/page/delete.rb
-    lib/gollum_rails/page/find.rb
-    lib/gollum_rails/page/helper.rb
-    lib/gollum_rails/page/new.rb
-    lib/gollum_rails/page/save.rb
-    lib/gollum_rails/page/search.rb
-    lib/gollum_rails/page/update.rb
-    lib/gollum_rails/page/versions.rb
-    lib/gollum_rails/validations.rb
-    lib/gollum_rails/wiki.rb
-    spec/gollum_rails/page_spec.rb
-    spec/gollum_rails/respository_spec.rb
-    spec/gollum_rails/wiki_spec.rb
-    spec/spec.opts
-    spec/spec_helper.rb
+    lib/gollum_rails/repository.rb
   ]
   # = MANIFEST =
 
