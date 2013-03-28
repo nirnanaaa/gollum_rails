@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'activemodel', '~> 3.2.13'
   s.add_dependency 'gollum-lib', '~> 0.0.1'
-  s.add_dependency 'grit', '~> 2.5.0'
+  #s.add_dependency 'grit', '~> 2.5.0'
   s.add_dependency 'builder', '~> 3.0.0'
   s.add_dependency 'rack', '~> 1.4.5'
 
@@ -23,7 +23,8 @@ Gem::Specification.new do |s|
 
   s.author = 'Florian Kasper'
   s.email = 'mosny@zyg.li'
-  s.homepage = 'https://github.com/nirnanaaa/gollum_rails'
+  s.homepage = 'http://gollum.zyg.li'
+  s.license = 'AGPL'
   s.platform = Gem::Platform::RUBY
   s.required_ruby_version = '>=1.9.3'
 
@@ -45,10 +46,12 @@ Gem::Specification.new do |s|
     lib/gollum_rails/adapters/activemodel/naming.rb
     lib/gollum_rails/adapters/activemodel/validation.rb
     lib/gollum_rails/adapters/gollum.rb
+    lib/gollum_rails/adapters/gollum/.gitkeep
+    lib/gollum_rails/adapters/gollum/committer.rb
+    lib/gollum_rails/adapters/gollum/page.rb
+    lib/gollum_rails/adapters/gollum/wiki.rb
     lib/gollum_rails/modules/hash.rb
     lib/gollum_rails/modules/loader.rb
-    lib/gollum_rails/page.rb
-    lib/gollum_rails/repository.rb
   ]
   # = MANIFEST =
 
