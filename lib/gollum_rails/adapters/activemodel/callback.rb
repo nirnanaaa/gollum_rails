@@ -1,5 +1,3 @@
-require 'active_model'
-
 module GollumRails
   module Adapters
     module ActiveModel
