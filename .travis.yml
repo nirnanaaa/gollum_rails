@@ -17,6 +17,8 @@ matrix:
 notifications:
   disabled: true
   
+script:
+  - rspec
 
 before_install:
  - sudo apt-get update -qq

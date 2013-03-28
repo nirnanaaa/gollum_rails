@@ -75,7 +75,12 @@ end
 
 desc "Run specs"
 task :spec_run do
-  sh "rake spec"
+  begin
+    sh "rake spec"
+  rescue RuntimeError => e
+    puts e.message
+    exit(1)
+  end
 end
 
 
