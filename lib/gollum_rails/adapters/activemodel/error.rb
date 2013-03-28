@@ -2,6 +2,7 @@ module GollumRails
   module Adapters
     module ActiveModel
       class Error < ::GollumRails::GollumInternalError
+        extend Naming::
         
         # Gets/Sets the Error
         attr_accessor :errors
