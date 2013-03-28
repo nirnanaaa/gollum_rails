@@ -54,7 +54,7 @@ To run tests just use the `rspec` command:
 
 ## LICENSE
 
-[![AGPLv3](http://www.gnu.org/licenses/agpl-3.0.en.html)](http://www.gnu.org/graphics/agplv3-155x51.png)
+[![AGPLv3](http://www.gnu.org/graphics/agplv3-155x51.png)](http://www.gnu.org/licenses/agpl-3.0.en.html)
 
 gollum_rails is licensed under the AGPL license. 
 
