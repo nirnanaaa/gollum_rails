@@ -20,7 +20,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rails', '~> 3.2.13'
   s.add_development_dependency 'rr', '~> 1.0.4' 
   s.add_development_dependency 'rails', '~> 3.2.13'
-  s.add_development_dependency 'factory_girl', '~> 4.2.0'
 
   s.author = 'Florian Kasper'
   s.email = 'mosny@zyg.li'
