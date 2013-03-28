@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-gem 'gollum-lib'
+gem 'coveralls', require: false
 gemspec
