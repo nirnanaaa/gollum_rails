@@ -41,12 +41,15 @@ module GollumRails
         #
         # Returns the commit id
         def update_page( new, commit={}, old=nil)
-          commit_id = @wiki.update_page (old||@page), 
-                                        new.name||@page.name, 
-                                        new.format.to_sym||@page.format, 
-                                        new.content||@page.content, 
-                                        commit 
-
+          if new.is_a?(Hash)
+            commit_id = @wiki.update_page (old||@page), 
+                                          new.name||@page.name, 
+                                          new.format.to_sym||@page.format, 
+                                          new.content||@page.content, 
+                                          commit 
+          else
+            raise ::Error
+          end
           if new.name
             @page = @page.find(new[:name], commit_id)
           end
