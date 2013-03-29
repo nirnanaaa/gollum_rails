@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.name = 'gollum_rails'
   s.rubyforge_project = s.name
 
-  s.version = '0.0.3'
+  s.version = '0.0.4'
 
   s.summary = 'Combines the benefits from Gollum and Rails'
   s.description= 'Use all the benefits from Rails and combine them with the awesome Gollum wiki'
@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
     Gemfile
     Gemfile.lock
     HISTORY.md
-    LICENSE.md
+    LICENSE
     README.md
     Rakefile
     examples/rails/initializer.rb
@@ -48,10 +48,13 @@ Gem::Specification.new do |s|
     lib/gollum_rails/adapters/gollum.rb
     lib/gollum_rails/adapters/gollum/.gitkeep
     lib/gollum_rails/adapters/gollum/committer.rb
+    lib/gollum_rails/adapters/gollum/error.rb
     lib/gollum_rails/adapters/gollum/page.rb
     lib/gollum_rails/adapters/gollum/wiki.rb
+    lib/gollum_rails/initializer.rb
     lib/gollum_rails/modules/hash.rb
     lib/gollum_rails/modules/loader.rb
+    lib/gollum_rails/setup.rb
   ]
   # = MANIFEST =
 
