@@ -25,17 +25,19 @@ describe GollumRails::Adapters::Gollum::Page do
     wiki = GollumRails::Adapters::Gollum::Wiki.new repo
     page = GollumRails::Adapters::Gollum::Page.new 
     page.new_page("testpage", "content",:markdown, @commit ).should be_instance_of Gollum::Page
-    page.delete_page(nil, @commit)
+    page.delete_page(@commit)
   end
 
   it "should delete an existing page" do
     page = @page.new_page 'testpage', 'content', :markdown, @commit
-    @page.delete_page(page, @commit).should be_instance_of String
+    @page.delete_page(@commit,page).should be_instance_of String
     
     @page.new_page 'testpage', 'content', :markdown, @commit
-    @page.delete_page(nil, @commit).should be_instance_of String
-    
+    @page.delete_page(@commit).should be_instance_of String
   end
   it "should update an existing page" do 
+    page = @page.new_page 'testpage', 'content', :markdown, @commit
+
+    page.delete_page(@commit)
   end
 end
