@@ -50,6 +50,16 @@ describe GollumRails::Page do
     #invalid input
     RailsModel.find('<script type="text/javascript">alert(123);</script>').should be_nil
   end
+  it "should test the preview" do
+    rr = RailsModel.new :content => "# content", :name => "somepage"
+    start = Time.new
+    100.times do
+      rr.preview.should == "<h1>content<a class=\"anchor\" id=\"content\" href=\"#content\"></a></h1>\n"
+    end
+    ending = Time.new
+    puts "\n\t# 100 times preview took about: #{ending-start} seconds\n\t# 1 test took about #{(ending-start)/100} seconds\n\n"
+
+  end
 
   it "should test the supported formats" do
     RailsModel.format_supported?('ascii').should be_true
