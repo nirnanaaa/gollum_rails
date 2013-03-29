@@ -30,7 +30,7 @@ module GollumRails
           @wiki.write_page(name.to_s, type, content, commit) if name
           @page = @wiki.page(name)
           #@page = @wiki.page(name.to_s)
-          #return @page
+          return @page
         end
 
         # updates an existing page
@@ -49,8 +49,8 @@ module GollumRails
         #
         # Returns the commit id
         def delete_page( page = nil, commit={} )
-          #return @wiki.delete_page(page, commit) if not page.nil?
-          return @wiki.delete_page(@page,commit)
+          @wiki.delete_page(page, commit) if !page.nil?
+          @wiki.delete_page(@page,commit)
         end
         
         # renames an existing page
