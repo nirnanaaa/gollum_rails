@@ -58,6 +58,22 @@ describe GollumRails::Adapters::Gollum::Page do
     page[:format] = :wiki
     @page.update_page(page, @commit).format.should == :mediawiki
 
+
+
+    @page.delete_page(@commit)
+  end
+  it "should find a page" do
+    @page.new_page 'content_page', 'content', :markdown, @commit
+
+    @page.find_page("content_page")
+    @page.delete_page(@commit)
+  end
+  it "should test the commit methods" do
+    @page.new_page 'content_page', 'content', :markdown, @commit
+    @page.page_last_edited_date.should be_instance_of Time
+    @page.page_created.should be_instance_of Time
+    @page.page_last_commit.should be_instance_of Grit::Commit
+
     @page.delete_page(@commit)
   end
 end
