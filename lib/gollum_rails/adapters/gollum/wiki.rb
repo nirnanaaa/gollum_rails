@@ -28,8 +28,6 @@ module GollumRails
           end
         end
       
-        
-
         # Static call from within any other class
         #
         # Returns a new instance of this class
