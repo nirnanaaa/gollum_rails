@@ -175,6 +175,14 @@ module GollumRails
       page.delete_page get_right_commit(commit)
     end
 
+    # Previews the page - Mostly used if you want to see what you do before saving
+    # 
+    #
+    def preview(format=:markdown)
+      preview = wiki.preview_page @name, @content, format
+      preview.formatted_data
+    end
+
     # Finds a page based on the name and specified version
     #
     # name - the name of the page
