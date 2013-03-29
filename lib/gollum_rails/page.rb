@@ -158,19 +158,28 @@ module GollumRails
     
     # Deletes current page (also available static. See below)
     #
-    # 
+    # commit - optional. If given this commit will be used instead of that one, used
+    #          to initialize the instance
+    #
+    # Returns the commit id of the current action as String 
     def delete(commit=nil)
       page.delete_page get_right_commit(commit)
+    end
+
+    # Finds a page based on the name and specified version
+    #
+    # name - the name of the page
+    #
+    # Return an instance of Gollum::Page
+    def self.find(name)
+      page = GollumRails::Adapters::Gollum::Page.new
+      page.find_page name
     end
 
     # Checks if 
     def valid?
       true
     end
-    
-    def self.find
-    end
-
     def self.validate(&block)
       validator = self.validator.new
       block.call validator 
@@ -185,8 +194,6 @@ module GollumRails
     # module templates following:
 
 
-    #callbacks
-
 
     def self.method_missing(name, *args)
     end
@@ -197,7 +204,10 @@ module GollumRails
     end
 
     def self.format_supported?(format)
+      supported = ['ascii', 'github-markdown','markdown', 'creole', 'org', 'pod', 'rdoc']
+      format.in?(supported)
     end
+
     private
 
     def get_right_commit(commit_local)

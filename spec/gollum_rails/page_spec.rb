@@ -44,4 +44,20 @@ describe GollumRails::Page do
     rr.delete.should be_instance_of String
   end
 
+  it "should test the finding of a page" do
+    RailsModel.find('google').should be_instance_of Gollum::Page
+
+    #invalid input
+    RailsModel.find('<script type="text/javascript">alert(123);</script>').should be_nil
+  end
+
+  it "should test the supported formats" do
+    RailsModel.format_supported?('ascii').should be_true
+    RailsModel.format_supported?('markdown').should be_true
+    RailsModel.format_supported?('github-markdown').should be_true
+    RailsModel.format_supported?('rdoc').should be_true
+    RailsModel.format_supported?('org').should be_true
+    RailsModel.format_supported?('pod').should be_true
+  end
+
 end
