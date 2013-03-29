@@ -51,6 +51,8 @@ module GollumRails
   end
 end
 
+require File.expand_path '../gollum/error', __FILE__
 require File.expand_path '../gollum/wiki', __FILE__
 require File.expand_path '../gollum/committer', __FILE__
 require File.expand_path '../gollum/page', __FILE__
+
