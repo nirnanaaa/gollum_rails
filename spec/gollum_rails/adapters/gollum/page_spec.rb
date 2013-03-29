@@ -36,8 +36,16 @@ describe GollumRails::Adapters::Gollum::Page do
     @page.delete_page(@commit).should be_instance_of String
   end
   it "should update an existing page" do 
-    page = @page.new_page 'testpage', 'content', :markdown, @commit
+    @page.new_page 'testpage', 'content', :markdown, @commit
+    page = {}
+    page[:name] = 'test'
+    page[:format] = :markdown
+    page[:content] = "content"
+    @page.update_page(page, @commit)
 
-    page.delete_page(@commit)
+    puts @page.page.name
+
+
+    @page.delete_page(@commit)
   end
 end

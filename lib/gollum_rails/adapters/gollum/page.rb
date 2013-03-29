@@ -4,7 +4,9 @@ module GollumRails
 
       # TODO: doc
       class Page
-        
+
+        Connector.page_class = self
+
         # Gets / Sets current page
         attr_accessor :page
 
@@ -14,7 +16,6 @@ module GollumRails
         # Initializer
         def initialize
           @wiki = Wiki.class_variable_get(:@@wiki)
-          #Error.new('initialized wiki is not an instance of Gollum::Wiki')
         end
 
 
@@ -27,19 +28,29 @@ module GollumRails
         #
         # Returns the commit id
         def new_page( name, content,type=:markdown, commit={} )
-          @wiki.write_page(name.to_s, type, content, commit) if name
-          @page = @wiki.page(name)
-          #@page = @wiki.page(name.to_s)
-          return @page
+          @wiki.write_page name.to_s, type, content, commit if name
+          @page = @wiki.page name
+          @page
         end
 
         # updates an existing page
         #
-        # page - instance of self
+        # new - Hash with changed data
         # commit - Hash or instance of Committer
+        # old - also an instance of self
         #
         # Returns the commit id
-        def update_page( page=nil , commit={})
+        def update_page( new, commit={}, old=nil)
+          commit_id = @wiki.update_page (old||@page), 
+                                        new.name||@page.name, 
+                                        new.format.to_sym||@page.format, 
+                                        new.content||@page.content, 
+                                        commit 
+
+          if new.name
+            @page = @page.find(new[:name], commit_id)
+          end
+          @page
         end
 
         # deletes an existing page
@@ -49,8 +60,7 @@ module GollumRails
         #
         # Returns the commit id
         def delete_page( commit={}, page = nil )
-          @wiki.delete_page(page, commit) if !page.nil?
-          @wiki.delete_page(@page,commit)
+          @wiki.delete_page (page||@page), commit
         end
         
         # renames an existing page

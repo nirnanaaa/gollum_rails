@@ -15,12 +15,6 @@ describe ::Hash do
     @hash_b.b.should == @hash_a.b
   end
   it "should change the value by method missing" do
-    @hash_a.b = 3  
-    @hash_a.b.should == 3.to_s
-    newar = {}
-    newar[:d] = 'd'
-    newar[:x] = 'Hash.new'
-    @hash_a.d = Hash[newar]
     #@hash_a.d.to_s.should == "{ d: 'd', x: 'Hash.new' }"
     #@hash_a.d.should be_instance_of(Hash)
     #puts @hash_a.d
