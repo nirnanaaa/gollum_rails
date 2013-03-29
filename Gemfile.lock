@@ -10,7 +10,7 @@ GIT
 PATH
   remote: .
   specs:
-    gollum_rails (0.0.3)
+    gollum_rails (0.0.4)
       activemodel (~> 3.2.13)
       builder (~> 3.0.0)
       gollum-lib (~> 0.0.1)
