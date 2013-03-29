@@ -21,8 +21,9 @@ module GollumRails
 
     # Initializes a new Page
     #
+    # attrs - Hash of attributes
     #
-    # if save() or create() is called, the 
+    # commit must be given to perform any page action!
     def initialize(attrs)
       attrs.each{|k,v| self.instance_variable_set("@#{k}", v)}
     end
@@ -89,6 +90,9 @@ module GollumRails
       @page ||= Adapters::Gollum::Connector.page_class.new
     end
     
+    # Statically page getter
+    #
+    # DEPRECATED! Do not use
     def self.page
       Adapters::Gollum::Connector.page_class
     end
@@ -127,6 +131,11 @@ module GollumRails
         return page.page 
       end
     end
+
+    # aliasing save
+    #
+    # TODO:
+    #   * implement full method!
     alias_method :save!, :save
 
     # first creates an instance of itself and executes the save function.
@@ -176,14 +185,18 @@ module GollumRails
       page.find_page name
     end
 
-    # Checks if 
+    # todo
     def valid?
       true
     end
+    
+    # todo
     def self.validate(&block)
       validator = self.validator.new
       block.call validator 
     end
+
+    # todo
     def self.register_validations_for(*args)
       context = <<-END
       END
@@ -193,14 +206,20 @@ module GollumRails
 
     # module templates following:
 
-
-
+    # empty
     def self.method_missing(name, *args)
     end
+
+    # empty
     def method_missing(name, *args)
     end
     
-    def self.find_or_initialize_by_id
+    # Finds an existing page or creates it
+    #
+    # Returns self
+    def self.find_or_initialize_by_name(name)
+      result_for_find = self.find(name)
+      self.create({:format => :markdown, :name => name, content => ".", commit })
     end
 
     def self.format_supported?(format)
@@ -210,6 +229,11 @@ module GollumRails
 
     private
 
+    # Get the right commit out of 2 commits
+    #
+    # commit_local - local commit Hash
+    #
+    # Returns local_commit > class_commit
     def get_right_commit(commit_local)
       com = commit if commit_local.nil?
       com = commit_local if !commit_local.nil?
