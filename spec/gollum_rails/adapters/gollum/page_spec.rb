@@ -75,6 +75,7 @@ describe GollumRails::Adapters::Gollum::Page do
     @page.page_last_commit.should be_instance_of Grit::Commit
     @page.page_commit(@page.page.versions.first.id).should be_instance_of Grit::Commit
     @page.page_commit_date(@page.page.versions.first.id).should be_instance_of Time
+    @page.page_first_commit.should be_instance_of Grit::Commit
     @page.delete_page(@commit)
   end
   it "should test the error throwing" do

@@ -245,9 +245,9 @@ module GollumRails
     # Finds an existing page or creates it
     #
     # Returns self
-    def self.find_or_initialize_by_name(name)
+    def self.find_or_initialize_by_name(name, commit)
       result_for_find = self.find(name)
-      self.create({:format => :markdown, :name => name, content => "." })
+      self.create({:format => :markdown, :name => name, :content => ".", :commit => commit })
     end
 
     def self.format_supported?(format)
