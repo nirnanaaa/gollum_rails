@@ -22,7 +22,7 @@ describe GollumRails::Page do
     end
 
     rr = RailsModel.new :name => "Goole", :content => "content data", :commit => @commit, :format => :markdown
-    rr.save
+    puts rr.save.class
 
     #RailsModel.model?(GollumRails::Page).should be_true
 
