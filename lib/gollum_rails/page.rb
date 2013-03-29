@@ -10,7 +10,7 @@ module GollumRails
   #   * new
   #   * save
   #   * delete
-  #   * find_or_initialize_by_id
+  #   * find_or_initialize_by_naname
   #
   class Page < Adapters::ActiveModel::Callback
     include ::ActiveModel::Conversion
