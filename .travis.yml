@@ -4,6 +4,7 @@ branches:
   only:
     - master
     - trunk
+    - ruby-head-grit
 
 rvm:
   - 1.9.3
