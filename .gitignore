@@ -21,6 +21,7 @@ local.properties
 .settings/
 .loadpath
 lib_old/
+/spec/utils/
 
 # External tool builders
 .externalToolBuilders/
