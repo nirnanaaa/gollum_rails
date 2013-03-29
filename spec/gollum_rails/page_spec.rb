@@ -7,24 +7,41 @@ describe GollumRails::Page do
       :message => "commit",
       :email => "mosny@zyg.li"
     }
+    @call = {
+      :name => "Goole", 
+      :content => "content data", 
+      :commit => @commit, 
+      :format => :markdown
+    }
   end
-  it "should extend a rails model" do
-    
-    class RailsModel < GollumRails::Page
 
-      register_validations_for :name,
-                               :format
+  class RailsModel < GollumRails::Page
 
-      validate do |validator|
-        validator.test(:name, "type=String")
-        validator.test(:format, "type=Object")
-      end
+    register_validations_for :name,
+                             :format
+
+    validate do |validator|
+      validator.test(:name, "type=String")
+      validator.test(:format, "type=Object")
     end
-
-    rr = RailsModel.new :name => "Goole", :content => "content data", :commit => @commit, :format => :markdown
-    puts rr.save.class
-
-    #RailsModel.model?(GollumRails::Page).should be_true
-
   end
+  it "should test the creation of a page" do
+    rr = RailsModel.new(@call)
+    rr.save.should be_instance_of Gollum::Page
+    rr.save!.should be_instance_of Gollum::Page
+    RailsModel.create(@call)
+  end
+  
+  it "should test the update of a page" do
+    rr = RailsModel.new @call
+    cc = rr.save.should be_instance_of Gollum::Page
+    rr.update_attributes({:name => "google", :format => :wiki}).should be_instance_of Gollum::Page
+  end
+
+  it "should test the deletion of a page" do
+    rr = RailsModel.new @call
+    cc = rr.save.should be_instance_of Gollum::Page
+    rr.delete.should be_instance_of String
+  end
+
 end
