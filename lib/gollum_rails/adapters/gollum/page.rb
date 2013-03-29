@@ -74,10 +74,16 @@ module GollumRails
         #
         # Returns the commit id
         def rename_page( page, newname, commit={} )
+
         end
 
-        # undoc
-        def find_page()
+        # finds all versions of a page
+        #
+        # name - the pagename to search
+        #
+        # Returns the Gollum::Page class
+        def find_page(name)
+          @wiki.page ::Gollum::Page.cname(name)
         end
         
         # moves an existing page
@@ -89,7 +95,7 @@ module GollumRails
 
         # gets page last edit date
         #
-        # Returns a Date
+        # Returns an instance of Time
         def page_last_edited_date
           if @page
             return @page.versions.first.authored_date
@@ -109,12 +115,27 @@ module GollumRails
           end
         end
 
-        # 
+        # gets the creation date of the page
+        #
+        # Returns an instance of Time
         def page_created
+          if @page
+            return @page.versions.last.authored_date
+          else
+            Error.new
+          end
 
         end
         
+        # gets the first page commit
+        #
+        # Returns an instance of Grit::Commit
         def page_first_commit
+          if @page
+            return @page.versions.last
+          else
+            Error.new
+          end
         end
 
         #
