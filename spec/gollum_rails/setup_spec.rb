@@ -7,9 +7,7 @@ describe GollumRails::Setup do
       # => The repository path to the 
       #
       #
-      setup.repository = '.'
-
-      
+      setup.repository = '.'      
 
       #setup.wiki.use = :default
       setup.startup.should be_true
