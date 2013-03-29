@@ -74,6 +74,7 @@ describe GollumRails::Adapters::ActiveModel::Validation do
     @model.error[:variable][0].should == "is too long (maximum is 2 characters)"
 
     
+
   end
 
   it "should test the performance" do
@@ -89,6 +90,13 @@ describe GollumRails::Adapters::ActiveModel::Validation do
   it "should test the blank param" do
     @model.validate do |sm|
       #sm.test("string")
+    end
+  end
+  it "should test errors" do
+    @model.validate do |sm|
+      expect{sm.test("string", "presence!string")}.to raise_error GollumRails::Adapters::ActiveModel::Error
+      sm.test("string", "nobla=tebla").should be_true  
+      sm.test("string", "type=123!").should be_false
     end
   end
 end
