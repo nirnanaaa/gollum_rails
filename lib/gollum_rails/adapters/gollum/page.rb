@@ -59,7 +59,7 @@ module GollumRails
                                           new[:content]||@page.raw_data, 
                                           commit 
           else
-            raise ::StandardError
+            raise Error.new  "commit must be a Hash. #{new.class} given", :crit
           end
 
           # this is very ugly. Shouldn't gollum return the new page?
@@ -111,7 +111,7 @@ module GollumRails
           if @page
             return @page.versions.first.authored_date
           else
-            Error.new()
+            raise Error.new  "page cannot be empty for #{__method__}", :high
           end
         end
 
@@ -122,7 +122,7 @@ module GollumRails
           if @page
             return @page.versions.first
           else
-            Error.new()
+            raise Error.new "page cannot be empty for #{__method__}", :high
           end
         end
 
@@ -133,7 +133,7 @@ module GollumRails
           if @page
             return @page.versions.last.authored_date
           else
-            Error.new
+            raise Error.new  "page cannot be empty for #{__method__}", :high
           end
 
         end
@@ -145,7 +145,7 @@ module GollumRails
           if @page
             return @page.versions.last
           else
-            Error.new
+            raise Error.new  "page cannot be empty for #{__method__}", :high
           end
         end
 
@@ -156,7 +156,7 @@ module GollumRails
           if @page
             return @page.versions.each{|v| return v if v.id == id}
           else
-            Error.new
+            raise Error.new  "page cannot be empty for #{__method__}", :high
           end
         end
 
@@ -167,7 +167,7 @@ module GollumRails
           if @page
             return @page.versions.each{|v| return v.authored_date if v.id == id}
           else
-            Error.new
+            raise Error.new  "page cannot be empty for #{__method__}", :high
           end
         end
 
