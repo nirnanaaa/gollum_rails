@@ -8,7 +8,7 @@ module GollumRails
         # Gets / Sets current page
         attr_accessor :page
 
-        # Gets / Sets the wiki
+          # Gets / Sets the wiki
         attr_accessor :wiki
 
         # Initializer
@@ -24,29 +24,47 @@ module GollumRails
 
         # creates a new Page
         #
+        # name - String
+        # type - Symbol
+        # content - Text
+        # commit - Hash or instance of Committer
+        #
         # Returns the commit id
-        def new_page()
+        def new_page( name, type = :markdown, content, commit = {} )
         end
 
         # updates an existing page
         #
+        # page - instance of self
+        # commit - Hash or instance of Committer
+        #
         # Returns the commit id
-        def update_page()
+        def update_page( page, commit = {})
         end
 
         # deletes an existing page
         #
+        # page - instance of self
+        # commit - Hash or instance of Committer
+        #
         # Returns the commit id
-        def delete_page()
+        def delete_page( page, commit = {} )
         end
         
         # renames an existing page
         #
+        # page - instance of myself
+        # newname - new pagename
+        # commit - Hash or instance of Committer
+        #
         # Returns the commit id
-        def rename_page()
+        def rename_page( page, newname, commit = {} )
         end
         
         # moves an existing page
+        #
+        # TODO:
+        #   * implement
         def move_page()
         end
 
