@@ -30,9 +30,11 @@ module GollumRails
          return ::ActiveModel::Naming.singular name if name.model_name
          return nil
         end
-      class NameSpace
-        extend ::ActiveModel::Naming
-      end
+      
+        # dummy namespace class
+        class NameSpace
+          extend ::ActiveModel::Naming
+        end
       end
 
     end

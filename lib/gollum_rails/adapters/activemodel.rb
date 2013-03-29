@@ -1,5 +1,7 @@
 require 'active_model'
 module GollumRails
+
+  # Adapter class. To be documented
   module Adapters
     
     # ActiveModel improvements and own connectors

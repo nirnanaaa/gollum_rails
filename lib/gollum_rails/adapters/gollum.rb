@@ -12,6 +12,9 @@ module GollumRails
     module Gollum
       # connector version
       VERSION="0.0.0"
+
+      # Gollum connector class, keeping defaults!
+      #
       class Connector
         class << self
           # Sets the page class used by all instances
