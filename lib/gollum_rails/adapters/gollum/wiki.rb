@@ -6,6 +6,8 @@ module GollumRails
       # TODO: doc
       class  Wiki
 
+        Connector.wiki_class = self
+
         # Gets / Sets the git path or object
         attr_accessor :git
 
