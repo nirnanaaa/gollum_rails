@@ -53,7 +53,7 @@ describe GollumRails::Page do
   it "should test the preview" do
     rr = RailsModel.new :content => "# content", :name => "somepage"
     100.times do
-      rr.preview.should == "<h1>content<a class=\"anchor\" id=\"content\" href=\"#content\"></a></h1>\n"
+      rr.preview.should == "<h1>content<a class=\"anchor\" id=\"content\" href=\"#content\"></a></h1>"
     end
   end
 
