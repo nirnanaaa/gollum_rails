@@ -60,4 +60,19 @@ describe GollumRails::Page do
     RailsModel.format_supported?('pod').should be_true
   end
 
+  it "should test getters" do
+    rr = RailsModel.new @call
+    rr.name.should == "Goole"
+    rr.content.should == "content data"
+    rr.commit.should be_instance_of Hash
+    rr.commit.should == @commit
+    rr.format.should == :markdown
+
+    rr.save
+
+    rr.page.should be_instance_of GollumRails::Adapters::Gollum::Page
+  end
+  it "should test setters" do
+  end
+
 end
