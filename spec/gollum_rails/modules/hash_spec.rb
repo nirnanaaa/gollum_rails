@@ -15,6 +15,10 @@ describe ::Hash do
     @hash_b.b.should == @hash_a.b
   end
   it "should change the value by method missing" do
+
+    @hash_c = {:hooh => "c", :tripple => {:d => "d"}}
+    @hash_d = Hash.new
+    expect{@hash_d.x}.to raise_error
     #@hash_a.d.to_s.should == "{ d: 'd', x: 'Hash.new' }"
     #@hash_a.d.should be_instance_of(Hash)
     #puts @hash_a.d

@@ -130,10 +130,6 @@ module GollumRails
               code = <<-END
                 validates_length_of :variable, :#{k.first.to_s}imum => #{k[1].to_i}
               END
-            elsif k.first.to_s.match /^blank$/i
-              code = <<-END
-                validates_length_of :variable, :allow_blank #{k[1]}
-              END
             else
               puts <<-END
               WARNING: no validator matches! This will cause an Error in the next release
