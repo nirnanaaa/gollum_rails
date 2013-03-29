@@ -84,6 +84,5 @@ describe GollumRails::Adapters::Gollum::Page do
     expect{@page.page_created}.to raise_error GollumRails::Adapters::Gollum::Error
     expect{@page.page_commit(1)}.to raise_error GollumRails::Adapters::Gollum::Error
     expect{@page.page_commit_date(1)}.to raise_error GollumRails::Adapters::Gollum::Error
-
   end
 end
