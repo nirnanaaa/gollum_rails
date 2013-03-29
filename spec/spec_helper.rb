@@ -1,10 +1,11 @@
 require 'rubygems'
 require 'bundler/setup'
 
-require 'gollum_rails'
-
 require 'coveralls'
 Coveralls.wear!
+
+require 'gollum_rails'
+
 
 require 'benchmark'
 RSpec::Matchers.define :take_less_than do |n|
