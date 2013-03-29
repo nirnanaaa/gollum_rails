@@ -6,13 +6,6 @@ module GollumRails
       class Error < ::GollumRails::GollumInternalError
         extend ::ActiveModel::Naming
         
-        #######
-        private
-        #######
-
-        # Gets the Priority
-        attr_reader :priority
-
         ######
         public
         ######
@@ -22,12 +15,8 @@ module GollumRails
 
         # Initializes a new Exception
         # 
-        def initialize(name, message = nil, stack = nil, priority = :crit)
-          if priority == :high or priority == :crit
-            super("Error thrown: #{name},\n\n #{(message||stack)}")
-          else
-            puts "Info: #{name}, \n\n #{(message||stack)}"
-          end
+        def initialize(name, message = nil, priority = :crit)
+          super("Error thrown: #{name},\n\n #{(message)}")
         end
 
 
