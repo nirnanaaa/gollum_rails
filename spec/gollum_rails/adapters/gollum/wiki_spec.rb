@@ -18,6 +18,7 @@ describe GollumRails::Adapters::Gollum::Wiki do
     wiki.git.should == @repo
     wiki = GollumRails::Adapters::Gollum::Wiki.wiki @location
     wiki.git.should == @location
+    GollumRails::Adapters::Gollum::Wiki.class_variable_get(:@@wiki).should be_instance_of(::Gollum::Wiki)
   end
 
 end
