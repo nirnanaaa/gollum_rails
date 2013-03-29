@@ -43,8 +43,20 @@ describe GollumRails::Adapters::Gollum::Page do
     page[:content] = "content"
     @page.update_page(page, @commit)
 
-    puts @page.page.name
+    page = []
+    expect{@page.update_page(page, @commit)}.to raise_error ::StandardError
 
+    page = {}
+    page[:content] = "test"
+    @page.update_page(page, @commit).raw_data.should == page[:content]
+
+    page = {}
+    page[:name] = "test"
+    @page.update_page(page, @commit).name.should == page[:name]
+
+    page = {}
+    page[:format] = :wiki
+    @page.update_page(page, @commit).format.should == :mediawiki
 
     @page.delete_page(@commit)
   end

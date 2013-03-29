@@ -43,16 +43,16 @@ module GollumRails
         def update_page( new, commit={}, old=nil)
           if new.is_a?(Hash)
             commit_id = @wiki.update_page (old||@page), 
-                                          new.name||@page.name, 
-                                          new.format.to_sym||@page.format, 
-                                          new.content||@page.content, 
+                                          new[:name]||@page.name, 
+                                          new[:format]||@page.format, 
+                                          new[:content]||@page.raw_data, 
                                           commit 
           else
-            raise ::Error
+            raise ::StandardError
           end
-          if new.name
-            @page = @page.find(new[:name], commit_id)
-          end
+
+          # this is very ugly. Shouldn't gollum return the new page?
+          @page = @page.find(new[:name]||@page.name, commit_id)
           @page
         end
 
