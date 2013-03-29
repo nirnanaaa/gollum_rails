@@ -2,7 +2,18 @@ module GollumRails
   module Adapters
     module Gollum
 
-      # TODO: doc
+      # Main page class for the Gollum connector.
+      #
+      # It provides some awesome features for connecting gollum to gollum_rails such as:
+      #   * new_page
+      #   * find_page
+      #   * delete_page
+      #   * rename_page
+      #   * move_page
+      #   * first_page_commit
+      #   * page_creation time
+      #   * ...
+      #
       class Page
 
         Connector.page_class = self
@@ -138,11 +149,26 @@ module GollumRails
           end
         end
 
+        # gets a specific commit version
         #
+        # Returns an instance of Grit::Commit
         def page_commit(id)
+          if @page
+            return @page.versions.each{|v| return v if v.id == id}
+          else
+            Error.new
+          end
         end
 
+        # gets a specific commit time
+        #
+        # Returns an instance of Time
         def page_commit_date(id)
+          if @page
+            return @page.versions.each{|v| return v.authored_date if v.id == id}
+          else
+            Error.new
+          end
         end
 
       end

@@ -74,6 +74,8 @@ describe GollumRails::Adapters::Gollum::Page do
     @page.page_created.should be_instance_of Time
     @page.page_last_commit.should be_instance_of Grit::Commit
 
+    puts @page.page_commit(@page.page.versions.first.id).class
+
     @page.delete_page(@commit)
   end
 end
