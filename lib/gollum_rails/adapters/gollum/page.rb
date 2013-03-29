@@ -48,7 +48,7 @@ module GollumRails
         # commit - Hash or instance of Committer
         #
         # Returns the commit id
-        def delete_page( page = nil, commit={} )
+        def delete_page( commit={}, page = nil )
           @wiki.delete_page(page, commit) if !page.nil?
           @wiki.delete_page(@page,commit)
         end
