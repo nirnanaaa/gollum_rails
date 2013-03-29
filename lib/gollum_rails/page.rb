@@ -142,14 +142,27 @@ module GollumRails
     #
     # hash - Hash containing the page data
     #
-    # TODO:
-    #   * implement an create! function
-    #   * document and test
     #
     # Returns an instance of Gollum::Page or false
     def self.create(hash)
       page = Page.new hash
       page.save
+    end
+
+    # calls `create` on current class. If returned value is nil an exception will be thrown
+    #
+    # hash - Hash containing the page data
+    #
+    # TODO:
+    #   * much testing
+    #
+    # Returns an instance of Gollum::Page
+    def self.create!(hash)
+      action = self.create(hash)
+      if action.nil? or action.is_a? Adapters::ActiveModel::Boolean
+        raise GollumInternalError, "Page is nil"
+      end
+      action
     end
 
     # Updates an existing page (or created)
@@ -162,7 +175,6 @@ module GollumRails
     # Returns an instance of Gollum::Page 
     def update_attributes(hash, commit=nil)
       page.update_page hash, get_right_commit(commit)
-
     end
     
     # Deletes current page (also available static. See below)
@@ -176,8 +188,11 @@ module GollumRails
     end
 
     # Previews the page - Mostly used if you want to see what you do before saving
+    # 
     # This is an extremely performant method!
-    # 1 rendering attempt take depending on the content about 0.001 seconds
+    # 1 rendering attempt take depending on the content about 0.001 (simple markdown) 
+    # upto 0.004 (1000 chars markdown) seconds, which is quite good
+    #
     # 
     # format - Specify the format you want to render with see {self.format_supported?}
     #          for formats

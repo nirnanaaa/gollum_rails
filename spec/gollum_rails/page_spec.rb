@@ -58,7 +58,10 @@ describe GollumRails::Page do
     end
     ending = Time.new
     puts "\n\t# 100 times preview took about: #{ending-start} seconds\n\t# 1 test took about #{(ending-start)/100} seconds\n\n"
+  end
 
+  it "should test exception methods" do
+    create = RailsModel.create! @call
   end
 
   it "should test the supported formats" do
