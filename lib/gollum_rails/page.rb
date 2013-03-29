@@ -52,7 +52,7 @@ module GollumRails
 
     # Gets the wiki instance
     def wiki
-      @wiki || Adapters::Gollum::Connector.wiki_class
+      @wiki || Adapters::Gollum::Connector.wiki_class.class_variable_get(:@@wiki)
     end
 
     # Gets the pages' name
@@ -73,12 +73,21 @@ module GollumRails
 
     # Gets the pages format
     def format
-      @format || @gollum_page.format
+      (@format || @gollum_page.format).to_sym
     end
 
     # Gets the validator
     def self.validator
       Adapters::ActiveModel::Validation
+    end
+
+    # Gets the page class
+    def page
+      Adapters::Gollum::Connector.page_class.new
+    end
+    
+    def self.page
+      Adapters::Gollum::Connector.page_class
     end
 
     #############
@@ -91,26 +100,22 @@ module GollumRails
     # Examples:
     #
     def save
-      run_callback :save do
-        puts "test"
-        puts @wiki.page(@name) 
+      begin
+        return page.new_page(name, content, format, commit)
+      rescue ::Gollum::DuplicatePageError => e 
+        return page.find_page name
       end
     end
 
     # Checks if 
     def valid?
+      true
     end
     
     def self.create
-      run_callback :create do
-
-      end
     end
 
     def self.find
-      run_callback :find do
-        
-      end
     end
 
     def self.validate(&block)
@@ -131,8 +136,6 @@ module GollumRails
     end
     
     def delete
-      run_callback :delete do
-      end
     end
 
     #callbacks
@@ -141,7 +144,6 @@ module GollumRails
     def self.method_missing(name, *args)
     end
     def method_missing(name, *args)
-      self.class.superclass.send(name, *args)
     end
     
     def self.find_or_initialize_by_id
