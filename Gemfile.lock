@@ -1,3 +1,12 @@
+GIT
+  remote: git://github.com/styx/grit.git
+  revision: 2109888819d23f18cdc30c0fbb6280ec3208fa7d
+  specs:
+    grit (2.5.0)
+      diff-lcs (~> 1.1)
+      mime-types (~> 1.15)
+      posix-spawn (~> 0.3.6)
+
 PATH
   remote: .
   specs:
@@ -58,10 +67,6 @@ GEM
       pygments.rb (~> 0.4.2)
       sanitize (~> 2.0.3)
       stringex (~> 1.5.1)
-    grit (2.5.0)
-      diff-lcs (~> 1.1)
-      mime-types (~> 1.15)
-      posix-spawn (~> 0.3.6)
     hike (1.2.1)
     i18n (0.6.1)
     journey (1.0.4)
@@ -140,6 +145,7 @@ PLATFORMS
 DEPENDENCIES
   coveralls
   gollum_rails!
+  grit!
   rails (~> 3.2.13)
   rr (~> 1.0.4)
   rspec (~> 2.13.0)
