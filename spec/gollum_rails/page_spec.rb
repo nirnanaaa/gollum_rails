@@ -74,7 +74,10 @@ describe GollumRails::Page do
   end
   it "should test setters" do
     rr = RailsModel.new
-    rr.name = ""
+    rr.name=("google").should == "google"
+    rr.commit=(@commit).should == @commit
+    rr.content=("content").should == "content"
+    rr.format=(:markdown).should == :markdown
   end
 
 end
