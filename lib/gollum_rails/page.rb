@@ -24,7 +24,7 @@ module GollumRails
     # attrs - Hash of attributes
     #
     # commit must be given to perform any page action!
-    def initialize(attrs)
+    def initialize(attrs = {})
       attrs.each{|k,v| self.instance_variable_set("@#{k}", v)}
     end
 
@@ -219,7 +219,7 @@ module GollumRails
     # Returns self
     def self.find_or_initialize_by_name(name)
       result_for_find = self.find(name)
-      self.create({:format => :markdown, :name => name, content => ".", commit })
+      self.create({:format => :markdown, :name => name, content => "." })
     end
 
     def self.format_supported?(format)
