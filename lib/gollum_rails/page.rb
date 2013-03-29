@@ -91,7 +91,7 @@ module GollumRails
     # Examples:
     #
     def save
-      self.class.superclass.run_callback :save do
+      run_callback :save do
         puts "test"
         puts @wiki.page(@name) 
       end
@@ -139,6 +139,9 @@ module GollumRails
 
 
     def self.method_missing(name, *args)
+    end
+    def method_missing(name, *args)
+      self.class.superclass.send(name, *args)
     end
     
     def self.find_or_initialize_by_id
