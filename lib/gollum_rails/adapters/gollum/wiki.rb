@@ -6,16 +6,10 @@ module GollumRails
       # TODO: doc
       class  Wiki
 
-        Connector.wiki_class = self
+        Connector.wiki_class = 
 
         # Gets / Sets the git path or object
         attr_accessor :git
-
-        # Static callers
-        class << self
-          # Gets / Sets the wiki instance
-          attr_accessor :wiki
-        end
 
         # Initializes the class
         #
@@ -24,9 +18,9 @@ module GollumRails
           gollum = ::Gollum::Wiki
           @git = location
           if location.is_a? ::String
-            @@wiki = gollum.new @git
+            Connector.wiki_class = gollum.new @git
           else
-            @@wiki = gollum.new @git.path
+            Connector.wiki_class = gollum.new @git.path
           end
         end
       
