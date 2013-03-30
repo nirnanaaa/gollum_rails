@@ -26,6 +26,12 @@ module GollumRails
           # Sets the committer
           attr_writer :committer_class
 
+          # Sets the applications status
+          attr_writer :enabled
+
+          def enabled
+            @enabled || false
+          end
           # Gets the Globally used Page class or use a new one if not defined
           #
           #

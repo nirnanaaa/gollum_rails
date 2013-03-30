@@ -32,6 +32,7 @@ module GollumRails
       # Returns true or throws an exception if the path is invalid
       def startup=(action)
         if action
+          Adapters::Gollum::Connector.enabled = true
           if @repository == :application
             initialize_wiki Rails.config.wiki_repository
           else
