@@ -28,6 +28,9 @@ RSpec.configure do |config|
   /spec\/spec_helper\.rb/,
   /lib\/rspec\/(core|expectations|matchers|mocks)/
  ]
+ config.before(:each) do
+   GollumRails::Adapters::Gollum::Connector.enabled = true
+ end
  config.full_backtrace= false # save the console
  config.color_enabled= true   # save your eyes
  config.formatter = :documentation
