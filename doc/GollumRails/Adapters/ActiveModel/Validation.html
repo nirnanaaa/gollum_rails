@@ -462,11 +462,7 @@ statement - validation statement, seperated by coma</code></pre>
 141
 142
 143
-144
-145
-146
-147
-148</pre>
+144</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/gollum_rails/adapters/activemodel/validation.rb', line 103</span>
@@ -500,10 +496,6 @@ statement - validation statement, seperated by coma</code></pre>
 </span>    <span class='kw'>elsif</span> <span class='id identifier rubyid_k'>k</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_match'>match</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>^(min|max)$</span><span class='regexp_end'>/i</span></span>
       <span class='id identifier rubyid_code'>code</span> <span class='op'>=</span> <span class='heredoc_beg'>&lt;&lt;-END</span>
 <span class='tstring_content'>        validates_length_of :variable, :</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_k'>k</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='embexpr_end'>}</span><span class='tstring_content'>imum =&gt; </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_k'>k</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='embexpr_end'>}</span><span class='tstring_content'>
-</span><span class='heredoc_end'>      END
-</span>    <span class='kw'>elsif</span> <span class='id identifier rubyid_k'>k</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_match'>match</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>^blank$</span><span class='regexp_end'>/i</span></span>
-      <span class='id identifier rubyid_code'>code</span> <span class='op'>=</span> <span class='heredoc_beg'>&lt;&lt;-END</span>
-<span class='tstring_content'>        validates_length_of :variable, :allow_blank </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_k'>k</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'>
 </span><span class='heredoc_end'>      END
 </span>    <span class='kw'>else</span>
       <span class='id identifier rubyid_puts'>puts</span> <span class='heredoc_beg'>&lt;&lt;-END</span>
@@ -716,7 +708,7 @@ key!value is the negociation of key=value</code></pre>
 </div>
 
     <div id="footer">
-  Generated on Fri Mar 29 19:10:55 2013 by
+  Generated on Sat Mar 30 13:23:00 2013 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.5.2 (ruby-2.0.0).
 </div>

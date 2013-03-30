@@ -114,38 +114,6 @@
 
 
 
-  <h2>Class Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
-  <ul class="summary">
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#wiki-class_method" title="wiki (class method)">+ (Object) <strong>wiki</strong>(location) </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'>
-<p>Static call from within any other class.</p>
-</div></span>
-  
-</li>
-
-    
-  </ul>
-
   <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
   <ul class="summary">
     
@@ -181,6 +149,63 @@
 
 
 
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#method_missing-class_method" title="method_missing (class method)">+ (Object) <strong>method_missing</strong>(name, *args) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Forwards unknown methods to Gollum::Wiki.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#wiki-class_method" title="wiki (class method)">+ (Object) <strong>wiki</strong>(location) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Static call from within any other class.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
   
     <h2>
       Instance Method Summary
@@ -249,84 +274,34 @@
       <pre class="lines">
 
 
-23
-24
-25
-26
-27
-28
-29
-30
-31</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/adapters/gollum/wiki.rb', line 23</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_location'>location</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_gollum'>gollum</span> <span class='op'>=</span> <span class='op'>::</span><span class='const'>Gollum</span><span class='op'>::</span><span class='const'>Wiki</span>
-  <span class='ivar'>@git</span> <span class='op'>=</span> <span class='id identifier rubyid_location'>location</span>
-  <span class='kw'>if</span> <span class='id identifier rubyid_location'>location</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='op'>::</span><span class='const'>String</span>
-    <span class='cvar'>@@wiki</span> <span class='op'>=</span> <span class='id identifier rubyid_gollum'>gollum</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='ivar'>@git</span>
-  <span class='kw'>else</span>
-    <span class='cvar'>@@wiki</span> <span class='op'>=</span> <span class='id identifier rubyid_gollum'>gollum</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='ivar'>@git</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span>
-  <span class='kw'>end</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-  
-</div>
-
-  <div id="class_attr_details" class="attr_details">
-    <h2>Class Attribute Details</h2>
-    
-      
-      <span id="wiki=-class_method"></span>
-      <div class="method_details first">
-  <h3 class="signature first" id="wiki-class_method">
-  
-    + (<tt>Object</tt>) <strong>wiki</strong>(location) 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-<p>Static call from within any other class</p>
-
-<p>Returns a new instance of this class</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
+15
+16
 17
 18
-19</pre>
+19
+20
+21
+22
+23</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/adapters/gollum/wiki.rb', line 17</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/adapters/gollum/wiki.rb', line 15</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_wiki'>wiki</span>
-  <span class='ivar'>@wiki</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_location'>location</span><span class='rparen'>)</span>
+  <span class='ivar'>@git</span> <span class='op'>=</span> <span class='id identifier rubyid_location'>location</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_location'>location</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='op'>::</span><span class='const'>String</span>
+    <span class='id identifier rubyid_con'>con</span> <span class='op'>=</span> <span class='op'>::</span><span class='const'>Gollum</span><span class='op'>::</span><span class='const'>Wiki</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='ivar'>@git</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_con'>con</span><span class='op'>=</span> <span class='op'>::</span><span class='const'>Gollum</span><span class='op'>::</span><span class='const'>Wiki</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='ivar'>@git</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span>
+  <span class='kw'>end</span>
+  <span class='const'>Connector</span><span class='period'>.</span><span class='id identifier rubyid_wiki_class'>wiki_class</span> <span class='op'>=</span> <span class='id identifier rubyid_con'>con</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
 </div>
-    
-  </div>
+  
+</div>
 
   <div id="instance_attr_details" class="attr_details">
     <h2>Instance Attribute Details</h2>
@@ -359,12 +334,12 @@
       <pre class="lines">
 
 
-12
-13
-14</pre>
+10
+11
+12</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/adapters/gollum/wiki.rb', line 12</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/adapters/gollum/wiki.rb', line 10</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_git'>git</span>
   <span class='ivar'>@git</span>
@@ -377,10 +352,102 @@
   </div>
 
 
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="method_missing-class_method">
+  
+    + (<tt>Object</tt>) <strong>method_missing</strong>(name, *args) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Forwards unknown methods to Gollum::Wiki</p>
+
+<p>may throw an Argument error or method missing</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+35
+36
+37</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/adapters/gollum/wiki.rb', line 35</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_method_missing'>method_missing</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+  <span class='const'>Connector</span><span class='period'>.</span><span class='id identifier rubyid_wiki_class'>wiki_class</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="wiki-class_method">
+  
+    + (<tt>Object</tt>) <strong>wiki</strong>(location) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Static call from within any other class</p>
+
+<p>Returns a new instance of this class</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+28
+29
+30</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/adapters/gollum/wiki.rb', line 28</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_wiki'>wiki</span><span class='lparen'>(</span><span class='id identifier rubyid_location'>location</span><span class='rparen'>)</span>
+  <span class='const'>Wiki</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_location'>location</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
 </div>
 
     <div id="footer">
-  Generated on Fri Mar 29 19:10:55 2013 by
+  Generated on Sat Mar 30 13:23:00 2013 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.5.2 (ruby-2.0.0).
 </div>
