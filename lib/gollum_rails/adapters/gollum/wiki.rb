@@ -13,12 +13,11 @@ module GollumRails
         #
         # location - String or Grit::Repo
         def initialize(location)
-          wiki = ::Gollum::Wiki
           @git = location
           if location.is_a? ::String
-            con = wiki.new @git
+            con = ::Gollum::Wiki.new @git
           else
-            con= wiki.new @git.path
+            con= ::Gollum::Wiki.new @git.path
           end
           Connector.wiki_class = con
         end

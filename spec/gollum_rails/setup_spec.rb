@@ -18,4 +18,19 @@ describe GollumRails::Setup do
 
 
   end
+  class Bla < GollumRails::Page
+  end
+  it "should work" do
+
+        committer = {
+          :name => "Flo",
+          :message => "no",
+          :email => "mosny@zyg.li"
+        }
+
+    bla = Bla.new :name => "Default page", :commit => committer, :content => "#title \n ##body", :format => :markdown
+    bla.save.should be_instance_of Gollum::Page
+    @found = Bla.find("Default page")
+  end
+
 end
