@@ -23,6 +23,7 @@ with gollum_rails you can:
 - Unix like operating system (OS X, Ubuntu, Debian, and more)
 - Will not work on Windows (see [gollum](https://github.com/github/gollum/blob/master/README.md#system-requirements))
 
+## [RUBY >= 2.0 READ THIS](https://github.com/nirnanaaa/gollum_rails/wiki/Ruby#ruby-2.0)
 ## [Installation](https://github.com/nirnanaaa/gollum_rails/wiki/Installation)
 
 ## [Usage](https://github.com/nirnanaaa/gollum_rails/wiki/Usage)
