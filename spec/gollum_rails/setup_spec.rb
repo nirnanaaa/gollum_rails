@@ -10,10 +10,10 @@ describe GollumRails::Setup do
       setup.repository = '.'      
 
       #setup.wiki.use = :default
-      setup.startup.should be_true
+      setup.startup=(true).should be_true
 
       setup.repository = nil
-      expect{setup.startup}.to raise_error GollumRails::GollumInternalError
+      expect{setup.startup=true}.to raise_error GollumRails::GollumInternalError
     end
 
 
