@@ -64,9 +64,9 @@ Gem::Specification.new do |s|
   s.post_install_message = "Important: \n\n" \
   "**********************************************\n\n" \
   "To use the 'autoinitializer' just run the following command:\n\n"\
-  "\t\trails g gollum_rails:install\n\n"\
+  "\trails g gollum_rails:install\n\n"\
   "To generate a new Page model just run:\n\n"\
-  "\t\rails g gollum_rails:model MODEL_NAME"\
+  "\trails g gollum_rails:model MODEL_NAME\n"\
   "**********************************************"
 end
 
