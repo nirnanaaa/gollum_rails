@@ -54,6 +54,7 @@ Gem::Specification.new do |s|
     lib/gollum_rails/initializer.rb
     lib/gollum_rails/modules/hash.rb
     lib/gollum_rails/modules/loader.rb
+    lib/gollum_rails/page.rb
     lib/gollum_rails/setup.rb
   ]
   # = MANIFEST =
