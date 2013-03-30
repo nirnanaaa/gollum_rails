@@ -13,13 +13,14 @@ module GollumRails
         #
         # location - String or Grit::Repo
         def initialize(location)
-          gollum = ::Gollum::Wiki
+          wiki = ::Gollum::Wiki
           @git = location
           if location.is_a? ::String
-            Connector.wiki_class = gollum.new @git
+            con = wiki.new @git
           else
-            Connector.wiki_class = gollum.new @git.path
+            con= wiki.new @git.path
           end
+          Connector.wiki_class = con
         end
       
         # Static call from within any other class
@@ -27,6 +28,10 @@ module GollumRails
         # Returns a new instance of this class
         def self.wiki(location)
           Wiki.new(location)
+        end
+
+        def self.method_missing(name, *args)
+          Connector.wiki_class.send(name, *args)
         end
 
       end
