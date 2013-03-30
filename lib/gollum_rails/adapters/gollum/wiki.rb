@@ -29,6 +29,9 @@ module GollumRails
           Wiki.new(location)
         end
 
+        # Forwards unknown methods to Gollum::Wiki
+        #
+        # may throw an Argument error or method missing
         def self.method_missing(name, *args)
           Connector.wiki_class.send(name, *args)
         end
