@@ -65,7 +65,7 @@ module GollumRails
 
     # Gets the wiki instance
     def wiki
-      @wiki || Adapters::Gollum::Connector.wiki_class.class_variable_get(:@@wiki)
+      @wiki || Adapters::Gollum::Connector.wiki_class
     end
 
     # Gets the pages' name
@@ -133,12 +133,11 @@ module GollumRails
     # Returns an instance of Gollum::Page or false
     def save
       begin
-        page.instance_variable_set("@page", page.new_page(name, content, format, commit)) if valid?
-        return page.page||false
+        page.new_page(name,content,format,commit)
       rescue ::Gollum::DuplicatePageError => e 
         page.instance_variable_set "@page",page.find_page(name)
-        return page.page 
       end
+      return page.page
     end
 
     # aliasing save

@@ -26,7 +26,7 @@ module GollumRails
 
         # Initializer
         def initialize
-          @wiki = Wiki.class_variable_get(:@@wiki)
+          @wiki = Connector.wiki_class
         end
 
 
