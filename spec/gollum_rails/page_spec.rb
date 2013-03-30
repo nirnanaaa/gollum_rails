@@ -21,8 +21,7 @@ describe GollumRails::Page do
                              :format
 
     validate do |validator|
-      validator.test(:name, "type=String")
-      validator.test(:format, "type=Object")
+      validator.test(@format, "type=Object")
     end
   end
   it "should test the creation of a page" do
@@ -78,7 +77,6 @@ describe GollumRails::Page do
     rr.commit.should == @commit
     rr.format.should == :markdown
     rr.wiki.should be_instance_of Gollum::Wiki
-    RailsModel.validator.should == GollumRails::Adapters::ActiveModel::Validation
     rr.save
     rr.page.should be_instance_of GollumRails::Adapters::Gollum::Page
   end
