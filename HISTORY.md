@@ -1,3 +1,14 @@
+# 0.0.6 4th April 2013
+* Validators
+* missing generators added
+
+# 0.0.5 31th March 2013
+* Fully working create!, create, find, save, update_attributes, find_by_(name|format)
+* 100% code coverage
+
+# 0.0.4 29th March 2013
+* Adapters for Gollum and ActiveRecord
+
 # 0.0.3 10th February 2013
 
 * create added
