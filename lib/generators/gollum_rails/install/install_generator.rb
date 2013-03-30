@@ -1,11 +1,16 @@
 require 'rails/generators'
 
 module GollumRails
+
+  # Generators for GollumRails
   module Generators
+
+    # Installation generator
     class InstallGenerator < ::Rails::Generators::Base
       source_root File.expand_path("../templates", __FILE__)
       desc "This generator will install gollum_rails"
 
+      # Installs the necessary files
       def install_application
         if File.exist? 'config/initializers/gollum.rb'
           puts <<-EOM

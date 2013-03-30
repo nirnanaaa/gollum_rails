@@ -29,6 +29,9 @@ module GollumRails
           # Sets the applications status
           attr_writer :enabled
 
+          # Gets the enabled status
+          #
+          # Returns a boolean value
           def enabled
             @enabled || false
           end
