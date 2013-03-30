@@ -229,12 +229,12 @@ module GollumRails
     
     # todo
     def self.validate(context=nil,check=false,&block)
-      if block
-        @@gollum_page = block
-      end
-      if check
-        @@gollum_page.call context.class.validator 
-      end
+      #if block
+      #  @@gollum_page = block
+      #end
+      #if check
+      #  @@gollum_page.call context.class.validator 
+      #end
     end
 
     # todo
