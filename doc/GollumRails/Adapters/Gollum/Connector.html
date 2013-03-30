@@ -147,6 +147,33 @@
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#enabled-class_method" title="enabled (class method)">+ (Object) <strong>enabled</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the enabled status.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#page_class-class_method" title="page_class (class method)">+ (Object) <strong>page_class</strong> </a>
     
 
@@ -235,15 +262,60 @@
       <pre class="lines">
 
 
-48
-49
-50</pre>
+57
+58
+59</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/adapters/gollum.rb', line 48</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/adapters/gollum.rb', line 57</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_committer_class'>committer_class</span>
   <span class='ivar'>@committer_class</span> <span class='op'>||</span> <span class='const'>Committer</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="enabled=-class_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="enabled-class_method">
+  
+    + (<tt>Object</tt>) <strong>enabled</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gets the enabled status</p>
+
+<p>Returns a boolean value</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+35
+36
+37</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/adapters/gollum.rb', line 35</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_enabled'>enabled</span>
+  <span class='ivar'>@enabled</span> <span class='op'>||</span> <span class='kw'>false</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -280,12 +352,12 @@
       <pre class="lines">
 
 
-33
-34
-35</pre>
+42
+43
+44</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/adapters/gollum.rb', line 33</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/adapters/gollum.rb', line 42</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_page_class'>page_class</span>
   <span class='ivar'>@page_class</span> <span class='op'>||</span> <span class='const'>Page</span>
@@ -325,12 +397,12 @@
       <pre class="lines">
 
 
-41
-42
-43</pre>
+50
+51
+52</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gollum_rails/adapters/gollum.rb', line 41</span>
+      <pre class="code"><span class="info file"># File 'lib/gollum_rails/adapters/gollum.rb', line 50</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_wiki_class'>wiki_class</span>
   <span class='ivar'>@wiki_class</span> <span class='op'>||</span> <span class='const'>Wiki</span>
@@ -346,7 +418,7 @@
 </div>
 
     <div id="footer">
-  Generated on Fri Mar 29 19:10:55 2013 by
+  Generated on Sat Mar 30 13:23:00 2013 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.5.2 (ruby-2.0.0).
 </div>
