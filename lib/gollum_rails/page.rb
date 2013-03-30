@@ -16,9 +16,17 @@ module GollumRails
     include ::ActiveModel::Conversion
     extend ::ActiveModel::Naming
     
-    # Gets / Sets the gollum page
-    attr_accessor :gollum_page
 
+    # static
+    class << self
+      # Gets / Sets the gollum page
+      #
+      attr_accessor :gollum_page
+
+      # Sets the validator
+      attr_writer :validator
+
+    end
     # Initializes a new Page
     #
     # attrs - Hash of attributes
@@ -26,6 +34,7 @@ module GollumRails
     # commit must be given to perform any page action!
     def initialize(attrs = {})
       attrs.each{|k,v| self.instance_variable_set("@#{k}", v)}
+      attrs.each{|k,v| self.class.validator.instance_variable_set("@#{k}", v)}
     end
 
     #########
@@ -82,7 +91,7 @@ module GollumRails
 
     # Gets the validator
     def self.validator
-      Adapters::ActiveModel::Validation
+      @@validator ||= Adapters::ActiveModel::Validation.new
     end
 
     # Gets the page class
@@ -215,32 +224,34 @@ module GollumRails
 
     # todo
     def valid?
-      true
+      self.class.validate self,true
     end
     
     # todo
-    def self.validate(&block)
-      validator = self.validator.new
-      block.call validator 
+    def self.validate(context=nil,check=false,&block)
+      if block
+        @@gollum_page = block
+      end
+      if check
+        @@gollum_page.call context.class.validator 
+      end
     end
 
     # todo
     def self.register_validations_for(*args)
-      context = <<-END
-      END
-      self.validator.class_eval(context)
     end
 
 
     # module templates following:
 
     # empty
-    def self.method_missing(name, *args)
-    end
+    #def self.method_missing(name, *args)
+    #  
+    #end
 
     # empty
-    def method_missing(name, *args)
-    end
+    #def method_missing(name, *args)
+    #end
     
     # Finds an existing page or creates it
     #
