@@ -20,5 +20,8 @@ describe GollumRails::Adapters::Gollum::Wiki do
     wiki.git.should == @location
     GollumRails::Adapters::Gollum::Connector.wiki_class.should be_instance_of(::Gollum::Wiki)
   end
+  it "should test the error throwing and forwarding" do
+    expect{GollumRails::Adapters::Gollum::Wiki.write_page}.to raise_error ArgumentError
+  end
 
 end
