@@ -30,14 +30,15 @@ module GollumRails
       # Startup action for building wiki components
       #
       # Returns true or throws an exception if the path is invalid
-      def startup
-        if path_valid? @repository
-          repository = Grit::Repo.new @repository.to_s
-          GollumRails::Adapters::Gollum::Wiki.new repository
-          true
-        else
-          raise GollumInternalError, 'no repository path specified'
+      def startup=(action)
+        if action
+          if @repository == :application
+            initialize_wiki Rails.config.wiki_repository
+          else
+            initialize_wiki @repository
+          end
         end
+
       end
       
       # defines block builder for Rails initializer.
@@ -61,6 +62,17 @@ module GollumRails
       #   # =>false
       def path_valid?(path)
         return !(path.nil? || path.empty? || ! path.is_a?(String))
+      end
+
+      def initialize_wiki(path)
+        if path_valid? path
+          repository = Grit::Repo.new path.to_s
+          GollumRails::Adapters::Gollum::Wiki.new repository
+          true
+        else
+          raise GollumInternalError, 'no repository path specified'
+        end
+
       end
 
     end
