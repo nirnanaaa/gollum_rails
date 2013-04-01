@@ -46,7 +46,6 @@ Gem::Specification.new do |s|
     lib/gollum_rails.rb
     lib/gollum_rails/adapters/activemodel.rb
     lib/gollum_rails/adapters/activemodel/boolean.rb
-    lib/gollum_rails/adapters/activemodel/callback.rb
     lib/gollum_rails/adapters/activemodel/error.rb
     lib/gollum_rails/adapters/activemodel/naming.rb
     lib/gollum_rails/adapters/activemodel/validation.rb
