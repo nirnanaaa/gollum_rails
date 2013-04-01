@@ -12,7 +12,7 @@ require 'gollum-lib'
 module GollumRails
   
   # GollumRails version string
-  VERSION = '0.0.6'
+  VERSION = '0.0.7'
   
   # Simplified error
   class Error < StandardError; end
