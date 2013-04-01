@@ -152,8 +152,8 @@ module GollumRails
         rescue ::Gollum::DuplicatePageError => e 
           page.instance_variable_set "@page",page.find_page(name)
         end
+        return page.page
       end
-      return page.page
     end
 
     # aliasing save
@@ -183,9 +183,6 @@ module GollumRails
     # Returns an instance of Gollum::Page
     def self.create!(hash)
       action = self.create(hash)
-      if action.nil? or action.is_a? Adapters::ActiveModel::Boolean
-        raise GollumInternalError, "Page is nil"
-      end
       action
     end
 
@@ -246,7 +243,13 @@ module GollumRails
       self.class.validate self,true
     end
     
-    # todo
+    # Validation functions
+    #
+    # context - The current config
+    # check - check now
+    # block - Validations
+    #
+    # Returns true or raises an exception
     def self.validate(context=nil,check=false,&block)
       #if block
       #  @@gollum_page = block
@@ -256,23 +259,10 @@ module GollumRails
       #end
     end
 
-    # todo
-    def self.register_validations_for(*args)
-    end
-
-
-    # module templates following:
-
-    # empty
-    #def self.method_missing(name, *args)
-    #  
-    #end
-
-    # empty
-    #def method_missing(name, *args)
-    #end
-    
     # Finds an existing page or creates it
+    #
+    # name - The name
+    # commit - Hash
     #
     # Returns self
     def self.find_or_initialize_by_name(name, commit)
@@ -280,12 +270,19 @@ module GollumRails
       self.create({:format => :markdown, :name => name, :content => ".", :commit => commit })
     end
 
+    # Checks if the fileformat is supported
+    #
+    # format - String
+    #
+    # Returns true or false
     def self.format_supported?(format)
       supported = ['ascii', 'github-markdown','markdown', 'creole', 'org', 'pod', 'rdoc']
       format.in?(supported)
     end
 
+    #######
     private
+    #######
 
     # Get the right commit out of 2 commits
     #
