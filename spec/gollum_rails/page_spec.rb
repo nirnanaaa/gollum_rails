@@ -98,9 +98,17 @@ describe GollumRails::Page do
     RailsModel.find_or_initialize_by_name(@call[:name], @commit).should  be_instance_of Gollum::Page
   end
   it "should test the callback functions" do
+
+    class SaveCallback
+      def self.before_save( obj )
+        obj.name.should == "Goole"
+      end
+    end
+
+
     class CallbackTest < GollumRails::Page
 
-      before_save SaveCallback
+      before_save ::SaveCallback
       after_save :after_save
       after_delete :after_delete
       before_delete :before_delete
@@ -126,12 +134,6 @@ describe GollumRails::Page do
         @name.should == "Goole"
       end
       
-    end
-
-    class SaveCallback
-      def before_save( obj )
-        obj.name.should == "Goole"
-      end
     end
 
     test = CallbackTest.new @call
