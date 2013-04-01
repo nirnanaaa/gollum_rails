@@ -1,0 +1,336 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: GollumRails::Generators::LanguageGenerator
+  
+    &mdash; Documentation by YARD 0.8.5.2
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../../';
+  framesUrl = "../../frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../../_index.html">Index (L)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../GollumRails.html" title="GollumRails (module)">GollumRails</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Generators.html" title="GollumRails::Generators (module)">Generators</a></span></span>
+     &raquo; 
+    <span class="title">LanguageGenerator</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: GollumRails::Generators::LanguageGenerator
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Rails::Generators::Base</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Rails::Generators::Base</li>
+          
+            <li class="next">GollumRails::Generators::LanguageGenerator</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/generators/gollum_rails/language/language_generator.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Generates additional language files</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#install_languages-instance_method" title="#install_languages (instance method)">- (Object) <strong>install_languages</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>installs languages.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="install_languages-instance_method">
+  
+    - (<tt>Object</tt>) <strong>install_languages</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>installs languages</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/generators/gollum_rails/language/language_generator.rb', line 15</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_install_languages'>install_languages</span>
+  <span class='kw'>case</span> <span class='id identifier rubyid_language'>language</span>
+  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ascii</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='heredoc_beg'>&lt;&lt;-EOT</span>
+<span class='tstring_content'>    \n Installation instructures for ASCIIDoc:\n
+    \n\n Ubuntu/Debian Linux:
+    \n (sudo) apt-get install asciidoc
+    \n\n Mac with homebrew:
+    \n brew install asciidoc 
+    \n
+</span><span class='heredoc_end'>    EOT
+</span>  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>markdown</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_run'>run</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gem install redcarped</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='heredoc_beg'>&lt;&lt;-EOT</span>
+<span class='tstring_content'>    \n Parser for type &quot;markdown&quot; was installed
+    \n
+</span><span class='heredoc_end'>    EOT
+</span>  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>better-markdown</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_run'>run</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gem install github-markdown</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='heredoc_beg'>&lt;&lt;-EOT</span>
+<span class='tstring_content'>    \n Parser for type &quot;github-markdown&quot; was installed
+    \n
+</span><span class='heredoc_end'>    EOT
+</span>  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>textile</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_run'>run</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gem install RedCloth</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='heredoc_beg'>&lt;&lt;-EOT</span>
+<span class='tstring_content'>    \n Parser for type &quot;textile&quot; was installed
+    \n
+</span><span class='heredoc_end'>    EOT
+</span>  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>wiki</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_run'>run</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gem install wikicloth</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='heredoc_beg'>&lt;&lt;-EOT</span>
+<span class='tstring_content'>    \n Parser for type &quot;wiki&quot; was installed
+    \n
+</span><span class='heredoc_end'>    EOT
+</span>  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>org</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_run'>run</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gem install org-ruby</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='heredoc_beg'>&lt;&lt;-EOT</span>
+<span class='tstring_content'>    \n Parser for type &quot;org-ruby&quot; was installed
+    \n
+</span><span class='heredoc_end'>    EOT
+</span>  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>creole</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_run'>run</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gem install creole</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='heredoc_beg'>&lt;&lt;-EOT</span>
+<span class='tstring_content'>    \n Parser for type &quot;creole&quot; was installed
+    \n
+</span><span class='heredoc_end'>    EOT
+</span>  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>pod</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='heredoc_beg'>&lt;&lt;-EOT</span>
+<span class='tstring_content'>    \nPOT must be installed through CPAN (perl)
+    \nSee http://search.cpan.org/dist/perl/pod/perlpod.pod for further information
+    \n
+</span><span class='heredoc_end'>    EOT
+</span>  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>rst</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='heredoc_beg'>&lt;&lt;-EOT</span>
+<span class='tstring_content'>    \nInstall through &#39;easy_install&#39;
+    \nSee http://docutils.sourceforge.net/rst.html for further information
+</span><span class='heredoc_end'>    EOT
+</span>  <span class='kw'>else</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>UNKNOWN LANGUAGE</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_exit'>exit</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Mon Apr  1 15:43:21 2013 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.5.2 (ruby-2.0.0).
+</div>
+
+  </body>
+</html>
