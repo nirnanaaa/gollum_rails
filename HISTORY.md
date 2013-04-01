@@ -1,5 +1,12 @@
-# 0.0.6 4th April 2013
-* Validators
+# 0.0.8 1th April 2013
+* updated documentation
+* removed unused code
+
+# 0.0.7 1th April 2013
+* improved installation instructions
+* improved performance
+
+# 0.0.6 1th April 2013
 * missing generators added
 
 # 0.0.5 31th March 2013
