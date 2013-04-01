@@ -11,7 +11,7 @@ module GollumRails
     #
     module Gollum
       # connector version
-      VERSION="0.0.0"
+      VERSION="1.0.1rc-1"
 
       # Gollum connector class, keeping defaults!
       #

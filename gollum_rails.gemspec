@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.name = 'gollum_rails'
   s.rubyforge_project = s.name
 
-  s.version = '0.0.7'
+  s.version = '0.0.8'
 
   s.summary = 'Combines the benefits from Gollum and Rails'
   s.description= 'Use all the benefits from Rails and combine them with the awesome Gollum wiki'
@@ -40,6 +40,9 @@ Gem::Specification.new do |s|
     gollum_rails.gemspec
     lib/generators/gollum_rails/install/install_generator.rb
     lib/generators/gollum_rails/install/templates/gollum_initializer.rb
+    lib/generators/gollum_rails/language/language_generator.rb
+    lib/generators/gollum_rails/model/model_generator.rb
+    lib/generators/gollum_rails/model/templates/model_template.erb
     lib/gollum_rails.rb
     lib/gollum_rails/adapters/activemodel.rb
     lib/gollum_rails/adapters/activemodel/boolean.rb
