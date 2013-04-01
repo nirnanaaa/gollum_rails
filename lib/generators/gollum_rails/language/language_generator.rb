@@ -11,6 +11,7 @@ module GollumRails
       
       argument :language, :type => :string
 
+      # installs languages
       def install_languages
         case language
         when "ascii"
