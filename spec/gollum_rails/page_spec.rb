@@ -17,8 +17,6 @@ describe "Gollum Page" do
   describe GollumRails::Page do
     class RailsModel < GollumRails::Page
 
-      register_validations_for :name,
-                               :format
 
       validate do |validator|
         validator.test(@format, "type=Object")
