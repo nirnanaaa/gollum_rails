@@ -12,10 +12,20 @@ module GollumRails
   #   * delete
   #   * find_or_initialize_by_naname
   #
-  class Page < Adapters::ActiveModel::Callback
+  class Page 
+    extend ::ActiveModel::Callbacks
     include ::ActiveModel::Conversion
     extend ::ActiveModel::Naming
     
+
+    # Callback for save
+    define_model_callbacks :save
+
+    # Callback for update
+    define_model_callbacks :update
+
+    # Callback for delete
+    define_model_callbacks :delete
 
     # static
     class << self
@@ -136,10 +146,12 @@ module GollumRails
     # 
     # Returns an instance of Gollum::Page or false
     def save
-      begin
-        page.new_page(name,content,format,commit)
-      rescue ::Gollum::DuplicatePageError => e 
-        page.instance_variable_set "@page",page.find_page(name)
+      run_callbacks :save do
+        begin
+          page.new_page(name,content,format,commit)
+        rescue ::Gollum::DuplicatePageError => e 
+          page.instance_variable_set "@page",page.find_page(name)
+        end
       end
       return page.page
     end
@@ -186,7 +198,9 @@ module GollumRails
     #
     # Returns an instance of Gollum::Page 
     def update_attributes(hash, commit=nil)
-      page.update_page hash, get_right_commit(commit)
+      run_callbacks :update do
+        page.update_page hash, get_right_commit(commit)
+      end
     end
     
     # Deletes current page (also available static. See below)
@@ -196,7 +210,9 @@ module GollumRails
     #
     # Returns the commit id of the current action as String 
     def delete(commit=nil)
-      page.delete_page get_right_commit(commit)
+      run_callbacks :delete do
+        page.delete_page get_right_commit(commit)
+      end
     end
 
     # Previews the page - Mostly used if you want to see what you do before saving
