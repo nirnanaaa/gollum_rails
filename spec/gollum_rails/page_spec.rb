@@ -100,17 +100,12 @@ describe GollumRails::Page do
   it "should test the callback functions" do
     class CallbackTest < GollumRails::Page
 
-      before_save :before_save
+      before_save SaveCallback
       after_save :after_save
       after_delete :after_delete
       before_delete :before_delete
       before_update :before_update
       after_update :after_update
-
-      def before_save
-
-        @name.should == "Goole" 
-      end
 
       def after_save
         @name.should == "Goole"
@@ -131,6 +126,12 @@ describe GollumRails::Page do
         @name.should == "Goole"
       end
       
+    end
+
+    class SaveCallback
+      def before_save( obj )
+        obj.name.should == "Goole"
+      end
     end
 
     test = CallbackTest.new @call
