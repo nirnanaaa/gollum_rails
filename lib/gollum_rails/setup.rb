@@ -34,7 +34,7 @@ module GollumRails
         if action
           Adapters::Gollum::Connector.enabled = true
           if @repository == :application
-            initialize_wiki Rails.config.wiki_repository
+            initialize_wiki Rails.application.config.wiki_repository
           else
             initialize_wiki @repository
           end
