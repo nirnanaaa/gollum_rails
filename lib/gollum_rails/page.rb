@@ -45,7 +45,7 @@ module GollumRails
     # commit must be given to perform any page action!
     def initialize(attrs = {})
       if Adapters::Gollum::Connector.enabled
-        attrs.each{|k,v| self.send("#{k}=",v)}
+        attrs.each{|k,v| self.public_send("#{k}=",v)} if attrs
       else
         raise GollumInternalError, 'gollum_rails is not enabled!'
       end
@@ -58,11 +58,11 @@ module GollumRails
     # Sets the wiki instance
     attr_writer :wiki
 
-    # Sets the pages name
-    attr_writer :name
+    # Gets / Sets the pages name
+    attr_accessor :name
 
-    # Sets the contents content
-    attr_writer :content
+    # Gets / Sets the contents content
+    attr_accessor :content
 
     # Sets the commit Hash
     attr_writer :commit
@@ -82,16 +82,6 @@ module GollumRails
       @wiki || Adapters::Gollum::Connector.wiki_class
     end
 
-    # Gets the pages' name
-    def name
-      @name || @gollum_page.name
-    end
-
-    # Gets the raw content of the current page
-    def content
-      @content || @gollum_page.raw_content
-    end
-
     # Need to implement the Committer connector (forgot it completely)
     # Gets the commit Hash from current object
     def commit
@@ -100,7 +90,7 @@ module GollumRails
 
     # Gets the pages format
     def format
-      (@format || @gollum_page.format).to_sym
+      @format.to_sym
     end
 
     # Gets the validator
@@ -212,6 +202,11 @@ module GollumRails
       end
     end
 
+    # checks if entry already has been saved
+    # 
+    #
+    def persisted?
+    end
     # Previews the page - Mostly used if you want to see what you do before saving
     # 
     # This is an extremely performant method!
@@ -236,27 +231,6 @@ module GollumRails
     def self.find(name)
       page = GollumRails::Adapters::Gollum::Page.new
       page.find_page name
-    end
-
-    # todo
-    def valid?
-      self.class.validate self,true
-    end
-    
-    # Validation functions
-    #
-    # context - The current config
-    # check - check now
-    # block - Validations
-    #
-    # Returns true or raises an exception
-    def self.validate(context=nil,check=false,&block)
-      #if block
-      #  @@gollum_page = block
-      #end
-      #if check
-      #  @@gollum_page.call context.class.validator 
-      #end
     end
 
     # Finds an existing page or creates it
