@@ -10,7 +10,7 @@ GIT
 PATH
   remote: .
   specs:
-    gollum_rails (0.0.8)
+    gollum_rails (1.0.0)
       activemodel (~> 3.2.13)
       gollum-lib (~> 1.0.0)
 
