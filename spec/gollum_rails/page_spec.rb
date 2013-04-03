@@ -152,5 +152,43 @@ describe "Gollum Page" do
     end
 
   end
+  describe "testing validation" do
+
+
+
+   it "should test the basic validation" do
+     class Callbackt < GollumRails::Page
+      validates_presence_of :name
+     end
+     cla = Callbackt.new @call
+     cla.valid?.should be_true
+   end
+   class SugarBaby < GollumRails::Page
+     validates_presence_of :name
+     validates_length_of :name, :minimum => 20
+     validates_length_of :format, :maximum => 14
+   end
+   it "should test string validation" do
+     @call[:name] = "das ist zu lang"*10
+     cla = SugarBaby.new @call
+     cla.valid?.should be_true
+   end 
+   it "should test the presence validator" do
+     @call[:name] = [ ]
+     bla = SugarBaby.new @call
+     bla.valid?.should be_false
+   end
+   it "should test the length validator for name" do
+     @call[:name] = "das"
+     res = SugarBaby.new @call
+     res.valid?.should be_false
+   end
+   it "should test the length validator for format" do
+     @call[:format] = :toolongformatstringforvalidator
+     res = SugarBaby.new @call
+     res.valid?.should be_false
+   end
+
+  end
 
 end
