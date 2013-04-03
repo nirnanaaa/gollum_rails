@@ -11,10 +11,10 @@ Gem::Specification.new do |s|
   #File.read(File.join(File.dirname(__FILE__), 'README.md'))
 
   s.add_dependency 'activemodel', '~> 3.2.13'
-  s.add_dependency 'gollum-lib', '~> 0.0.1'
+  s.add_dependency 'gollum-lib', '~> 1.0.0'
   #s.add_dependency 'grit', '~> 2.5.0'
-  s.add_dependency 'builder', '~> 3.0.0'
-  s.add_dependency 'rack', '~> 1.4.5'
+  #s.add_dependency 'builder', '~> 3.0.0'
+  #s.add_dependency 'rack', '~> 1.4.5'
 
   s.add_development_dependency 'rspec', '~> 2.13.0'
   s.add_development_dependency 'rails', '~> 3.2.13'
@@ -63,12 +63,16 @@ Gem::Specification.new do |s|
 
 
   s.require_paths = %w[lib]
-  s.post_install_message = "Important: \n\n" \
-  "**********************************************\n\n" \
-  "To use the 'autoinitializer' just run the following command:\n\n"\
-  "\trails g gollum_rails:install\n\n"\
-  "To generate a new Page model just run:\n\n"\
-  "\trails g gollum_rails:model MODEL_NAME\n"\
-  "**********************************************"
+  s.post_install_message = <<-END 
+  Important: \n
+  **********************************************
+  To use the installer just run the following command:
+  \trails g gollum_rails:install\n
+  To generate a new Page model just run:
+  \trails g gollum_rails:model MODEL_NAME\n
+  To install an additional parsing language run:
+  rails g gollum_rails:language LANGUAGE
+  **********************************************"
+  END
 end
 
