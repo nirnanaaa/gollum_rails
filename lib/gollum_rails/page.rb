@@ -14,6 +14,7 @@ module GollumRails
   #
   class Page 
     extend ::ActiveModel::Callbacks
+    include ::ActiveModel::Validations
     include ::ActiveModel::Conversion
     extend ::ActiveModel::Naming
     
@@ -44,8 +45,7 @@ module GollumRails
     # commit must be given to perform any page action!
     def initialize(attrs = {})
       if Adapters::Gollum::Connector.enabled
-        attrs.each{|k,v| self.instance_variable_set("@#{k}", v)}
-        attrs.each{|k,v| self.class.validator.instance_variable_set("@#{k}", v)}
+        attrs.each{|k,v| self.send("#{k}=",v)}
       else
         raise GollumInternalError, 'gollum_rails is not enabled!'
       end
