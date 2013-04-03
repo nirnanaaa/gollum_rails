@@ -1,3 +1,10 @@
+# 1.0.0 3th April 2013
+* added validators
+* removed unused gems
+* updated documentation
+* removed unused middleware
+* improved code coverage
+
 # 0.0.8 1th April 2013
 * updated documentation
 * removed unused code
