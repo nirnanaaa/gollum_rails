@@ -36,7 +36,6 @@ Gem::Specification.new do |s|
     LICENSE
     README.md
     Rakefile
-    examples/rails/initializer.rb
     gollum_rails.gemspec
     lib/generators/gollum_rails/install/install_generator.rb
     lib/generators/gollum_rails/install/templates/gollum_initializer.rb
