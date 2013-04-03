@@ -36,7 +36,6 @@ Gem::Specification.new do |s|
     LICENSE
     README.md
     Rakefile
-    examples/rails/initializer.rb
     gollum_rails.gemspec
     lib/generators/gollum_rails/install/install_generator.rb
     lib/generators/gollum_rails/install/templates/gollum_initializer.rb
@@ -48,7 +47,6 @@ Gem::Specification.new do |s|
     lib/gollum_rails/adapters/activemodel/boolean.rb
     lib/gollum_rails/adapters/activemodel/error.rb
     lib/gollum_rails/adapters/activemodel/naming.rb
-    lib/gollum_rails/adapters/activemodel/validation.rb
     lib/gollum_rails/adapters/gollum.rb
     lib/gollum_rails/adapters/gollum/.gitkeep
     lib/gollum_rails/adapters/gollum/committer.rb
