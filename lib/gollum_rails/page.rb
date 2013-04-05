@@ -79,7 +79,7 @@ module GollumRails
       #
       # Returns an instance of Gollum::Page
       def create!(hash)
-        action = self.create(hash)
+        action = self.class.create(hash)
         action
       end
       
