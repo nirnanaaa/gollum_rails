@@ -145,6 +145,7 @@ describe "Gollum Page" do
   describe "rails extension" do
     it "should test fetch_all" do
       GollumRails::Page.all.length.should == 2
+      GollumRails::Page.find_all.length.should == 2
     end
 
   end
