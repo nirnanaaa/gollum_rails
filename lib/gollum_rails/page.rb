@@ -74,12 +74,10 @@ module GollumRails
       #
       # hash - Hash containing the page data
       #
-      # TODO:
-      #   * much testing
       #
       # Returns an instance of Gollum::Page
       def create!(hash)
-        action = self.class.create(hash)
+        action = self.create(hash)
         action
       end
       
@@ -136,8 +134,6 @@ module GollumRails
     # Sets the format
     attr_writer :format
 
-    # Sets the page
-    attr_writer :page
     
     #########
     # Getters
