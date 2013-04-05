@@ -103,13 +103,6 @@ module GollumRails
       @page ||= Adapters::Gollum::Connector.page_class.new
     end
     
-    # Statically page getter
-    #
-    # DEPRECATED! Do not use
-    def self.page
-      Adapters::Gollum::Connector.page_class
-    end
-
     #############
     # activemodel
     #############
@@ -140,7 +133,7 @@ module GollumRails
         begin
           page.new_page(name,content,format,commit)
         rescue ::Gollum::DuplicatePageError => e 
-          page.instance_variable_set "@page",page.find_page(name)
+          page.page = page.find_page(name)
         end
         return page.page
       end
