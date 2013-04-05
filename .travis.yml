@@ -19,8 +19,19 @@ env:
   - JRUBY_OPTS="--1.9 -J-XX:+CMSClassUnloadingEnabled -J-XX:+UseConcMarkSweepGC -J-XX:MaxPermSize=256m -J-Xmx1024m -Xcext.enabled=true"
   
 matrix:
-  allow-failures:
-  - rvm: ruby-head
+  exclude:
+    - rvm: ruby-head
+      jdk: opendjk6
+    - rvm: ruby-head
+      jdk: oraclejdk7
+    - rvm: 1.9.3
+      jdk: oraclejdk7
+    - rvm: 1.9.3
+      jdk: openjdk6
+    - rvm: 2.0.0
+      jdk: oraclejdk7
+    - rvm: 2.0.0
+      jdk: openjdk6
 
 notifications:
   disabled: true
