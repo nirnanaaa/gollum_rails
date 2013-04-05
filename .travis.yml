@@ -11,6 +11,10 @@ rvm:
   - 2.0.0
   - ruby-head
   - jruby-19mode
+jdk:
+  - openjdk7
+  - oraclejdk7
+  - openjdk6
   
 matrix:
   allow-failures:
