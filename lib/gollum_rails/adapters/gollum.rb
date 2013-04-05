@@ -10,8 +10,12 @@ module GollumRails
     #   currently nothing implemented
     #
     module Gollum
+      autoload :Wiki,       'gollum_rails/adapters/gollum/wiki'
+      autoload :Page,       'gollum_rails/adapters/gollum/page'
+      autoload :Committer,  'gollum_rails/adapters/gollum/committer'
+      autoload :Error,      'gollum_rails/adapters/gollum/error'
       # connector version
-      VERSION="1.0.1rc-1"
+      VERSION="1.0.3"
 
       # Gollum connector class, keeping defaults!
       #
@@ -63,8 +67,8 @@ module GollumRails
   end
 end
 
-require File.expand_path '../gollum/error', __FILE__
-require File.expand_path '../gollum/wiki', __FILE__
-require File.expand_path '../gollum/committer', __FILE__
-require File.expand_path '../gollum/page', __FILE__
+#require File.expand_path '../gollum/error', __FILE__
+#require File.expand_path '../gollum/wiki', __FILE__
+#require File.expand_path '../gollum/committer', __FILE__
+#require File.expand_path '../gollum/page', __FILE__
 
