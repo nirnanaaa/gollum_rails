@@ -134,16 +134,15 @@ describe "Gollum Page" do
       end
 
       test = CallbackTest.new @call
+      test.persisted?.should be_false
       test.save
       test.delete @commit
       test.save
       test.update_attributes @call
+      test.persisted?.should be_true
     end
   end
   describe "rails extension" do
-    it "should test 100 saves" do
-
-    end
 
   end
   describe "testing validation" do

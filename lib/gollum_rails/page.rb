@@ -128,8 +128,8 @@ module GollumRails
     # Gets / Sets the contents content
     attr_accessor :content
 
-    # Sets the commit Hash
-    attr_writer :commit
+    # Gets / Sets the commit Hash
+    attr_accessor :commit
 
     # Sets the format
     attr_writer :format
@@ -139,12 +139,6 @@ module GollumRails
     # Getters
     #########
 
-
-    # Need to implement the Committer connector (forgot it completely)
-    # Gets the commit Hash from current object
-    def commit
-      @commit
-    end
 
     # Gets the pages format
     def format
@@ -199,6 +193,7 @@ module GollumRails
     # TODO:
     #   * implement full method!
     alias_method :save!, :save
+
     # Updates an existing page (or created)
     #
     # hash - Hash containing the attributes, you want to update
@@ -229,6 +224,8 @@ module GollumRails
     # 
     #
     def persisted?
+      return true if page.page.instance_of?(::Gollum::Page)
+      return false
     end
     # Previews the page - Mostly used if you want to see what you do before saving
     # 
