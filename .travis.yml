@@ -15,6 +15,8 @@ jdk:
   - openjdk7
   - oraclejdk7
   - openjdk6
+env:
+  - JRUBY_OPTS="--1.9 -J-XX:+CMSClassUnloadingEnabled -J-XX:+UseConcMarkSweepGC -J-XX:MaxPermSize=256m -J-Xmx1024m -Xcext.enabled=true"
   
 matrix:
   allow-failures:

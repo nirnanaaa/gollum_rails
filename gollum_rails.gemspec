@@ -53,11 +53,25 @@ Gem::Specification.new do |s|
     lib/gollum_rails/adapters/gollum/error.rb
     lib/gollum_rails/adapters/gollum/page.rb
     lib/gollum_rails/adapters/gollum/wiki.rb
-    lib/gollum_rails/initializer.rb
     lib/gollum_rails/modules/hash.rb
     lib/gollum_rails/modules/loader.rb
     lib/gollum_rails/page.rb
     lib/gollum_rails/setup.rb
+    spec/gollum_rails/adapters/activemodel/error_spec.rb
+    spec/gollum_rails/adapters/activemodel/naming_spec.rb
+    spec/gollum_rails/adapters/activemodel/validation_unused.rb
+    spec/gollum_rails/adapters/gollum/committer_spec.rb
+    spec/gollum_rails/adapters/gollum/connector_spec.rb
+    spec/gollum_rails/adapters/gollum/error_spec.rb
+    spec/gollum_rails/adapters/gollum/page_spec.rb
+    spec/gollum_rails/adapters/gollum/wiki_spec.rb
+    spec/gollum_rails/modules/hash_spec.rb
+    spec/gollum_rails/page_spec.rb
+    spec/gollum_rails/respository_spec.rb
+    spec/gollum_rails/setup_spec.rb
+    spec/gollum_rails/wiki_spec.rb
+    spec/spec.opts
+    spec/spec_helper.rb
   ]
   # = MANIFEST =
 
