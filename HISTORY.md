@@ -1,3 +1,10 @@
+# 1.0.1 5th April 2013
+* added find_all and all for Page
+* removed some unused functions
+* added autoloading
+* improved documentation
+* improved code coverage
+
 # 1.0.0 3th April 2013
 * added validators
 * removed unused gems
