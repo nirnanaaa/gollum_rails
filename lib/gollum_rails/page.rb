@@ -37,6 +37,71 @@ module GollumRails
       # Sets the validator
       attr_writer :validator
 
+      # Finds an existing page or creates it
+      #
+      # name - The name
+      # commit - Hash
+      #
+      # Returns self
+      def find_or_initialize_by_name(name, commit)
+        result_for_find = self.find(name)
+        self.create({:format => :markdown, :name => name, :content => ".", :commit => commit })
+      end
+
+      # Checks if the fileformat is supported
+      #
+      # format - String
+      #
+      # Returns true or false
+      def format_supported?(format)
+        supported = ['ascii', 'github-markdown','markdown', 'creole', 'org', 'pod', 'rdoc']
+        format.in?(supported)
+      end
+
+      # first creates an instance of itself and executes the save function.
+      #
+      # hash - Hash containing the page data
+      #
+      #
+      # Returns an instance of Gollum::Page or false
+      def create(hash)
+        page = Page.new hash
+        page.save
+      end
+
+
+      # calls `create` on current class. If returned value is nil an exception will be thrown
+      #
+      # hash - Hash containing the page data
+      #
+      # TODO:
+      #   * much testing
+      #
+      # Returns an instance of Gollum::Page
+      def create!(hash)
+        action = self.create(hash)
+        action
+      end
+      
+      # Finds a page based on the name and specified version
+      #
+      # name - the name of the page
+      #
+      # Return an instance of Gollum::Page
+      def find(name)
+        page = GollumRails::Adapters::Gollum::Page.new
+        page.find_page name
+      end
+
+      # Gets all pages in the wiki
+      def all
+        
+      end
+
+      # Gets the wiki instance
+      def wiki
+        @wiki || Adapters::Gollum::Connector.wiki_class
+      end
     end
     # Initializes a new Page
     #
@@ -55,8 +120,6 @@ module GollumRails
     # Setters
     #########
      
-    # Sets the wiki instance
-    attr_writer :wiki
 
     # Gets / Sets the pages name
     attr_accessor :name
@@ -77,10 +140,6 @@ module GollumRails
     # Getters
     #########
 
-    # Gets the wiki instance
-    def wiki
-      @wiki || Adapters::Gollum::Connector.wiki_class
-    end
 
     # Need to implement the Committer connector (forgot it completely)
     # Gets the commit Hash from current object
@@ -144,31 +203,6 @@ module GollumRails
     # TODO:
     #   * implement full method!
     alias_method :save!, :save
-
-    # first creates an instance of itself and executes the save function.
-    #
-    # hash - Hash containing the page data
-    #
-    #
-    # Returns an instance of Gollum::Page or false
-    def self.create(hash)
-      page = Page.new hash
-      page.save
-    end
-
-    # calls `create` on current class. If returned value is nil an exception will be thrown
-    #
-    # hash - Hash containing the page data
-    #
-    # TODO:
-    #   * much testing
-    #
-    # Returns an instance of Gollum::Page
-    def self.create!(hash)
-      action = self.create(hash)
-      action
-    end
-
     # Updates an existing page (or created)
     #
     # hash - Hash containing the attributes, you want to update
@@ -212,40 +246,10 @@ module GollumRails
     #
     # Returns a String
     def preview(format=:markdown)
-      preview = wiki.preview_page @name, @content, format
+      preview = self.class.wiki.preview_page @name, @content, format
       preview.formatted_data
     end
 
-    # Finds a page based on the name and specified version
-    #
-    # name - the name of the page
-    #
-    # Return an instance of Gollum::Page
-    def self.find(name)
-      page = GollumRails::Adapters::Gollum::Page.new
-      page.find_page name
-    end
-
-    # Finds an existing page or creates it
-    #
-    # name - The name
-    # commit - Hash
-    #
-    # Returns self
-    def self.find_or_initialize_by_name(name, commit)
-      result_for_find = self.find(name)
-      self.create({:format => :markdown, :name => name, :content => ".", :commit => commit })
-    end
-
-    # Checks if the fileformat is supported
-    #
-    # format - String
-    #
-    # Returns true or false
-    def self.format_supported?(format)
-      supported = ['ascii', 'github-markdown','markdown', 'creole', 'org', 'pod', 'rdoc']
-      format.in?(supported)
-    end
 
     #######
     private
