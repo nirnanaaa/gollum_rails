@@ -74,7 +74,6 @@ describe "Gollum Page" do
       rr.commit.should be_instance_of Hash
       rr.commit.should == @commit
       rr.format.should == :markdown
-      rr.wiki.should be_instance_of Gollum::Wiki
       rr.save
       rr.page.should be_instance_of GollumRails::Adapters::Gollum::Page
     end
