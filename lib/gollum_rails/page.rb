@@ -93,7 +93,7 @@ module GollumRails
 
       # Gets all pages in the wiki
       def all
-        
+        self.wiki.pages
       end
 
       # Gets the wiki instance
