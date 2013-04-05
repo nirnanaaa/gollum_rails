@@ -18,10 +18,8 @@ describe "Gollum Page" do
     class RailsModel < GollumRails::Page
 
 
-      validate do |validator|
-        validator.test(@format, "type=Object")
-      end
     end
+
     it "should test the creation of a page" do
       rr = RailsModel.new(@call)
       rr.save.should be_instance_of Gollum::Page

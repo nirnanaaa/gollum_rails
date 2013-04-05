@@ -102,7 +102,10 @@ module GollumRails
       def wiki
         @wiki || Adapters::Gollum::Connector.wiki_class
       end
+
     end
+
+
     # Initializes a new Page
     #
     # attrs - Hash of attributes
@@ -152,10 +155,6 @@ module GollumRails
       @format.to_sym
     end
 
-    # Gets the validator
-    def self.validator
-      @@validator ||= Adapters::ActiveModel::Validation.new
-    end
 
     # Gets the page class
     def page
@@ -189,6 +188,7 @@ module GollumRails
     # Returns an instance of Gollum::Page or false
     def save
       run_callbacks :save do
+        return false unless valid?
         begin
           page.new_page(name,content,format,commit)
         rescue ::Gollum::DuplicatePageError => e 
