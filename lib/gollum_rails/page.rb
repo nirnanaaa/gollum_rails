@@ -95,6 +95,7 @@ module GollumRails
       def all
         self.wiki.pages
       end
+      alias_method :find_all, :all
 
       # Gets the wiki instance
       def wiki
