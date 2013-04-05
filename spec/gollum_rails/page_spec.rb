@@ -86,9 +86,6 @@ describe "Gollum Page" do
       rr.format=(:markdown).should == :markdown
     end
 
-    it "should test the static page" do
-      RailsModel.page.should == GollumRails::Adapters::Gollum::Connector.page_class
-    end
 
     it "should test find or initialize" do
       rr = RailsModel.new @call
