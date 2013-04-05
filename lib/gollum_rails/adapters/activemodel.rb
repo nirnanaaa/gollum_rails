@@ -3,7 +3,6 @@ module GollumRails
 
   # Adapter class. To be documented
   module Adapters
-    
     # ActiveModel improvements and own connectors
     #
     # including:
@@ -34,7 +33,7 @@ module GollumRails
     module ActiveModel
 
       # connector version
-      VERSION="1.10.0"
+      VERSION="1.20.0"
     end
   end
 end
@@ -42,6 +41,3 @@ end
 require File.expand_path '../activemodel/boolean', __FILE__
 require File.expand_path '../activemodel/naming', __FILE__
 require File.expand_path '../activemodel/error', __FILE__
-
-# removed in 0.0.8
-#require File.expand_path '../activemodel/validation', __FILE__
