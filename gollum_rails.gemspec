@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.rubygems_version = '>= 1.3.5'
-  
+
   s.name = 'gollum_rails'
   s.rubyforge_project = s.name
 
@@ -8,17 +8,13 @@ Gem::Specification.new do |s|
 
   s.summary = 'Combines the benefits from Gollum and Rails'
   s.description= 'Use all the benefits from Rails and combine them with the awesome Gollum wiki'
-  #File.read(File.join(File.dirname(__FILE__), 'README.md'))
 
   s.add_dependency 'activemodel', '~> 3.2.13'
   s.add_dependency 'gollum-lib', '~> 1.0.0'
-  #s.add_dependency 'grit', '~> 2.5.0'
-  #s.add_dependency 'builder', '~> 3.0.0'
-  #s.add_dependency 'rack', '~> 1.4.5'
+  s.add_dependency 'gitlab-grit', '~> 1.0.0'
 
   s.add_development_dependency 'rspec', '~> 2.13.0'
-  s.add_development_dependency 'rails', '~> 3.2.13'
-  s.add_development_dependency 'rr', '~> 1.0.4' 
+  s.add_development_dependency 'rr', '~> 1.0.4'
   s.add_development_dependency 'rails', '~> 3.2.13'
 
   s.author = 'Florian Kasper'
@@ -77,7 +73,7 @@ Gem::Specification.new do |s|
 
 
   s.require_paths = %w[lib]
-  s.post_install_message = <<-END 
+  s.post_install_message = <<-END
   Important: \n
   **********************************************
   To use the installer just run the following command:
@@ -89,4 +85,3 @@ Gem::Specification.new do |s|
   **********************************************"
   END
 end
-
