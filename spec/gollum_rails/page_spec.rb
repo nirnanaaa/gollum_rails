@@ -8,9 +8,9 @@ describe "Gollum Page" do
         :email => "mosny@zyg.li"
       }
       @call = {
-        :name => "Goole", 
-        :content => "content data", 
-        :commit => @commit, 
+        :name => "Goole",
+        :content => "content data",
+        :commit => @commit,
         :format => :markdown
       }
     end
@@ -26,7 +26,7 @@ describe "Gollum Page" do
       rr.save!.should be_instance_of Gollum::Page
       RailsModel.create(@call)
     end
-    
+
     it "should test the update of a page" do
       rr = RailsModel.new @call
       cc = rr.save.should be_instance_of Gollum::Page
@@ -116,7 +116,7 @@ describe "Gollum Page" do
           @name.should == "Goole"
         end
         def before_update
-          @name.should == "Goole" 
+          @name.should == "Goole"
         end
 
         def after_update
@@ -124,13 +124,13 @@ describe "Gollum Page" do
         end
 
         def before_delete
-          @name.should == "Goole" 
+          @name.should == "Goole"
         end
 
         def after_delete
           @name.should == "Goole"
         end
-        
+
       end
 
       test = CallbackTest.new @call
@@ -169,7 +169,7 @@ describe "Gollum Page" do
      @call[:name] = "das ist zu lang"*10
      cla = SugarBaby.new @call
      cla.valid?.should be_true
-   end 
+   end
    it "should test the presence validator" do
      @call[:name] = [ ]
      bla = SugarBaby.new @call
@@ -187,5 +187,21 @@ describe "Gollum Page" do
    end
 
   end
+ describe "the thread safety" do
+   class ThreadModel < GollumRails::Page
 
+   end
+   it "should save " do
+     100.times do |time|
+       Thread.new do
+         ThreadModel.new(@call)
+         ThreadModel.save.should be_instance_of(Gollum::Page)
+         ThreadModel.delete(@commit).length.should == 40
+       end
+     end
+
+   end
+
+
+end
 end
