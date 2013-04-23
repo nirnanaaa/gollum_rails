@@ -2,6 +2,7 @@
 * added standalone compability for ruby 2.0
 * added patches by styx
 * added string corext for ruby2
+* added mutex locks for ugly threadsave
 
 # 1.0.1 5th April 2013
 * added find_all and all for Page
