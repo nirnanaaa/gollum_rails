@@ -1,3 +1,5 @@
+require 'thread'
+
 module GollumRails
 
   # Main class, used to interact with rails.
@@ -12,12 +14,12 @@ module GollumRails
   #   * delete
   #   * find_or_initialize_by_naname
   #
-  class Page 
+  class Page
     extend ::ActiveModel::Callbacks
     include ::ActiveModel::Validations
     include ::ActiveModel::Conversion
     extend ::ActiveModel::Naming
-    
+
 
     # Callback for save
     define_model_callbacks :save
@@ -80,7 +82,7 @@ module GollumRails
         action = self.create(hash)
         action
       end
-      
+
       # Finds a page based on the name and specified version
       #
       # name - the name of the page
@@ -104,6 +106,8 @@ module GollumRails
 
     end
 
+    # mutex lock for multithreading
+    attr_reader :mutex
 
     # Initializes a new Page
     #
@@ -111,6 +115,7 @@ module GollumRails
     #
     # commit must be given to perform any page action!
     def initialize(attrs = {})
+      @mutex = Mutex.new
       if Adapters::Gollum::Connector.enabled
         attrs.each{|k,v| self.public_send("#{k}=",v)} if attrs
       else
@@ -121,7 +126,7 @@ module GollumRails
     #########
     # Setters
     #########
-     
+
 
     # Gets / Sets the pages name
     attr_accessor :name
@@ -135,7 +140,7 @@ module GollumRails
     # Sets the format
     attr_writer :format
 
-    
+
     #########
     # Getters
     #########
@@ -151,7 +156,7 @@ module GollumRails
     def page
       @page ||= Adapters::Gollum::Connector.page_class.new
     end
-    
+
     #############
     # activemodel
     #############
@@ -162,30 +167,32 @@ module GollumRails
     # will detect it and returns that page instead.
     #
     # Examples:
-    #   
+    #
     #   obj = GollumRails::Page.new <params>
     #   @article = obj.save
     #   # => Gollum::Page
-    #   
+    #
     #   @article.name
-    #   whatever name you have entered OR the name of the previous 
+    #   whatever name you have entered OR the name of the previous
     #   created page
-    #       
+    #
     #
     # TODO:
     #   * overriding for creation(duplicates)
-    #   * do not alias save! on save 
-    # 
+    #   * do not alias save! on save
+    #
     # Returns an instance of Gollum::Page or false
     def save
-      run_callbacks :save do
-        return false unless valid?
-        begin
-          page.new_page(name,content,format,commit)
-        rescue ::Gollum::DuplicatePageError => e 
-          page.page = page.find_page(name)
+      mutex.synchronize do
+        run_callbacks :save do
+          return false unless valid?
+          begin
+            page.new_page(name,content,format,commit)
+          rescue ::Gollum::DuplicatePageError => e
+            page.page = page.find_page(name)
+          end
+          return page.page
         end
-        return page.page
       end
     end
 
@@ -202,39 +209,45 @@ module GollumRails
     #          to initialize the instance
     #
     #
-    # Returns an instance of Gollum::Page 
+    # Returns an instance of Gollum::Page
     def update_attributes(hash, commit=nil)
-      run_callbacks :update do
-        page.update_page hash, get_right_commit(commit)
+      mutex.synchronize do
+        run_callbacks :update do
+          page.update_page hash, get_right_commit(commit)
+        end
       end
+
     end
-    
+
     # Deletes current page (also available static. See below)
     #
     # commit - optional. If given this commit will be used instead of that one, used
     #          to initialize the instance
     #
-    # Returns the commit id of the current action as String 
+    # Returns the commit id of the current action as String
     def delete(commit=nil)
-      run_callbacks :delete do
-        page.delete_page get_right_commit(commit)
+      mutex.synchronize do
+        run_callbacks :delete do
+          page.delete_page get_right_commit(commit)
+        end
       end
+
     end
 
     # checks if entry already has been saved
-    # 
+    #
     #
     def persisted?
       return true if page.page.instance_of?(::Gollum::Page)
       return false
     end
     # Previews the page - Mostly used if you want to see what you do before saving
-    # 
+    #
     # This is an extremely performant method!
-    # 1 rendering attempt take depending on the content about 0.001 (simple markdown) 
+    # 1 rendering attempt take depending on the content about 0.001 (simple markdown)
     # upto 0.004 (1000 chars markdown) seconds, which is quite good
     #
-    # 
+    #
     # format - Specify the format you want to render with see {self.format_supported?}
     #          for formats
     #
