@@ -1,3 +1,8 @@
+# 1.0.2 23th April 2013
+* added standalone compability for ruby 2.0
+* added patches by styx
+* added string corext for ruby2
+
 # 1.0.1 5th April 2013
 * added find_all and all for Page
 * removed some unused functions
