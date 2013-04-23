@@ -12,6 +12,7 @@ coverage/
 bin/
 tmp/
 pkg/
+doc/
 *.tmp
 *.bak
 *.swp
