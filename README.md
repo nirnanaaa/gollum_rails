@@ -7,7 +7,7 @@ Gollum for Rails
 
 
 gollum_rails combines the git-powered wiki software gollum with the extremely popular webframework rails.
-It improves the lightweight "gollum" experience which is quite awesome. 
+It improves the lightweight "gollum" experience which is quite awesome.
 
 with gollum_rails you can:
 
@@ -23,7 +23,6 @@ with gollum_rails you can:
 - Unix like operating system (OS X, Ubuntu, Debian, and more)
 - Will not work on Windows (see [gollum](https://github.com/github/gollum/blob/master/README.md#system-requirements))
 
-## [RUBY >= 2.0 READ THIS](https://github.com/nirnanaaa/gollum_rails/wiki/Ruby#ruby-2.0)
 ## [Installation](https://github.com/nirnanaaa/gollum_rails/wiki/Installation)
 
 ## [Usage](https://github.com/nirnanaaa/gollum_rails/wiki/Usage)
@@ -37,11 +36,11 @@ Very cool. Just fork this repository and send me pull requests.
 
 Clone the repository:
 
-	$ git clone git://github.com/nirnanaaa/gollum_rails.git
+    $ git clone git://github.com/nirnanaaa/gollum_rails.git
 
 Run the [Bundler](http://gembundler.com/):
 
-	$ bundle install
+    $ bundle install
 
 
 ### TESTING
@@ -51,13 +50,13 @@ All tests are stored under the `spec/` directory.
 
 To run tests just use the `rspec` command:
 
-	$ bundle exec rspec
+    $ bundle exec rspec
 
 ## LICENSE
 
 [![AGPLv3](http://www.gnu.org/graphics/agplv3-155x51.png)](http://www.gnu.org/licenses/agpl-3.0.en.html)
 
-gollum_rails is licensed under the AGPL license. 
+gollum_rails is licensed under the AGPL license.
 
 Copyright (C) 2013  Florian Kasper
 
@@ -73,4 +72,3 @@ GNU Affero General Public License for more details.
 
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
