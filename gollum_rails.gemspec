@@ -11,7 +11,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'activemodel', '~> 3.2.13'
   s.add_dependency 'gollum-lib', '~> 1.0.0'
-  s.add_dependency 'gitlab-grit', '~> 1.0.0'
 
   s.add_development_dependency 'rspec', '~> 2.13.0'
   s.add_development_dependency 'rr', '~> 1.0.4'
