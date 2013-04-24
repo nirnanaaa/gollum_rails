@@ -1,3 +1,8 @@
+# 1.0.3 ?
+* fixed post install messsage
+* removed unused require statements
+* removed gitlab-grit
+
 # 1.0.2 23th April 2013
 * added standalone compability for ruby 2.0
 * added patches by styx
