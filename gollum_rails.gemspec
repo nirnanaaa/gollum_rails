@@ -76,13 +76,11 @@ Gem::Specification.new do |s|
   s.require_paths = %w[lib]
   s.post_install_message = <<-END
   Important: \n
-  **********************************************
-  To use the installer just run the following command:
+  To enable gollum_rails run the following command:
   \trails g gollum_rails:install\n
   To generate a new Page model just run:
   \trails g gollum_rails:model MODEL_NAME\n
   To install an additional parsing language run:
-  rails g gollum_rails:language LANGUAGE
-  **********************************************"
+  \trails g gollum_rails:language LANGUAGE
   END
 end
