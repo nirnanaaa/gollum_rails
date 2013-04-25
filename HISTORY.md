@@ -1,4 +1,4 @@
-# 1.0.3 ?
+# 1.0.3 25th April 2013
 * fixed post install messsage
 * removed unused require statements
 * removed gitlab-grit
