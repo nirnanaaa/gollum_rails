@@ -3,7 +3,6 @@ PATH
   specs:
     gollum_rails (1.0.2)
       activemodel (~> 3.2.13)
-      gitlab-grit (~> 1.0.0)
       gollum-lib (~> 1.0.0)
 
 GEM
@@ -49,10 +48,6 @@ GEM
     erubis (2.7.0)
     github-markdown (0.5.3)
     github-markup (0.7.5)
-    gitlab-grit (1.0.0)
-      diff-lcs (~> 1.1)
-      mime-types (~> 1.15)
-      posix-spawn (~> 0.3.6)
     gollum-lib (1.0.0)
       github-markdown (~> 0.5.3)
       github-markup (>= 0.7.5, < 1.0.0)
