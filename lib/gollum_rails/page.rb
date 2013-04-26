@@ -106,8 +106,6 @@ module GollumRails
 
     end
 
-    # mutex lock for multithreading
-    attr_reader :mutex
 
     # Initializes a new Page
     #
@@ -115,7 +113,6 @@ module GollumRails
     #
     # commit must be given to perform any page action!
     def initialize(attrs = {})
-      @mutex = Mutex.new
       if Adapters::Gollum::Connector.enabled
         attrs.each{|k,v| self.public_send("#{k}=",v)} if attrs
       else
@@ -183,16 +180,14 @@ module GollumRails
     #
     # Returns an instance of Gollum::Page or false
     def save
-      mutex.synchronize do
-        run_callbacks :save do
-          return false unless valid?
-          begin
-            page.new_page(name,content,format,commit)
-          rescue ::Gollum::DuplicatePageError => e
-            page.page = page.find_page(name)
-          end
-          return page.page
+      run_callbacks :save do
+        return false unless valid?
+        begin
+          page.new_page(name,content,format,commit)
+        rescue ::Gollum::DuplicatePageError => e
+          page.page = page.find_page(name)
         end
+        return page.page
       end
     end
 
@@ -211,12 +206,9 @@ module GollumRails
     #
     # Returns an instance of Gollum::Page
     def update_attributes(hash, commit=nil)
-      mutex.synchronize do
-        run_callbacks :update do
-          page.update_page hash, get_right_commit(commit)
-        end
+      run_callbacks :update do
+        page.update_page hash, get_right_commit(commit)
       end
-
     end
 
     # Deletes current page (also available static. See below)
@@ -226,12 +218,9 @@ module GollumRails
     #
     # Returns the commit id of the current action as String
     def delete(commit=nil)
-      mutex.synchronize do
-        run_callbacks :delete do
-          page.delete_page get_right_commit(commit)
-        end
+      run_callbacks :delete do
+        page.delete_page get_right_commit(commit)
       end
-
     end
 
     # checks if entry already has been saved
