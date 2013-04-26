@@ -1,3 +1,19 @@
+
+# 1.0.4 1th May 2013
+* removed mutex again
+* added gemspec name to Gemfile
+* removed odd modules
+* updated description
+* improved documentation
+* removed unused activemodel adapters
+* added fancy inspects
+* concept to make gollum page adapter threadsave
+* new documentation standard
+* removed unused GollumRails::Adapters::Gollum::Committer (unused)
+* removed .gitkeep from filled directories
+* removed old and deprecated require style
+
+
 # 1.0.3 25th April 2013
 * fixed post install messsage
 * removed unused require statements
