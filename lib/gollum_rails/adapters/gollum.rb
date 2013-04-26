@@ -12,10 +12,10 @@ module GollumRails
     module Gollum
       autoload :Wiki,       'gollum_rails/adapters/gollum/wiki'
       autoload :Page,       'gollum_rails/adapters/gollum/page'
-      autoload :Committer,  'gollum_rails/adapters/gollum/committer'
       autoload :Error,      'gollum_rails/adapters/gollum/error'
+
       # connector version
-      VERSION="1.0.3"
+      VERSION="2.0.0"
 
       # Gollum connector class, keeping defaults!
       #
