@@ -3,11 +3,6 @@ module GollumRails
   module Adapters
     # Gollum Wiki connector classes
     #
-    # TODO:
-    #   * implement
-    #
-    # FIXME:
-    #   currently nothing implemented
     #
     module Gollum
       autoload :Wiki,       'gollum_rails/adapters/gollum/wiki'
