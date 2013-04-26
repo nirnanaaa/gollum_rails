@@ -27,9 +27,6 @@ module GollumRails
           # Sets the wiki class used by all instances
           attr_writer :wiki_class
 
-          # Sets the committer
-          attr_writer :committer_class
-
           # Sets the applications status
           attr_writer :enabled
 
@@ -55,12 +52,6 @@ module GollumRails
             @wiki_class || Wiki
           end
 
-          # Gets the current committer or using anon
-          #
-          #
-          def committer_class
-            @committer_class || Committer
-          end
         end
       end
     end
