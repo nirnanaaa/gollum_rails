@@ -11,8 +11,5 @@ describe GollumRails::Adapters::Gollum::Connector do
   it "should test the Page class connector" do
     @class.page_class.should == GollumRails::Adapters::Gollum::Page
   end
-  it "should test the Committer class connector" do
-    @class.committer_class.should == GollumRails::Adapters::Gollum::Committer
-  end
     
 end
