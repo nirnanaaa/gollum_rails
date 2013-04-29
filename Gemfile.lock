@@ -72,6 +72,7 @@ GEM
     mime-types (1.22)
     multi_json (1.7.2)
     nokogiri (1.5.9)
+    nokogiri (1.5.9-java)
     polyglot (0.3.3)
     posix-spawn (0.3.6)
     pygments.rb (0.4.2)

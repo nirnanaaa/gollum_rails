@@ -45,7 +45,6 @@ Gem::Specification.new do |s|
     lib/gollum_rails/adapters/activemodel/naming.rb
     lib/gollum_rails/adapters/gollum.rb
     lib/gollum_rails/adapters/gollum/.gitkeep
-    lib/gollum_rails/adapters/gollum/committer.rb
     lib/gollum_rails/adapters/gollum/error.rb
     lib/gollum_rails/adapters/gollum/page.rb
     lib/gollum_rails/adapters/gollum/wiki.rb
