@@ -9,12 +9,12 @@ Gem::Specification.new do |s|
   s.summary = 'Combines Gollum and Rails'
   s.description= 'include Gollum into Rails with ease'
 
-  s.add_dependency 'activemodel', '~> 3.2.13'
+  s.add_dependency 'activemodel', '~> 4.0.0.rc1'
   s.add_dependency 'gollum-lib', '~> 1.0.0'
 
   s.add_development_dependency 'rspec', '~> 2.13.0'
   s.add_development_dependency 'rr', '~> 1.0.4'
-  s.add_development_dependency 'rails', '~> 3.2.13'
+  s.add_development_dependency 'rails', '~> 4.0.0.rc1'
 
   s.author = 'Florian Kasper'
   s.email = 'mosny@zyg.li'
