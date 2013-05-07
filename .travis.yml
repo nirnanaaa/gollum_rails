@@ -2,6 +2,7 @@ language: ruby
 
 branches:
   only:
+    - rails4
     - master
     - trunk
     - ruby-head-grit
