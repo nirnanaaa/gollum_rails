@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    gollum_rails (1.4.0.rc1)
+    gollum_rails (1.4.0.rc2)
       activemodel (~> 4.0.0.rc1)
       gollum-lib (~> 1.0.0)
 
@@ -69,7 +69,6 @@ GEM
     minitest (4.7.4)
     multi_json (1.7.2)
     nokogiri (1.5.9)
-    nokogiri (1.5.9-java)
     polyglot (0.3.3)
     posix-spawn (0.3.6)
     pygments.rb (0.4.2)
