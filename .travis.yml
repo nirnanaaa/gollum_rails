@@ -5,12 +5,11 @@ branches:
     - rails4
     - master
     - trunk
-    - ruby-head-grit
 
 rvm:
   - 1.9.3
   - 2.0.0
-#  - ruby-head
+  - ruby-head
   
 notifications:
   disabled: true
