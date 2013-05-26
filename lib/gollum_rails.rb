@@ -1,5 +1,12 @@
+# ~*~ encoding: utf-8 ~*~
+
+# stdlib
 require 'rubygems'
+
+# external
 require 'gollum-lib'
+
+# patches
 require 'grit/git-ruby/internal/pack'
 require 'core_ext/string'
 
@@ -21,16 +28,34 @@ module GollumRails
   # Simplified error
   class Error < StandardError; end
 
-  # For use with internal gollumGem exceptions
-  #
+  # All Gollum internal exceptions will be redirected to this
   class GollumInternalError < Error
 
+    # The classes name, that raised the exception
+    attr_accessor :name
+
+    # The messsage, brought by the class
+    attr_accessor :message
+
+    # The target, the class wanted to interact with
+    attr_accessor :target
+
+    # modifies content for throwing an exception
+    def initialize(name, target = nil, message = nil)
+      @name = name
+      @target = target
+      @message = message
+
+      super(message || "An Error occured: #{name} on #{target}")
+    end
+
+    # Fancy inspects
+    def inspect
+      "#<GollumRails::GollumInternalError:#{object_id} {name: #{name.inspect}, message: #{message.inspect}, target: #{target.inspect}}>"      
+    end
   end
 end
 
 
 require File.expand_path '../gollum_rails/adapters/activemodel', __FILE__
 require File.expand_path '../gollum_rails/adapters/gollum', __FILE__
-# load extensions
-# TODO: Remove this shit. It is unnecessary
-require File.expand_path '../gollum_rails/modules/loader', __FILE__
