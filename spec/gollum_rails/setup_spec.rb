@@ -41,7 +41,20 @@ describe GollumRails::Setup do
     end
   end
   it "should test the Rails configuration" do
-    puts Rails.application.config
+    GollumRails::Setup.build do |setup|
+
+      # => The repository path to the 
+      #
+      #
+      setup.repository = :application    
+
+      #setup.wiki.use = :default
+      expect{setup.startup=(true)}.to raise_error(NoMethodError, "undefined method `config' for nil:NilClass")
+
+      #setup.repository = nil
+      #expect{setup.startup=true}.to raise_error GollumRails::GollumInternalError
+
+    end
   end
 
 end
