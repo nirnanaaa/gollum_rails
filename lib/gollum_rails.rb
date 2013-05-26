@@ -1,5 +1,12 @@
+# ~*~ encoding: utf-8 ~*~
+
+# stdlib
 require 'rubygems'
+
+# external
 require 'gollum-lib'
+
+# patches
 require 'grit/git-ruby/internal/pack'
 require 'core_ext/string'
 
@@ -16,15 +23,31 @@ module GollumRails
   autoload :Setup,    'gollum_rails/setup'
 
   # GollumRails version string
-  VERSION = '1.0.4'
+  VERSION = '1.4.0.rc2'
 
   # Simplified error
   class Error < StandardError; end
 
-  # For use with internal gollumGem exceptions
-  #
+  # All Gollum internal exceptions will be redirected to this
   class GollumInternalError < Error
 
+    attr_accessor :name
+    attr_accessor :message
+    attr_accessor :target
+
+    # modifies content for throwing an exception
+    def initialize(name, target = nil, message = nil)
+      @name = name
+      @target = target
+      @message = message
+
+      super(message || "An Error occured: #{name} on #{target}")
+    end
+
+    # Fancy inspects
+    def inspect
+      "#<GollumRails::GollumInternalError:#{object_id} {name: #{name.inspect}, message: #{message.inspect}, target: #{target.inspect}}>"      
+    end
   end
 end
 
