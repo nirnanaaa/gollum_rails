@@ -31,8 +31,13 @@ module GollumRails
   # All Gollum internal exceptions will be redirected to this
   class GollumInternalError < Error
 
+    # The classes name, that raised the exception
     attr_accessor :name
+
+    # The messsage, brought by the class
     attr_accessor :message
+
+    # The target, the class wanted to interact with
     attr_accessor :target
 
     # modifies content for throwing an exception
