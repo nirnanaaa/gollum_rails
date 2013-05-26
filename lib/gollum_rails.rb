@@ -59,6 +59,3 @@ end
 
 require File.expand_path '../gollum_rails/adapters/activemodel', __FILE__
 require File.expand_path '../gollum_rails/adapters/gollum', __FILE__
-# load extensions
-# TODO: Remove this shit. It is unnecessary
-#require File.expand_path '../gollum_rails/modules/loader', __FILE__
