@@ -40,5 +40,8 @@ describe GollumRails::Setup do
       expect{setup.startup=true}.to raise_error
     end
   end
+  it "should test the Rails configuration" do
+    puts Rails.application.config
+  end
 
 end
