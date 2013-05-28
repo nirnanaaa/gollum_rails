@@ -18,10 +18,11 @@ Gem::Specification.new do |s|
 
   s.author = 'Florian Kasper'
   s.email = 'mosny@zyg.li'
-  s.homepage = 'http://gollum.zyg.li'
+  s.homepage = 'https://github.com/nirnanaaa/gollum_rails'
   s.license = 'AGPL'
   s.platform = Gem::Platform::RUBY
   s.required_ruby_version = '>=1.9.3'
+
 
   # = MANIFEST =
   s.files = %w[
