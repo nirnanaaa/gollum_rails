@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.name = 'gollum_rails'
   s.rubyforge_project = s.name
 
-  s.version = '1.4.0.rc2'
+  s.version = '1.4.0.rc3'
 
   s.summary = 'Combines Gollum and Rails'
   s.description= 'include Gollum into Rails with ease'
@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.license = 'AGPL'
   s.platform = Gem::Platform::RUBY
   s.required_ruby_version = '>=1.9.3'
+
 
   # = MANIFEST =
   s.files = %w[
