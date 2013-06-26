@@ -65,7 +65,6 @@ Gem::Specification.new do |s|
     spec/gollum_rails/respository_spec.rb
     spec/gollum_rails/setup_spec.rb
     spec/gollum_rails/wiki_spec.rb
-    spec/gollum_rails_spec.rb
     spec/spec.opts
     spec/spec_helper.rb
   ]
