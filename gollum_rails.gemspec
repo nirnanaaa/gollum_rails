@@ -4,17 +4,17 @@ Gem::Specification.new do |s|
   s.name = 'gollum_rails'
   s.rubyforge_project = s.name
 
-  s.version = '1.0.4'
+  s.version = '1.4.1'
 
   s.summary = 'Combines Gollum and Rails'
   s.description= 'include Gollum into Rails with ease'
 
-  s.add_dependency 'activemodel', '~> 3.2.13'
+  s.add_dependency 'activemodel', '>= 4.0.0'
   s.add_dependency 'gollum-lib', '~> 1.0.0'
 
   s.add_development_dependency 'rspec', '~> 2.13.0'
-  s.add_development_dependency 'rr', '~> 1.0.4'
-  s.add_development_dependency 'rails', '~> 3.2.13'
+  s.add_development_dependency 'rr', '~> 1.1.1'
+  s.add_development_dependency 'rails', '>= 4.0.0'
 
   s.author = 'Florian Kasper'
   s.email = 'mosny@zyg.li'
@@ -49,8 +49,6 @@ Gem::Specification.new do |s|
     lib/gollum_rails/adapters/gollum/error.rb
     lib/gollum_rails/adapters/gollum/page.rb
     lib/gollum_rails/adapters/gollum/wiki.rb
-    lib/gollum_rails/modulesDEPRECATED/hash.rb
-    lib/gollum_rails/modulesDEPRECATED/loader.rb
     lib/gollum_rails/page.rb
     lib/gollum_rails/setup.rb
     lib/grit/git-ruby/internal/pack.rb
@@ -63,7 +61,6 @@ Gem::Specification.new do |s|
     spec/gollum_rails/adapters/gollum/page_spec.rb
     spec/gollum_rails/adapters/gollum/wiki_spec.rb
     spec/gollum_rails/error_spec.rb
-    spec/gollum_rails/modulesDEPRECATED/hash.rb
     spec/gollum_rails/page_spec.rb
     spec/gollum_rails/respository_spec.rb
     spec/gollum_rails/setup_spec.rb
@@ -86,3 +83,5 @@ Gem::Specification.new do |s|
   \trails g gollum_rails:language LANGUAGE
   END
 end
+
+  
