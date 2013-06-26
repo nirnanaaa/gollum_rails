@@ -1,3 +1,5 @@
+# 1.4.1 26th June 2013
+* Rails4
 
 # 1.0.4 1th May 2013
 * removed mutex again
