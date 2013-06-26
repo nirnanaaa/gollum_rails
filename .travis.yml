@@ -2,11 +2,11 @@ language: ruby
 
 branches:
   only:
+    - rails4
     - master
     - trunk
 
 rvm:
-  - 1.9.2
   - 1.9.3
   - 2.0.0
   - ruby-head
@@ -17,8 +17,9 @@ notifications:
 script:
   - bundle exec rspec
 
+
 before_install:
+ - gem install bundler --pre
  - sudo apt-get update -qq
- - sudo apt-get install -yqq git-core
  - git init spec/utils/wiki
  
