@@ -12,7 +12,7 @@ module GollumRails
   #   * new
   #   * save
   #   * delete
-  #   * find_or_initialize_by_naname
+  #   * find_or_initialize_by_name
   #
   class Page
     # extend ::ActiveModel::Callbacks
