@@ -47,8 +47,8 @@ module GollumRails
       #
       # Returns self
       def find_or_initialize_by_name(name, commit)
-        result_for_find = self.find(name)
-        self.create({:format => :markdown, :name => name, :content => ".", :commit => commit })
+        result_for_find = find(name)
+        create({:format => :markdown, :name => name, :content => ".", :commit => commit })
       end
 
       # Checks if the fileformat is supported
@@ -80,7 +80,7 @@ module GollumRails
       #
       # Returns an instance of Gollum::Page
       def create!(hash)
-        self.create(hash)
+        create(hash)
       end
 
       # Finds a page based on the name and specified version
@@ -94,7 +94,7 @@ module GollumRails
 
       # Gets all pages in the wiki
       def all
-        self.wiki.pages
+        wiki.pages
       end
       alias_method :find_all, :all
 
