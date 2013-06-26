@@ -15,10 +15,11 @@ module GollumRails
   #   * find_or_initialize_by_naname
   #
   class Page
-    extend ::ActiveModel::Callbacks
-    include ::ActiveModel::Validations
-    include ::ActiveModel::Conversion
-    extend ::ActiveModel::Naming
+    # extend ::ActiveModel::Callbacks
+    # include ::ActiveModel::Validations
+    # include ::ActiveModel::Conversion
+    # extend ::ActiveModel::Naming
+    include ::ActiveModel::Model
 
 
     # Callback for save
@@ -79,8 +80,7 @@ module GollumRails
       #
       # Returns an instance of Gollum::Page
       def create!(hash)
-        action = self.create(hash)
-        action
+        self.create(hash)
       end
 
       # Finds a page based on the name and specified version
@@ -89,8 +89,7 @@ module GollumRails
       #
       # Return an instance of Gollum::Page
       def find(name)
-        page = GollumRails::Adapters::Gollum::Page.new
-        page.find_page name
+        GollumRails::Adapters::Gollum::Page.find_page name
       end
 
       # Gets all pages in the wiki
@@ -185,7 +184,7 @@ module GollumRails
         begin
           page.new_page(name,content,format,commit)
         rescue ::Gollum::DuplicatePageError => e
-          page.page = page.find_page(name)
+          page.page = Adapters::Gollum::Connector.page_class.find_page(name)
         end
         return page.page
       end

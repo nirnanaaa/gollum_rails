@@ -24,11 +24,18 @@ module GollumRails
           # Gets / Sets the wiki
         attr_accessor :wiki
 
-        # Initializer
-        def initialize
-          @wiki = Connector.wiki_class
-        end
+        class << self
 
+          # finds all versions of a page
+          #
+          # name - the pagename to search
+          #
+          # Returns the Gollum::Page class
+          def find_page(name)
+            Connector.wiki_class.page ::Gollum::Page.cname(name)
+          end
+
+        end
 
         # creates a new Page
         #
@@ -39,8 +46,8 @@ module GollumRails
         #
         # Returns the commit id
         def new_page( name, content,type=:markdown, commit={} )
-          @wiki.write_page name.to_s, type, content, commit if name
-          @page = @wiki.page name
+          Connector.wiki_class.write_page name.to_s, type, content, commit if name
+          @page = Connector.wiki_class.page name
           @page
         end
 
@@ -53,7 +60,7 @@ module GollumRails
         # Returns the commit id
         def update_page( new, commit={}, old=nil)
           if new.is_a?(Hash)
-            commit_id = @wiki.update_page (old||@page), 
+            commit_id = Connector.wiki_class.update_page (old||@page), 
                                           new[:name]||@page.name, 
                                           new[:format]||@page.format, 
                                           new[:content]||@page.raw_data, 
@@ -74,7 +81,7 @@ module GollumRails
         #
         # Returns the commit id
         def delete_page( commit={}, page = nil )
-          @wiki.delete_page (page||@page), commit
+          Connector.wiki_class.delete_page (page||@page), commit
         end
         
         # renames an existing page
@@ -94,7 +101,8 @@ module GollumRails
         #
         # Returns the Gollum::Page class
         def find_page(name)
-          @wiki.page ::Gollum::Page.cname(name)
+          puts "DEPRECATED! Use Page.find_page instead"
+          self.class.find_page(name)
         end
         
         # moves an existing page
