@@ -6,7 +6,7 @@ Gollum for Rails
 [![Coverage Status](https://coveralls.io/repos/nirnanaaa/gollum_rails/badge.png?branch=master)](https://coveralls.io/r/nirnanaaa/gollum_rails)
 
 
-gollum_rails combines the git-powered wiki software gollum with the extremely popular webframework rails.
+gollum_rails combines the git-powered wiki software gollum with the extreme popular webframework rails.
 It improves the lightweight "gollum" experience which is quite awesome.
 
 with gollum_rails you can:
