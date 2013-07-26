@@ -112,9 +112,8 @@ module GollumRails
 
     end
 
-    def wiki
-      self.class.wiki
-    end
+
+    
     # Initializes a new Page
     #
     # attrs - Hash of attributes
@@ -195,9 +194,9 @@ module GollumRails
       run_callbacks :save do
         return nil unless valid?
         begin
-          gollum_page = page.new_page(name,content,wiki,format,commit) 
+          @gollum_page = page.new_page(name,content,wiki,format,commit) 
         rescue ::Gollum::DuplicatePageError => e
-          gollum_page = Adapters::Gollum::Page.find_page(name, wiki)
+          @gollum_page = Adapters::Gollum::Page.find_page(name, wiki)
         end
         return self
       end
@@ -219,8 +218,7 @@ module GollumRails
     # Returns an instance of Gollum::Page
     def update_attributes(content=nil,name=nil,format=:markdown, commit=nil)
       run_callbacks :update do
-        gollum_page = page.update_page(gollum_page, wiki, content, get_right_commit(commit), name, format)
-        puts gollum_page
+        @gollum_page = page.update_page(gollum_page, wiki, content, get_right_commit(commit), name, format)
       end
     end
 
@@ -260,15 +258,34 @@ module GollumRails
       preview.formatted_data
     end
 
+    # == Gets the url for current page from Gollum::Page
+    #
+    # Return a String
     def url
       gollum_page.url_path
     end
+    
+    def title
+    end
+    
+    def html_data
+    end
+    
+    def raw_data
+    end
+    
+    def history
+    end
+    
+    def compare_commits(sha1,sha2)
+    end
+      
     
     #######
     private
     #######
 
-    # Get the right commit out of 2 commits
+    # == Gets the right commit out of 2 commits
     #
     # commit_local - local commit Hash
     #
@@ -279,12 +296,18 @@ module GollumRails
       return com
     end
     
-
+    # == Updates local attributes from gollum_page class
+    #
     def update_attrs
       @name = gollum_page.name
       @content= gollum_page.raw_data
       @format = gollum_page.format      
     end
-
+    
+    # == To static
+    def wiki
+      self.class.wiki
+    end
+    
   end
  end
