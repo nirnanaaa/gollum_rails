@@ -68,7 +68,7 @@ module GollumRails
       #
       # Returns an instance of Gollum::Page or false
       def create(hash)
-        page = Page.new hash
+        page = Page.new(hash)
         page.save
       end
 
