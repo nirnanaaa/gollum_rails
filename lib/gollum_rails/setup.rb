@@ -27,6 +27,9 @@ module GollumRails
       # Gets / Sets the repository
       attr_accessor :repository
 
+      # Gets / Sets the init options
+      attr_accessor :options
+      
       # Startup action for building wiki components
       #
       # Returns true or throws an exception if the path is invalid
@@ -39,7 +42,11 @@ module GollumRails
             initialize_wiki @repository
           end
         end
-
+      end
+      
+      # Wiki startup options
+      def options=(options)
+        self.options = options
       end
       
       # defines block builder for Rails initializer.
@@ -65,10 +72,10 @@ module GollumRails
         return !(path.nil? || path.empty? || ! path.is_a?(String))
       end
 
-      def initialize_wiki(path)
+      def initialize_wiki(path=nil)
         if path_valid? path
           repository = Grit::Repo.new path.to_s
-          GollumRails::Adapters::Gollum::Wiki.new repository
+          GollumRails::Adapters::Gollum::Wiki.new(repository, options)
           true
         else
           raise GollumInternalError, 'no repository path specified'
