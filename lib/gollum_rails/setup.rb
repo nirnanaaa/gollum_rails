@@ -72,10 +72,10 @@ module GollumRails
         return !(path.nil? || path.empty? || ! path.is_a?(String))
       end
 
-      def initialize_wiki(path=nil)
+      def initialize_wiki(path)
         if path_valid? path
           repository = Grit::Repo.new path.to_s
-          GollumRails::Adapters::Gollum::Wiki.new(repository, options)
+          GollumRails::Adapters::Gollum::Wiki.new(repository, options || {})
           true
         else
           raise GollumInternalError, 'no repository path specified'
