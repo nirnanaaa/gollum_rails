@@ -60,8 +60,8 @@ module GollumRails
         # Returns the page
         def new_page( name, content, wiki, type=:markdown, commit={} )
           path_data = self.class.parse_path(name)
-          puts path_data
           wiki.write_page( path_data[:name], type, content, commit, path_data[:path][1..-1] || "" )
+          puts self.class.find_page( name, wiki ).class
           self.class.find_page( name, wiki )
         end
 
@@ -75,7 +75,7 @@ module GollumRails
         # format - A filetype as symbol (optional)
         #
         # Returns the page
-        def update_page( page, wiki, content , commit={}, name=nil, format=nil)
+        def update_page( page, wiki, content=nil, commit={}, name=nil, format=nil)
           return if !page || ((!content||page.raw_data == content) && page.format == format)
           name ||= page.name
           format = (format || page.format).to_sym

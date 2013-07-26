@@ -95,7 +95,7 @@ module GollumRails
       #
       # Return an instance of Gollum::Page
       def find(name)
-        GollumRails::Adapters::Gollum::Page.find_page(name, wiki)
+        self.new(gollum_page: Adapters::Gollum::Page.find_page(name, wiki))
       end
 
       # Gets all pages in the wiki
@@ -107,12 +107,14 @@ module GollumRails
 
       # Gets the wiki instance
       def wiki
-        @wiki ||= ::Gollum.Wiki.new(Adapters::Gollum::Connector.wiki_path, Adapters::Gollum::Connector.wiki_options)
+        @wiki ||= ::Gollum::Wiki.new(Adapters::Gollum::Connector.wiki_path, Adapters::Gollum::Connector.wiki_options)
       end
 
     end
 
-
+    def wiki
+      self.class.wiki
+    end
     # Initializes a new Page
     #
     # attrs - Hash of attributes
@@ -121,6 +123,7 @@ module GollumRails
     def initialize(attrs = {})
       if Adapters::Gollum::Connector.enabled
         attrs.each{|k,v| self.public_send("#{k}=",v)} if attrs
+        update_attrs if attrs[:gollum_page]
       else
         raise GollumInternalError, 'gollum_rails is not enabled!'
       end
@@ -157,8 +160,11 @@ module GollumRails
 
     # Gets the page class
     def page
-      @page ||= Adapters::Gollum::Connector.page_class.new
+      Adapters::Gollum::Page.new
     end
+    
+    # Gollum Page
+    attr_accessor :gollum_page
 
     #############
     # activemodel
@@ -187,13 +193,13 @@ module GollumRails
     # Returns an instance of Gollum::Page or false
     def save
       run_callbacks :save do
-        return false unless valid?
+        return nil unless valid?
         begin
-          page.new_page(name,content,wiki,format,commit) 
+          gollum_page = page.new_page(name,content,wiki,format,commit) 
         rescue ::Gollum::DuplicatePageError => e
-          page.page = Adapters::Gollum::Page.find_page(name)
+          gollum_page = Adapters::Gollum::Page.find_page(name, wiki)
         end
-        return page.page
+        return self
       end
     end
 
@@ -205,15 +211,16 @@ module GollumRails
 
     # Updates an existing page (or created)
     #
-    # hash - Hash containing the attributes, you want to update
+    # TODO
     # commit - optional. If given this commit will be used instead of that one, used
     #          to initialize the instance
     #
     #
     # Returns an instance of Gollum::Page
-    def update_attributes(hash, commit=nil)
+    def update_attributes(content=nil,name=nil,format=:markdown, commit=nil)
       run_callbacks :update do
-        page.update_page hash, get_right_commit(commit)
+        gollum_page = page.update_page(gollum_page, wiki, content, get_right_commit(commit), name, format)
+        puts gollum_page
       end
     end
 
@@ -225,7 +232,7 @@ module GollumRails
     # Returns the commit id of the current action as String
     def delete(commit=nil)
       run_callbacks :delete do
-        page.delete_page get_right_commit(commit)
+        page.delete_page(gollum_page, wiki, get_right_commit(commit))
       end
     end
 
@@ -233,9 +240,10 @@ module GollumRails
     #
     #
     def persisted?
-      return true if page.page.instance_of?(::Gollum::Page)
+      return true if gollum_page
       return false
     end
+    
     # Previews the page - Mostly used if you want to see what you do before saving
     #
     # This is an extremely performant method!
@@ -252,7 +260,10 @@ module GollumRails
       preview.formatted_data
     end
 
-
+    def url
+      gollum_page.url_path
+    end
+    
     #######
     private
     #######
@@ -266,6 +277,13 @@ module GollumRails
       com = commit if commit_local.nil?
       com = commit_local if !commit_local.nil?
       return com
+    end
+    
+
+    def update_attrs
+      @name = gollum_page.name
+      @content= gollum_page.raw_data
+      @format = gollum_page.format      
     end
 
   end
