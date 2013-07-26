@@ -15,16 +15,33 @@ describe "Gollum Page" do
       }
     end
   describe GollumRails::Page do
-    class RailsModel < GollumRails::Page
+    class RailsModel < GollumRails::Page; end
 
+    describe "the creation of a page" do
+      before :each do 
+        @rr = RailsModel.new(@call)
+      end
+      
+      it "saves via .save" do
+        @rr.save.should be_a GollumRails::Page
+      end
+      
+      it "saves via .save!" do
+        @rr.save!.should be_a GollumRails::Page
+      end
+      
+      it "saves via .create" do
+        RailsModel.create(@call).should be_a GollumRails::Page
+      end
+      
+      it "saves via .create!" do
+        RailsModel.create!(@call).should be_a GollumRails::Page
+      end
+      
+      it "fails if invalid arguments are supplied via the ! create" do
+      
+      end
 
-    end
-
-    it "should test the creation of a page" do
-      rr = RailsModel.new(@call)
-      rr.save.should be_a GollumRails::Page
-      rr.save!.should be_a GollumRails::Page
-      RailsModel.create(@call)
     end
 
     it "should test the update of a page" do
@@ -33,12 +50,36 @@ describe "Gollum Page" do
       rr.update_attributes({:name => "google", :format => :wiki}).should be_a Gollum::Page
     end
 
-    it "should test the deletion of a page" do
-      rr = RailsModel.new @call
-      cc = rr.save
-      puts cc.gollum_page
-      puts rr.gollum_page
+
+    describe "should test the deletion of a page" do
+      before :each do 
+        @rr = RailsModel.new @call
+        @cc = @rr.save
+      end
+      
+      it "should return a string" do
+        delete = @rr.delete
+        delete.should be_a String
+      end
+      
+      it "should return a SHA1 hash" do
+        delete = @rr.delete
+        delete.length.should == 40
+      end
+      
+      it "should also work was result from save" do
+        delete = @cc.delete
+        delete.should be_a String
+      end
+      
+      it "should test the recreation" do
+        delete = @rr.delete
+        @rr.save.should be_a GollumRails::Page
+        @rr.delete.should be_a String
+        
+      end
     end
+
 
     100.times do
       it "should test the preview" do
