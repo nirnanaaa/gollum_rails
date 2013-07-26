@@ -1,1 +1,1 @@
-content data
+{:name=>"google", :format=>:wiki}
