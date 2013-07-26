@@ -6,20 +6,21 @@ module GollumRails
       # TODO: doc
       class  Wiki
 
-        # Gets / Sets the git path or object
-        attr_accessor :git
-
         # Initializes the class
         #
         # location - String or Grit::Repo
         def initialize(location, options={})
-          @git = location
+          
+          Connector.wiki_options = options
+          
           if location.is_a?(::String)
-            con = ::Gollum::Wiki.new(@git, options)
+            con = location
           else
-            con = ::Gollum::Wiki.new(@git.path, options)
+            con = location.path
           end
-          Connector.wiki_class = con
+          
+          Connector.wiki_path = con
+          
         end
       
         # Static call from within any other class

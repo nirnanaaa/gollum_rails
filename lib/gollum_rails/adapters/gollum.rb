@@ -20,7 +20,11 @@ module GollumRails
           attr_writer :page_class
 
           # Sets the wiki class used by all instances
-          attr_writer :wiki_class
+          attr_writer :wiki_path
+          
+          # Sets the wiki options
+          attr_writer :wiki_options
+          
 
           # Sets the applications status
           attr_writer :enabled
@@ -38,12 +42,17 @@ module GollumRails
           def page_class
             @page_class || Page
           end
+          
+          # Gets the wiki options
+          def wiki_options
+            @wiki_options || {}
+          end
 
           # Gets the Globally used Page class or use a new one if not defined
           #
           #
           # Returns the internal page class or a fresh ::Gollum::Page
-          def wiki_class
+          def wiki_path
             @wiki_class || Wiki
           end
 
