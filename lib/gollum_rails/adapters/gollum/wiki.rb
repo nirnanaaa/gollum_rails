@@ -12,7 +12,7 @@ module GollumRails
         # Initializes the class
         #
         # location - String or Grit::Repo
-        def initialize(location, options=nil)
+        def initialize(location, options={})
           @git = location
           if location.is_a? ::String
             con = ::Gollum::Wiki.new(@git, options)
@@ -25,7 +25,7 @@ module GollumRails
         # Static call from within any other class
         #
         # Returns a new instance of this class
-        def self.wiki(location, options=nil)
+        def self.wiki(location, options={})
           Wiki.new(location, options)
         end
 
