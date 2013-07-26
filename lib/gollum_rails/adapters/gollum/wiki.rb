@@ -14,10 +14,10 @@ module GollumRails
         # location - String or Grit::Repo
         def initialize(location, options={})
           @git = location
-          if location.is_a? ::String
+          if location.is_a?(::String)
             con = ::Gollum::Wiki.new(@git, options)
           else
-            con= ::Gollum::Wiki.new(@git.path, options)
+            con = ::Gollum::Wiki.new(@git.path, options)
           end
           Connector.wiki_class = con
         end
