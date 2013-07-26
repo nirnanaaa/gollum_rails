@@ -38,6 +38,7 @@ module GollumRails
     
     # static
     class << self
+      
       # Gets / Sets the gollum page
       #
       attr_accessor :gollum_page
@@ -94,7 +95,7 @@ module GollumRails
       #
       # Return an instance of Gollum::Page
       def find(name)
-        GollumRails::Adapters::Gollum::Page.find_page name
+        GollumRails::Adapters::Gollum::Page.find_page(name, wiki)
       end
 
       # Gets all pages in the wiki
@@ -188,9 +189,9 @@ module GollumRails
       run_callbacks :save do
         return false unless valid?
         begin
-          page.new_page(name,content,format,commit)
+          page.new_page(name,content,wiki,format,commit) 
         rescue ::Gollum::DuplicatePageError => e
-          page.page = Adapters::Gollum::Connector.page_class.find_page(name)
+          page.page = Adapters::Gollum::Page.find_page(name)
         end
         return page.page
       end

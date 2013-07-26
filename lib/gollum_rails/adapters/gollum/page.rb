@@ -26,62 +26,73 @@ module GollumRails
 
         class << self
 
+          def parse_path(name)
+            path = '/'
+            if name.include?('/')
+              name = name[1..-1] if name[0] == "/"
+              content = name.split('/')
+              name = content.pop
+              path = '/'+content.join('/')
+            end
+            { path: path, name: name }
+          end
+          
           # finds all versions of a page
           #
           # name - the pagename to search
+          # wiki - instance of Gollum::Wiki
           #
           # Returns the Gollum::Page class
-          def find_page(name)
-            Connector.wiki_class.page ::Gollum::Page.cname(name)
+          def find_page(name, wiki)
+            path_data = parse_path(name)
+            wiki.paged(path_data[:name], path_data[:path], exact = true)
           end
-
         end
 
-        # creates a new Page
+        # == Creates a new page
         #
-        # name - String
-        # type - Symbol
-        # content - Text
-        # commit - Hash or instance of Committer
+        # name - The name of the page
+        # content - The content of the page
+        # wiki - An instance of Gollum::Wiki
+        # type - A filetype as symbol (optional)
+        # commit - Commit Hash
         #
-        # Returns the commit id
-        def new_page( name, content,type=:markdown, commit={} )
-          Connector.wiki_class.write_page name.to_s, type, content, commit if name
-          @page = Connector.wiki_class.page name
-          @page
+        # Returns the page
+        def new_page( name, content, wiki, type=:markdown, commit={} )
+          path_data = self.class.parse_path(name)
+          puts path_data
+          wiki.write_page( path_data[:name], type, content, commit, path_data[:path][1..-1] || "" )
+          self.class.find_page( name, wiki )
         end
 
-        # updates an existing page
+        # == Updates an existing page
         #
-        # new - Hash with changed data
-        # commit - Hash or instance of Committer
-        # old - also an instance of self
+        # page - An instance of Gollum::Page
+        # wiki - An instance of Gollum::Wiki
+        # content - New content
+        # commit - Commit Hash
+        # name - A new String (optional)
+        # format - A filetype as symbol (optional)
         #
-        # Returns the commit id
-        def update_page( new, commit={}, old=nil)
-          if new.is_a?(Hash)
-            commit_id = Connector.wiki_class.update_page (old||@page), 
-                                          new[:name]||@page.name, 
-                                          new[:format]||@page.format, 
-                                          new[:content]||@page.raw_data, 
-                                          commit 
-          else
-            raise Error.new  "commit must be a Hash. #{new.class} given", :crit
-          end
-
-          # this is very ugly. Shouldn't gollum return the new page?
-          @page = @page.find(new[:name]||@page.name, commit_id)
-          @page
+        # Returns the page
+        def update_page( page, wiki, content , commit={}, name=nil, format=nil)
+          return if !page || ((!content||page.raw_data == content) && page.format == format)
+          name ||= page.name
+          format = (format || page.format).to_sym
+          content ||= page.raw_data
+          wiki.update_page(page,name,format,content.to_s,commit)
+          self.class.find_page( mixin(page.url_path, name), wiki )
         end
 
-        # deletes an existing page
+        # == Deletes an existing page
         #
-        # page - instance of self
-        # commit - Hash or instance of Committer
+        # page - Gollum::Page
+        # wiki - Gollum::Wiki
+        # commit - Commit Hash
         #
         # Returns the commit id
-        def delete_page( commit={}, page = nil )
-          Connector.wiki_class.delete_page (page||@page), commit
+        def delete_page( page,wiki,commit={} )
+          wiki.delete_page(page, commit)
         end
         
         # renames an existing page
@@ -101,7 +112,6 @@ module GollumRails
         #
         # Returns the Gollum::Page class
         def find_page(name)
-          puts "DEPRECATED! Use Page.find_page instead"
           self.class.find_page(name)
         end
         
@@ -177,6 +187,16 @@ module GollumRails
           else
             raise Error.new  "page cannot be empty for #{__method__}", :high
           end
+        end
+        
+        private
+        
+        # replaces old filename with new
+        def mixin(old_url, new_name)
+          url = old_url.split("/")
+          url.pop
+          url << new_name
+          url.join("/")
         end
 
       end
