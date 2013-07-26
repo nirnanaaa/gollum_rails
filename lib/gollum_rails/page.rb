@@ -26,7 +26,16 @@ module GollumRails
 
     # Callback for delete
     define_model_callbacks :delete
+    
+    # Callback for initialize
+    define_model_callbacks :initialize
+    
+    # Callback for create
+    define_model_callbacks :create
 
+    # Callback for commit
+    define_model_callbacks :commit
+    
     # static
     class << self
       # Gets / Sets the gollum page
