@@ -25,8 +25,8 @@ module GollumRails
         # Static call from within any other class
         #
         # Returns a new instance of this class
-        def self.wiki(location)
-          Wiki.new(location)
+        def self.wiki(location, options=nil)
+          Wiki.new(location, options)
         end
 
         # Forwards unknown methods to Gollum::Wiki
