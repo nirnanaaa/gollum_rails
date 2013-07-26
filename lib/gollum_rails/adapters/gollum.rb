@@ -53,7 +53,7 @@ module GollumRails
           #
           # Returns the internal page class or a fresh ::Gollum::Page
           def wiki_path
-            @wiki_class || Wiki
+            @wiki_path || ""
           end
 
         end
