@@ -15,10 +15,6 @@ module GollumRails
   #   * find_or_initialize_by_name
   #
   class Page
-    # extend ::ActiveModel::Callbacks
-    # include ::ActiveModel::Validations
-    # include ::ActiveModel::Conversion
-    # extend ::ActiveModel::Naming
     include ::ActiveModel::Model
 
 
@@ -96,11 +92,12 @@ module GollumRails
       def all
         wiki.pages
       end
+      
       alias_method :find_all, :all
 
       # Gets the wiki instance
       def wiki
-        @wiki || Adapters::Gollum::Connector.wiki_class
+        @wiki ||= ::Gollum.Wiki.new(Adapters::Gollum::Connector.wiki_path, Adapters::Gollum::Connector.wiki_options)
       end
 
     end
