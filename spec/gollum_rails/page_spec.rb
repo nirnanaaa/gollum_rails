@@ -2,6 +2,11 @@ require 'spec_helper'
 
 describe "Gollum Page" do
   before(:each) do
+    GollumRails::Setup.build do |config|
+      config.repository = File.join(File.dirname(__FILE__),'..','utils','wiki.git')
+      config.options={}
+      config.startup = true
+    end
       @commit = {
         :name => "flo",
         :message => "commit",
