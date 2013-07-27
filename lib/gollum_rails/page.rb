@@ -204,14 +204,13 @@ module GollumRails
       end
     end
 
-    # aliasing save
+    # == Save without exception handling
+    # raises errors everytime something is wrong 
     #
-    # TODO:
-    #   * implement full method!
     def save!
       run_callbacks :save do
-        raise ActiveModel::Errors, "record is not valid" unless valid?
-        raise ActiveModel::Errors, "commit could not be empty" if commit == {}
+        raise StandardError, "record is not valid" unless valid?
+        raise StandardError, "commit could not be empty" if commit == {}
         @gollum_page = page.new_page(name,content,wiki,format,commit)
         return self
       end
@@ -233,7 +232,7 @@ module GollumRails
       end
     end
 
-    # Deletes current page (also available static. See below)
+    # == Deletes current page (also available static. See below)
     #
     # commit - optional. If given this commit will be used instead of that one, used
     #          to initialize the instance
@@ -253,9 +252,9 @@ module GollumRails
       return false
     end
     
-    # Previews the page - Mostly used if you want to see what you do before saving
+    # == Previews the page - Mostly used if you want to see what you do before saving
     #
-    # This is an extremely performant method!
+    # This is an extremely fast method!
     # 1 rendering attempt take depending on the content about 0.001 (simple markdown)
     # upto 0.004 (1000 chars markdown) seconds, which is quite good
     #
@@ -265,7 +264,7 @@ module GollumRails
     #
     # Returns a String
     def preview(format=:markdown)
-      preview = self.class.wiki.preview_page @name, @content, format
+      preview = page.preview_page( wiki, name, content, format )
       preview.formatted_data
     end
 

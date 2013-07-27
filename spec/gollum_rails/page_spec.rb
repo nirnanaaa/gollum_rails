@@ -42,11 +42,18 @@ describe "Gollum Page" do
       end
       
       it "saves via .create!" do
-        RailsModel.create!(@call).should be_a GollumRails::Page
+        expect{RailsModel.create!(@call)}.to raise_error Gollum::DuplicatePageError
       end
       
       it "fails if invalid arguments are supplied via the ! create" do
-        #TODO
+        args = {
+          name: "Gaming",
+          content: "content data",
+          commit: {},
+          format: :markdown
+        }
+        expect{RailsModel.create!(args)}.to raise_error  StandardError #change this
+        
       end
 
     end
@@ -100,7 +107,7 @@ describe "Gollum Page" do
    end
    
     it "should test exception methods" do
-      create = RailsModel.create! @call
+      expect{RailsModel.create! @call}.to raise_error Gollum::DuplicatePageError
     end
 
     it "should test the supported formats" do
@@ -186,11 +193,12 @@ describe "Gollum Page" do
     end
   end
   describe "rails extension" do
+    
     it "should test fetch_all" do
-      GollumRails::Page.all.length.should == 3
+      GollumRails::Page.all.length.should == 1
     end
     it "should test all" do 
-      GollumRails::Page.find_all.length.should == 3
+      GollumRails::Page.find_all.length.should == 1
     end
 
   end
