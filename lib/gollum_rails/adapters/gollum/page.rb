@@ -18,11 +18,6 @@ module GollumRails
 
         Connector.page_class = self
 
-        # Gets / Sets current page
-        attr_accessor :page
-
-          # Gets / Sets the wiki
-        attr_accessor :wiki
 
         class << self
 
