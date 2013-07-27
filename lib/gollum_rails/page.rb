@@ -111,6 +111,16 @@ module GollumRails
       def wiki
         @wiki ||= ::Gollum::Wiki.new(Adapters::Gollum::Connector.wiki_path, Adapters::Gollum::Connector.wiki_options)
       end
+      
+      # TODO: implement more of this (format, etc)
+      #
+      def method_missing(name, *args)
+        if name =~ /^find_by_(name)$/
+          self.find(args.first)
+        else
+          raise NoMethodError, "Method #{name} was not found"
+        end
+      end
 
     end
 

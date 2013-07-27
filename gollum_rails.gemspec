@@ -59,7 +59,7 @@ Gem::Specification.new do |s|
     spec/gollum_rails/adapters/gollum/connector_spec.rb
     spec/gollum_rails/adapters/gollum/error_spec.rb
     spec/gollum_rails/adapters/gollum/page_spec.rb
-    spec/gollum_rails/adapters/gollum/wiki_spec.rb
+    spec/gollum_rails/adapters/gollum/wiki_spec_off.rb
     spec/gollum_rails/error_spec.rb
     spec/gollum_rails/page_spec.rb
     spec/gollum_rails/respository_spec.rb
