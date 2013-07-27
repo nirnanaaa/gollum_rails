@@ -25,6 +25,7 @@ describe "Gollum Page" do
     class RailsModel < GollumRails::Page; end
 
     describe "the creation of a page" do
+      
       before :each do 
         @rr = RailsModel.new(@call)
       end
@@ -53,7 +54,22 @@ describe "Gollum Page" do
           format: :markdown
         }
         expect{RailsModel.create!(args)}.to raise_error  StandardError #change this
-        
+      end
+      it "has a history now" do
+        @rr.save
+        @rr.history.should have(30).items
+      end
+      it "outputs the raw_data" do
+        @rr.save
+        @rr.raw_data.should == @call[:content]
+      end
+      it "has the formatted data" do
+        @rr.save
+        @rr.html_data.should == '<p>content data</p>'
+      end
+      it "was last changed by me" do
+        @rr.save
+        @rr.last_changed_by.should == 'flo <mosny@zyg.li>'
       end
 
     end
