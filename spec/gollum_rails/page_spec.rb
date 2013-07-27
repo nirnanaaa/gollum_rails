@@ -85,7 +85,15 @@ describe "Gollum Page" do
       it { @rr.update_attributes({:name => "google", :format => :wiki}).should be_a Gollum::Page }
       
     end
-
+    describe "method missings" do
+      
+      it "should perform a normal find" do
+        RailsModel.find_by_name('Goole').should be_a GollumRails::Page
+          
+        
+      end
+      
+    end
 
     describe "should test the deletion of a page" do
       before :each do 

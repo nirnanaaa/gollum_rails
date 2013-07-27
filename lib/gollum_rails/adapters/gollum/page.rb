@@ -27,6 +27,7 @@ module GollumRails
           # Returns a Hash
           def parse_path(name)
             path = '/'
+            name = name.to_s
             if name.include?('/')
               name = name[1..-1] if name[0] == "/"
               content = name.split('/')
