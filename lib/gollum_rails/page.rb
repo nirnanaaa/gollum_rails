@@ -69,24 +69,26 @@ module GollumRails
 
       # first creates an instance of itself and executes the save function.
       #
-      # hash - Hash containing the page data
+      # data - Hash containing the page data
       #
       #
       # Returns an instance of Gollum::Page or false
-      def create(hash)
-        page = Page.new(hash)
+      def create(data)
+        page = Page.new(data)
         page.save
       end
 
 
       # calls `create` on current class. If returned value is nil an exception will be thrown
       #
-      # hash - Hash containing the page data
+      # data - Hash of Data containing all necessary stuff
+      # TODO write this stuff
       #
       #
       # Returns an instance of Gollum::Page
-      def create!(hash)
-        create(hash)
+      def create!(data)
+        page = Page.new(data)
+        page.save!
       end
 
       # Finds a page based on the name and specified version
@@ -206,16 +208,25 @@ module GollumRails
     #
     # TODO:
     #   * implement full method!
-    alias_method :save!, :save
+    def save!
+      run_callbacks :save do
+        raise ActiveModel::Errors, "record is not valid" unless valid?
+        raise ActiveModel::Errors, "commit could not be empty" if commit == {}
+        @gollum_page = page.new_page(name,content,wiki,format,commit)
+        return self
+      end
+    end
 
-    # Updates an existing page (or created)
+    # == Updates an existing page (or created)
     #
-    # TODO
+    # content - optional. If given the content of the gollum_page will be updated
+    # name - optional. If given the name of gollum_page will be updated
+    # format - optional. Updates the format. Uses markdown as default
     # commit - optional. If given this commit will be used instead of that one, used
     #          to initialize the instance
     #
     #
-    # Returns an instance of Gollum::Page
+    # Returns an instance of GollumRails::Page
     def update_attributes(content=nil,name=nil,format=:markdown, commit=nil)
       run_callbacks :update do
         @gollum_page = page.update_page(gollum_page, wiki, content, get_right_commit(commit), name, format)

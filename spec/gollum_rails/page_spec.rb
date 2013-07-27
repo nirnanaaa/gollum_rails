@@ -34,7 +34,7 @@ describe "Gollum Page" do
       end
       
       it "saves via .save!" do
-        @rr.save!.should be_a GollumRails::Page
+        expect{@rr.save!}.to raise_error Gollum::DuplicatePageError
       end
       
       it "saves via .create" do
