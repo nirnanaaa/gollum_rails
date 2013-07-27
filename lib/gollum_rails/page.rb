@@ -39,9 +39,7 @@ module GollumRails
     # static
     class << self
       
-      # Gets / Sets the gollum page
-      #
-      attr_accessor :gollum_page
+
 
       # Sets the validator
       attr_writer :validator
@@ -124,7 +122,9 @@ module GollumRails
 
     end
 
-
+    # Gets / Sets the gollum page
+    #
+    attr_accessor :gollum_page
     
     # Initializes a new Page
     #
