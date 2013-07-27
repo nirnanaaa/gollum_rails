@@ -19,6 +19,7 @@ script:
 
 
 before_install:
+ - gem update rubygems
  - gem install bundler --pre
  - sudo apt-get update -qq
  - git init spec/utils/wiki
