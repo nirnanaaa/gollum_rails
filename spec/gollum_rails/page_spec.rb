@@ -65,6 +65,14 @@ describe "Gollum Page" do
         @rr.save
         @rr.last_changed_by.should == 'flo <mosny@zyg.li>'
       end
+      it "has a title" do
+        @rr.save
+        @rr.title.should == "Goole"
+      end
+      it "has a url" do
+        @rr.save
+        @rr.url.should =="Goole"
+      end
 
     end
 
