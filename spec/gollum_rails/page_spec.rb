@@ -117,6 +117,7 @@ describe "Gollum Page" do
    end
    
     it "should test exception methods" do
+      RailsModel.create! @call
       expect{RailsModel.create! @call}.to raise_error Gollum::DuplicatePageError
     end
 
