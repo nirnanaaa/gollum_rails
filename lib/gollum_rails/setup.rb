@@ -46,7 +46,7 @@ module GollumRails
       
       # Wiki startup options
       def options=(options)
-        self.options = options
+        @options = options
       end
       
       # defines block builder for Rails initializer.
