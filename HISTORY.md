@@ -1,3 +1,10 @@
+# 1.4.2 1th August 2013
+* Found an issue that the Wiki was not updating from external pushes
+* Some helper methods implemented
+* Improved code quality
+* Should be threadsaver now
+* Updated documentation
+
 # 1.4.1 26th June 2013
 * Rails4
 

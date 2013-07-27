@@ -20,6 +20,11 @@ module GollumRails
 
         class << self
 
+          # == Parses a given filepath e.g. '/test/page'
+          # Name is page
+          # path is /test
+          #
+          # Returns a Hash
           def parse_path(name)
             path = '/'
             if name.include?('/')
