@@ -39,11 +39,6 @@ module GollumRails
     # static
     class << self
       
-
-
-      # Sets the validator
-      attr_writer :validator
-
       # Finds an existing page or creates it
       #
       # name - The name
