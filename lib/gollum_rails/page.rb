@@ -315,7 +315,9 @@ module GollumRails
       "%s <%s>" % [history.last.author.name, history.last.author.email]
     end
     
+    
     def compare_commits(sha1,sha2)
+      puts "NOT YET IMPLEMENTED"
     end
       
     
