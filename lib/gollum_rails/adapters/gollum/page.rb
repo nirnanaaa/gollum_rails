@@ -18,7 +18,6 @@ module GollumRails
 
         Connector.page_class = self
 
-
         class << self
 
           def parse_path(name)
