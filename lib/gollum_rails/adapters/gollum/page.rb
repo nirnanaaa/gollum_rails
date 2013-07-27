@@ -60,7 +60,7 @@ module GollumRails
         # Returns the page
         def new_page( name, content, wiki, type=:markdown, commit={} )
           path_data = self.class.parse_path(name)
-          wiki.write_page( path_data[:name], type, content, commit, path_data[:path][1..-1] || "" )
+          wiki.write_page( path_data[:name], type, content, commit, path_data[:path].gsub!(/^\//, "").gsub!(/(\/)+$/,'') || "" )
           self.class.find_page( name, wiki )
         end
 
