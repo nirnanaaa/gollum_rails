@@ -269,21 +269,45 @@ module GollumRails
 
     # == Gets the url for current page from Gollum::Page
     #
-    # Return a String
+    # Returns a String
     def url
       gollum_page.url_path
     end
     
+    # == Gets the title for current Gollum::Page
+    #
+    # Returns a String
     def title
+      gollum_page.title
     end
     
+    # == Gets formatted_data for current Gollum::Page
+    #
+    # Returns a String
     def html_data
+      gollum_page.formatted_data
     end
     
+    
+    # == Gets raw_data for current Gollum::Page
+    #
+    # Returns a String
     def raw_data
+      gollum_page.raw_data
     end
     
+    # == Gets the history of current gollum_page
+    #
+    # Returns an Array
     def history
+      gollum_page.versions
+    end
+    
+    # == Gets the last modified by Gollum::Committer
+    #
+    # Returns a String
+    def last_changed_by
+      "%s <%s>" % [history.last.author.name, history.last.author.email]
     end
     
     def compare_commits(sha1,sha2)
