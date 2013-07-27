@@ -7,18 +7,20 @@ describe "Gollum Page" do
       config.options={}
       config.startup = true
     end
+    
       @commit = {
-        :name => "flo",
-        :message => "commit",
-        :email => "mosny@zyg.li"
+        name: "flo",
+        message: "commit",
+        email: "mosny@zyg.li"
       }
       @call = {
-        :name => "Goole",
-        :content => "content data",
-        :commit => @commit,
-        :format => :markdown
+        name: "Goole",
+        content: "content data",
+        commit: @commit,
+        format: :markdown
       }
     end
+    
   describe GollumRails::Page do
     class RailsModel < GollumRails::Page; end
 
@@ -44,15 +46,19 @@ describe "Gollum Page" do
       end
       
       it "fails if invalid arguments are supplied via the ! create" do
-      
+        #TODO
       end
 
     end
 
-    it "should test the update of a page" do
-      rr = RailsModel.new @call
-      cc = rr.save.should be_a GollumRails::Page
-      rr.update_attributes({:name => "google", :format => :wiki}).should be_a Gollum::Page
+    describe "the update of a page" do
+      before :each do 
+        @rr = RailsModel.new(@call)
+        @rr.save
+      end
+      
+      it { @rr.update_attributes({:name => "google", :format => :wiki}).should be_a Gollum::Page }
+      
     end
 
 
