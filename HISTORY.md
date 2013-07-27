@@ -3,7 +3,7 @@
 * Some helper methods implemented
 * Improved code quality
 * Should be threadsaver now
-* 
+* Updated documentation
 
 # 1.4.1 26th June 2013
 * Rails4
