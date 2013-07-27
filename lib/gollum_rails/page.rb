@@ -264,8 +264,7 @@ module GollumRails
     #
     # Returns a String
     def preview(format=:markdown)
-      preview = page.preview_page( wiki, name, content, format )
-      preview.formatted_data
+      page.preview_page( wiki, name, content, format )
     end
 
     # == Gets the url for current page from Gollum::Page

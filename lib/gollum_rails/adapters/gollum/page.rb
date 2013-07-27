@@ -82,6 +82,18 @@ module GollumRails
           wiki.update_page(page,name,format,content.to_s,commit)
           self.class.find_page( mixin(page.url_path, name), wiki )
         end
+        
+        # == Preview page
+        #
+        # wiki - An instance of Gollum::Wiki
+        # content - New content
+        # name - A String
+        # format - A filetype as symbol (optional)
+        #
+        def preview_page(wiki, name, content, format=:markdown)
+          page = wiki.preview_page(name,content,format)
+          page.formatted_data
+        end
 
         # == Deletes an existing page
         #
