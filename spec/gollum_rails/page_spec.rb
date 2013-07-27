@@ -34,18 +34,12 @@ describe "Gollum Page" do
         @rr.save.should be_a GollumRails::Page
       end
       
-      it "saves via .save!" do
-        expect{@rr.save!}.not_to raise_error Gollum::DuplicatePageError
-      end
-      
+
       it "saves via .create" do
         RailsModel.create(@call).should be_a GollumRails::Page
       end
       
-      it "saves via .create!" do
-        expect{RailsModel.create!(@call)}.to raise_error Gollum::DuplicatePageError
-      end
-      
+
       it "fails if invalid arguments are supplied via the ! create" do
         args = {
           name: "Gaming",
