@@ -1,3 +1,9 @@
+# 1.4.3 1th September 2013
+* Display the current pages version (short OR long)
+* Display if the page is a sub page
+* Display the pages filename
+* Improved specs
+
 # 1.4.2 1th August 2013
 * Found an issue that the Wiki was not updating from external pushes
 * Some helper methods implemented
