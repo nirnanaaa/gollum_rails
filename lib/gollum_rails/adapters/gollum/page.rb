@@ -44,6 +44,7 @@ module GollumRails
           #
           # Returns the Gollum::Page class
           def find_page(name, wiki)
+            wiki.clear_cache
             path_data = parse_path(name)
             wiki.paged(path_data[:name], path_data[:path], exact = true)
           end
@@ -61,6 +62,7 @@ module GollumRails
         def new_page( name, content, wiki, type=:markdown, commit={} )
           path_data = self.class.parse_path(name)
           wiki.write_page( path_data[:name], type, content, commit, path_data[:path].gsub!(/^\//, "").gsub!(/(\/)+$/,'') || "" )
+          wiki.clear_cache
           self.class.find_page( name, wiki )
         end
 
@@ -75,6 +77,7 @@ module GollumRails
         #
         # Returns the page
         def update_page( page, wiki, content=nil, commit={}, name=nil, format=nil)
+          wiki.clear_cache
           return page if page.nil?
           name ||= page.name
           format = (format || page.format).to_sym
@@ -105,6 +108,7 @@ module GollumRails
         #
         # Returns the commit id
         def delete_page( page,wiki,commit={} )
+          wiki.clear_cache
           wiki.delete_page(page, commit)
         end
         
@@ -125,6 +129,7 @@ module GollumRails
         #
         # Returns the Gollum::Page class
         def find_page(name)
+          
           self.class.find_page(name)
         end
         
