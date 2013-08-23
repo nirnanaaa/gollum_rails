@@ -137,25 +137,45 @@ describe "Gollum Page" do
       expect{RailsModel.create! @call}.to raise_error Gollum::DuplicatePageError
     end
 
-    it "should test the supported formats" do
-      RailsModel.format_supported?('ascii').should be_true
-      RailsModel.format_supported?('markdown').should be_true
-      RailsModel.format_supported?('github-markdown').should be_true
-      RailsModel.format_supported?('rdoc').should be_true
-      RailsModel.format_supported?('org').should be_true
-      RailsModel.format_supported?('pod').should be_true
+    describe "supported formats" do
+      ['ascii', 'github-markdown', 'markdown', 'rdoc', 'org', 'pod'].each do |format|
+        it "should support #{format}" do
+          RailsModel.format_supported?(format).should be_true
+        end
+      end
+      
     end
-
-    it "should test getters" do
-      rr = RailsModel.new @call
-      rr.name.should == "Goole"
-      rr.content.should == "content data"
-      rr.commit.should be_a Hash
-      rr.commit.should == @commit
-      rr.format.should == :markdown
-      rr.save
-      rr.page.should be_a GollumRails::Adapters::Gollum::Page
+    
+    describe "accessors" do
+      let(:rr){RailsModel.new @call}
+      
+      it "should have a name" do
+        expect(rr.name).to match(/^Goole$/)
+      end
+      
+      it "should have a content" do
+        expect(rr.content).to match(/^content\ data$/)
+      end
+      
+      it "should have a commit which is a Hash" do
+        expect(rr.commit).to be_a Hash
+      end
+      
+      it "should be @commit" do
+        expect(rr.commit).to be(@commit)
+      end
+      
+      it "should have a format" do
+        expect(rr.format.to_s).to match('markdown')
+      end
+      
+      it "should be a Gollum::Page after save" do
+        rr.save
+        expect(rr.gollum_page).to be_a Gollum::Page
+      end
+      
     end
+    
     it "should test setters" do
       rr = RailsModel.new
       rr.name=("google").should == "google"
@@ -237,29 +257,35 @@ describe "Gollum Page" do
      class Callbackt < GollumRails::Page
       validates_presence_of :name
      end
+     
      cla = Callbackt.new @call
      cla.valid?.should be_true
    end
+   
    class SugarBaby < GollumRails::Page
      validates_presence_of :name
      validates_length_of :name, :minimum => 20
      validates_length_of :format, :maximum => 14
    end
+   
    it "should test string validation" do
      @call[:name] = "das ist zu lang"*10
      cla = SugarBaby.new @call
      cla.valid?.should be_true
    end
+   
    it "should test the presence validator" do
      @call[:name] = [ ]
      bla = SugarBaby.new @call
      bla.valid?.should be_false
    end
+   
    it "should test the length validator for name" do
      @call[:name] = "das"
      res = SugarBaby.new @call
      res.valid?.should be_false
    end
+   
    it "should test the length validator for format" do
      @call[:format] = :toolongformatstringforvalidator
      res = SugarBaby.new @call
