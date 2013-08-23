@@ -322,6 +322,15 @@ describe "Gollum Page" do
     
   end
   
+  describe "Filename" do
+    class Fns < GollumRails::Page
+    end
+    it "should assemble a filename" do
+      res = CommitDiff.new @call
+      expect(res.filename).to match(/^Goole\.md$/)
+    end
+  end
+  
  # describe "the thread safety" do
 #    class ThreadModel < GollumRails::Page
 # 
