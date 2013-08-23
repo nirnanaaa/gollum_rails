@@ -322,6 +322,13 @@ module GollumRails
     def compare_commits(sha1,sha2=nil)
       Page.wiki.full_reverse_diff_for(@gollum_page,sha1,sha2)
     end
+    
+    # == The pages filename, based on the name and the format
+    # 
+    # Returns a String
+    def filename
+      Page.wiki.page_file_name(@name, @format)
+    end
       
     
     #######
