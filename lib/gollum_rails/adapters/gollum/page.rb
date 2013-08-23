@@ -75,11 +75,13 @@ module GollumRails
         #
         # Returns the page
         def update_page( page, wiki, content=nil, commit={}, name=nil, format=nil)
-          return if !page || ((!content||page.raw_data == content) && page.format == format)
+          return page if page.nil?
           name ||= page.name
           format = (format || page.format).to_sym
           content ||= page.raw_data
-          wiki.update_page(page,name,format,content.to_s,commit)
+          
+          wiki.update_page(page,name,format,content.to_s,commit) unless ((!content||page.raw_data == content) && page.format == format)
+          
           self.class.find_page( mixin(page.url_path, name), wiki )
         end
         
