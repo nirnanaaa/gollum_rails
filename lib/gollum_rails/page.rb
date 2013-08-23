@@ -57,7 +57,7 @@ module GollumRails
       # Returns true or false
       def format_supported?(format)
         supported = ['ascii', 'github-markdown','markdown', 'creole', 'org', 'pod', 'rdoc']
-        format.in?(supported)
+        supported.include?(format.to_s)
       end
 
       # first creates an instance of itself and executes the save function.
@@ -315,9 +315,12 @@ module GollumRails
       "%s <%s>" % [history.last.author.name, history.last.author.email]
     end
     
-    
-    def compare_commits(sha1,sha2)
-      puts "NOT YET IMPLEMENTED"
+    # == Compare 2 Commits.
+    #
+    # sha1 - SHA1
+    # sha2 - SHA1
+    def compare_commits(sha1,sha2=nil)
+      Page.wiki.full_reverse_diff_for(@gollum_page,sha1,sha2)
     end
       
     
