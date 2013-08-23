@@ -297,7 +297,8 @@ describe "Gollum Page" do
   describe "diffing commits" do
     class CommitDiff < GollumRails::Page
     end
-    it "should be empty on no changes" do
+    
+    it "should display the diff commit" do
       commit = {
         name: "flo",
         message: "commit",
@@ -313,9 +314,12 @@ describe "Gollum Page" do
       res = CommitDiff.new call
       res.save
       res.update_attributes("content",nil,:markdown, @commit)
-      res.compare_commits(res.history.first)
+      diff = res.compare_commits(res.history.first)
+      expect(diff).to be_a String
+      expect(diff).to match(/diff/)
       res.delete
     end
+    
   end
   
  # describe "the thread safety" do
