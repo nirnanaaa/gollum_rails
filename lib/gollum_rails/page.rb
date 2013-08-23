@@ -335,6 +335,18 @@ module GollumRails
       @gollum_page.sub_page
     end
     
+    # == Gets the version of current commit
+    #
+    def current_version(long=false)
+      return nil unless persisted?
+      unless long
+        @gollum_page.version_short 
+      else
+        @gollum_page.version.to_s
+      end
+      
+    end
+    
     #######
     private
     #######
