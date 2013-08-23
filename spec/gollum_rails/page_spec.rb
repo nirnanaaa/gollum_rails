@@ -267,21 +267,46 @@ describe "Gollum Page" do
    end
 
   end
- describe "the thread safety" do
-   class ThreadModel < GollumRails::Page
+  
+  describe "diffing commits" do
+    class CommitDiff < GollumRails::Page
+    end
+    it "should be empty on no changes" do
+      commit = {
+        name: "flo",
+        message: "commit",
+        email: "mosny@zyg.li"
+      }
+      call = {
+        name: "a Page",
+        content: "my content",
+        commit: commit,
+        format: :markdown
+      }
+      
+      res = CommitDiff.new call
+      res.save
+      res.update_attributes("content",nil,:markdown, @commit)
+      res.compare_commits(res.history.first)
+      res.delete
+    end
+  end
+  
+ # describe "the thread safety" do
+#    class ThreadModel < GollumRails::Page
+# 
+#    end
+#    it "should save " do
+#      100.times do |time|
+#        Thread.new do
+#          ThreadModel.new(@call)
+#          ThreadModel.save.should be_a(GollumRails::Page)
+#          ThreadModel.delete(@commit).length.should == 40
+#        end
+#      end
+# 
+#    end
 
-   end
-   it "should save " do
-     100.times do |time|
-       Thread.new do
-         ThreadModel.new(@call)
-         ThreadModel.save.should be_a(GollumRails::Page)
-         ThreadModel.delete(@commit).length.should == 40
-       end
-     end
 
-   end
-
-
-end
+#end
 end
