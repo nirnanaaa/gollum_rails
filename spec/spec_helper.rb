@@ -16,8 +16,5 @@ RSpec.configure do |config|
  end
 
  config.mock_with :rr
-
- config.before(:each) do
- end
  
 end
