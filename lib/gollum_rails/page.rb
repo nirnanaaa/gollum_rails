@@ -56,8 +56,7 @@ module GollumRails
       #
       # Returns true or false
       def format_supported?(format)
-        supported = ['ascii', 'github-markdown','markdown', 'creole', 'org', 'pod', 'rdoc']
-        supported.include?(format.to_s)
+        Gollum::Markup.formats.include?(format.to_sym)
       end
 
       # first creates an instance of itself and executes the save function.
@@ -330,6 +329,11 @@ module GollumRails
       Page.wiki.page_file_name(@name, @format)
     end
       
+    # == Checks if current page is a subpage
+    def sub_page?
+      return nil unless persisted?
+      @gollum_page.sub_page
+    end
     
     #######
     private

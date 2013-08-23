@@ -138,7 +138,7 @@ describe "Gollum Page" do
     end
 
     describe "supported formats" do
-      ['ascii', 'github-markdown', 'markdown', 'rdoc', 'org', 'pod'].each do |format|
+      ['markdown', 'rdoc', 'org', 'pod'].each do |format|
         it "should support #{format}" do
           RailsModel.format_supported?(format).should be_true
         end
@@ -331,6 +331,28 @@ describe "Gollum Page" do
     end
   end
   
+  describe "Sub Page" do
+    class Fns < GollumRails::Page
+    end
+    
+    it "should return nil if not persisted" do
+      res = CommitDiff.new @call
+      expect(res.sub_page?).to be_nil
+    end
+    it "should be true" do
+      res = CommitDiff.new @call.merge(name: '_aPage')
+      res.save
+      expect(res.sub_page?).to be_true
+      res.delete
+    end
+    
+    it "should be false" do
+      res = CommitDiff.new @call
+      res.save
+      expect(res.sub_page?).to be_false
+      res.delete
+    end
+  end  
  # describe "the thread safety" do
 #    class ThreadModel < GollumRails::Page
 # 
