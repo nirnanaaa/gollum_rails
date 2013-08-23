@@ -353,6 +353,38 @@ describe "Gollum Page" do
       res.delete
     end
   end  
+  
+  describe "Current version" do
+    class Fns < GollumRails::Page
+    end
+    
+    it "current version should have 7 digest" do
+      res = CommitDiff.new @call
+      res.save
+      expect(res.current_version.length).to be(7)
+      res.delete
+    end
+    
+    it "should be nil if page has not been set" do
+      res = CommitDiff.new @call
+      expect(res.current_version).to be_nil
+    end
+
+    it "should be the latest version of the page but shortened" do
+      res = CommitDiff.new @call
+      res.save
+      expect(res.gollum_page.version.to_s).to match(res.current_version)
+      res.delete
+    end
+    it "should display the long version" do
+      res = CommitDiff.new @call
+      res.save
+      expect(res.gollum_page.version.to_s).to match(/^#{res.current_version(true)}$/)
+      res.delete
+    end
+    
+  end
+  
  # describe "the thread safety" do
 #    class ThreadModel < GollumRails::Page
 # 
