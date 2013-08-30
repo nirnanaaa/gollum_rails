@@ -8,6 +8,7 @@
 * Returning nil on history if a page was not saved
 * Added finding with version string
 * Using activemodel convenient `destroy` and deprecated old `delete`
+* Added callback for initializer
 
 # 1.4.2 1th August 2013
 * Found an issue that the Wiki was not updating from external pushes
