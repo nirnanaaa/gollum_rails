@@ -192,11 +192,24 @@ describe "Gollum Page" do
       expect(RailsModel.find('Goole')).to be_a GollumRails::Page
     end
     
-    it "should test find or initialize" do
-      rr = RailsModel.new @call
-      rr.save
+    it 'should not be persisted on initialization or finding' do
+      init = RailsModel.find_or_initialize_by_name('totallybad', @commit)
+      expect(init.persisted?).to be_false
+    end
+    
+    it "should find the page without a commit if it exists" do
+      expect(RailsModel.find_or_initialize_by_name("Goole").persisted?).to be_true
+    end
+    
+    it "should find the page with a commit if it exists" do
+      expect(RailsModel.find_or_initialize_by_name("Goole", @commit).persisted?).to be_true
+    end
+    
+    it "should be valid on initialization or finding" do
+      init = RailsModel.find_or_initialize_by_name('whoooohooo', @commit)
+      expect(init.valid?).to be_true
       
-      RailsModel.find_or_initialize_by_name(@call[:name], @commit).should  be_a GollumRails::Page
+      #RailsModel.find_or_initialize_by_name(@call[:name], @commit).should  be_a GollumRails::Page
       
     end
   end
