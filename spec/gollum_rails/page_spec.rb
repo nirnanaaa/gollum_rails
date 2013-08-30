@@ -183,12 +183,21 @@ describe "Gollum Page" do
       rr.content=("content").should == "content"
       rr.format=(:markdown).should == :markdown
     end
-
-
+    
+    it "tests the find method to return nil if no page was found" do
+      expect(RailsModel.find('whoooohoo')).to be_nil
+    end
+    
+    it "tests the find method to return a gollum_rails:page if a page was found" do
+      expect(RailsModel.find('Goole')).to be_a GollumRails::Page
+    end
+    
     it "should test find or initialize" do
       rr = RailsModel.new @call
       rr.save
+      
       RailsModel.find_or_initialize_by_name(@call[:name], @commit).should  be_a GollumRails::Page
+      
     end
   end
   describe "callbacks" do
