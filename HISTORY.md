@@ -3,6 +3,8 @@
 * Display if the page is a sub page
 * Display the pages filename
 * Improved specs
+* Refactored find method to return nil if no page was found (BUG)
+* Refactored find_or_initialize_by_name to be useable :)
 
 # 1.4.2 1th August 2013
 * Found an issue that the Wiki was not updating from external pushes
