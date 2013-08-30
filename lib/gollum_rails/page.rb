@@ -47,7 +47,7 @@ module GollumRails
       # Returns self
       def find_or_initialize_by_name(name, commit={})
         result_for_find = find(name)
-        unless result_for_find.nil? && result_for_find.gollum_page.nil?
+        unless result_for_find.nil?
           result_for_find
         else
           new(:format => :markdown, :name => name, :content => ".", :commit => commit)
