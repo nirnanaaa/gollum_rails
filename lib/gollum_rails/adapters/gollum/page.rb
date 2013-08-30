@@ -41,12 +41,13 @@ module GollumRails
           #
           # name - the pagename to search
           # wiki - instance of Gollum::Wiki
+          # version - optional - The pages version
           #
           # Returns the Gollum::Page class
-          def find_page(name, wiki)
+          def find_page(name, wiki, version=nil)
             wiki.clear_cache
             path_data = parse_path(name)
-            wiki.paged(path_data[:name], path_data[:path], exact = true)
+            wiki.paged(path_data[:name], path_data[:path], exact = true, version)
           end
         end
 
