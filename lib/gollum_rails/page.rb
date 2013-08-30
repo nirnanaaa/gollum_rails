@@ -50,7 +50,7 @@ module GollumRails
         unless result_for_find.nil? && result_for_find.gollum_page.nil?
           result_for_find
         else
-          Page.new(:format => :markdown, :name => name, :content => ".", :commit => commit)
+          new(:format => :markdown, :name => name, :content => ".", :commit => commit)
         end
       end
 
@@ -93,7 +93,11 @@ module GollumRails
       #
       # Return an instance of Gollum::Page
       def find(name)
-        self.new(gollum_page: Adapters::Gollum::Page.find_page(name, wiki))
+        page = Adapters::Gollum::Page.find_page(name, wiki)
+        
+        return new( :gollum_page => page ) unless page.nil?
+        return nil
+        
       end
 
       # Gets all pages in the wiki
