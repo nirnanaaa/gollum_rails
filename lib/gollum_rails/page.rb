@@ -251,6 +251,18 @@ module GollumRails
         @gollum_page = page.update_page(gollum_page, wiki, content, get_right_commit(commit), name, format)
       end
     end
+    
+    # == Deletes current page (also available static. See below)
+    #
+    # commit - optional. If given this commit will be used instead of that one, used
+    #          to initialize the instance
+    #
+    # Returns the commit id of the current action as String
+    def destroy(commit=nil)
+      run_callbacks :delete do
+        page.delete_page(gollum_page, wiki, get_right_commit(commit))
+      end
+    end
 
     # == Deletes current page (also available static. See below)
     #
@@ -259,9 +271,7 @@ module GollumRails
     #
     # Returns the commit id of the current action as String
     def delete(commit=nil)
-      run_callbacks :delete do
-        page.delete_page(gollum_page, wiki, get_right_commit(commit))
-      end
+      destroy(commit)
     end
 
     # checks if entry already has been saved
