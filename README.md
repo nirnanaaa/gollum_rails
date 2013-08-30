@@ -28,6 +28,7 @@ with gollum_rails you can:
 ## [Usage](https://github.com/nirnanaaa/gollum_rails/wiki/Usage)
 
 
+
 ## DEVELOPER
 
 Very cool. Just fork this repository and send me pull requests.
