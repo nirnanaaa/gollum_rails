@@ -312,6 +312,7 @@ module GollumRails
     #
     # Returns an Array
     def history
+      return nil unless persisted?
       gollum_page.versions
     end
     
