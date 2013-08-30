@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.name = 'gollum_rails'
   s.rubyforge_project = s.name
 
-  s.version = '1.4.2'
+  s.version = '1.4.3'
 
   s.summary = 'Combines Gollum and Rails'
   s.description= 'include Gollum into Rails with ease'
@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
   s.files = %w[
     Gemfile
     Gemfile.lock
+    Guardfile
     HISTORY.md
     LICENSE
     README.md
@@ -65,7 +66,6 @@ Gem::Specification.new do |s|
     spec/gollum_rails/respository_spec.rb
     spec/gollum_rails/setup_spec.rb
     spec/gollum_rails/wiki_spec.rb
-    spec/spec.opts
     spec/spec_helper.rb
   ]
   # = MANIFEST =
