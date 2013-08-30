@@ -407,6 +407,24 @@ describe "Gollum Page" do
     
   end
   
+  describe 'History' do
+    class Fns < GollumRails::Page
+    end
+    
+    it "history should return nil if no gollum_page was saved" do
+      res = Fns.new @call
+      expect(res.history).to be_nil
+    end
+    
+    it "history should return the pages versions if there are changes" do
+      res = Fns.new @call
+      res.save
+      expect(res.history).to be_a Array
+      res.delete
+    end
+    
+  end
+  
  # describe "the thread safety" do
 #    class ThreadModel < GollumRails::Page
 # 

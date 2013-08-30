@@ -90,10 +90,11 @@ module GollumRails
       # Finds a page based on the name and specified version
       #
       # name - the name of the page
+      # version - optional - The pages version
       #
       # Return an instance of Gollum::Page
-      def find(name)
-        page = Adapters::Gollum::Page.find_page(name, wiki)
+      def find(name, version=nil)
+        page = Adapters::Gollum::Page.find_page(name, wiki, version)
         
         return new( :gollum_page => page ) unless page.nil?
         return nil
@@ -148,10 +149,10 @@ module GollumRails
 
 
     # Gets / Sets the pages name
-    attr_accessor :name
+    attr_writer :name
 
     # Gets / Sets the contents content
-    attr_accessor :content
+    attr_writer :content
 
     # Gets / Sets the commit Hash
     attr_accessor :commit
@@ -167,9 +168,16 @@ module GollumRails
 
     # Gets the pages format
     def format
-      (@format || :markdown).to_sym
+      (@format || @gollum_page.format).to_sym
     end
 
+    def name
+      @name ||= @gollum_page.name
+    end
+    
+    def content
+      @content ||= @gollum_page.content
+    end
 
     # Gets the page class
     def page

@@ -5,6 +5,9 @@
 * Improved specs
 * Refactored find method to return nil if no page was found (BUG)
 * Refactored find_or_initialize_by_name to be useable :)
+* Returning nil on history if a page was not saved
+* Added finding with version string
+
 
 # 1.4.2 1th August 2013
 * Found an issue that the Wiki was not updating from external pushes
