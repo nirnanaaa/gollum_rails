@@ -44,14 +44,13 @@ module GollumRails
       # name - The name
       # commit - Hash
       #
-      # TODO: This does not find anything :)
       # Returns self
       def find_or_initialize_by_name(name, commit={})
         result_for_find = find(name)
-        if result_for_find.nil?
-          new({:format => :markdown, :name => name, :content => ".", :commit => commit })
-        else
+        unless result_for_find.nil? && result_for_find.gollum_page.nil?
           result_for_find
+        else
+          Page.new(:format => :markdown, :name => name, :content => ".", :commit => commit)
         end
       end
 
@@ -164,7 +163,7 @@ module GollumRails
 
     # Gets the pages format
     def format
-      (@format ||= :markdown).to_sym
+      (@format || :markdown).to_sym
     end
 
 
