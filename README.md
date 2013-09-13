@@ -4,7 +4,7 @@ Gollum for Rails
 [![Dependency Status](https://gemnasium.com/nirnanaaa/gollum_rails.png)](https://gemnasium.com/nirnanaaa/gollum_rails)
 [![Gem Version](https://badge.fury.io/rb/gollum_rails.png)](http://badge.fury.io/rb/gollum_rails)
 [![Coverage Status](https://coveralls.io/repos/nirnanaaa/gollum_rails/badge.png?branch=master)](https://coveralls.io/r/nirnanaaa/gollum_rails)
-
+[![Code Climate](https://codeclimate.com/github/nirnanaaa/gollum_rails.png)](https://codeclimate.com/github/nirnanaaa/gollum_rails)
 
 gollum_rails combines the git-powered wiki software gollum with the extreme popular webframework rails.
 It improves the lightweight "gollum" experience which is quite awesome.
