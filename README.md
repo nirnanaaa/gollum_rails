@@ -17,6 +17,10 @@ with gollum_rails you can:
 * Use own preprocession e.g. background workers for data procession
 * Use user authentication e.g. Devise or Authlogic
 
+For an Editor to use with gollum_rails I personally like the [gollum_editor](https://github.com/samknight/gollum_editor)
+
+It provides nearly the same features as the official editor.
+
 ## SYSTEM REQUIREMENTS
 - Python 2.5+ (2.7.3 recommended)
 - Ruby 1.9.3+ (2.0.0 recommended)
