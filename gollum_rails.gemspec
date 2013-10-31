@@ -34,7 +34,6 @@ Gem::Specification.new do |s|
     README.md
     Rakefile
     gollum_rails.gemspec
-    lib/core_ext/string.rb
     lib/generators/gollum_rails/install/install_generator.rb
     lib/generators/gollum_rails/install/templates/gollum_initializer.rb
     lib/generators/gollum_rails/language/language_generator.rb
