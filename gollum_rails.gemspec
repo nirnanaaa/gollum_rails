@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.description= 'include Gollum into Rails with ease'
 
   s.add_dependency 'activemodel', '>= 4.0.0'
-  s.add_dependency 'gollum-lib', '~> 1.0.4'
+  s.add_dependency 'gollum-lib', '~> 1.0.8'
 
   s.add_development_dependency 'rspec', '~> 2.13.0'
   s.add_development_dependency 'rr', '~> 1.1.1'
@@ -52,7 +52,6 @@ Gem::Specification.new do |s|
     lib/gollum_rails/adapters/gollum/wiki.rb
     lib/gollum_rails/page.rb
     lib/gollum_rails/setup.rb
-    lib/grit/git-ruby/internal/pack.rb
     spec/gollum_rails/adapters/activemodel/error_spec.rb
     spec/gollum_rails/adapters/activemodel/naming_spec.rb
     spec/gollum_rails/adapters/activemodel/validation_unused.rb
