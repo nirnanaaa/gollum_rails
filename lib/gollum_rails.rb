@@ -6,9 +6,6 @@ require 'rubygems'
 # external
 require 'gollum-lib'
 
-# patches
-require 'grit/git-ruby/internal/pack'
-require 'core_ext/string'
 
 # GollumRails is a RubyGem for extending Rails and the Gollum wiki powered by github
 # It has the ability to combine the benefits from a git powered wiki with Rails.
