@@ -59,7 +59,7 @@ describe "Gollum Page" do
       end
       it "has the formatted data" do
         @rr.save
-        @rr.html_data.should == '<p>content data</p>'
+        @rr.html_data.should == 'content data'
       end
       it "was last changed by me" do
         @rr.save
@@ -124,13 +124,6 @@ describe "Gollum Page" do
       end
     end
 
-
-    100.times do
-      it "should test the preview" do
-        rr = RailsModel.new :content => "# content", :name => "somepage"
-          rr.preview.should include("<h1>content<a class=\"anchor\" id=\"content\" href=\"#content\"></a></h1>")
-      end
-   end
    
     it "should test exception methods" do
       RailsModel.create @call
@@ -338,7 +331,7 @@ describe "Gollum Page" do
       res.update_attributes("content",nil,:markdown, @commit)
       diff = res.compare_commits(res.history.first)
       expect(diff).to be_a String
-      expect(diff).to match(/diff/)
+      expect(diff).to match(/---/)
       res.delete
     end
     
