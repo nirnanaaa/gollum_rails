@@ -1,3 +1,10 @@
+# 1.4.4 31th October 2013
+* Removed Monkey patch for Grit
+* Upgraded Gollum lib version
+* Fixed specs for new gollum behavior
+* Removed String freedom patches
+*  
+
 # 1.4.3 1th September 2013
 * Display the current pages version (short OR long)
 * Display if the page is a sub page
