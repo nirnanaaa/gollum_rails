@@ -79,7 +79,7 @@ module GollumRails
           GollumRails::Adapters::Gollum::Wiki.new(repository, options || {})
           true
         else
-          raise GollumInternalError, 'no repository path specified'
+          raise GollumInternalError, 'Repistory path empty or invalid!'
         end
 
       end

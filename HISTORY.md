@@ -1,6 +1,6 @@
 # 1.4.6 9th December 2013
 * Updated the initializer to support paths now
-
+* Updated error messages
 
 # 1.0.6 9th December 2013 *RAILS3 branch*
 * Rails 3 backwards compability

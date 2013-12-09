@@ -40,6 +40,12 @@ describe GollumRails::Setup do
       expect{setup.startup=true}.to raise_error
     end
   end
+  it "should throw an error if a pathname was supplied that does not exist" do
+    GollumRails::Setup.build do |setup|
+      setup.repository = Pathname.new('/nonexistingdirectoryshouldbenonexisting') 
+      expect{setup.startup=(true)}.to raise_error(GollumRails::GollumInternalError)
+    end
+  end
   it "should test the Rails configuration" do
     GollumRails::Setup.build do |setup|
 
