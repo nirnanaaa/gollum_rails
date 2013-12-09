@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.name = 'gollum_rails'
   s.rubyforge_project = s.name
 
-  s.version = '1.0.5'
+  s.version = '1.0.6'
 
   s.summary = 'Combines Gollum and Rails'
   s.description= 'include Gollum into Rails with ease'
