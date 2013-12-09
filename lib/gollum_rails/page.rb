@@ -15,8 +15,9 @@ module GollumRails
   #   * find_or_initialize_by_name
   #
   class Page
-    include ::ActiveModel::Model
-
+    extend ActiveModel::Naming
+    include ActiveModel::Conversion
+    include ActiveModel::Validations
 
     # Callback for save
     define_model_callbacks :save
