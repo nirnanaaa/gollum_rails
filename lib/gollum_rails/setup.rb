@@ -69,6 +69,7 @@ module GollumRails
       #   path_valid? nil
       #   # =>false
       def path_valid?(path)
+        return path.exist? if path.is_a?(Pathname)
         return !(path.nil? || path.empty? || ! path.is_a?(String))
       end
 
