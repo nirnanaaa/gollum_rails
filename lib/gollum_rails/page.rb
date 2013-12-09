@@ -16,26 +16,13 @@ module GollumRails
   #
   class Page
     extend ActiveModel::Naming
+    extend ActiveModel::Callbacks
+    
     include ActiveModel::Conversion
     include ActiveModel::Validations
 
-    # Callback for save
-    define_model_callbacks :save
+    define_model_callbacks :save, :update, :delete, :initialize, :create, :commit
 
-    # Callback for update
-    define_model_callbacks :update
-
-    # Callback for delete
-    define_model_callbacks :delete
-    
-    # Callback for initialize
-    define_model_callbacks :initialize
-    
-    # Callback for create
-    define_model_callbacks :create
-
-    # Callback for commit
-    define_model_callbacks :commit
     
     # static
     class << self
@@ -120,7 +107,7 @@ module GollumRails
         if name =~ /^find_by_(name)$/
           self.find(args.first)
         else
-          raise NoMethodError, "Method #{name} was not found"
+          raise NoMethodError, "undefined method `#{name}` for #{self}:#{self.class}"
         end
       end
 
