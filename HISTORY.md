@@ -1,3 +1,6 @@
+# 1.0.6 9th December 2013
+* Rails 3 backwards compability
+
 # 1.4.5 6th November 2013
 * Updated Gollum-Lib version to 1.0.9
 * Updated Rails stuff to 4.0.1
