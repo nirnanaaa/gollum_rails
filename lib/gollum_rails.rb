@@ -20,7 +20,7 @@ module GollumRails
   autoload :Setup,    'gollum_rails/setup'
 
   # GollumRails version string
-  VERSION = '1.4.5'
+  VERSION = '1.0.5'
 
   # Simplified error
   class Error < StandardError; end
