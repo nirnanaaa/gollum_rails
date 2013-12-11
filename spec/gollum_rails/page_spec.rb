@@ -223,8 +223,8 @@ describe "Gollum Page" do
 
         before_save ::SaveCallback
         after_save :after_save
-        after_delete :after_delete
-        before_delete :before_delete
+        after_destroy :after_delete
+        before_destroy :before_delete
         before_update :before_update
         after_update :after_update
 
