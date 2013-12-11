@@ -82,16 +82,11 @@ module GollumRails
       def method_missing(name, *args)
         if name =~ /^find_by_(name)$/
           self.find(args.first)
-        else
-          raise NoMethodError, "Method #{name} was not found"
+        else super
         end
       end
 
     end
-
-    # Gets / Sets the gollum page
-    #
-    attr_accessor :gollum_page
     
     # Initializes a new Page
     #
@@ -108,28 +103,6 @@ module GollumRails
         end
       end
     end
-
-    #########
-    # Setters
-    #########
-
-
-    # Gets / Sets the pages name
-    attr_writer :name
-
-    # Gets / Sets the contents content
-    attr_writer :content
-
-    # Gets / Sets the commit Hash
-    attr_accessor :commit
-
-    # Sets the format
-    attr_writer :format
-
-
-    #########
-    # Getters
-    #########
 
 
     # Gets the pages format
@@ -149,9 +122,6 @@ module GollumRails
     def page
       Adapters::Gollum::Page.new
     end
-    
-    # Gollum Page
-    attr_accessor :gollum_page
 
 
 
@@ -324,4 +294,5 @@ module GollumRails
   if defined?(ActiveSupport)
     ActiveSupport.run_load_hooks(:gollum, Page)
   end
+  
  end
