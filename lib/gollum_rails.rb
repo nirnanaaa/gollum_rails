@@ -5,7 +5,8 @@ require 'rubygems'
 
 # external
 require 'gollum-lib'
-
+require 'active_model'
+require 'active_support'
 
 # GollumRails is a RubyGem for extending Rails and the Gollum wiki powered by github
 # It has the ability to combine the benefits from a git powered wiki with Rails.
@@ -16,8 +17,14 @@ require 'gollum-lib'
 #   * ...
 #
 module GollumRails
-  autoload :Page,     'gollum_rails/page'
-  autoload :Setup,    'gollum_rails/setup'
+  extend ActiveSupport::Autoload
+  
+  autoload :Persistance
+  autoload :Callbacks
+  autoload :Store
+  autoload :Validation
+  autoload :Page
+  autoload :Setup
 
   # GollumRails version string
   VERSION = '1.4.6'

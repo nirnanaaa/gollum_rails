@@ -1,5 +1,3 @@
-require 'thread'
-
 module GollumRails
 
   # Main class, used to interact with rails.
@@ -17,28 +15,16 @@ module GollumRails
   class Page
     include ::ActiveModel::Model
 
+    include Callbacks
+    include Store
+    include Validation
+    include Persistance
 
-    # Callback for save
-    define_model_callbacks :save
-
-    # Callback for update
-    define_model_callbacks :update
-
-    # Callback for delete
-    define_model_callbacks :delete
-    
-    # Callback for initialize
-    define_model_callbacks :initialize
-    
-    # Callback for create
-    define_model_callbacks :create
-
-    # Callback for commit
-    define_model_callbacks :commit
     
     # static
     class << self
-      
+
+        
       # Finds an existing page or creates it
       #
       # name - The name
@@ -63,29 +49,7 @@ module GollumRails
         Gollum::Markup.formats.include?(format.to_sym)
       end
 
-      # first creates an instance of itself and executes the save function.
-      #
-      # data - Hash containing the page data
-      #
-      #
-      # Returns an instance of Gollum::Page or false
-      def create(data)
-        page = Page.new(data)
-        page.save
-      end
 
-
-      # calls `create` on current class. If returned value is nil an exception will be thrown
-      #
-      # data - Hash of Data containing all necessary stuff
-      # TODO write this stuff
-      #
-      #
-      # Returns an instance of Gollum::Page
-      def create!(data)
-        page = Page.new(data)
-        page.save!
-      end
 
       # Finds a page based on the name and specified version
       #
@@ -189,54 +153,7 @@ module GollumRails
     # Gollum Page
     attr_accessor :gollum_page
 
-    #############
-    # activemodel
-    #############
 
-    # Handles the connection betweet plain activemodel and Gollum
-    # Saves current page in GIT wiki
-    # If another page with the same name is existing, gollum_rails
-    # will detect it and returns that page instead.
-    #
-    # Examples:
-    #
-    #   obj = GollumRails::Page.new <params>
-    #   @article = obj.save
-    #   # => Gollum::Page
-    #
-    #   @article.name
-    #   whatever name you have entered OR the name of the previous
-    #   created page
-    #
-    #
-    # TODO:
-    #   * overriding for creation(duplicates)
-    #   * do not alias save! on save
-    #
-    # Returns an instance of Gollum::Page or false
-    def save
-      run_callbacks :save do
-        return nil unless valid?
-        begin
-          @gollum_page = page.new_page(name,content,wiki,format,commit) 
-        rescue ::Gollum::DuplicatePageError => e
-          @gollum_page = Adapters::Gollum::Page.find_page(name, wiki)
-        end
-        return self
-      end
-    end
-
-    # == Save without exception handling
-    # raises errors everytime something is wrong 
-    #
-    def save!
-      run_callbacks :save do
-        raise StandardError, "record is not valid" unless valid?
-        raise StandardError, "commit could not be empty" if commit == {}
-        @gollum_page = page.new_page(name,content,wiki,format,commit)
-        return self
-      end
-    end
 
     # == Updates an existing page (or created)
     #
@@ -261,9 +178,7 @@ module GollumRails
     #
     # Returns the commit id of the current action as String
     def destroy(commit=nil)
-      run_callbacks :delete do
-        page.delete_page(gollum_page, wiki, get_right_commit(commit))
-      end
+      page.delete_page(gollum_page, wiki, get_right_commit(commit))
     end
 
     # == Deletes current page (also available static. See below)
@@ -404,5 +319,9 @@ module GollumRails
       self.class.wiki
     end
     
+  end
+  
+  if defined?(ActiveSupport)
+    ActiveSupport.run_load_hooks(:gollum, Page)
   end
  end
