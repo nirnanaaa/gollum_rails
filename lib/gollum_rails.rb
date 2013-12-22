@@ -43,7 +43,7 @@ module GollumRails
   autoload :Orm
 
   # GollumRails version string
-  VERSION = '1.4.6'
+  VERSION = '1.4.7'
 
   # Simplified error
   class Error < StandardError; end
