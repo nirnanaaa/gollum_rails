@@ -115,13 +115,7 @@ describe "Gollum Page" do
         delete = @cc.delete
         delete.should be_a String
       end
-      
-      it "should test the recreation" do
-        delete = @rr.delete
-        @rr.save.should be_a GollumRails::Page
-        @rr.delete.should be_a String
-        
-      end
+
     end
 
    
@@ -175,6 +169,24 @@ describe "Gollum Page" do
       rr.commit=(@commit).should == @commit
       rr.content=("content").should == "content"
       rr.format=(:markdown).should == :markdown
+    end
+    
+    it "builds an url for the page" do
+      page = RailsModel.find('Goole')
+      
+      p = RailsModel.new(name: "bla/testfa", commit: @commit, content: "[[Goole]]", format: :markdown)
+      #p.destroy(@commit)
+
+      
+
+    end
+    
+    it "gets the pages filename on disk with a 'DOT' in filename" do
+      expect(RailsModel.find('Goole').filename).to match('.')
+    end
+    
+    it "gets the pages filename on disk withOUT a 'dot' in filename" do
+      expect(RailsModel.find('Goole').filename(false)).not_to match('.md')
     end
     
     it "tests the find method to return nil if no page was found" do
@@ -336,15 +348,7 @@ describe "Gollum Page" do
     end
     
   end
-  
-  describe "Filename" do
-    class Fns < GollumRails::Page
-    end
-    it "should assemble a filename" do
-      res = CommitDiff.new @call
-      expect(res.filename).to match(/^Goole\.md$/)
-    end
-  end
+
   
   describe "Sub Page" do
     class Fns < GollumRails::Page
@@ -418,20 +422,43 @@ describe "Gollum Page" do
     
   end
   
- # describe "the thread safety" do
-#    class ThreadModel < GollumRails::Page
-# 
-#    end
-#    it "should save " do
-#      100.times do |time|
-#        Thread.new do
-#          ThreadModel.new(@call)
-#          ThreadModel.save.should be_a(GollumRails::Page)
-#          ThreadModel.delete(@commit).length.should == 40
-#        end
-#      end
-# 
-#    end
+  describe "path names" do
+    class Fns < GollumRails::Page
+    end
+    it "should output nothing as there is no path" do
+      res = Fns.create @call
+      expect(res.path_name).to match ''
+      res.destroy(@commit)
+    end
+    
+    it "should output a path name as there was a path supplied" do
+      res = Fns.new @call.merge(name: 'test/pagess')
+      res.save
+      expect(res.path_name).not_to be_nil
+      res.destroy(@commit)
+    end
+    
+    it "should create a nested page under /test" do
+      res = Fns.new @call.merge(name: 'test/my_page')
+      res.save
+      expect(res.path_name).to match 'test'
+      res.destroy(@commit)
+    end
+    it "should find a nested file" do
+      res = Fns.new @call.merge(name: 'test/my_page2')
+      res.save
+      expect(Fns.find('test/my_page2')).not_to be_nil
+      res.destroy
+    end
+    it "should search for a files content" do
+      res = Fns.new @call.merge(name: 'test/my_page3')
+      res.save
+      expect(Fns.search('content')).not_to be_empty
+      expect(Fns.search('content').first[:count]).to be(1)
+      res.destroy
+    end
+  end
+
 
 
 #end

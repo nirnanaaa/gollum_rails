@@ -16,77 +16,13 @@ module GollumRails
     include ::ActiveModel::Model
 
     include Callbacks
+    include Core
     include Store
     include Validation
     include Persistance
+    include Finders
 
     
-    # static
-    class << self
-
-        
-      # Finds an existing page or creates it
-      #
-      # name - The name
-      # commit - Hash
-      #
-      # Returns self
-      def find_or_initialize_by_name(name, commit={})
-        result_for_find = find(name)
-        unless result_for_find.nil?
-          result_for_find
-        else
-          new(:format => :markdown, :name => name, :content => ".", :commit => commit)
-        end
-      end
-
-      # Checks if the fileformat is supported
-      #
-      # format - String
-      #
-      # Returns true or false
-      def format_supported?(format)
-        Gollum::Markup.formats.include?(format.to_sym)
-      end
-
-
-
-      # Finds a page based on the name and specified version
-      #
-      # name - the name of the page
-      # version - optional - The pages version
-      #
-      # Return an instance of Gollum::Page
-      def find(name, version=nil)
-        page = Adapters::Gollum::Page.find_page(name, wiki, version)
-        
-        return new( :gollum_page => page ) unless page.nil?
-        return nil
-        
-      end
-
-      # Gets all pages in the wiki
-      def all
-        wiki.pages
-      end
-      
-      alias_method :find_all, :all
-
-      # Gets the wiki instance
-      def wiki
-        @wiki ||= ::Gollum::Wiki.new(Adapters::Gollum::Connector.wiki_path, Adapters::Gollum::Connector.wiki_options)
-      end
-      
-      # TODO: implement more of this (format, etc)
-      #
-      def method_missing(name, *args)
-        if name =~ /^find_by_(name)$/
-          self.find(args.first)
-        else super
-        end
-      end
-
-    end
     
     # Initializes a new Page
     #
@@ -114,6 +50,13 @@ module GollumRails
       @name ||= @gollum_page.name
     end
     
+    # == Outputs the pages filename on disc
+    #
+    # ext - Wether to output extension or not
+    def filename(ext=true)
+      @filename ||= (ext) ? @gollum_page.filename : @gollum_page.filename_stripped
+    end
+    
     def content
       @content ||= @gollum_page.content
     end
@@ -125,49 +68,9 @@ module GollumRails
 
 
 
-    # == Updates an existing page (or created)
-    #
-    # content - optional. If given the content of the gollum_page will be updated
-    # name - optional. If given the name of gollum_page will be updated
-    # format - optional. Updates the format. Uses markdown as default
-    # commit - optional. If given this commit will be used instead of that one, used
-    #          to initialize the instance
-    #
-    #
-    # Returns an instance of GollumRails::Page
-    def update_attributes(content=nil,name=nil,format=:markdown, commit=nil)
-      run_callbacks :update do
-        @gollum_page = page.update_page(gollum_page, wiki, content, get_right_commit(commit), name, format)
-      end
-    end
+
     
-    # == Deletes current page (also available static. See below)
-    #
-    # commit - optional. If given this commit will be used instead of that one, used
-    #          to initialize the instance
-    #
-    # Returns the commit id of the current action as String
-    def destroy(commit=nil)
-      page.delete_page(gollum_page, wiki, get_right_commit(commit))
-    end
 
-    # == Deletes current page (also available static. See below)
-    #
-    # commit - optional. If given this commit will be used instead of that one, used
-    #          to initialize the instance
-    #
-    # Returns the commit id of the current action as String
-    def delete(commit=nil)
-      destroy(commit)
-    end
-
-    # checks if entry already has been saved
-    #
-    #
-    def persisted?
-      return true if gollum_page
-      return false
-    end
     
     # == Previews the page - Mostly used if you want to see what you do before saving
     #
@@ -239,9 +142,9 @@ module GollumRails
     # == The pages filename, based on the name and the format
     # 
     # Returns a String
-    def filename
-      Page.wiki.page_file_name(@name, @format)
-    end
+    # def filename
+    #   Page.wiki.page_file_name(@name, @format)
+    # end
       
     # == Checks if current page is a subpage
     def sub_page?
