@@ -1,3 +1,11 @@
+# 1.4.7 22th December 2013
+* rails3 and 4 support in a single release
+* Major code refactoring
+* Bugfixes
+* Stability improvements
+* Removed obsolete abstraction layer
+* Decentralized code à la ActiveRecord
+
 # 1.4.6 9th December 2013
 * Updated the initializer to support paths now
 * Updated error messages
