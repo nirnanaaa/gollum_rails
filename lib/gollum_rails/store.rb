@@ -1,18 +1,7 @@
 module GollumRails
   module Store
     extend ActiveSupport::Concern
-    # 
-    # # Gets / Sets the pages name
-    # attr_writer :name
-    # 
-    # # Gets / Sets the contents content
-    # attr_writer :content
-    # 
-    # # Gets / Sets the commit Hash
-    # attr_accessor :commit
-    # 
-    # # Sets the format
-    # attr_writer :format
+
     
     ATTR_READERS = []
     ATTR_WRITERS = [:name, :content, :format]
@@ -27,5 +16,45 @@ module GollumRails
       end
       
     end
+    
+    module ClassMethods
+      # Gets the wiki instance
+      def wiki
+        @wiki ||= Gollum::Wiki.new(Adapters::Gollum::Connector.wiki_path, Adapters::Gollum::Connector.wiki_options)
+      end
+    end
+    # Gets the pages format
+    def format
+      (@format || @gollum_page.format).to_sym
+    end
+
+    def name
+      @name ||= @gollum_page.name
+    end
+    
+    # == Outputs the pages filename on disc
+    #
+    # ext - Wether to output extension or not
+    def filename(ext=true)
+      @filename ||= (ext) ? @gollum_page.filename : @gollum_page.filename_stripped
+    end
+    
+    def content
+      @content ||= @gollum_page.content
+    end
+
+    # Gets the page class
+    def page
+      Adapters::Gollum::Page.new
+    end
+    
+    private 
+    # == To static
+    def wiki
+      self.class.wiki
+    end
+    
+    
+    
   end
 end

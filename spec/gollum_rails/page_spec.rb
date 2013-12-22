@@ -139,7 +139,9 @@ describe "Gollum Page" do
       it "should have a name" do
         expect(rr.name).to match(/^Goole$/)
       end
-      
+      it "should have a preview" do
+        expect(rr.preview).to match(/^content/)
+      end 
       it "should have a content" do
         expect(rr.content).to match(/^content\ data$/)
       end
