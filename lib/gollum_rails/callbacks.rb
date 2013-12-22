@@ -21,7 +21,7 @@ module GollumRails
     
     
     
-    def destroy
+    def destroy(*)
       run_callbacks(:destroy) { super }
     end
     
