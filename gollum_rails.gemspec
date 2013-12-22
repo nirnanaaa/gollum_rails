@@ -44,26 +44,26 @@ Gem::Specification.new do |s|
     lib/generators/gollum_rails/model/model_generator.rb
     lib/generators/gollum_rails/model/templates/model_template.erb
     lib/gollum_rails.rb
-    lib/gollum_rails/adapters/activemodel.rb
-    lib/gollum_rails/adapters/activemodel/boolean.rb
-    lib/gollum_rails/adapters/activemodel/error.rb
-    lib/gollum_rails/adapters/activemodel/naming.rb
     lib/gollum_rails/adapters/gollum.rb
     lib/gollum_rails/adapters/gollum/.gitkeep
     lib/gollum_rails/adapters/gollum/error.rb
     lib/gollum_rails/adapters/gollum/page.rb
     lib/gollum_rails/adapters/gollum/wiki.rb
+    lib/gollum_rails/callbacks.rb
+    lib/gollum_rails/core.rb
+    lib/gollum_rails/finders.rb
+    lib/gollum_rails/orm.rb
     lib/gollum_rails/page.rb
+    lib/gollum_rails/persistance.rb
     lib/gollum_rails/setup.rb
-    spec/gollum_rails/adapters/activemodel/error_spec.rb
-    spec/gollum_rails/adapters/activemodel/naming_spec.rb
-    spec/gollum_rails/adapters/activemodel/validation_unused.rb
+    lib/gollum_rails/store.rb
+    lib/gollum_rails/validation.rb
     spec/gollum_rails/adapters/gollum/committer_spec.rb
     spec/gollum_rails/adapters/gollum/connector_spec.rb
-    spec/gollum_rails/adapters/gollum/error_spec.rb
     spec/gollum_rails/adapters/gollum/page_spec.rb
     spec/gollum_rails/adapters/gollum/wiki_spec_off.rb
     spec/gollum_rails/error_spec.rb
+    spec/gollum_rails/orm_spec.rb
     spec/gollum_rails/page_spec.rb
     spec/gollum_rails/respository_spec.rb
     spec/gollum_rails/setup_spec.rb
