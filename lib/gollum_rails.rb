@@ -21,10 +21,13 @@ module GollumRails
   
   autoload :Persistance
   autoload :Callbacks
+  autoload :Core
   autoload :Store
   autoload :Validation
+  autoload :Finders
   autoload :Page
   autoload :Setup
+  autoload :Orm
 
   # GollumRails version string
   VERSION = '1.4.6'
