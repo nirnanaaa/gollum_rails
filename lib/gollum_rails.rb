@@ -59,6 +59,4 @@ module GollumRails
   end
 end
 
-
-require File.expand_path '../gollum_rails/adapters/activemodel', __FILE__
 require File.expand_path '../gollum_rails/adapters/gollum', __FILE__
