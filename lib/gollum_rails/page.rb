@@ -75,12 +75,12 @@ module GollumRails
       include ActiveModel::Validations
     end
     
-    include Callbacks
     include Core
     include Store
     include Validation
     include Persistance
     include Finders
+    include Callbacks
 
   end
   
