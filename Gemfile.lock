@@ -2,8 +2,8 @@ PATH
   remote: .
   specs:
     gollum_rails (1.4.6)
-      activemodel (>= 4.0.0)
-      activesupport (>= 4.0.0)
+      activemodel (>= 3.2.11)
+      activesupport (>= 3.2.11)
       gollum-lib (~> 1.0.9)
 
 GEM
@@ -168,7 +168,7 @@ DEPENDENCIES
   gollum_rails!
   guard
   guard-rspec
-  rails (>= 4.0.0)
+  rails (>= 3.2.11)
   rb-fsevent
   rr (~> 1.1.1)
   rspec (~> 2.13.0)

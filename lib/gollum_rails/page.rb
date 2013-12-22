@@ -65,9 +65,16 @@ module GollumRails
   #
   #
   class Page
-
-    include ::ActiveModel::Model
-
+    
+    if ActiveModel::VERSION::MAJOR == 4
+      include ActiveModel::Model
+    else
+      extend ActiveModel::Naming
+      extend ActiveModel::Callbacks
+      include ActiveModel::Conversion
+      include ActiveModel::Validations
+    end
+    
     include Callbacks
     include Core
     include Store
