@@ -20,7 +20,7 @@ module GollumRails
     module ClassMethods
       # Gets the wiki instance
       def wiki
-        @wiki ||= Gollum::Wiki.new(Adapters::Gollum::Connector.wiki_path, Adapters::Gollum::Connector.wiki_options)
+        @wiki ||= Gollum::Wiki.new(Setup.wiki_path, Setup.wiki_options)
       end
     end
     # Gets the pages format

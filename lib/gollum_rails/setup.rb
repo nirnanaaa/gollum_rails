@@ -12,37 +12,21 @@ module GollumRails
   #     config.startup
   #   end
   #
-  # TODO:
-  #   * more options
-  #
-  # FIXME:
-  #   currently nothing
   #
   class Setup
-
-    # static baby
     class << self
       
+      attr_accessor :wiki_path
+      
+      attr_accessor :wiki_options
 
-      # Gets / Sets the repository
       attr_accessor :repository
-
+      
+      attr_accessor :startup
+      
       # Gets / Sets the init options
       attr_accessor :options
       
-      # Startup action for building wiki components
-      #
-      # Returns true or throws an exception if the path is invalid
-      def startup=(action)
-        if action
-          Adapters::Gollum::Connector.enabled = true
-          if @repository == :application
-            initialize_wiki Rails.application.config.wiki_repository
-          else
-            initialize_wiki @repository
-          end
-        end
-      end
       
       # Wiki startup options
       def options=(options)
@@ -54,6 +38,16 @@ module GollumRails
       #
       def build(&block)
         block.call self
+        if @repository == :application
+          raise GollumRailsSetupError, "Rails configuration is not defined. 
+          Are you in a Rails app?" if Rails.application.nil?
+          
+          initialize_wiki Rails.application.config.wiki_repository
+        else
+          raise GollumRailsSetupError, "Git repository does not exist.
+          Was the specified pathname correct?" unless Pathname.new(@repository).exist?
+          initialize_wiki @repository
+        end
       end
 
       #######
@@ -75,15 +69,16 @@ module GollumRails
 
       def initialize_wiki(path)
         if path_valid? path
-          repository = Grit::Repo.new path.to_s
-          GollumRails::Adapters::Gollum::Wiki.new(repository, options || {})
+          @wiki_path = path.to_s
+          @wiki_options = options
           true
         else
-          raise GollumInternalError, 'Repistory path empty or invalid!'
+          raise GollumRailsSetupError, 'Repistory path is empty or invalid!'
         end
 
       end
 
     end
   end
+  class GollumRailsSetupError < ArgumentError; end
 end
