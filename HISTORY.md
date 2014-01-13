@@ -1,3 +1,8 @@
+# 1.4.8 13th January 2013
+* Updated initializer
+* Better errors
+* no nil exception
+
 # 1.4.7 22th December 2013
 * rails3 and 4 support in a single release
 * Major code refactoring
