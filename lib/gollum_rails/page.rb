@@ -75,6 +75,7 @@ module GollumRails
       include ActiveModel::Validations
     end
     
+    include Error
     include Core
     include Store
     include Validation
