@@ -25,15 +25,6 @@ module GollumRails
           attr_writer :wiki_options
           
 
-          # Sets the applications status
-          attr_writer :enabled
-
-          # Gets the enabled status
-          #
-          # Returns a boolean value
-          def enabled
-            @enabled || false
-          end
           # Gets the Globally used Page class or use a new one if not defined
           #
           #
