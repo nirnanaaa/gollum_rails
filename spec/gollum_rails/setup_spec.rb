@@ -27,17 +27,7 @@ describe GollumRails::Setup do
   end
   class Bla < GollumRails::Page
   end
-  it "should test the disable behavior" do
-    GollumRails::Adapters::Gollum::Connector.enabled = false
 
-    committer = {
-          :name => "Flo",
-          :message => "no",
-          :email => "mosny@zyg.li"
-        }
-
-    expect{Bla.new :name => "Default page", :commit => committer, :content => "#title \n ##body", :format => :markdown}.to raise_error GollumRails::GollumInternalError
-  end
   it "could not start without a rails configuration" do
     
     expect {
