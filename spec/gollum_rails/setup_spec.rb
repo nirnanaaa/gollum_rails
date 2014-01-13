@@ -3,22 +3,27 @@ require 'spec_helper'
 require 'rails'
 describe GollumRails::Setup do
   it "should setup the application" do
-    GollumRails::Setup.build do |setup|
+    expect{
+      GollumRails::Setup.build do |setup|
 
-      # => The repository path to the 
-      #
-      #
-      setup.repository = '.'      
+        # => The repository path to the 
+        #
+        #
+        setup.repository = '.'      
 
-      #setup.wiki.use = :default
-      setup.startup=(true).should be_true
-
-      setup.repository = nil
-      expect{setup.startup=true}.to raise_error GollumRails::GollumInternalError
-
-    end
+      end
+    }.not_to raise_error
+    
 
 
+  end
+  it "should raise an error because no repo was supplied" do
+    expect{
+      GollumRails::Setup.build do |setup|
+        setup.repository = nil     
+
+      end
+    }.to raise_error
   end
   class Bla < GollumRails::Page
   end
@@ -33,34 +38,23 @@ describe GollumRails::Setup do
 
     expect{Bla.new :name => "Default page", :commit => committer, :content => "#title \n ##body", :format => :markdown}.to raise_error GollumRails::GollumInternalError
   end
-  it "should test the applications config" do
-    GollumRails::Setup.build do |config|
-      config.repository = :application
+  it "could not start without a rails configuration" do
+    
+    expect {
+      GollumRails::Setup.build do |config|
+        config.repository = :application
 
-      expect{setup.startup=true}.to raise_error
-    end
+      end
+    }.to raise_error GollumRails::GollumRailsSetupError
+    
   end
   it "should throw an error if a pathname was supplied that does not exist" do
-    GollumRails::Setup.build do |setup|
-      setup.repository = Pathname.new('/nonexistingdirectoryshouldbenonexisting') 
-      expect{setup.startup=(true)}.to raise_error(GollumRails::GollumInternalError)
-    end
+    expect{
+      GollumRails::Setup.build do |setup|
+        setup.repository = Pathname.new('/nonexistingdirectoryshouldbenonexisting') 
+      end
+    }.to raise_error GollumRails::GollumRailsSetupError
   end
-  it "should test the Rails configuration" do
-    GollumRails::Setup.build do |setup|
 
-      # => The repository path to the 
-      #
-      #
-      setup.repository = :application    
-
-      #setup.wiki.use = :default
-      expect{setup.startup=(true)}.to raise_error(NoMethodError, "undefined method `config' for nil:NilClass")
-
-      #setup.repository = nil
-      #expect{setup.startup=true}.to raise_error GollumRails::GollumInternalError
-
-    end
-  end
 
 end
