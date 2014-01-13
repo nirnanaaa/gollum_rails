@@ -7,7 +7,6 @@ module GollumRails
     module Gollum
       autoload :Wiki,       'gollum_rails/adapters/gollum/wiki'
       autoload :Page,       'gollum_rails/adapters/gollum/page'
-      autoload :Error,      'gollum_rails/adapters/gollum/error'
 
       # connector version
       VERSION="2.0.0"
