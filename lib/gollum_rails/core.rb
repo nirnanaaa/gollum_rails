@@ -24,11 +24,9 @@ module GollumRails
     # commit must be given to perform any page action!
     def initialize(attrs = {})
       run_callbacks :initialize do
-        if Adapters::Gollum::Connector.enabled
+        if wiki
           attrs.each{|k,v| self.public_send("#{k}=",v)} if attrs
           update_attrs if attrs[:gollum_page]
-        else
-          raise GollumInternalError, 'gollum_rails is not enabled!'
         end
       end
     end
