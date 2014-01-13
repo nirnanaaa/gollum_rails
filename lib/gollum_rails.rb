@@ -34,6 +34,7 @@ module GollumRails
   
   autoload :Persistance
   autoload :Callbacks
+  autoload :Error
   autoload :Core
   autoload :Store
   autoload :Validation
@@ -45,31 +46,6 @@ module GollumRails
   # GollumRails version string
   VERSION = '1.4.7'
 
-  # Simplified error
-  class Error < StandardError; end
-
-  # All Gollum internal exceptions will be redirected to this
-  class GollumInternalError < Error
-
-
-    attr_accessor :name
-    attr_accessor :message
-    attr_accessor :target
-
-    # modifies content for throwing an exception
-    def initialize(name, target = nil, message = nil)
-      @name = name
-      @target = target
-      @message = message
-
-      super(message || "An Error occured: #{name} on #{target}")
-    end
-
-    # Fancy inspects
-    def inspect
-      "#<GollumRails::GollumInternalError:#{object_id} {name: #{name.inspect}, message: #{message.inspect}, target: #{target.inspect}}>"      
-    end
-  end
 end
 
-require File.expand_path '../gollum_rails/adapters/gollum', __FILE__
+require 'gollum_rails/adapters/gollum'
