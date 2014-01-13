@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.name = 'gollum_rails'
   s.rubyforge_project = s.name
 
-  s.version = '1.4.7'
+  s.version = '1.4.8'
 
   s.summary = 'Combines Gollum and Rails'
   s.description= 'include Gollum into Rails with ease'
@@ -46,11 +46,10 @@ Gem::Specification.new do |s|
     lib/gollum_rails.rb
     lib/gollum_rails/adapters/gollum.rb
     lib/gollum_rails/adapters/gollum/.gitkeep
-    lib/gollum_rails/adapters/gollum/error.rb
     lib/gollum_rails/adapters/gollum/page.rb
-    lib/gollum_rails/adapters/gollum/wiki.rb
     lib/gollum_rails/callbacks.rb
     lib/gollum_rails/core.rb
+    lib/gollum_rails/error.rb
     lib/gollum_rails/finders.rb
     lib/gollum_rails/orm.rb
     lib/gollum_rails/page.rb
@@ -58,12 +57,8 @@ Gem::Specification.new do |s|
     lib/gollum_rails/setup.rb
     lib/gollum_rails/store.rb
     lib/gollum_rails/validation.rb
-    spec/gollum_rails/adapters/gollum/committer_spec.rb
     spec/gollum_rails/adapters/gollum/connector_spec.rb
     spec/gollum_rails/adapters/gollum/page_spec.rb
-    spec/gollum_rails/adapters/gollum/wiki_spec_off.rb
-    spec/gollum_rails/error_spec.rb
-    spec/gollum_rails/orm_spec.rb
     spec/gollum_rails/page_spec.rb
     spec/gollum_rails/respository_spec.rb
     spec/gollum_rails/setup_spec.rb
