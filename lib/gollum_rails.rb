@@ -44,7 +44,7 @@ module GollumRails
   autoload :Orm
 
   # GollumRails version string
-  VERSION = '1.4.8'
+  VERSION = '1.4.9'
 
 end
 
