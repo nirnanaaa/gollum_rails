@@ -26,11 +26,11 @@ module GollumRails
     end
     # Gets the pages format
     def format
-      (@format || @gollum_page.format).to_sym
+      (@format || (@gollum_page.format||:markdown)).to_sym
     end
 
     def name
-      @name ||= @gollum_page.name
+      @name ||= (@gollum_page.name || "")
     end
     
     # == Outputs the pages filename on disc
@@ -41,7 +41,7 @@ module GollumRails
     end
     
     def content
-      @content ||= @gollum_page.content
+      @content ||= (@gollum_page.content || "")
     end
 
     # Gets the page class
