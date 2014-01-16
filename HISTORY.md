@@ -1,3 +1,12 @@
+# 1.4.11 16th January 2013
+* Bugfixes and finally a working project
+
+# 1.4.10 14th January 2013
+* Bugfixes
+
+# 1.4.9 14th January 2013
+* Bugfixes
+
 # 1.4.8 13th January 2013
 * Updated initializer
 * Better errors
