@@ -1,13 +1,17 @@
-# 1.4.11 16th January 2013
+# 1.4.12 16th January 2014
+* Date fix in Readme
+* `all` static method now initializes in a GollumRails::Page 
+
+# 1.4.11 16th January 2014
 * Bugfixes and finally a working project
 
-# 1.4.10 14th January 2013
+# 1.4.10 14th January 2014
 * Bugfixes
 
-# 1.4.9 14th January 2013
+# 1.4.9 14th January 2014
 * Bugfixes
 
-# 1.4.8 13th January 2013
+# 1.4.8 13th January 2014
 * Updated initializer
 * Better errors
 * no nil exception
