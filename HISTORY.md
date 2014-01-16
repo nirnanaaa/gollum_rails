@@ -1,3 +1,6 @@
+# 1.4.13 16th January 2014
+* Update wiki reloading
+
 # 1.4.12 16th January 2014
 * Date fix in Readme
 * `all` static method now initializes in a GollumRails::Page 
