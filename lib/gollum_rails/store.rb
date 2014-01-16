@@ -21,7 +21,7 @@ module GollumRails
       # Gets the wiki instance
       def wiki
         raise InitializationError, "Wiki path was not initialized!" if Setup.wiki_path.nil?
-        @wiki ||= Gollum::Wiki.new(Setup.wiki_path, {} )
+        @wiki ||= Gollum::Wiki.new(Setup.wiki_path, Setup.wiki_options )
       end
     end
     # Gets the pages format

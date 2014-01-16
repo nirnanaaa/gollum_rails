@@ -18,7 +18,7 @@ module GollumRails
       
       attr_accessor :wiki_path
       
-      attr_accessor :wiki_options
+      attr_writer :wiki_options
 
       attr_accessor :repository
       
@@ -28,6 +28,10 @@ module GollumRails
       attr_accessor :options
       
       
+      def wiki_options
+        return {} unless @wiki_options.kind_of? Hash
+        @wiki_options ||= {} 
+      end
       # Wiki startup options
       def options=(options)
         @options = options
