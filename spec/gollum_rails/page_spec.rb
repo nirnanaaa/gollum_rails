@@ -195,6 +195,14 @@ describe "Gollum Page" do
       expect(RailsModel.find('whoooohoo')).to be_nil
     end
     
+    it "should initializes all with GollumRails::Page" do
+      expect(RailsModel.all.first).to be_kind_of GollumRails::Page
+    end
+    
+    it "should have a gollum page after initializing with all" do
+      expect(RailsModel.all.first.gollum_page).not_to be_nil
+    end
+    
     it "tests the find method to return a gollum_rails:page if a page was found" do
       expect(RailsModel.find('Goole')).to be_a GollumRails::Page
     end
