@@ -42,7 +42,10 @@ module GollumRails
 
       # Gets all pages in the wiki
       def all
-        wiki.pages
+        pages = wiki.pages
+        r = pages.map do |page|
+          self.new(gollum_page: page)
+        end
       end
       
       alias_method :find_all, :all
