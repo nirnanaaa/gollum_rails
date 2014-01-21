@@ -432,6 +432,7 @@ describe "Gollum Page" do
     
   end
   
+  
   describe "path names" do
     class Fns < GollumRails::Page
     end
@@ -442,6 +443,48 @@ describe "Gollum Page" do
     end
     
     it "should output a path name as there was a path supplied" do
+      res = Fns.new @call.merge(name: 'test/pagess')
+      res.save
+      res2 = Fns.new @call.merge(name: 'test/pagess2')
+      res2.save
+      expect(Fns.all(folder: 'test').length).to be 2
+      #expect(res.path_name).not_to be_nil
+      res2.destroy(@commit)
+      res.destroy(@commit)
+    end
+    it "should find more pages under root without options" do
+      res = Fns.new @call.merge(name: 'test4/pagess')
+      res2 = Fns.new @call.merge(name: 'test5/pagess')
+      res.save
+      res2.save
+      #Fns.all(folder: 'test1/').each{|p| puts p.url}
+      expect(Fns.all(folder: 'test4').length).to be 1
+      expect(Fns.all(folder: 'test5').length).to be 1
+      
+      res2.destroy(@commit)
+      res.destroy(@commit)
+      
+    end
+    
+    it "should be empty for a non existing folder" do
+      res = Fns.new @call.merge(name: 'test/pagess')
+      res.save
+      
+      expect(Fns.first(folder: 'test2')).to be_nil
+      expect(Fns.last(folder: 'test2')).to be_nil
+      
+      res.destroy(@commit)
+    end
+    it "should not be empty for an existing folder" do
+      res = Fns.new @call.merge(name: 'test/pagess')
+      res.save
+      
+      expect(Fns.first(folder: 'test')).not_to be_nil 
+      expect(Fns.last(folder: 'test')).not_to be_nil
+      
+      res.destroy(@commit)
+    end    
+    it "should change the folder" do
       res = Fns.new @call.merge(name: 'test/pagess')
       res.save
       expect(res.path_name).not_to be_nil
