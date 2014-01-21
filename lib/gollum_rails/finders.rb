@@ -41,11 +41,20 @@ module GollumRails
       end
 
       # Gets all pages in the wiki
-      def all
+      def all(options={})
+        set_folder(options)
         pages = wiki.pages
         r = pages.map do |page|
           self.new(gollum_page: page)
         end
+      end
+      
+      def first(options)
+        all(options).first
+      end
+      
+      def last(options)
+        all(options).last
       end
       
       alias_method :find_all, :all

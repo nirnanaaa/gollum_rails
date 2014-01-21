@@ -13,6 +13,16 @@ module GollumRails
         Gollum::Markup.formats.include?(format.to_sym)
       end
       
+      def set_folder(options)
+        if options.kind_of? Hash
+        
+          return if options.empty?
+          options = options[:folder]
+        end
+        Setup.wiki_options = { page_file_dir: options }
+      end
+      alias_method :folder=, :set_folder
+    
 
       
     end
@@ -31,6 +41,7 @@ module GollumRails
       end
     end
     
+
     
     def path_name
       name.gsub(/(^\/|(\/){2}+|#{canonicalized_filename})/, "")
@@ -55,6 +66,8 @@ module GollumRails
       wiki.preview_page(name, content, format).formatted_data
     end
     
+    
+
     # == Gets the url for current page from Gollum::Page
     #
     # Returns a String
