@@ -1,3 +1,8 @@
+# 1.4.14 21th January 2014
+* set directory by calling Page.folder= or Page.set_folder
+* all supports directories
+* improved specs 
+
 # 1.4.13 16th January 2014
 * Update wiki reloading
 
