@@ -1,4 +1,5 @@
 module GollumRails
+  # Playground
   module Orm
     extend ActiveSupport::Concern
     

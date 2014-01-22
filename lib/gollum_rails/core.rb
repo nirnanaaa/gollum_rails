@@ -82,6 +82,7 @@ module GollumRails
       gollum_page.title
     end
     
+    
     # == Gets formatted_data for current Gollum::Page
     #
     # Returns a String
