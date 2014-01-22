@@ -77,6 +77,7 @@ module GollumRails
     
     include Error
     include Core
+    include Meta
     include Store
     include Validation
     include Persistance

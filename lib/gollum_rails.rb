@@ -42,6 +42,7 @@ module GollumRails
   autoload :Page
   autoload :Setup
   autoload :Orm
+  autoload :Meta
 
   # GollumRails version string
   VERSION = '1.4.14'
