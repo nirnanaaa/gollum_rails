@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    gollum_rails (1.4.14)
+    gollum_rails (1.5.0)
       activemodel (>= 3.2.11)
       activesupport (>= 3.2.11)
       gollum-lib (~> 1.0.9)

@@ -1,3 +1,8 @@
+# 1.5.0 22th January 2014
+* Added parsing support for YAML header `page.meta`
+* Added html rendering without the YAML `page.html_without_yaml`
+* Added `has_meta?` method to page
+
 # 1.4.14 21th January 2014
 * set directory by calling Page.folder= or Page.set_folder
 * all supports directories
