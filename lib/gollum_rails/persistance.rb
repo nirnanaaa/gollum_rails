@@ -107,6 +107,24 @@ module GollumRails
     
     # == Updates an existing page (or created)
     #
+    # args - Argument chain
+    #
+    # Returns an instance of GollumRails::Page
+    def update_attributes(*args)
+      run_callbacks :update do
+        return update_deprecated(*args) if args.length > 1
+        #content=nil,name=nil,format=:markdown, commit=nil
+        args = args.first
+        @gollum_page = page.update_page(gollum_page, wiki, 
+          args[:content], 
+          get_right_commit(args[:commit]), 
+          args[:name], 
+          args[:format]||:markdown)
+      end
+    end
+    
+    # == DEPRECATED: Updates an existing page (or created)
+    #
     # content - optional. If given the content of the gollum_page will be updated
     # name - optional. If given the name of gollum_page will be updated
     # format - optional. Updates the format. Uses markdown as default
@@ -115,10 +133,9 @@ module GollumRails
     #
     #
     # Returns an instance of GollumRails::Page
-    def update_attributes(content=nil,name=nil,format=:markdown, commit=nil)
-      run_callbacks :update do
-        @gollum_page = page.update_page(gollum_page, wiki, content, get_right_commit(commit), name, format)
-      end
+    def update_deprecated(content=nil,name=nil,format=:markdown, commit=nil)
+      @gollum_page = page.update_page(gollum_page, wiki, content, get_right_commit(commit), name, format)
+      
     end
     
     # == Deletes current page

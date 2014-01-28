@@ -82,18 +82,19 @@ describe "Gollum Page" do
         @rr.save
       end
       
-      it { @rr.update_attributes({:name => "google", :format => :wiki}).should be_a Gollum::Page }
-      
-    end
-    describe "method missings" do
-      
-      it "should perform a normal find" do
-        RailsModel.find_by_name('Goole').should be_a GollumRails::Page
-          
-        
+      it "updates properly without all arguments, content+commit" do 
+        @rr.update_attributes({:name => "google", :format => :wiki}).should be_a Gollum::Page 
+        @rr.delete(@commit)
+      end
+      it "updates properly without all arguments, name, format" do
+        @rr.update_attributes({:content => "test"}).should be_a Gollum::Page 
+        expect(@rr.name).to match "Goole"
+        expect(@rr.format.to_s).to match "markdown"
+        @rr.delete(@commit)
       end
       
     end
+
 
     describe "should test the deletion of a page" do
       before :each do 
