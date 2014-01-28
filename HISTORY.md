@@ -1,3 +1,7 @@
+# 1.5.1 28th January 2014
+* Updated `update_attributes` to work with hashes
+* Bugfixing
+
 # 1.5.0 22th January 2014
 * Added parsing support for YAML header `page.meta`
 * Added html rendering without the YAML `page.html_without_yaml`
