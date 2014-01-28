@@ -49,11 +49,11 @@ module GollumRails
         end
       end
       
-      def first(options)
+      def first(options={})
         all(options).first
       end
       
-      def last(options)
+      def last(options={})
         all(options).last
       end
       
