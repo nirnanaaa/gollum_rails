@@ -61,6 +61,12 @@ describe "Gollum Page" do
         @rr.save
         @rr.html_data.should == 'content data'
       end
+      it "can be saved using special characters in name" do
+        @rr.name = 'test-page'
+        @rr.save
+        expect(RailsModel.find('test-page')).not_to be_nil
+        @rr.destroy
+      end
       it "was last changed by me" do
         @rr.save
         @rr.last_changed_by.should == 'flo <mosny@zyg.li>'
