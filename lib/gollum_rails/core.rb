@@ -44,8 +44,11 @@ module GollumRails
 
     
     def path_name
-      name.gsub(/(^\/|(\/){2}+|#{canonicalized_filename})/, "")
+      f = File.split(name).first
+      return '/' if f == '.'
+      f
     end
+    
     
     def canonicalized_filename
       Gollum::Page.canonicalize_filename(name)
