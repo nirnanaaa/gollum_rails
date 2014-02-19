@@ -1,6 +1,7 @@
 module GollumRails
   module Finders
     extend ActiveSupport::Concern
+
     module ClassMethods
       # Finds an existing page or creates it
       #
@@ -9,9 +10,9 @@ module GollumRails
       #
       # Returns self
       def find_or_initialize_by_name(name, commit={})
-        result_for_find = find(name)
-        unless result_for_find.nil?
-          result_for_find
+        result = find(name)
+        if result
+          result
         else
           new(:format => :markdown, :name => name, :content => ".", :commit => commit)
         end
@@ -21,14 +22,26 @@ module GollumRails
       #
       # name - the name of the page
       # version - optional - The pages version
+      # reset_folder - optional - resets the folder to / before performing the search
+      # exact - optional - perform an exact match
       #
       # Return an instance of Gollum::Page
-      def find(name, version=nil)
-        page = Adapters::Gollum::Page.find_page(name, wiki, version)
-        
-        return new( :gollum_page => page ) unless page.nil?
-        return nil
-        
+      def find(name, version=nil, reset_folder=false, exact=true)
+        name = name[:name] if name.kind_of?(Hash) && name.has_key?(:name)
+        Setup.wiki_options.merge(:page_file_dir => nil) if reset_folder
+        wiki.clear_cache
+        path = File.split(name)
+        if path.first == '/' || path.first == '.'
+          folder = nil
+        else
+          folder = path.first
+        end
+        page = wiki.paged(path.last, folder, exact, version)
+        if page
+          new(gollum_page: page)
+        else
+          nil
+        end
       end
       
       # == Searches the wiki for files CONTENT!
@@ -41,26 +54,38 @@ module GollumRails
       end
 
       # Gets all pages in the wiki
+      #
+      # Returns an Array with GollumRails::Page s
       def all(options={})
         set_folder(options)
         pages = wiki.pages
-        r = pages.map do |page|
+        pages.map do |page|
           self.new(gollum_page: page)
         end
       end
       
+      # Gets the last item from `all` method call
+      #
+      # options - optional - some options e.g. :folder
+      #
+      # Returns a single GollumRails::Page
       def first(options={})
         all(options).first
       end
       
+      # Gets the first item from `all` method call
+      #
+      # options - optional - some options e.g. :folder
+      #
+      # Returns a single GollumRails::Page
       def last(options={})
         all(options).last
       end
       
+      # Aliasing this for ActiveRecord behavior
       alias_method :find_all, :all
       
-      # TODO: implement more of this (format, etc)
-      #
+      # Catch-all method
       def method_missing(name, *args)
         if name =~ /^find_by_(name)$/
           self.find(args.first)

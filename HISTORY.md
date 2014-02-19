@@ -1,3 +1,11 @@
+# 1.5.3 19th February 2014
+* Documentation improvements
+* Refactored find `find` method call to accept page resets and exact matches
+* Bugfixing
+
+# 1.5.2 18th February 2014
+* Bugfixing
+
 # 1.5.1 28th January 2014
 * Updated `update_attributes` to work with hashes
 * Bugfixing
