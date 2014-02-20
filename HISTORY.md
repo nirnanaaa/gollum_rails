@@ -1,3 +1,6 @@
+# 1.5.4 20th February 2014
+* Bugfixing
+
 # 1.5.3 19th February 2014
 * Documentation improvements
 * Refactored find `find` method call to accept page resets and exact matches
