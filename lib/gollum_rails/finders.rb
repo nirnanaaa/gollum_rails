@@ -28,7 +28,7 @@ module GollumRails
       # Return an instance of Gollum::Page
       def find(name, version=nil, reset_folder=false, exact=true)
         name = name[:name] if name.kind_of?(Hash) && name.has_key?(:name)
-        Setup.wiki_options[:page_file_dir] = nil if reset_folder
+        Page.set_folder(nil) if reset_folder
         wiki.clear_cache
         path = File.split(name)
         if path.first == '/' || path.first == '.'

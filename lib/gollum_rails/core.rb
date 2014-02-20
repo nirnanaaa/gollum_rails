@@ -19,12 +19,10 @@ module GollumRails
           return if options.empty?
           options = options[:folder]
         end
-        Setup.wiki_options = { page_file_dir: options }
+        Setup.wiki_options ||= {}
+        Setup.wiki_options[:page_file_dir] = options
       end
       alias_method :folder=, :set_folder
-    
-
-      
     end
     
     # Initializes a new Page
