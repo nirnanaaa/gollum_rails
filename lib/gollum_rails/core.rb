@@ -63,8 +63,8 @@ module GollumRails
 
     # Gets the next subfolder for current pathname
     def next_folder(previous)
-      path = path_name
-      previous = File.split(previous).join
+      path = url 
+      previous = File.split(previous).join('/').gsub(/^\/+/, '')
       path.gsub!(/#{previous}/i, '')
       ngxpath = File.split(path).first #use path only cuz we want the next folder not file
       new_path = ngxpath.split('/').reject { |c| c.empty? }

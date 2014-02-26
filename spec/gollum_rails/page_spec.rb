@@ -89,7 +89,7 @@ describe "Gollum Page" do
       it "can get the next subfolder" do
         @rr.name = '/home/page/test/page'
         @rr.save
-        expect(@rr.next_folder('/home')).to match 'page'
+        expect(@rr.next_folder('/home/page')).to match 'test'
         @rr.destroy
       end
       it "can get the next subfolder again" do
