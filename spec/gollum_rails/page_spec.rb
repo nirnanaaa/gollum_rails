@@ -67,6 +67,43 @@ describe "Gollum Page" do
         expect(RailsModel.find('test-page')).not_to be_nil
         @rr.destroy
       end
+      it "has a cname" do
+        @rr.name = 'test page'
+        @rr.save
+        expect(@rr.cname).to match('test-page')
+        @rr.destroy
+      end
+      it "has a filename " do
+       @rr.name = '/home/page/test/page'
+       @rr.save
+       expect(@rr.file_name).to match 'page'
+       @rr.destroy
+      end
+      it "has a path name" do
+        @rr.name = '/home/page/test/page'
+        @rr.save
+
+        expect(@rr.path_name).to match 'home/page/test'
+        @rr.destroy
+      end
+      it "can get the next subfolder" do
+        @rr.name = '/home/page/test/page'
+        @rr.save
+        expect(@rr.next_folder('/home')).to match 'page'
+        @rr.destroy
+      end
+      it "can get the next subfolder again" do
+        @rr.name = '/home/page'
+        @rr.save
+        expect(@rr.next_folder("/home")).to be_nil
+        @rr.destroy
+      end
+      it "cannot get the next subfolder" do
+        @rr.name = 'page'
+        @rr.save
+        expect(@rr.next_folder("/")).to be_nil
+        @rr.destroy
+      end
       it "was last changed by me" do
         @rr.save
         @rr.last_changed_by.should == 'flo <mosny@zyg.li>'

@@ -13,14 +13,20 @@ module GollumRails
         Gollum::Markup.formats.include?(format.to_sym)
       end
       
+      # Resets the folder to /
+      def reset_folder
+        set_folder(nil)
+      end
+
+      # Sets the folder
       def set_folder(options)
-        if options.kind_of? Hash
-        
+        if options.is_a? Hash
           return if options.empty?
           options = options[:folder]
         end
         Setup.wiki_options ||= {}
         Setup.wiki_options[:page_file_dir] = options
+        Setup.wiki_options[:base_path] = options
       end
       alias_method :folder=, :set_folder
     end
@@ -40,14 +46,40 @@ module GollumRails
     end
     
 
-    
+    # Gets the pathname for current file 
     def path_name
-      f = File.split(name).first
+      f = full_path.first
       return '/' if f == '.'
       f
     end
+
+    def full_path
+      File.split(name)
+    end
+
+    def file_name
+      full_path.last
+    end
+
+    # Gets the next subfolder for current pathname
+    def next_folder(previous)
+      path = path_name
+      previous = File.split(previous).join
+      path.gsub!(/#{previous}/i, '')
+      ngxpath = File.split(path).first #use path only cuz we want the next folder not file
+      new_path = ngxpath.split('/').reject { |c| c.empty? }
+      px = new_path.join
+      if px == '.' || px.empty?
+        return nil
+      end
+      px
+
+    end
     
-    
+    def cname
+      Gollum::Page.cname(self.name)
+    end
+    # Gets a canonicalized filename of the page 
     def canonicalized_filename
       Gollum::Page.canonicalize_filename(name)
     end

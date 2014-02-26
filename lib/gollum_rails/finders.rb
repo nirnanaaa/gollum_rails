@@ -22,13 +22,13 @@ module GollumRails
       #
       # name - the name of the page
       # version - optional - The pages version
-      # reset_folder - optional - resets the folder to / before performing the search
+      # folder_reset - optional - resets the folder to / before performing the search
       # exact - optional - perform an exact match
       #
       # Return an instance of Gollum::Page
-      def find(name, version=nil, reset_folder=false, exact=true)
+      def find(name, version=nil, folder_reset=false, exact=true)
         name = name[:name] if name.kind_of?(Hash) && name.has_key?(:name)
-        Page.set_folder(nil) if reset_folder
+        Page.reset_folder if folder_reset
         wiki.clear_cache
         path = File.split(name)
         if path.first == '/' || path.first == '.'
