@@ -61,21 +61,6 @@ module GollumRails
       full_path.last
     end
 
-    # Gets the next subfolder for current pathname
-    def next_folder(previous)
-      path = url 
-      previous = File.split(previous).join('/').gsub(/^\/+/, '')
-      path.gsub!(/#{previous}/i, '')
-      ngxpath = File.split(path).first #use path only cuz we want the next folder not file
-      new_path = ngxpath.split('/').reject { |c| c.empty? }
-      px = new_path.join
-      if px == '.' || px.empty?
-        return nil
-      end
-      px
-
-    end
-    
     def cname
       Gollum::Page.cname(self.name)
     end
