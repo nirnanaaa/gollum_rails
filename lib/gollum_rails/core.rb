@@ -22,11 +22,12 @@ module GollumRails
       def set_folder(options)
         if options.is_a? Hash
           return if options.empty?
+          base = options[:base]
           options = options[:folder]
         end
         Setup.wiki_options ||= {}
         Setup.wiki_options[:page_file_dir] = options
-        Setup.wiki_options[:base_path] = options
+        Setup.wiki_options[:base_path] = base || options
       end
       alias_method :folder=, :set_folder
     end
