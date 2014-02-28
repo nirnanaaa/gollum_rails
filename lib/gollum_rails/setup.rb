@@ -1,3 +1,4 @@
+require 'gollum_rails/setup/error'
 module GollumRails
 
   # Setup functionality for Rails initializer
@@ -13,59 +14,45 @@ module GollumRails
   #   end
   #
   #
-  class Setup
-    class << self
-      
-      attr_accessor :wiki_path
-      
-      attr_writer :wiki_options
+  module Setup
+    autoload :Options, 'gollum_rails/setup/options'
+    include Options 
 
-      attr_accessor :repository
-      
-      attr_accessor :startup
-      
-      # Gets / Sets the init options
-      attr_accessor :options
-      
-      
-      def wiki_options
-        return {} unless @wiki_options.kind_of? Hash
-        @wiki_options ||= {} 
-      end
-      # Wiki startup options
-      def options=(options)
-        @options = options
-      end
-      
+    class << self
+
       # defines block builder for Rails initializer.
       # executes public methods inside own class
       #
-      def build(&block)
-        block.call self
-        if @repository == :application
+      def build(new_attributes = nil, &block)
+        if block_given?
+          yield self
+        else
+          if !new_attributes.respond_to?(:stringify_keys)
+            raise ArgumentError, "When assigning attributes, you must pass a hash as an argument."
+          end
+          attributes = new_attributes.stringify_keys
+          attributes.each do |k, v|
+            begin
+              public_send("#{k}=", v)
+            rescue NoMethodError
+            end
+          end
+          
+        end
+        if self.repository == :application
           raise GollumRailsSetupError, "Rails configuration is not defined. 
           Are you in a Rails app?" if Rails.application.nil?
           
           initialize_wiki Rails.application.config.wiki_repository
         else
           raise GollumRailsSetupError, "Git repository does not exist.
-          Was the specified pathname correct?" unless Pathname.new(@repository).exist?
-          initialize_wiki @repository
+          Was the specified pathname correct?" unless Pathname.new(self.repository).exist?
+          initialize_wiki self.repository
         end
       end
 
-      #######
       private
-      #######
-
-      # Checks if provided path is present and valid
-      #
-      # Example
-      #   path_valid? '/'
-      #   # =>true
-      #  
-      #   path_valid? nil
-      #   # =>false
+      
       def path_valid?(path)
         return path.exist? if path.is_a?(Pathname)
         return !(path.nil? || path.empty? || ! path.is_a?(String))
@@ -73,16 +60,15 @@ module GollumRails
 
       def initialize_wiki(path)
         if path_valid? path
-          @wiki_path = path.to_s
-          @wiki_options = options
+          self.wiki_path = path.to_s
+          self.wiki_options = options
           true
         else
-          raise GollumRailsSetupError, 'Repistory path is empty or invalid!'
+          raise GollumRailsSetupError, 'Path to repository is empty or invalid!'
         end
 
       end
 
     end
   end
-  class GollumRailsSetupError < ArgumentError; end
 end

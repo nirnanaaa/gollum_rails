@@ -35,7 +35,7 @@ describe GollumRails::Setup do
         config.repository = :application
 
       end
-    }.to raise_error GollumRails::GollumRailsSetupError
+    }.to raise_error GollumRails::Setup::GollumRailsSetupError
     
   end
   it "should throw an error if a pathname was supplied that does not exist" do
@@ -43,7 +43,12 @@ describe GollumRails::Setup do
       GollumRails::Setup.build do |setup|
         setup.repository = Pathname.new('/nonexistingdirectoryshouldbenonexisting') 
       end
-    }.to raise_error GollumRails::GollumRailsSetupError
+    }.to raise_error GollumRails::Setup::GollumRailsSetupError
+  end
+  it "should also initialize without a block given" do
+    expect{
+      GollumRails::Setup.build(repository: '.')
+    }.not_to raise_error
   end
 
 
