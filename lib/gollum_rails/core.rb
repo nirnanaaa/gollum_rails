@@ -27,7 +27,8 @@ module GollumRails
         end
         Setup.wiki_options ||= {}
         Setup.wiki_options[:page_file_dir] = options
-        Setup.wiki_options[:base_path] = base || options
+
+        Setup.wiki_options[:base_path] = (base || options) || ''
       end
       alias_method :folder=, :set_folder
     end
