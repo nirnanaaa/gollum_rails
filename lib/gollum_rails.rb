@@ -24,10 +24,6 @@ require 'active_support'
 # GollumRails is a RubyGem for extending Rails and the Gollum wiki powered by github
 # It has the ability to combine the benefits from a git powered wiki with Rails.
 #
-# Example solutions:
-#   * Gollum Wiki pages - Devise authentication - GollumRails connector - Haml layouting
-#   * Gollum Wiki pages - Ember.js - Handlebars layout - Rails REST API
-#   * ...
 #
 module GollumRails
   extend ActiveSupport::Autoload
