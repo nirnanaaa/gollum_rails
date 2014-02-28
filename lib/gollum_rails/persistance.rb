@@ -11,7 +11,7 @@ module GollumRails
       #
       # Returns an instance of Gollum::Page or false
       def create(data)
-        page = Page.new(data)
+        page = self.new(data)
         page.save
       end
 
@@ -24,7 +24,7 @@ module GollumRails
       #
       # Returns an instance of Gollum::Page
       def create!(data)
-        page = Page.new(data)
+        page = self.new(data)
         page.save!
       end
       
@@ -61,7 +61,7 @@ module GollumRails
        rescue ::Gollum::DuplicatePageError => e
          #false
        end
-       @gollum_page = Adapters::Gollum::Page.find_page(name, wiki)
+         @gollum_page = wiki.paged(file_name, path_name, true, wiki.ref)
        
        self
     end
@@ -113,15 +113,32 @@ module GollumRails
     def update_attributes(*args)
       run_callbacks :update do
         return update_deprecated(*args) if args.length > 1
-        #content=nil,name=nil,format=:markdown, commit=nil
         args = args.first
-        @gollum_page = page.update_page(gollum_page, wiki, 
-          args[:content], 
-          get_right_commit(args[:commit]), 
-          args[:name], 
-          args[:format]||:markdown)
+        if !args.respond_to?(:stringify_keys)
+          raise ArgumentError, "When assigning attributes, you must pass a hash as an argument."
+        end
+        arguments = args.stringify_keys
+        name = arguments["name"] || self.name
+        wiki.update_page(gollum_page,
+                         name,
+                         arguments["format"]||self.format, 
+                         arguments["content"]||self.content,
+                         get_right_commit(args[:commit]))
+        self.gollum_page = wiki.paged(name, path_name, true, wiki.ref)
+        update_attrs
+        self
       end
     end
+    
+    def seperate_path(path)
+      path = File.split(name)
+      if path.first == '/' || path.first == '.'
+        folder = nil
+      else
+        folder = path.first
+      end
+    end
+
     
     # == DEPRECATED: Updates an existing page (or created)
     #
@@ -134,8 +151,10 @@ module GollumRails
     #
     # Returns an instance of GollumRails::Page
     def update_deprecated(content=nil,name=nil,format=:markdown, commit=nil)
-      @gollum_page = page.update_page(gollum_page, wiki, content, get_right_commit(commit), name, format)
-      
+      wiki.update_page(gollum_page, name, format||:markdown, content, get_right_commit(commit))
+      self.gollum_page = wiki.paged(file_name, path_name, true, wiki.ref)
+      update_attrs
+      self
     end
     
     # == Deletes current page

@@ -45,4 +45,3 @@ module GollumRails
 
 end
 
-require 'gollum_rails/adapters/gollum'

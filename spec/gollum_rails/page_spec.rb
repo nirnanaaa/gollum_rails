@@ -101,11 +101,22 @@ describe "Gollum Page" do
       end
       
       it "updates properly without all arguments, content+commit" do 
-        @rr.update_attributes({:name => "google", :format => :wiki}).should be_a Gollum::Page 
+        @rr.update_attributes({:name => "google", :format => :wiki}).should be_a GollumRails::Page
+        @rr.delete(@commit)
+      end
+      it "sets the format as created" do
+        @rr.update_attributes(name: "omg", format: :textile)
+        expect(@rr.format).to eq :textile
+        @rr.delete(@commit)
+      end
+
+      it "sets the name as created" do
+        @rr.update_attributes(name: "omg", format: :textile)
+        expect(@rr.name).to eq "omg" 
         @rr.delete(@commit)
       end
       it "updates properly without all arguments, name, format" do
-        @rr.update_attributes({:content => "test"}).should be_a Gollum::Page 
+        @rr.update_attributes({:content => "test"}).should be_a GollumRails::Page 
         expect(@rr.name).to match "Goole"
         expect(@rr.format.to_s).to match "markdown"
         @rr.delete(@commit)
@@ -294,16 +305,6 @@ describe "Gollum Page" do
       test.persisted?.should be_false
       test.save
     end
-  end
-  describe "rails extension" do
-    
-    it "should test fetch_all" do
-      GollumRails::Page.all.length.should == 1
-    end
-    it "should test all" do 
-      GollumRails::Page.find_all.length.should == 1
-    end
-
   end
   describe "testing validation" do
 

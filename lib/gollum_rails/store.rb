@@ -44,10 +44,6 @@ module GollumRails
       @content ||= (@gollum_page.content || "")
     end
 
-    # Gets the page class
-    def page
-      Adapters::Gollum::Page.new
-    end
     
     private 
     # == To static
