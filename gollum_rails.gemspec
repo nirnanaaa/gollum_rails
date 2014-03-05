@@ -44,9 +44,6 @@ Gem::Specification.new do |s|
     lib/generators/gollum_rails/model/model_generator.rb
     lib/generators/gollum_rails/model/templates/model_template.erb
     lib/gollum_rails.rb
-    lib/gollum_rails/adapters/gollum.rb
-    lib/gollum_rails/adapters/gollum/.gitkeep
-    lib/gollum_rails/adapters/gollum/page.rb
     lib/gollum_rails/callbacks.rb
     lib/gollum_rails/core.rb
     lib/gollum_rails/error.rb
@@ -56,10 +53,10 @@ Gem::Specification.new do |s|
     lib/gollum_rails/page.rb
     lib/gollum_rails/persistance.rb
     lib/gollum_rails/setup.rb
+    lib/gollum_rails/setup/error.rb
+    lib/gollum_rails/setup/options.rb
     lib/gollum_rails/store.rb
     lib/gollum_rails/validation.rb
-    spec/gollum_rails/adapters/gollum/connector_spec.rb
-    spec/gollum_rails/adapters/gollum/page_spec.rb
     spec/gollum_rails/page_spec.rb
     spec/gollum_rails/respository_spec.rb
     spec/gollum_rails/setup_spec.rb
