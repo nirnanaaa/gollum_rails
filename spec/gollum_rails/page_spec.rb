@@ -370,7 +370,6 @@ describe "Gollum Page" do
       
       res = CommitDiff.new call
       res.save
-      res.update_attributes("content",nil,:markdown, @commit)
       diff = res.compare_commits(res.history.first)
       expect(diff).to be_a String
       expect(diff).to match(/---/)
@@ -514,7 +513,7 @@ describe "Gollum Page" do
     it "should create a nested page under /test" do
       res = Fns.new @call.merge(name: 'test/my_page')
       res.save
-      expect(res.path_name).to match 'test'
+      expect(res.url_path).to include 'test'
       res.destroy(@commit)
     end
     it "should find a nested file" do

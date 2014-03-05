@@ -39,33 +39,53 @@ module GollumRails
     #
     # commit must be given to perform any page action!
     def initialize(attrs = {})
-      run_callbacks :initialize do
-        if wiki
-          attrs.each{|k,v| self.public_send("#{k}=",v)} if attrs
-          update_attrs if attrs[:gollum_page]
-        end
+      assign_attributes(attrs)
+      _update_page_attributes if attrs[:gollum_page]
+      yield self if block_given?
+      run_callbacks :initialize unless _initialize_callbacks.empty?
+    end
+
+
+    # Allows you to set all the attributes by passing in a hash of attributes with
+    # keys matching the attribute name
+    #
+    # new_attributes - Hash - Hash of arguments
+    def assign_attributes(new_attributes)
+      if !new_attributes.respond_to?(:stringify_keys)
+        raise ArgumentError, "When assigning attributes, you must pass a hash as an argument."
+      end
+      return if new_attributes.blank?
+
+      attributes = new_attributes.stringify_keys
+      attributes.each do |k, v|
+        _assign_attribute(k, v)
       end
     end
     
 
-    # Gets the pathname for current file 
-    def path_name
+    
+    def url_path #:nodoc:
+      File.split(url)
+    end
+
+    def path_name #:nodoc:
       f = full_path.first
       return '/' if f == '.'
       f
     end
 
-    def full_path
+    def full_path #:nodoc:
       File.split(name)
     end
 
-    def file_name
+    def file_name #:nodoc:
       full_path.last
     end
 
-    def cname
+    def cname #:nodoc:
       Gollum::Page.cname(self.name)
     end
+
     # Gets a canonicalized filename of the page 
     def canonicalized_filename
       Gollum::Page.canonicalize_filename(name)
@@ -92,7 +112,9 @@ module GollumRails
     #
     # Returns a String
     def url
-      gollum_page.url_path
+      if gollum_page
+        gollum_page.url_path
+      end
     end
     
     # == Gets the title for current Gollum::Page
@@ -177,10 +199,18 @@ module GollumRails
       com = commit_local if !commit_local.nil?
       return com
     end
+
+    def _assign_attribute(key, value)
+      public_send("#{key}=", value)
+    rescue NoMethodEr3ror
+      if respond_to?("#{key}=")
+        raise
+      end
+    end
     
     # == Updates local attributes from gollum_page class
     #
-    def update_attrs
+    def _update_page_attributes
       @name = gollum_page.name
       @content= gollum_page.raw_data
       @format = gollum_page.format      

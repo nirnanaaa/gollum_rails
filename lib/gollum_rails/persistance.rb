@@ -58,12 +58,11 @@ module GollumRails
       return nil unless valid?
       begin
         create_or_update
-       rescue ::Gollum::DuplicatePageError => e
-         #false
-       end
-         @gollum_page = wiki.paged(file_name, path_name, true, wiki.ref)
-       
-       self
+      rescue ::Gollum::DuplicatePageError => e
+      end
+      self.gollum_page = wiki.paged(file_name, path_name, true, wiki.ref)
+      _update_page_attributes
+      self
     end
 
     # == Save without exception handling
@@ -101,33 +100,23 @@ module GollumRails
     #
     # returns a Commit id
     def update_record
+      wiki.update_page(self.gollum_page,
+                       self.name,
+                       self.format, 
+                       self.content,
+                       self.commit)
     end
     
     
     
     # == Updates an existing page (or created)
     #
-    # args - Argument chain
+    # attributes - Hash of arguments
     #
     # Returns an instance of GollumRails::Page
-    def update_attributes(*args)
-      run_callbacks :update do
-        return update_deprecated(*args) if args.length > 1
-        args = args.first
-        if !args.respond_to?(:stringify_keys)
-          raise ArgumentError, "When assigning attributes, you must pass a hash as an argument."
-        end
-        arguments = args.stringify_keys
-        name = arguments["name"] || self.name
-        wiki.update_page(gollum_page,
-                         name,
-                         arguments["format"]||self.format, 
-                         arguments["content"]||self.content,
-                         get_right_commit(args[:commit]))
-        self.gollum_page = wiki.paged(name, path_name, true, wiki.ref)
-        update_attrs
-        self
-      end
+    def update_attributes(attributes)
+      assign_attributes(attributes)
+      save
     end
     
     def seperate_path(path)
@@ -139,23 +128,6 @@ module GollumRails
       end
     end
 
-    
-    # == DEPRECATED: Updates an existing page (or created)
-    #
-    # content - optional. If given the content of the gollum_page will be updated
-    # name - optional. If given the name of gollum_page will be updated
-    # format - optional. Updates the format. Uses markdown as default
-    # commit - optional. If given this commit will be used instead of that one, used
-    #          to initialize the instance
-    #
-    #
-    # Returns an instance of GollumRails::Page
-    def update_deprecated(content=nil,name=nil,format=:markdown, commit=nil)
-      wiki.update_page(gollum_page, name, format||:markdown, content, get_right_commit(commit))
-      self.gollum_page = wiki.paged(file_name, path_name, true, wiki.ref)
-      update_attrs
-      self
-    end
     
     # == Deletes current page
     #

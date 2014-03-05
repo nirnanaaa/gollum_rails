@@ -31,9 +31,9 @@ module GollumRails
     
     private
 
-    # def create_or_update #:nodoc:
-    #  run_callbacks(:save) { super }
-    # end
+    def create_or_update #:nodoc:
+     run_callbacks(:save) { super }
+    end
 
     def create_record #:nodoc:
      run_callbacks(:create) { super }
