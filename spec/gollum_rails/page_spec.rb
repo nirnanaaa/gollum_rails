@@ -529,6 +529,7 @@ describe "Gollum Page" do
       expect(Fns.search('content').first[:count]).to be(1)
       res.destroy
     end
+
   end
 
 

@@ -51,5 +51,12 @@ describe GollumRails::Setup do
     }.not_to raise_error
   end
 
+  it "should not accept empty options. or set it to default" do
+    expect{
+      GollumRails::Setup.build(wiki_options: nil)
+    }.not_to raise_error
+    expect(GollumRails::Setup.wiki_options).to be_kind_of Hash
+  end
+
 
 end
