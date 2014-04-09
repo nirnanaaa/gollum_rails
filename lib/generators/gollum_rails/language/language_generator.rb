@@ -24,7 +24,7 @@ module GollumRails
           \n
           EOT
         when "markdown"
-          run "gem install redcarped"
+          run "gem install redcarpet"
           puts <<-EOT
           \n Parser for type "markdown" was installed
           \n
