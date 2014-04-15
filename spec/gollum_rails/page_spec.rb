@@ -59,7 +59,7 @@ describe "Gollum Page" do
       end
       it "has the formatted data" do
         @rr.save
-        @rr.html_data.should == 'content data'
+        @rr.html_data.should == '<p>content data</p>'
       end
       it "can be saved using special characters in name" do
         @rr.name = 'test-page'
@@ -170,7 +170,7 @@ describe "Gollum Page" do
         expect(rr.name).to match(/^Goole$/)
       end
       it "should have a preview" do
-        expect(rr.preview).to match(/^content/)
+        expect(rr.preview).to match(/content/)
       end 
       it "should have a content" do
         expect(rr.content).to match(/^content\ data$/)
