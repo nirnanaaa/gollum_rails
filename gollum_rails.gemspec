@@ -14,11 +14,10 @@ Gem::Specification.new do |s|
   
   s.add_dependency 'gollum-lib', '~> 3.0.0'
 
-  s.add_development_dependency 'rspec', '~> 2.13.0'
-  s.add_development_dependency 'rr', '~> 1.1.1'
+  s.add_development_dependency 'rspec', '~> 2.14.1'
   s.add_development_dependency 'rails', '>= 3.2.11'
-  s.add_development_dependency 'guard', '~> 2.4.0'
-  s.add_development_dependency 'guard-rspec', '~> 3.1.0'
+  s.add_development_dependency 'guard', '~> 2.6.0'
+  s.add_development_dependency 'guard-rspec', '~> 4.2.8'
   s.add_development_dependency 'rb-fsevent', '>= 0.9.3'
   s.add_development_dependency 'redcarpet', '>= 3.1.1'
   s.author = 'Florian Kasper'
