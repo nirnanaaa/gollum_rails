@@ -1,11 +1,11 @@
 module GollumRails
-  
-  
+
+
   # = GollumRails
   #
   # Gollum Rails was initially designed to integrate the Gollum wiki software
   # into your Rails application without any mounts or extra applications to run.
-  # 
+  #
   # Now you can use your completely own layout without struggling with gollum forks.
   #
   # Just integrate this gem into your Gemfile and you are good to go:
@@ -18,7 +18,7 @@ module GollumRails
   #
   #
   # If you want to use this gem with Rails version prior 4.0.0 please check out the rails3
-  # branch on Github: 
+  # branch on Github:
   #
   # https://github.com/nirnanaaa/gollum_rails/tree/rails3
   #
@@ -48,7 +48,7 @@ module GollumRails
   #
   #   commit = { name: 'nirnanaa', email: 'mosny@zyg.li', message: 'created page page'}
   #   Page.create(name: 'test_page', content: 'content', format: :markdown, commit: commit)
-  #   
+  #
   #   Page.create!(name: 'test_page', content: 'content', format: :markdown, commit: commit)
   #
   # The <tt>!</tt> version of the method throws an error on failure.
@@ -65,7 +65,6 @@ module GollumRails
   #
   #
   class Page
-    
     if ActiveModel::VERSION::MAJOR == 4
       include ActiveModel::Model
     else
@@ -74,7 +73,6 @@ module GollumRails
       include ActiveModel::Conversion
       include ActiveModel::Validations
     end
-    
     include Error
     include Core
     include Meta
@@ -83,9 +81,6 @@ module GollumRails
     include Persistance
     include Finders
     include Callbacks
-
   end
-  
   ActiveSupport.run_load_hooks(:gollum, Page)
-  
  end

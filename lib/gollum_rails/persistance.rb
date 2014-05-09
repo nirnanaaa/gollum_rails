@@ -1,9 +1,8 @@
 module GollumRails
   module Persistance
     extend ActiveSupport::Concern
-    
     module ClassMethods
-      
+
       # first creates an instance of itself and executes the save function.
       #
       # data - Hash containing the page data
@@ -14,7 +13,6 @@ module GollumRails
         page = self.new(data)
         page.save
       end
-
 
       # calls `create` on current class. If returned value is nil an exception will be thrown
       #
@@ -27,7 +25,7 @@ module GollumRails
         page = self.new(data)
         page.save!
       end
-      
+
     end
     #############
     # activemodel
@@ -66,15 +64,16 @@ module GollumRails
     end
 
     # == Save without exception handling
-    # raises errors everytime something is wrong 
+    # raises errors everytime something is wrong
     #
+    # Returns an instance of GollumRails::Page
     def save!
       raise StandardError, "record is not valid" unless valid?
       raise StandardError, "commit must not be empty" if commit == {}
       create_or_update
       self
     end
-    
+
     # == Creates a record or updates it!
     #
     # Returns a Commit id string
@@ -85,30 +84,28 @@ module GollumRails
         create_record
       end
     end
-    
+
     # == Creates a record
     #
     # Returns a Commit id
     def create_record
-      wiki.write_page(canonicalized_filename, format, content, commit, path_name) 
+      wiki.write_page(canonicalized_filename, format, content, commit, path_name)
       wiki.clear_cache
     end
-    
+
     # == Update a record
     #
-    # NYI
+    # Updates a record based on current instance variables
     #
     # returns a Commit id
     def update_record
       wiki.update_page(self.gollum_page,
                        self.name,
-                       self.format, 
+                       self.format,
                        self.content,
                        self.commit)
     end
-    
-    
-    
+
     # == Updates an existing page (or created)
     #
     # attributes - Hash of arguments
@@ -118,8 +115,8 @@ module GollumRails
       assign_attributes(attributes)
       save
     end
-    
-    def seperate_path(path)
+
+    def seperate_path(path) #:nodoc:
       path = File.split(name)
       if path.first == '/' || path.first == '.'
         folder = nil
@@ -128,7 +125,6 @@ module GollumRails
       end
     end
 
-    
     # == Deletes current page
     #
     # commit - optional. If given this commit will be used instead of that one, used
@@ -157,17 +153,5 @@ module GollumRails
       return true if gollum_page
       return false
     end
-    
-
-    
-    
-    # == Checks if the page is valid
-    #
-    #    # 
-    # def valid?
-    #   #if Gollum::Page.valid_page_name?(self.name)
-    # end
-    
-    
   end
 end

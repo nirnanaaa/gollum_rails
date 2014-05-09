@@ -1,10 +1,10 @@
 module GollumRails
   module Meta
     extend ActiveSupport::Concern
-    
+
     # == Checks if this page has a Yaml part
     #
-    # Example YAML part: 
+    # Example YAML part:
     #
     # ---
     # title: "My Page"
@@ -26,7 +26,7 @@ module GollumRails
     def raw_meta
       raw_data.match(/^(?<headers>---\s*\n.*?\n?)^(---\s*$\n?)/m).to_s
     end
-    
+
     # == Gets the parsed meta data
     #
     #
@@ -36,8 +36,7 @@ module GollumRails
     rescue Psych::SyntaxError => e
       {error: e}
     end
-    
-    
+
     # == Example for meta data usage:
     #
     # Gets the title from the meta data
@@ -53,6 +52,6 @@ module GollumRails
     def html_without_yaml
       gollum_page.markup_class.render(raw_data.tap{|s| s.slice!(raw_meta.to_s)})
     end
-    
+
   end
 end

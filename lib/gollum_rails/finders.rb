@@ -1,9 +1,9 @@
 module GollumRails
   module Finders
     extend ActiveSupport::Concern
-
     module ClassMethods
-      # Finds an existing page or creates it
+
+      # Find an existing page or create it
       #
       # name - The name
       # commit - Hash
@@ -17,7 +17,7 @@ module GollumRails
           new(:format => :markdown, :name => name, :content => ".", :commit => commit)
         end
       end
-      
+
       # Finds a page based on the name and specified version
       #
       # name - the name of the page
@@ -43,7 +43,7 @@ module GollumRails
           nil
         end
       end
-      
+
       # == Searches the wiki for files CONTENT!
       #
       # string - Searchstring
@@ -63,7 +63,7 @@ module GollumRails
           self.new(gollum_page: page)
         end
       end
-      
+
       # Gets the last item from `all` method call
       #
       # options - optional - some options e.g. :folder
@@ -72,7 +72,7 @@ module GollumRails
       def first(options={})
         all(options).first
       end
-      
+
       # Gets the first item from `all` method call
       #
       # options - optional - some options e.g. :folder
@@ -81,10 +81,10 @@ module GollumRails
       def last(options={})
         all(options).last
       end
-      
+
       # Aliasing this for ActiveRecord behavior
       alias_method :find_all, :all
-      
+
       # Catch-all method
       def method_missing(name, *args)
         if name =~ /^find_by_(name)$/
@@ -92,8 +92,6 @@ module GollumRails
         else super
         end
       end
-      
-      
     end
   end
 end

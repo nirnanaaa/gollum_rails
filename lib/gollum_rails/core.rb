@@ -1,9 +1,8 @@
 module GollumRails
   module Core
     extend ActiveSupport::Concern
-    
     module ClassMethods
-      
+
       # Checks if the fileformat is supported
       #
       # format - String
@@ -12,7 +11,7 @@ module GollumRails
       def format_supported?(format)
         Gollum::Markup.formats.include?(format.to_sym)
       end
-      
+
       # Resets the folder to /
       def reset_folder
         set_folder(nil)
@@ -32,7 +31,7 @@ module GollumRails
       end
       alias_method :folder=, :set_folder
     end
-    
+
     # Initializes a new Page
     #
     # attrs - Hash of attributes
@@ -45,7 +44,6 @@ module GollumRails
       run_callbacks :initialize unless _initialize_callbacks.empty?
     end
 
-
     # Allows you to set all the attributes by passing in a hash of attributes with
     # keys matching the attribute name
     #
@@ -55,15 +53,12 @@ module GollumRails
         raise ArgumentError, "When assigning attributes, you must pass a hash as an argument."
       end
       return if new_attributes.blank?
-
       attributes = new_attributes.stringify_keys
       attributes.each do |k, v|
         _assign_attribute(k, v)
       end
     end
-    
 
-    
     def url_path #:nodoc:
       File.split(url)
     end
@@ -86,11 +81,11 @@ module GollumRails
       Gollum::Page.cname(self.name)
     end
 
-    # Gets a canonicalized filename of the page 
+    # Gets a canonicalized filename of the page
     def canonicalized_filename
       Gollum::Page.canonicalize_filename(name)
     end
-    
+
     # == Previews the page - Mostly used if you want to see what you do before saving
     #
     # This is an extremely fast method!
@@ -105,8 +100,6 @@ module GollumRails
     def preview(format=:markdown)
       wiki.preview_page(name, content, format).formatted_data
     end
-    
-    
 
     # == Gets the url for current page from Gollum::Page
     #
@@ -116,15 +109,14 @@ module GollumRails
         gollum_page.url_path
       end
     end
-    
+
     # == Gets the title for current Gollum::Page
     #
     # Returns a String
     def title
       gollum_page.title
     end
-    
-    
+
     # == Gets formatted_data for current Gollum::Page
     #
     # Returns a String
@@ -137,7 +129,7 @@ module GollumRails
     def raw_data
       gollum_page.raw_data
     end
-    
+
     # == Gets the history of current gollum_page
     #
     # Returns an Array
@@ -145,14 +137,14 @@ module GollumRails
       return nil unless persisted?
       gollum_page.versions
     end
-    
+
     # == Gets the last modified by Gollum::Committer
     #
     # Returns a String
     def last_changed_by
       "%s <%s>" % [history.last.author.name, history.last.author.email]
     end
-    
+
     # == Compare 2 Commits.
     #
     # sha1 - SHA1
@@ -161,34 +153,26 @@ module GollumRails
       Page.wiki.full_reverse_diff_for(@gollum_page,sha1,sha2)
     end
 
-    
-    # == The pages filename, based on the name and the format
-    # 
-    # Returns a String
-    # def filename
-    #   Page.wiki.page_file_name(@name, @format)
-    # end
-      
     # == Checks if current page is a subpage
     def sub_page?
       return nil unless persisted?
       @gollum_page.sub_page
     end
-    
+
     # == Gets the version of current commit
     #
     def current_version(long=false)
       return nil unless persisted?
       unless long
-        @gollum_page.version_short 
+        @gollum_page.version_short
       else
         @gollum_page.version.to_s
       end
-      
+
     end
-    
+
     private
-    
+
     # == Gets the right commit out of 2 commits
     #
     # commit_local - local commit Hash
@@ -207,14 +191,14 @@ module GollumRails
         raise
       end
     end
-    
+
     # == Updates local attributes from gollum_page class
     #
     def _update_page_attributes
       @name = gollum_page.name
       @content= gollum_page.raw_data
-      @format = gollum_page.format      
+      @format = gollum_page.format
     end
-    
+
   end
 end
