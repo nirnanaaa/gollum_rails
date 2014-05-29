@@ -2,7 +2,7 @@ Gollum for Rails
 ================
 [![Build Status](https://travis-ci.org/nirnanaaa/gollum_rails.png?branch=master)](https://travis-ci.org/nirnanaaa/gollum_rails)
 [![Dependency Status](https://gemnasium.com/nirnanaaa/gollum_rails.png)](https://gemnasium.com/nirnanaaa/gollum_rails)
-[![Gem Version](https://badge.fury.io/rb/gollum_rails.png)](http://badge.fury.io/rb/gollum_rails)
+[![Gem Version](https://badge.fury.io/rb/gollum_rails@2x.png)](http://badge.fury.io/rb/gollum_rails)
 [![Coverage Status](https://coveralls.io/repos/nirnanaaa/gollum_rails/badge.png?branch=master)](https://coveralls.io/r/nirnanaaa/gollum_rails)
 [![Code Climate](https://codeclimate.com/github/nirnanaaa/gollum_rails.png)](https://codeclimate.com/github/nirnanaaa/gollum_rails)
 
