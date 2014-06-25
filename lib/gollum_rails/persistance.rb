@@ -56,7 +56,7 @@ module GollumRails
       return nil unless valid?
       begin
         create_or_update
-      rescue ::Gollum::DuplicatePageError => e
+      rescue ::Gollum::DuplicatePageError
       end
       self.gollum_page = wiki.paged(file_name, path_name, true, wiki.ref)
       _update_page_attributes
