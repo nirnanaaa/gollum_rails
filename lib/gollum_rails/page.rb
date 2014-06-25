@@ -83,4 +83,4 @@ module GollumRails
     include Callbacks
   end
   ActiveSupport.run_load_hooks(:gollum, Page)
- end
+end

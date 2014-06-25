@@ -203,16 +203,6 @@ describe "Gollum Page" do
       rr.format=(:markdown).should == :markdown
     end
     
-    it "builds an url for the page" do
-      page = RailsModel.find('Goole')
-      
-      p = RailsModel.new(name: "bla/testfa", commit: @commit, content: "[[Goole]]", format: :markdown)
-      #p.destroy(@commit)
-
-      
-
-    end
-    
     it "gets the pages filename on disk with a 'DOT' in filename" do
       expect(RailsModel.find('Goole').filename).to match('.')
     end
