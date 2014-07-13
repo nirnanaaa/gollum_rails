@@ -186,7 +186,7 @@ module GollumRails
 
     def _assign_attribute(key, value)
       public_send("#{key}=", value)
-    rescue NoMethodEr3ror
+    rescue NoMethodError
       if respond_to?("#{key}=")
         raise
       end
