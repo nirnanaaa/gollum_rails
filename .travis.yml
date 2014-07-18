@@ -22,5 +22,4 @@ deploy:
     secure: nn8ZUGQaTNvfFnMyWZafSGcN513QxZsW3TYx15MpcFQJNLxUfGFWBO2laBIUBuYM0tz1EvLU3C40nh1cFQfONELufKfQFPdwVqICCoGYp3K6+R7DIo3BCUVrOmZh8dSrWNQgn6HNPDq/5kBflxw87l4sLL5uJZpSzfasYyBgId0=
   gem: gollum_rails
   on:
-    tags: true
     repo: nirnanaaa/gollum_rails
