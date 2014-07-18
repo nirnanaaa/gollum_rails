@@ -1,6 +1,22 @@
 module GollumRails
   module Core
     extend ActiveSupport::Concern
+
+    ATTR_READERS = []
+    ATTR_WRITERS = [:name, :content, :format]
+    ATTR_ACCESSORS = [:commit, :gollum_page]
+
+    included do
+      ATTR_WRITERS.each do |a|
+        attr_writer a
+      end
+      ATTR_ACCESSORS.each do |a|
+        attr_accessor a
+      end
+
+    end
+
+
     module ClassMethods
 
       # Checks if the fileformat is supported
@@ -42,21 +58,6 @@ module GollumRails
       _update_page_attributes if attrs[:gollum_page]
       yield self if block_given?
       run_callbacks :initialize unless _initialize_callbacks.empty?
-    end
-
-    # Allows you to set all the attributes by passing in a hash of attributes with
-    # keys matching the attribute name
-    #
-    # new_attributes - Hash - Hash of arguments
-    def assign_attributes(new_attributes)
-      if !new_attributes.respond_to?(:stringify_keys)
-        raise ArgumentError, "When assigning attributes, you must pass a hash as an argument."
-      end
-      return if new_attributes.blank?
-      attributes = new_attributes.stringify_keys
-      attributes.each do |k, v|
-        _assign_attribute(k, v)
-      end
     end
 
     def url_path #:nodoc:
@@ -172,6 +173,27 @@ module GollumRails
 
     end
 
+    # Gets the pages format
+    def format
+      (@format || (@gollum_page.format||:markdown)).to_sym
+    end
+
+    def name
+      @name ||= (@gollum_page.name || "")
+    end
+
+    # == Outputs the pages filename on disc
+    #
+    # ext - Wether to output extension or not
+    def filename(ext=true)
+      @filename ||= (ext) ? @gollum_page.filename : @gollum_page.filename_stripped
+    end
+
+    def content
+      @content ||= (@gollum_page.content || "")
+    end
+
+
     private
 
     # == Gets the right commit out of 2 commits
@@ -183,14 +205,6 @@ module GollumRails
       com = commit if commit_local.nil?
       com = commit_local if !commit_local.nil?
       return com
-    end
-
-    def _assign_attribute(key, value)
-      public_send("#{key}=", value)
-    rescue NoMethodError
-      if respond_to?("#{key}=")
-        raise
-      end
     end
 
     # == Updates local attributes from gollum_page class
