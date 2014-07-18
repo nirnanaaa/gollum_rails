@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.name = 'gollum_rails'
   s.rubyforge_project = s.name
 
-  s.version = '1.5.10'
+  s.version = '1.5.11'
 
   s.summary = 'Combines Gollum and Rails'
   s.description= 'include Gollum into Rails with ease'
@@ -58,11 +58,16 @@ Gem::Specification.new do |s|
     lib/gollum_rails/setup/options.rb
     lib/gollum_rails/store.rb
     lib/gollum_rails/validation.rb
+    spec/factories.rb
+    spec/gollum_rails/page_core_spec.rb
     spec/gollum_rails/page_spec.rb
     spec/gollum_rails/respository_spec.rb
     spec/gollum_rails/setup_spec.rb
     spec/gollum_rails/wiki_spec.rb
     spec/spec_helper.rb
+    spec/support/default_commit.rb
+    spec/support/gollum_page_spec.rb
+    spec/support/special_commit.rb
   ]
   # = MANIFEST =
 
