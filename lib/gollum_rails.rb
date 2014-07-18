@@ -31,11 +31,15 @@ module GollumRails
   autoload :Persistance
   autoload :Callbacks
   autoload :Error
+  autoload :Attributes
   autoload :Core
   autoload :Store
   autoload :Validation
   autoload :Finders
+
   autoload :Page
+  autoload :Upload
+
   autoload :Setup
   autoload :Orm
   autoload :Meta
