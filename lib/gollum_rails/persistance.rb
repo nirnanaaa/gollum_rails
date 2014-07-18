@@ -1,6 +1,9 @@
 module GollumRails
   module Persistance
     extend ActiveSupport::Concern
+
+    class AttributeMissingError < NoMethodError; end
+
     module ClassMethods
 
       # first creates an instance of itself and executes the save function.
@@ -91,6 +94,8 @@ module GollumRails
     def create_record
       wiki.write_page(canonicalized_filename, format, content, commit, path_name)
       wiki.clear_cache
+    rescue NoMethodError => e
+      raise AttributeMissingError, "Attributes are missing. Error message: <%s>" % e.message
     end
 
     # == Update a record
