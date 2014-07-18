@@ -25,10 +25,10 @@ describe "Gollum Page" do
         @rr = RailsModel.new(@call)
       end
       it "saves via .save" do
-        @rr.save.should be_a GollumRails::Page
+        expect(@rr.save).to be_a GollumRails::Page
       end
       it "saves via .create" do
-        RailsModel.create(@call).should be_a GollumRails::Page
+        expect(RailsModel.create(@call)).to be_a GollumRails::Page
       end
       it "fails if invalid arguments are supplied via the ! create" do
         args = {
@@ -41,15 +41,15 @@ describe "Gollum Page" do
       end
       it "has a history now" do
         @rr.save
-        @rr.history.should be_a Array
+        expect(@rr.history).to be_a Array
       end
       it "outputs the raw_data" do
         @rr.save
-        @rr.raw_data.should == @call[:content]
+        expect(@rr.raw_data) == @call[:content]
       end
       it "has the formatted data" do
         @rr.save
-        @rr.html_data.should == '<p>content data</p>'
+        expect(@rr.html_data) == '<p>content data</p>'
       end
       it "can be saved using special characters in name" do
         @rr.name = 'test-page'
@@ -69,17 +69,13 @@ describe "Gollum Page" do
        expect(@rr.file_name).to match 'page'
        @rr.destroy
       end
-      it "was last changed by me" do
-        @rr.save
-        @rr.last_changed_by.should == 'flo <mosny@zyg.li>'
-      end
       it "has a title" do
         @rr.save
-        @rr.title.should == "Goole"
+        expect(@rr.title) == "Goole"
       end
       it "has a url" do
         @rr.save
-        @rr.url.should =="Goole"
+        expect(@rr.url) =="Goole"
       end
     end
     describe "the update of a page" do
@@ -88,7 +84,7 @@ describe "Gollum Page" do
         @rr.save
       end
       it "updates properly without all arguments, content+commit" do
-        @rr.update_attributes({:name => "google", :format => :wiki}).should be_a GollumRails::Page
+        expect(@rr.update_attributes({:name => "google", :format => :wiki})).to be_a GollumRails::Page
         @rr.delete(@commit)
       end
       it "sets the format as created" do
@@ -102,7 +98,7 @@ describe "Gollum Page" do
         @rr.delete(@commit)
       end
       it "updates properly without all arguments, name, format" do
-        @rr.update_attributes({:content => "test"}).should be_a GollumRails::Page
+        expect(@rr.update_attributes({:content => "test"})).to be_a GollumRails::Page
         expect(@rr.name).to match "Goole"
         expect(@rr.format.to_s).to match "markdown"
         @rr.delete(@commit)
@@ -115,15 +111,15 @@ describe "Gollum Page" do
       end
       it "should return a string" do
         delete = @rr.delete
-        delete.should be_a String
+        expect(delete).to be_a String
       end
       it "should return a SHA1 hash" do
         delete = @rr.delete
-        delete.length.should == 40
+        expect(delete.length) == 40
       end
       it "should also work was result from save" do
         delete = @cc.delete
-        delete.should be_a String
+        expect(delete).to be_a String
       end
     end
     it "should test exception methods" do
@@ -133,7 +129,7 @@ describe "Gollum Page" do
     describe "supported formats" do
       ['markdown', 'rdoc', 'org', 'pod'].each do |format|
         it "should support #{format}" do
-          RailsModel.format_supported?(format).should be_true
+          expect(RailsModel.format_supported?(format))== true
         end
       end
     end
@@ -164,10 +160,10 @@ describe "Gollum Page" do
     end
     it "should test setters" do
       rr = RailsModel.new
-      rr.name=("google").should == "google"
-      rr.commit=(@commit).should == @commit
-      rr.content=("content").should == "content"
-      rr.format=(:markdown).should == :markdown
+      expect(rr.name=("google")) == "google"
+      expect(rr.commit=(@commit)) == @commit
+      expect(rr.content=("content")) == "content"
+      expect(rr.format=(:markdown)) == :markdown
     end
     it "gets the pages filename on disk with a 'DOT' in filename" do
       expect(RailsModel.find('Goole').filename).to match('.')
@@ -189,54 +185,58 @@ describe "Gollum Page" do
     end
     it 'should not be persisted on initialization or finding' do
       init = RailsModel.find_or_initialize_by_name('totallybad', @commit)
-      expect(init.persisted?).to be_false
+      expect(init.persisted?) == false
     end
     it "should find the page without a commit if it exists" do
-      expect(RailsModel.find_or_initialize_by_name("Goole").persisted?).to be_true
+      expect(RailsModel.find_or_initialize_by_name("Goole").persisted?)== true
     end
     it "should find the page with a commit if it exists" do
-      expect(RailsModel.find_or_initialize_by_name("Goole", @commit).persisted?).to be_true
+      expect(RailsModel.find_or_initialize_by_name("Goole", @commit).persisted?)== true
     end
     it "should be valid on initialization or finding" do
       init = RailsModel.find_or_initialize_by_name('whoooohooo', @commit)
-      expect(init.valid?).to be_true
-      #RailsModel.find_or_initialize_by_name(@call[:name], @commit).should  be_a GollumRails::Page
+      expect(init.valid?)== true
+      #RailsModel.find_or_initialize_by_name(@call[:name], @commit)).to  be_a GollumRails::Page
     end
   end
-  describe "callbacks" do
-    it "should test the callback functions" do
-      class SaveCallback
-        def self.before_save( obj )
-          obj.name.should == "Goole"
-        end
-      end
-      class CallbackTest < GollumRails::Page
-        before_save ::SaveCallback
-        after_save :after_save
-        after_destroy :after_delete
-        before_destroy :before_delete
-        before_update :before_update
-        after_update :after_update
-        def after_save
-          @name.should == "Goole"
-        end
-        def before_update
-          @name.should == "Goole"
-        end
-        def after_update
-          @name.should == "Goole"
-        end
-        def before_delete
-          @name.should == "Goole"
-        end
-        def after_delete
-          @name.should == "Goole"
-        end
-      end
-      test = CallbackTest.new @call
-      test.persisted?.should be_false
-      test.save
+  describe "callback testing" do
+
+    # Callback class definition
+    class SaveCallbacks < GollumRails::Page
+      after_save :after_save
+
+      before_destroy :before_delete
+
+      before_update :before_update
+      after_update :after_update
+      def after_save; end
+      def before_delete; end
+      def before_update; end
+      def after_update; end
     end
+    let(:cls) { SaveCallbacks.new(@call) }
+    after(:each) do
+      cls.destroy(@commit)
+    end
+
+    it "receives the after_save callback" do
+      expect(cls).to receive(:after_save)
+      cls.save
+    end
+    it "receives the before_delete callback" do
+      expect(cls).to receive(:before_delete)
+    end
+    it "receives the after_update callback" do
+      expect(cls).to receive(:after_update)
+      cls.save
+      cls.update_attributes(name: "Somepage")
+    end
+    it "receives the before_update callback" do
+      expect(cls).to receive(:before_update)
+      cls.save
+      cls.update_attributes(name: "Somepage")
+    end
+
   end
   describe "testing validation" do
    it "should test the basic validation" do
@@ -244,7 +244,7 @@ describe "Gollum Page" do
       validates_presence_of :name
      end
      cla = Callbackt.new @call
-     cla.valid?.should be_true
+     expect(cla.valid?)== true
    end
    class SugarBaby < GollumRails::Page
      validates_presence_of :name
@@ -254,22 +254,22 @@ describe "Gollum Page" do
    it "should test string validation" do
      @call[:name] = "das ist zu lang"*10
      cla = SugarBaby.new @call
-     cla.valid?.should be_true
+     expect(cla.valid?)== true
    end
    it "should test the presence validator" do
      @call[:name] = [ ]
      bla = SugarBaby.new @call
-     bla.valid?.should be_false
+     expect(bla.valid?) == false
    end
    it "should test the length validator for name" do
      @call[:name] = "das"
      res = SugarBaby.new @call
-     res.valid?.should be_false
+     expect(res.valid?) == false
    end
    it "should test the length validator for format" do
      @call[:format] = :toolongformatstringforvalidator
      res = SugarBaby.new @call
-     res.valid?.should be_false
+     expect(res.valid?) == false
    end
   end
   describe "diffing commits" do
@@ -305,13 +305,13 @@ describe "Gollum Page" do
     it "should be true" do
       res = CommitDiff.new @call.merge(name: '_aPage')
       res.save
-      expect(res.sub_page?).to be_true
+      expect(res.sub_page?)== true
       res.delete
     end
     it "should be false" do
       res = CommitDiff.new @call
       res.save
-      expect(res.sub_page?).to be_false
+      expect(res.sub_page?) == false
       res.delete
     end
   end
