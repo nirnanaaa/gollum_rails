@@ -74,6 +74,7 @@ module GollumRails
       include ActiveModel::Validations
     end
     include Error
+    include Attributes
     include Core
     include Meta
     include Store
