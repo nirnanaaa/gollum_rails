@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.name = 'gollum_rails'
   s.rubyforge_project = s.name
 
-  s.version = '1.5.12'
+  s.version = '1.5.13'
 
   s.summary = 'Combines Gollum and Rails'
   s.description= 'include Gollum into Rails with ease'
@@ -45,6 +45,7 @@ Gem::Specification.new do |s|
     lib/generators/gollum_rails/model/model_generator.rb
     lib/generators/gollum_rails/model/templates/model_template.erb
     lib/gollum_rails.rb
+    lib/gollum_rails/attributes.rb
     lib/gollum_rails/callbacks.rb
     lib/gollum_rails/core.rb
     lib/gollum_rails/error.rb
@@ -57,17 +58,24 @@ Gem::Specification.new do |s|
     lib/gollum_rails/setup/error.rb
     lib/gollum_rails/setup/options.rb
     lib/gollum_rails/store.rb
+    lib/gollum_rails/upload.rb
+    lib/gollum_rails/upload/class_definitions.rb
+    lib/gollum_rails/upload/file_too_big_error.rb
     lib/gollum_rails/validation.rb
     spec/factories.rb
     spec/gollum_rails/page_core_spec.rb
     spec/gollum_rails/page_spec.rb
     spec/gollum_rails/respository_spec.rb
     spec/gollum_rails/setup_spec.rb
+    spec/gollum_rails/upload/class_definitions_spec.rb
+    spec/gollum_rails/upload_spec.rb
     spec/gollum_rails/wiki_spec.rb
     spec/spec_helper.rb
     spec/support/default_commit.rb
     spec/support/gollum_page_spec.rb
+    spec/support/sample_upload.rb
     spec/support/special_commit.rb
+    uploads/GLD-LOTR-2T.jpg
   ]
   # = MANIFEST =
 
