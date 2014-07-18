@@ -11,15 +11,16 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'activemodel', '>= 3.2.11'
   s.add_dependency 'activesupport', '>= 3.2.11'
-  
   s.add_dependency 'gollum-lib', '~> 3.0.0'
 
-  s.add_development_dependency 'rspec', '~> 2.14.1'
+  s.add_development_dependency 'rspec', '~> 3.0'
   s.add_development_dependency 'rails', '>= 3.2.11'
   s.add_development_dependency 'guard', '~> 2.6.0'
   s.add_development_dependency 'guard-rspec', '~> 4.2.8'
   s.add_development_dependency 'rb-fsevent', '>= 0.9.3'
   s.add_development_dependency 'redcarpet', '>= 3.1.1'
+  s.add_development_dependency 'factory_girl', '~> 4.4'
+  s.add_development_dependency 'hashr','~> 0.0.22'
   s.author = 'Florian Kasper'
   s.email = 'mosny@zyg.li'
   s.homepage = 'https://github.com/nirnanaaa/gollum_rails'
