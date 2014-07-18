@@ -98,7 +98,8 @@ module GollumRails
     #
     # Returns a String
     def preview(format=:markdown)
-      wiki.preview_page(name, content, format).formatted_data
+      require 'active_support/core_ext/string/output_safety'
+      wiki.preview_page(name, content, format).formatted_data.html_safe
     end
 
     # == Gets the url for current page from Gollum::Page
@@ -142,7 +143,7 @@ module GollumRails
     #
     # Returns a String
     def last_changed_by
-      "%s <%s>" % [history.last.author.name, history.last.author.email]
+      "%s <%s>" % [history.first.author.name, history.first.author.email]
     end
 
     # == Compare 2 Commits.
@@ -186,7 +187,7 @@ module GollumRails
 
     def _assign_attribute(key, value)
       public_send("#{key}=", value)
-    rescue NoMethodEr3ror
+    rescue NoMethodError
       if respond_to?("#{key}=")
         raise
       end
