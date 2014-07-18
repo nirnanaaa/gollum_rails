@@ -111,7 +111,7 @@ end
 #############################################################################
 
 desc 'Create a release build'
-task :release => :build do
+task :release do
   unless `git branch` =~ /^\* master$/
     puts "You must be on the master branch to release!"
     exit!
@@ -121,7 +121,6 @@ task :release => :build do
   sh "git tag v#{version}"
   sh "git push origin master"
   sh "git push origin v#{version}"
-  sh "gem push pkg/#{name}-#{version}.gem"
 end
 
 desc 'Build gem'
