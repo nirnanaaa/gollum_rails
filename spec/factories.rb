@@ -1,3 +1,6 @@
+require 'rack/test'
+require 'rack/test/uploaded_file'
+
 FactoryGirl.define do
   trait :initialize do
     after(:build) do
@@ -17,6 +20,19 @@ FactoryGirl.define do
       { name: "mosny#{num}", message: "message number: #{num}", email: "mosny@zyg.li"}
     end
     initialize_with { attributes }
+  end
+
+  factory :restrictions_upload, class: SampleClassDefinitions do
+    file Rack::Test::UploadedFile.new(File.expand_path('../utils/GLD-LOTR-2T.jpg', __FILE__), "image/jpeg")
+    destination 'uploads'
+    initialize_with { new(attributes) }
+    commit { build(:commit_fakes) }
+  end
+  factory :upload, class: GollumRails::Upload do
+    file Rack::Test::UploadedFile.new(File.expand_path('../utils/GLD-LOTR-2T.jpg', __FILE__), "image/jpeg")
+    destination 'uploads'
+    initialize_with { new(attributes) }
+    commit { build(:commit_fakes) }
   end
   #factory :commit_fakes, class: DefaultCommit do
   #end
