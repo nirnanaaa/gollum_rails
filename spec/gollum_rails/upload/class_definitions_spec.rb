@@ -53,9 +53,24 @@ describe GollumRails::Upload::ClassDefinitions do
         not_blacklisted.destroy
       end
     end
-
-
   end
-
+  describe "whitelist" do
+    let(:ins){build(:whitelist_upload)}
+    let(:whitelisted){build(:not_whitelist_upload)}
+     it "does not allow to upload non-whitelisted formats" do
+      begin
+        expect{ins.save!}.to raise_error GollumRails::Upload::BlacklistedFiletypeError
+      ensure
+        ins.destroy
+      end
+    end
+    it "does allow to upload whitelisted formats" do
+      begin
+        expect{whitelisted.save!}.not_to raise_error
+      ensure
+        whitelisted.destroy
+      end
+    end
+  end
 
 end
