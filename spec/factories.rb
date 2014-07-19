@@ -4,8 +4,10 @@ require 'rack/test/uploaded_file'
 FactoryGirl.define do
   trait :initialize do
     after(:build) do
+      g_path = File.expand_path('../utils/wiki.git', __FILE__)
+      `test -d #{g_path} || git init --bare #{g_path}`
       GollumRails::Setup.build do |config|
-        GollumRails::Setup.repository = File.expand_path('../utils/wiki.git', __FILE__)
+        config.repository = File.expand_path('../utils/wiki.git', __FILE__)
       end
     end
   end
@@ -23,13 +25,13 @@ FactoryGirl.define do
   end
 
   factory :restrictions_upload, class: SampleClassDefinitions do
-    file Rack::Test::UploadedFile.new(File.expand_path('../utils/GLD-LOTR-2T.jpg', __FILE__), "image/jpeg")
+    file Rack::Test::UploadedFile.new(File.expand_path('../GLD-LOTR-2T.jpg', __FILE__), "image/jpeg")
     destination 'uploads'
     initialize_with { new(attributes) }
     commit { build(:commit_fakes) }
   end
   factory :upload, class: GollumRails::Upload do
-    file Rack::Test::UploadedFile.new(File.expand_path('../utils/GLD-LOTR-2T.jpg', __FILE__), "image/jpeg")
+    file Rack::Test::UploadedFile.new(File.expand_path('../GLD-LOTR-2T.jpg', __FILE__), "image/jpeg")
     destination 'uploads'
     initialize_with { new(attributes) }
     commit { build(:commit_fakes) }
