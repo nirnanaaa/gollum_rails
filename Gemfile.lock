@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    gollum_rails (1.5.13)
+    gollum_rails (1.6.0)
       activemodel (>= 3.2.11)
       activesupport (>= 3.2.11)
       gollum-lib (~> 3.0.0)
@@ -56,7 +56,7 @@ GEM
     formatador (0.2.5)
     github-markup (1.1.2)
       posix-spawn (~> 0.3.8)
-    gitlab-grit (2.6.9)
+    gitlab-grit (2.6.10)
       charlock_holmes (~> 0.6)
       diff-lcs (~> 1.1)
       mime-types (~> 1.15)
