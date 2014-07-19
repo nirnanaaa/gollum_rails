@@ -24,17 +24,22 @@ FactoryGirl.define do
     initialize_with { attributes }
   end
 
-  factory :restrictions_upload, class: SampleClassDefinitions, traits: [:initialize] do
-    file Rack::Test::UploadedFile.new(File.expand_path('../GLD-LOTR-2T.jpg', __FILE__), "image/jpeg")
-    destination 'uploads'
+  trait :default_upload do
     initialize_with { new(attributes) }
     commit { build(:commit_fakes) }
+    destination 'uploads'
   end
-  factory :upload, class: GollumRails::Upload, traits: [:initialize] do
+  factory :blacklist_upload, class: SampleUploadBlacklistPng, traits: [:initialize, :default_upload] do
+    file Rack::Test::UploadedFile.new(File.expand_path('../GLD-LOTR-2T.png', __FILE__), "image/png")
+  end
+  factory :not_blacklist_upload, class: SampleUploadBlacklistPng, traits: [:initialize, :default_upload] do
     file Rack::Test::UploadedFile.new(File.expand_path('../GLD-LOTR-2T.jpg', __FILE__), "image/jpeg")
-    destination 'uploads'
-    initialize_with { new(attributes) }
-    commit { build(:commit_fakes) }
+  end
+  factory :restrictions_upload, class: SampleClassDefinitions, traits: [:initialize, :default_upload] do
+    file Rack::Test::UploadedFile.new(File.expand_path('../GLD-LOTR-2T.jpg', __FILE__), "image/jpeg")
+  end
+  factory :upload, class: GollumRails::Upload, traits: [:initialize, :default_upload] do
+    file Rack::Test::UploadedFile.new(File.expand_path('../GLD-LOTR-2T.jpg', __FILE__), "image/jpeg")
   end
   #factory :commit_fakes, class: DefaultCommit do
   #end

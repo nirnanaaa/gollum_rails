@@ -7,6 +7,16 @@ module GollumRails
       module ClassMethods
         attr_accessor :destination
         attr_accessor :overwrite
+        attr_accessor :blacklist
+        attr_accessor :whitelist
+        def blacklist_format(formats)
+          self.blacklist ||= []
+          self.blacklist += Array(formats)
+        end
+        def whitelist_format(formats)
+          self.whitelist ||= []
+          self.whitelist += Array(formats)
+        end
         def max_filesize(size)
           @max_size=size if size
         end

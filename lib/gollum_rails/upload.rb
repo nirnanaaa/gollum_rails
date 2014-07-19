@@ -11,6 +11,7 @@ module GollumRails
 
     autoload :ClassDefinitions, 'gollum_rails/upload/class_definitions'
     autoload :FileTooBigError, 'gollum_rails/upload/file_too_big_error'
+    autoload :BlacklistedFiletypeError, 'gollum_rails/upload/blacklisted_filetype_error'
 
     include Attributes
     include Store
@@ -69,9 +70,7 @@ module GollumRails
     def destroy(commit=nil)
       return false if !persisted?
       committer    = Gollum::Committer.new(self.class.wiki, commit||self.commit)
-
       committer.delete(self.gollum_file.path)
-
       committer.after_commit do |index, sha|
         path = self.gollum_file.path
         dir = ::File.dirname(path)
@@ -80,11 +79,9 @@ module GollumRails
         ext = ::File.extname(fullname)
         format = ext.split('.').last || "txt"
         filename = ::File.basename(fullname, ext)
-
         self.class.wiki.clear_cache
         index.update_working_dir(dir, filename, format)
       end
-
      sha = committer.commit
      _update_gollum_file(nil)
      sha
@@ -108,6 +105,16 @@ module GollumRails
       if self.class.max_size
         raise FileTooBigError,
           "File is too big. Max. size is #{self.class.max_size}" if tempfile.size > self.class.max_size
+      end
+      ext = ::File.extname(tempfile.original_filename)
+      type = (ext.split('.').last || "txt").to_sym
+      if self.class.whitelist
+        raise BlacklistedFiletypeError,
+          "Filetype #{type} is blacklisted." unless self.class.whitelist.include?(type)
+      end
+      if self.class.blacklist
+        raise BlacklistedFiletypeError,
+          "Filetype #{type} is blacklisted." if self.class.blacklist.include?(type)
       end
     end
 
