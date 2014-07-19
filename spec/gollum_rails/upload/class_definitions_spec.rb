@@ -35,9 +35,17 @@ describe GollumRails::Upload::ClassDefinitions do
     let(:ins2){build(:upload)}
     let(:ins){build(:blacklist_upload)}
     let(:not_blacklisted){build(:not_blacklist_upload)}
+    let(:multi){build(:multi_blacklist_upload)}
     after(:each) do
       ins2.save
       ins2.destroy
+    end
+    it "accepts arrays" do
+      begin
+        expect{multi.save!}.to raise_error GollumRails::Upload::BlacklistedFiletypeError
+      ensure
+        multi.destroy
+      end
     end
     it "does not allow to upload blacklisted formats" do
       begin

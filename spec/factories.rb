@@ -32,6 +32,9 @@ FactoryGirl.define do
   factory :blacklist_upload, class: SampleUploadBlacklistPng, traits: [:initialize, :default_upload] do
     file Rack::Test::UploadedFile.new(File.expand_path('../GLD-LOTR-2T.png', __FILE__), "image/png")
   end
+  factory :multi_blacklist_upload, class: MultiUploadBlacklistPng, traits: [:initialize, :default_upload] do
+    file Rack::Test::UploadedFile.new(File.expand_path('../GLD-LOTR-2T.png', __FILE__), "image/png")
+  end
   factory :not_blacklist_upload, class: SampleUploadBlacklistPng, traits: [:initialize, :default_upload] do
     file Rack::Test::UploadedFile.new(File.expand_path('../GLD-LOTR-2T.jpg', __FILE__), "image/jpeg")
   end

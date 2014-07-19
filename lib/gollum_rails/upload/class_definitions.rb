@@ -9,11 +9,11 @@ module GollumRails
         attr_accessor :overwrite
         attr_accessor :blacklist
         attr_accessor :whitelist
-        def blacklist_format(formats)
+        def blacklist_format(*formats)
           self.blacklist ||= []
           self.blacklist += Array(formats)
         end
-        def whitelist_format(formats)
+        def whitelist_format(*formats)
           self.whitelist ||= []
           self.whitelist += Array(formats)
         end
