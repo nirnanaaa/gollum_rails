@@ -24,13 +24,13 @@ FactoryGirl.define do
     initialize_with { attributes }
   end
 
-  factory :restrictions_upload, class: SampleClassDefinitions do
+  factory :restrictions_upload, class: SampleClassDefinitions, traits: [:initialize] do
     file Rack::Test::UploadedFile.new(File.expand_path('../GLD-LOTR-2T.jpg', __FILE__), "image/jpeg")
     destination 'uploads'
     initialize_with { new(attributes) }
     commit { build(:commit_fakes) }
   end
-  factory :upload, class: GollumRails::Upload do
+  factory :upload, class: GollumRails::Upload, traits: [:initialize] do
     file Rack::Test::UploadedFile.new(File.expand_path('../GLD-LOTR-2T.jpg', __FILE__), "image/jpeg")
     destination 'uploads'
     initialize_with { new(attributes) }
