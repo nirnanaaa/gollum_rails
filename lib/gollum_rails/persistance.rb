@@ -62,6 +62,7 @@ module GollumRails
       rescue ::Gollum::DuplicatePageError
         self.errors.add 'name', 'has been taken'
         return false
+      end
       self.gollum_page = wiki.paged(file_name, path_name, true, wiki.ref)
       _update_page_attributes
       self
