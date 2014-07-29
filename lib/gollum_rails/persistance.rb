@@ -60,7 +60,8 @@ module GollumRails
       begin
         create_or_update
       rescue ::Gollum::DuplicatePageError
-      end
+        self.errors.add 'name', 'has been taken'
+        return false
       self.gollum_page = wiki.paged(file_name, path_name, true, wiki.ref)
       _update_page_attributes
       self
@@ -74,6 +75,8 @@ module GollumRails
       raise StandardError, "record is not valid" unless valid?
       raise StandardError, "commit must not be empty" if commit == {}
       create_or_update
+      self.gollum_page = wiki.paged(file_name, path_name, true, wiki.ref)
+      _update_page_attributes
       self
     end
 
