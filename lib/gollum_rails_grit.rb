@@ -18,18 +18,6 @@
 
 
 require 'gollum-lib'
-#PATCHES
-require 'rugged'
-def exp(path)
-  File.expand_path("../#{path}",__FILE__)
-end
-require exp('gollum-lib/git_access')
-require exp('gollum-lib/blob_entry')
-require exp('gollum-lib/committer')
-require exp('gollum-lib/markup')
-require exp('gollum-lib/wiki')
-require exp('gollum-lib/page')
-
 
 #/PATCHES
 require 'active_model'
