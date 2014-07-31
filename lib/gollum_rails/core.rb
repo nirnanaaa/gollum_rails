@@ -65,9 +65,8 @@ module GollumRails
     end
 
     def path_name #:nodoc:
-      f = full_path.first
-      return '/' if f == '.'
-      f
+      f = gollum_page.path
+      ::File.dirname(f)
     end
 
     def full_path #:nodoc:

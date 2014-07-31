@@ -92,6 +92,7 @@ module Gollum
     #
     # Returns nothing (modifies the Index in place).
     def add_to_index(dir, name, format, data, allow_same_ext = false)
+      @options ||= {}
       dir.gsub!(' ', '-')
       name.gsub!(' ', '-')
       path = @wiki.page_file_name(name, format)
@@ -110,6 +111,7 @@ module Gollum
     # Returns nothing
     def remove_from_index(fullpath)
       index.remove(fullpath)
+      @options ||= {}
       @options[:tree] = index.write_tree(@wiki.repo)
     end
 
