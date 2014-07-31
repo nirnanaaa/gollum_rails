@@ -23,7 +23,7 @@ module GollumRails
       base = Page.wiki.page_file_dir
 
       if base && !base.empty?
-        @path = File.join(base,path)
+        @path = File.join(base,item.path)
       else
         @path = item.path
       end
