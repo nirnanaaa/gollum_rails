@@ -31,6 +31,7 @@ require exp('gollum-lib/markup')
 require exp('gollum-lib/wiki')
 require exp('gollum-lib/file')
 require exp('gollum-lib/page')
+require exp('gollum-lib/filter/code')
 
 
 #/PATCHES

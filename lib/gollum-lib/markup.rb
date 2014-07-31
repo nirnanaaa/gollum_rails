@@ -5,12 +5,6 @@ require 'rouge'
 require 'base64'
 
 
-# Use pygments if it's installed
-begin
-  require 'pygments'
-  Pygments.start
-rescue Exception
-end
 
 module Gollum
 
