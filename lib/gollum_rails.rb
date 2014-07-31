@@ -29,6 +29,7 @@ require exp('gollum-lib/blob_entry')
 require exp('gollum-lib/committer')
 require exp('gollum-lib/markup')
 require exp('gollum-lib/wiki')
+require exp('gollum-lib/file')
 require exp('gollum-lib/page')
 
 

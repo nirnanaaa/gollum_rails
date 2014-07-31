@@ -48,15 +48,8 @@ module Gollum
     #
     # Returns the String data.
     def raw_data
-      return IO.read(@on_disk_path) if on_disk?
       return nil unless @blob
-
-      if !@wiki.repo.bare && @blob.is_symlink
-        new_path = @blob.symlink_target(::File.join(@wiki.repo.path, '..', self.path))
-        return IO.read(new_path) if new_path
-      end
-
-      @blob.data
+      @blob.content
     end
 
     # Public: Is this an on-disk file reference?
@@ -131,12 +124,7 @@ module Gollum
       if entry = map.detect { |entry| entry.path.downcase == checked }
         @path    = name
         @version = commit
-
-        if try_on_disk && get_disk_reference(name, commit)
-          @on_disk = true
-        else
-          @blob = entry.blob(@wiki.repo)
-        end
+        @blob = entry.blob(@wiki.repo)
 
         self
       end
