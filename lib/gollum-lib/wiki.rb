@@ -151,6 +151,9 @@ module Gollum
     # Gets side on which the sidebar should be shown
     attr_reader :bar_side
 
+
+    attr_reader :access
+
     # An array of symbols which refer to classes under Gollum::Filter,
     # each of which is an element in the "filtering chain".  See
     # the documentation for Gollum::Filter for more on how this chain
@@ -257,6 +260,7 @@ module Gollum
       @page_class.new(self).find(name, version, dir, exact)
     end
 
+
     # Public: Convenience method instead of calling page(name, nil, dir).
     #
     # name    - The human or canonical String page name of the wiki page.
@@ -325,10 +329,11 @@ module Gollum
       sanitized_name = name.gsub(' ', '-')
       sanitized_dir  = dir.gsub(' ', '-')
 
-      multi_commit = !!commit[:committer]
-      committer    = multi_commit ? commit[:committer] : Committer.new(self, commit)
+      committer    = Committer.new(self, commit)
 
       filename = Gollum::Page.cname(sanitized_name)
+
+
 
       committer.add_to_index(sanitized_dir, filename, format, data)
 
@@ -337,7 +342,7 @@ module Gollum
         index.update_working_dir(sanitized_dir, filename, format)
       end
 
-      multi_commit ? committer : committer.commit
+      committer.commit
     end
 
     # Public: Rename an existing page without altering content.
@@ -421,23 +426,16 @@ module Gollum
       filename = (rename = page.name != name) ?
           Gollum::Page.cname(name) : page.filename_stripped
 
-      multi_commit = !!commit[:committer]
-      committer    = multi_commit ? commit[:committer] : Committer.new(self, commit)
+      committer =  Committer.new(self, commit)
 
       if !rename && page.format == format
-        committer.add(page.path, normalize(data))
+        committer.add_to_index(dir,filename,format, normalize(data))
       else
-        committer.delete(page.path)
+        committer.remove_from_index(page.path)
         committer.add_to_index(dir, filename, format, data)
       end
 
-      committer.after_commit do |index, sha|
-        @access.refresh
-        index.update_working_dir(dir, page.filename_stripped, page.format)
-        index.update_working_dir(dir, filename, format)
-      end
-
-      multi_commit ? committer : committer.commit
+      committer.commit
     end
 
     # Public: Delete a page.
@@ -457,21 +455,9 @@ module Gollum
     # Returns the String SHA1 of the newly written version, or the
     # Gollum::Committer instance if this is part of a batch update.
     def delete_page(page, commit)
-
-      multi_commit = !!commit[:committer]
-      committer    = multi_commit ? commit[:committer] : Committer.new(self, commit)
-
-      committer.delete(page.path)
-
-      committer.after_commit do |index, sha|
-        dir = ::File.dirname(page.path)
-        dir = '' if dir == '.'
-
-        @access.refresh
-        index.update_working_dir(dir, page.filename_stripped, page.format)
-      end
-
-      multi_commit ? committer : committer.commit
+      committer = Committer.new(self,commit)
+      committer.remove_from_index(page.path)
+      committer.commit
     end
 
     # Public: Applies a reverse diff for a given page.  If only 1 SHA is given,
@@ -586,35 +572,18 @@ module Gollum
     #
     # Returns an Array with Objects of page name and count of matches
     def search(query)
-      args = [{}, '-i', '-c', query, @ref, '--']
-      args << '--' << @page_file_dir if @page_file_dir
-
-      results = {}
-
-      @repo.git.grep(*args).split("\n").each do |line|
-        result             = line.split(':')
-        result_1           = result[1]
-        # Remove ext only from known extensions.
-        # test.pdf => test.pdf, test.md => test
-        file_name          = Page::valid_page_name?(result_1) ? result_1.chomp(::File.extname(result_1)) :
-            result_1
-        results[file_name] = result[2].to_i
+      results ||= []
+      @repo.head.target.tree.walk_blobs do |root,entry|
+        if entry[:name] =~ /#{query.gsub(' ', '-')}/i
+          results << entry
+          next
+        end
+        e = @repo.lookup(entry[:oid])
+        if e.content =~ /#{query}/i
+          results << entry
+        end
       end
-
-      # Use git ls-files '*query*' to search for file names. Grep only searches file content.
-      # Spaces are converted to dashes when saving pages to disk.
-      @repo.git.ls_files({}, "*#{ query.gsub(' ', '-') }*").split("\n").each do |line|
-        # Remove ext only from known extensions.
-        file_name          = Page::valid_page_name?(line) ? line.chomp(::File.extname(line)) :
-            line
-        # If there's not already a result for file_name then
-        # the value is nil and nil.to_i is 0.
-        results[file_name] = results[file_name].to_i + 1;
-      end
-
-      results.map do |key, val|
-        { :count => val, :name => key }
-      end
+      results
     end
 
     # Public: All of the versions that have touched the Page.
@@ -913,7 +882,7 @@ module Gollum
       else
         @access.tree!(ref)
       end
-    rescue Grit::GitRuby::Repository::NoSuchShaFound
+    rescue Rugged::OdbError
       []
     end
 

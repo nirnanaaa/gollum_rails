@@ -23,6 +23,7 @@ require 'rugged'
 def exp(path)
   File.expand_path("../#{path}",__FILE__)
 end
+require exp('rugged/commit')
 require exp('gollum-lib/git_access')
 require exp('gollum-lib/blob_entry')
 require exp('gollum-lib/committer')
@@ -54,6 +55,7 @@ module GollumRails
   autoload :Page
   autoload :Upload
 
+  autoload :Item
   autoload :Setup
   autoload :Orm
   autoload :Meta

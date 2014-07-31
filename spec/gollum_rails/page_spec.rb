@@ -420,7 +420,7 @@ describe "Gollum Page" do
       res = Fns.new @call.merge(name: 'test/my_page3')
       res.save
       expect(Fns.search('content')).not_to be_empty
-      expect(Fns.search('content').first[:count]).to be(1)
+      expect(Fns.search('content').length).to be >= 1
       res.destroy
     end
   end

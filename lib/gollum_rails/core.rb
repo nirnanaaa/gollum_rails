@@ -144,7 +144,11 @@ module GollumRails
     #
     # Returns a String
     def last_changed_by
-      "%s <%s>" % [history.first.author.name, history.first.author.email]
+      if self.class.wiki.repo.is_a?(Rugged::Repository)
+        "%s <%s>" % [history.first.author[:name], history.first.author[:email]]
+      else
+        "%s <%s>" % [history.first.author.name, history.first.author.email]
+      end
     end
 
     # == Compare 2 Commits.

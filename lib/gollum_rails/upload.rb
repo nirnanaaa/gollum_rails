@@ -42,19 +42,16 @@ module GollumRails
       format = ext.split('.').last || "txt"
       filename = ::File.basename(fullname, ext)
       contents = ::File.read(tempfile)
-      #reponame = filename + '.' + format
-      head = self.class.wiki.repo.head
-
-      options = self.commit.merge(parent: head.commit)
-      committer = Gollum::Committer.new(self.class.wiki, options)
+      options = self.commit
+      committer = Gollum::Committer.new(self.class.wiki, options[:commit])
       committer.add_to_index(@dir, filename, format, contents)
-      committer.after_commit do |cmntr, sha|
-        self.class.wiki.clear_cache
-        cmntr.update_working_dir(@dir, filename, format)
-      end
+
       committer.commit
       _update_gollum_file(File.join(@dir,@fullname))
       self
+    rescue Rugged::ReferenceError
+      setup_branches
+      retry
     end
 
     def save
@@ -69,22 +66,11 @@ module GollumRails
 
     def destroy(commit=nil)
       return false if !persisted?
-      committer    = Gollum::Committer.new(self.class.wiki, commit||self.commit)
-      committer.delete(self.gollum_file.path)
-      committer.after_commit do |index, sha|
-        path = self.gollum_file.path
-        dir = ::File.dirname(path)
-        dir = '' if dir == '.'
-        fullname = ::File.basename(path)
-        ext = ::File.extname(fullname)
-        format = ext.split('.').last || "txt"
-        filename = ::File.basename(fullname, ext)
-        self.class.wiki.clear_cache
-        index.update_working_dir(dir, filename, format)
-      end
-     sha = committer.commit
-     _update_gollum_file(nil)
-     sha
+      committer    = Gollum::Committer.new(self.class.wiki, commit||self.commit[:commit])
+      committer.remove_from_index(self.gollum_file.path)
+      sha = committer.commit
+      _update_gollum_file(nil)
+      sha
     end
 
     def self.create(attributes)

@@ -166,7 +166,10 @@ module Gollum
     #
     # Returns a String SHA.
     def ref_to_sha!(ref)
-      @repo.ref(ref).target
+      if branch?(ref)
+        return @repo.branches[ref].target.oid
+      end
+      @repo.ref(ref).target.oid
     rescue Rugged::ReferenceError
     end
 

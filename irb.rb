@@ -1,9 +1,10 @@
 $:.push File.expand_path("../lib", __FILE__)
-require 'irb'
+require 'pry'
 require 'gollum_rails'
 
 GollumRails::Setup.build{|d|d.repository='../../wiki.git'}
-@p = GollumRails::Page.new(name: "abcde", format: :markdown, content: "test", commit: {name:"mosny" ,email:"mosny@zyg.li" ,message:"commit"})
+c = {name: "mosny", email: "mosny@zyg.li", message: "testmessage"}
+p = GollumRails::Page.new(name: "abcde", format: :markdown, content: "test", commit: c)
 
 
-IRB.start
+Pry.start self

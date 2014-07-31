@@ -11,7 +11,10 @@ module GollumRails
       end
     end
 
-    private
+    def setup_branches
+      repo = wiki.repo
+      raise
+    end
     # == To static
     def wiki
       self.class.wiki

@@ -35,17 +35,15 @@ module Gollum
 
     # Public: References the Git index for this commit.
     #
-    # Returns a Grit::Index.
+    # Returns a Rugged::Index.
     def index
       @index ||= begin
-        idx = @wiki.repo.index
-        if tree = options[:tree]
-          idx.read_tree(tree)
-        elsif parent = parents.first
-          idx.read_tree(parent.tree)
-        end
-        idx
-      end
+                   rep = @wiki.repo.index
+                   if !@wiki.repo.head_unborn?
+                     rep.read_tree(@wiki.repo.head.target.tree)
+                   end
+                   rep
+                 end
     end
 
     # Public: The committer for this commit.
@@ -55,7 +53,7 @@ module Gollum
       @actor ||= begin
         @options[:name]  = @wiki.default_committer_name if @options[:name].to_s.empty?
         @options[:email] = @wiki.default_committer_email if @options[:email].to_s.empty?
-        Grit::Actor.new(@options[:name], @options[:email])
+        {name: @options[:name], email: @options[:email] ,time:Time.now}
       end
     end
 
@@ -90,53 +88,29 @@ module Gollum
     # Raises Gollum::DuplicatePageError if a matching filename already exists.
     # This way, pages are not inadvertently overwritten.
     #
+    # TODO Add check for Gollum::DuplicatePageError
+    #
     # Returns nothing (modifies the Index in place).
     def add_to_index(dir, name, format, data, allow_same_ext = false)
-      # spaces must be dashes
       dir.gsub!(' ', '-')
       name.gsub!(' ', '-')
-
       path = @wiki.page_file_name(name, format)
-
       dir  = '/' if dir.strip.empty?
-
       fullpath = ::File.join(*[@wiki.page_file_dir, dir, path].compact)
       fullpath = fullpath[1..-1] if fullpath =~ /^\//
+      oid = @wiki.repo.write(data, :blob)
+      index.add(path: fullpath, oid: oid, mode: 0100644)
+      @options[:tree] = index.write_tree(@wiki.repo)
+    end
 
-      if @wiki.page_file_dir
-        tree = index.map{|e| e if e[:path] =~ /^#{@wiki.page_file_dir}/}
-      else
-        tree = index
-      end
-      tree.flatten!
-      tree.compact!
-      puts index.methods
-      if tree
-        downpath = path.downcase.sub(/\.\w+$/, '')
-
-        tree.each_blob do |blob|
-          next if page_path_scheduled_for_deletion?(index.tree, fullpath)
-
-          existing_file     = blob.name.downcase.sub(/\.\w+$/, '')
-          existing_file_ext = ::File.extname(blob.name).sub(/^\./, '')
-
-          new_file_ext = ::File.extname(path).sub(/^\./, '')
-
-          if downpath == existing_file && !(allow_same_ext && new_file_ext == existing_file_ext)
-            raise DuplicatePageError.new(dir, blob.name, path)
-          end
-        end
-      end
-
-      fullpath = fullpath.force_encoding('ascii-8bit') if fullpath.respond_to?(:force_encoding)
-
-      begin
-        data = @wiki.normalize(data)
-      rescue ArgumentError => err
-        # Swallow errors that arise from data being binary
-        raise err unless err.message.include?('invalid byte sequence')
-      end
-      index.add(fullpath, data)
+    # Removes a page from the given Index
+    #
+    # fullpath - The String representation of the location of the file
+    #
+    # Returns nothing
+    def remove_from_index(fullpath)
+      index.remove(fullpath)
+      @options[:tree] = index.write_tree(@wiki.repo)
     end
 
     # Update the given file in the repository's working directory if there
@@ -149,35 +123,18 @@ module Gollum
     #
     # Returns nothing.
     def update_working_dir(dir, name, format)
-      unless @wiki.repo.bare
-        if @wiki.page_file_dir && dir !~ /^#{@wiki.page_file_dir}/
-          dir = dir.size.zero? ? @wiki.page_file_dir : ::File.join(@wiki.page_file_dir, dir)
-        end
-
-        path =
-            if dir == ''
-              @wiki.page_file_name(name, format)
-            else
-              ::File.join(dir, @wiki.page_file_name(name, format))
-            end
-
-        path = path.force_encoding('ascii-8bit') if path.respond_to?(:force_encoding)
-
-        Dir.chdir(::File.join(@wiki.repo.path, '..')) do
-          if file_path_scheduled_for_deletion?(index.tree, path)
-            @wiki.repo.git.rm({ 'f' => true }, '--', path)
-          else
-            @wiki.repo.git.checkout({}, 'HEAD', '--', path)
-          end
-        end
-      end
     end
 
     # Writes the commit to Git and runs the after_commit callbacks.
     #
     # Returns the String SHA1 of the new commit.
     def commit
-      sha1 = index.commit(@options[:message], parents, actor, nil, @wiki.ref)
+      @options ||= {}
+      @options[:author] = actor
+      @options[:committer] = @options[:author]
+      @options[:parents] = @wiki.repo.empty? ? [] : [ @wiki.repo.head.target ].compact
+      @options[:update_ref] = 'HEAD'
+      sha1 = Rugged::Commit.create(@wiki.repo, options)
       @callbacks.each do |cb|
         cb.call(self, sha1)
       end

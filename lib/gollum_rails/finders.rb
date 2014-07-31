@@ -64,6 +64,15 @@ module GollumRails
         end
       end
 
+      def tree(options={})
+        Setup.wiki_options[:page_file_dir] = nil
+        set_folder(options)
+        entries = self.wiki.access.tree!(options[:ref]||self.wiki.ref)
+        entries.map {|e|
+          Item.new(e)
+        }.uniq{|u| u.path}
+      end
+
       # Gets the last item from `all` method call
       #
       # options - optional - some options e.g. :folder
