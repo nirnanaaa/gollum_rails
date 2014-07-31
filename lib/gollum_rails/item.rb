@@ -19,15 +19,7 @@ module GollumRails
         @type = :folder
         item = Folders.new.strip(item)
       end
-
-      base = Page.wiki.page_file_dir
-
-      if base && !base.empty?
-        @path = File.join(base,item.path)
-      else
-        @path = item.path
-      end
-
+      @path = item.path
       @name = item.name
     end
     def inspect
