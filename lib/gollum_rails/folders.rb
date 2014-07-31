@@ -16,11 +16,7 @@ module GollumRails
       path.gsub!(/\/(.*)/,'')
       if ::File.extname(path).empty?
         @name = path
-        if @base
-          @path = File.join(base,path)
-        else
-          @path = path
-        end
+        @path = path
       end
       self
     end
