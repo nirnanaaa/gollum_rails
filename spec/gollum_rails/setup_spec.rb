@@ -5,12 +5,7 @@ describe GollumRails::Setup do
   it "should setup the application" do
     expect{
       GollumRails::Setup.build do |setup|
-
-        # => The repository path to the 
-        #
-        #
         setup.repository = '.'      
-
       end
     }.not_to raise_error
     

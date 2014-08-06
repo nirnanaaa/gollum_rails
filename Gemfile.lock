@@ -5,6 +5,7 @@ PATH
       activemodel (>= 3.2.11)
       activesupport (>= 3.2.11)
       gollum-lib (~> 3.0.0)
+      rugged
 
 GEM
   remote: https://rubygems.org/
@@ -140,6 +141,7 @@ GEM
     rspec-mocks (3.0.2)
       rspec-support (~> 3.0.0)
     rspec-support (3.0.2)
+    rugged (0.21.0)
     sanitize (2.1.0)
       nokogiri (>= 1.4.4)
     simplecov (0.8.2)

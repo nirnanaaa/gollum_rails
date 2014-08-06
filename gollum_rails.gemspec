@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
   s.description= 'include Gollum into Rails with ease'
 
   s.add_dependency 'activemodel', '>= 3.2.11'
+  s.add_dependency 'rugged'
   s.add_dependency 'activesupport', '>= 3.2.11'
   s.add_dependency 'gollum-lib', '~> 3.0.0'
 

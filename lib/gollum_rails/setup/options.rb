@@ -16,6 +16,12 @@ module GollumRails
 
         attr_writer :wiki_options
 
+        # == Add additional filters to the Gollum filter chain
+        #
+        # GollumRails::Setup.filters << [name, order]
+        # GollumRails::Setup.filters << [:Highlight, {:before => :Code}]
+        attr_accessor :filters
+
         attr_accessor :repository
         attr_accessor :startup
         attr_accessor :options

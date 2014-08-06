@@ -28,8 +28,7 @@ module GollumRails
       # Return an instance of Gollum::Page
       def find(name, version=nil, folder_reset=false, exact=true)
         name = name[:name] if name.kind_of?(Hash) && name.has_key?(:name)
-        Page.reset_folder if folder_reset
-        wiki.clear_cache
+        reset_folder if folder_reset
         path = File.split(name)
         if path.first == '/' || path.first == '.'
           folder = nil
@@ -42,6 +41,8 @@ module GollumRails
         else
           nil
         end
+      ensure
+        reset_folder
       end
 
       # == Searches the wiki for files CONTENT!
@@ -57,11 +58,25 @@ module GollumRails
       #
       # Returns an Array with GollumRails::Page s
       def all(options={})
+        reset_folder
         set_folder(options)
         pages = wiki.pages
         pages.map do |page|
           self.new(gollum_page: page)
         end
+      ensure
+        reset_folder
+      end
+
+      def tree(options={})
+        reset_folder
+        set_folder(options)
+        entries = self.wiki.access.tree!(options[:ref]||self.wiki.ref)
+        entries.map {|e|
+          Item.new(e)
+        }.uniq{|u| u.path}
+      ensure
+        reset_folder
       end
 
       # Gets the last item from `all` method call
