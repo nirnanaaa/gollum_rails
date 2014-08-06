@@ -24,6 +24,7 @@ module GollumRails
       # executes public methods inside own class
       #
       def build(new_attributes = nil, &block)
+        self.filters ||= []
         if block_given?
           yield self
         else

@@ -282,7 +282,7 @@ describe "Gollum Page" do
         email: "mosny@zyg.li"
       }
       call = {
-        name: "a Page",
+        name: "aPage",
         content: "my content",
         commit: commit,
         format: :markdown
