@@ -1,8 +1,10 @@
 module GollumRails
   class Upload
     if ActiveModel::VERSION::MAJOR == 4
+      API_VERSION=4
       include ActiveModel::Model
     else
+      API_VERSION=3
       extend ActiveModel::Naming
       extend ActiveModel::Callbacks
       include ActiveModel::Conversion
@@ -30,7 +32,11 @@ module GollumRails
     def save!
       if self.file
         fullname = Gollum::Page.cname(self.file.original_filename)
-        tempfile = self.file
+        if API_VERSION == 4
+          tempfile = self.file
+        else
+          tempfile = self.file
+        end
         validate! tempfile
       end
 
@@ -45,6 +51,7 @@ module GollumRails
       #reponame = filename + '.' + format
       head = self.class.wiki.repo.head
 
+      @commit ||= {}
       options = self.commit.merge(parent: head.commit)
       committer = Gollum::Committer.new(self.class.wiki, options)
       committer.add_to_index(@dir, filename, format, contents)

@@ -2,6 +2,9 @@ require 'rubygems'
 require 'rake'
 require 'date'
 require 'rspec/core/rake_task'
+require 'wwtd/tasks'
+
+task default: "wwtd:local"
 
 
 #############################################################################
@@ -66,7 +69,7 @@ end
 #
 #############################################################################
 
-task :default => :spec_run
+#task :default => :spec_run
 
 desc "Run RSpec"
 RSpec::Core::RakeTask.new do |t|

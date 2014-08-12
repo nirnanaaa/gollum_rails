@@ -1,21 +1,32 @@
 language: ruby
+
 rvm:
-- 1.9.3
-- 2.0.0
-- 2.1.1
-- ruby-head
+  - 1.9.3
+  - 2.0.0
+  - 2.1.1
+  - ruby-head
+
 notifications:
   disabled: true
+
 script:
-- bundle exec rspec
+  - bundle exec rspec
+
 matrix:
   allow_failures:
-  - rvm: ruby-head
+    - rvm: ruby-head
+
 before_install:
-- gem update rubygems
-- sudo apt-get update -qq
-- sudo apt-get install libicu-dev -yqq
-- git init --bare spec/utils/wiki.git
+  - sudo apt-get update -qq
+  - gem install wwtd
+  - sudo apt-get install libicu-dev -yqq
+  - git init --bare spec/utils/wiki.git
+
+gemfile:
+  - gemfiles/rails3.gemfile
+  - gemfiles/rails3213.gemfile
+  - gemfiles/rails4.gemfile
+
 deploy:
   provider: rubygems
   api_key:

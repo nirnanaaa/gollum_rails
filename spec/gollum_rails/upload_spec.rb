@@ -54,7 +54,14 @@ describe GollumRails::Upload do
     end
   end
 
-  describe "::create" do
+  describe ".create" do
+    describe "with empty committer" do
+      let(:ins){create(:upload, commit: nil)}
+      it "should not fail to create" do
+        expect{ins}.not_to raise_error
+
+      end
+    end
 
   end
 

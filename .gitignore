@@ -173,3 +173,5 @@ pip-log.txt
 test/wiki
 /test/wiki
 author_patch.sh
+vendor/
+.bundle/
