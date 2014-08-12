@@ -32,11 +32,7 @@ module GollumRails
     def save!
       if self.file
         fullname = Gollum::Page.cname(self.file.original_filename)
-        if API_VERSION == 4
-          tempfile = self.file
-        else
-          tempfile = self.file
-        end
+        tempfile = self.file
         validate! tempfile
       end
 
