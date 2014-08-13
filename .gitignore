@@ -175,3 +175,4 @@ test/wiki
 author_patch.sh
 vendor/
 .bundle/
+gemfiles/*.lock
