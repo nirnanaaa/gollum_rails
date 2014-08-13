@@ -4,6 +4,7 @@ require 'date'
 require 'rspec/core/rake_task'
 require 'wwtd/tasks'
 
+task :local => "wwtd:local"
 task default: "wwtd:local"
 
 
