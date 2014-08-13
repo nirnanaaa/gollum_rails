@@ -43,7 +43,11 @@ module GollumRails
       # Allowed formats in future
       format = ext.split('.').last || "txt"
       filename = ::File.basename(fullname, ext)
-      contents = ::File.read(tempfile)
+      if tempfile.respond_to?(:tempfile)
+        contents = ::File.read(tempfile.tempfile)
+      else
+        contents = ::File.read(tempfile)
+      end
       #reponame = filename + '.' + format
       head = self.class.wiki.repo.head
 

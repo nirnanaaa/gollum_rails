@@ -170,6 +170,7 @@ GEM
       polyglot (>= 0.3.1)
     tzinfo (1.2.1)
       thread_safe (~> 0.1)
+    wwtd (0.5.5)
 
 PLATFORMS
   ruby
@@ -185,3 +186,4 @@ DEPENDENCIES
   rb-fsevent (>= 0.9.3)
   redcarpet (>= 3.1.1)
   rspec (~> 3.0)
+  wwtd

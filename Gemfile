@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'coveralls', require: false
-gem 'wwdt'
+gem 'wwtd'
 
 
 gemspec
