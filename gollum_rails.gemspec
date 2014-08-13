@@ -39,7 +39,6 @@ Gem::Specification.new do |s|
     README.md
     Rakefile
     gemfiles/rails3.gemfile
-    gemfiles/rails3.gemfile.lock
     gemfiles/rails3213.gemfile
     gemfiles/rails4.gemfile
     gollum_rails.gemspec
