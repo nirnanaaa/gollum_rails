@@ -17,7 +17,7 @@ require File.expand_path('../factories.rb', __FILE__)
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.before(:suite) do
-    FactoryGirl.lint
+    #FactoryGirl.lint
   end
   config.before(:all) do
     folder = File.expand_path('../utils/wiki.git',__FILE__)
