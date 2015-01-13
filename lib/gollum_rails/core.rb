@@ -193,6 +193,9 @@ module GollumRails
       @content ||= (@gollum_page.content || "")
     end
 
+    def to_param
+      name
+    end
 
     private
 

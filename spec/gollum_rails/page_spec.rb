@@ -77,6 +77,10 @@ describe "Gollum Page" do
         @rr.save
         expect(@rr.url) =="Goole"
       end
+      it "has correct to_param" do
+        @rr.save
+        expect(@rr.to_param).to eq(@rr.name)
+      end
     end
     describe "the update of a page" do
       before :each do
