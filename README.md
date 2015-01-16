@@ -1,5 +1,8 @@
 Gollum for Rails
 ================
+SUPPORT FOR GOLLUM_RAILS WILL END ON FEBRUARY 28th 2015
+
+
 [![Build Status](https://travis-ci.org/nirnanaaa/gollum_rails.png?branch=master)](https://travis-ci.org/nirnanaaa/gollum_rails)
 [![Dependency Status](https://gemnasium.com/nirnanaaa/gollum_rails.png)](https://gemnasium.com/nirnanaaa/gollum_rails)
 [![Gem Version](https://badge.fury.io/rb/gollum_rails.png)](http://badge.fury.io/rb/gollum_rails)
