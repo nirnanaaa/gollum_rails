@@ -45,7 +45,6 @@ module GollumRails
   autoload :Meta
 
   # GollumRails version
-  VERSION = '1.6.5'
+  VERSION = '3.0.0'
 
 end
-

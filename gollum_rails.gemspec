@@ -4,19 +4,17 @@ Gem::Specification.new do |s|
   s.name = 'gollum_rails'
   s.rubyforge_project = s.name
 
-  s.version = '1.6.5'
+  s.version = '3.0.0'
 
   s.summary = 'Combines Gollum and Rails'
   s.description= 'include Gollum into Rails with ease'
 
   s.add_dependency 'activemodel', '>= 3.2.11'
   s.add_dependency 'activesupport', '>= 3.2.11'
-  s.add_dependency 'gollum-lib', '~> 4.0.1'
+  s.add_dependency 'gollum-lib', '~> 4.2.1'
 
   s.add_development_dependency 'rspec', '~> 3.1.0'
   s.add_development_dependency 'rails', '>= 3.2.11'
-  s.add_development_dependency 'guard', '~> 2.10.4'
-  s.add_development_dependency 'guard-rspec', '~> 4.5.0'
   s.add_development_dependency 'rb-fsevent', '>= 0.9.3'
   s.add_development_dependency 'redcarpet', '>= 3.2.2'
   s.add_development_dependency 'factory_girl', '~> 4.4'
@@ -96,5 +94,3 @@ Gem::Specification.new do |s|
   \trails g gollum_rails:language LANGUAGE
   END
 end
-
-  
